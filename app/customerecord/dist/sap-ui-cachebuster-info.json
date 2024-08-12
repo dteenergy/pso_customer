@@ -1,0 +1,22 @@
+{
+  "model/models.js": 1723199334043,
+  "controller/App.controller.js": 1723199334047,
+  "controller/SearchCustomer.controller.js": 1723311922962,
+  "i18n/i18n.properties": 1723199393192,
+  "manifest.json": 1723451147974,
+  "Component.js": 1723199334039,
+  "Component-dbg.js": 1723199334039,
+  "Component.js.map": 1723451148255,
+  "controller/SearchCustomer-dbg.controller.js": 1723311922962,
+  "controller/SearchCustomer.controller.js.map": 1723451148285,
+  "model/models-dbg.js": 1723199334043,
+  "model/models.js.map": 1723451148283,
+  "controller/App-dbg.controller.js": 1723199334047,
+  "controller/App.controller.js.map": 1723451148255,
+  "Component-preload.js": 1723451148384,
+  "Component-preload.js.map": 1723451148385,
+  "view/SearchCustomer.view.xml": 1723308200321,
+  "view/App.view.xml": 1723199334051,
+  "css/style.css": 1723199334051,
+  "index.html": 1723199334039
+}

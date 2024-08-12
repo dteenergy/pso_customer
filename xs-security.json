@@ -1,0 +1,98 @@
+{
+  "xsappname": "psocustomerecord",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.pso_search_customer",
+      "description": " PSO Search Customer Scope"
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_details_create",
+      "description": " PSO Create Customer Details Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_details_display",
+      "description": " PSO Display Customer Details Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_details_display_limited",
+      "description": " PSO Display Limited Customer Details Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_details_edit",
+      "description": " PSO Edit Customer Details Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_specials_create",
+      "description": " PSO Edit Customer Specials Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_specials_edit",
+      "description": " PSO Edit Customer Specials Scope "
+    },
+    {
+      "name": "$XSAPPNAME.pso_customer_specials_display",
+      "description": " PSO Display Customer Specials Scope "
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "rl_pso_search_customer",
+      "description": "PSO Search Customer Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_search_customer"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_details_create",
+      "description": "PSO Create Customer Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_details_create"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_details_display",
+      "description": "PSO Display Customer Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_details_display"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_details_display_limited",
+      "description": "PSO Display Limited Customer Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_details_display_limited"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_details_edit",
+      "description": "PSO Edit Customer Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_details_edit"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_specials_create",
+      "description": "PSO Create Customer Specials Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_specials_create"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_specials_edit",
+      "description": "PSO Edit Customer Specials Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_specials_edit"
+      ]
+    },
+    {
+      "name": "rl_pso_customer_specials_display",
+      "description": "PSO Display Customer Specials Role",
+      "scope-references": [
+        "$XSAPPNAME.pso_customer_specials_display"
+      ]
+    }
+  ],
+  "attributes": []
+}

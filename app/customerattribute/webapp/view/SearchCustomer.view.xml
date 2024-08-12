@@ -1,0 +1,15 @@
+<mvc:View controllerName="com.pso.customerattribute.controller.SearchCustomer"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Button id="testscope" text="Click" press="clickMe"/>
+
+            <Text id="testText"/>
+
+            <Button press="launchOpentextURL" text="launchOpentextURL"/>
+
+            <Button press="createWFInstance" text="Submit for Approval"/>
+            </content>
+    </Page>
+</mvc:View>
