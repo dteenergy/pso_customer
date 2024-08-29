@@ -1,0 +1,65 @@
+<mvc:View controllerName="com.pso.customerattribute.controller.CustomerSpecials"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m" > 
+    <Page id="page" title="{i18n>title}" titleAlignment="Center" showNavButton="true" navButtonPress="onBack" enableScrolling="false">
+         
+      <Panel id="idpanelCreateSpecials" expanded="true" expandable="false" height="40em" visible="false" >
+           <content>
+            <core:Fragment 
+                    fragmentName="com.pso.customerattribute.fragment.CreateSpecials"
+                    type="XML" />
+          </content>
+      </Panel>
+ 
+      <Panel id="idpanelDiplaySpecials" expanded="true" expandable="false" height="40em" visible="false" >
+           <content>
+            <core:Fragment 
+                    fragmentName="com.pso.customerattribute.fragment.DisplaySpecials"
+                    type="XML" />
+          </content>
+      </Panel>     
+        
+       <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar01">
+            <!-- <Label id="idSpecialsStatusMessage" text="" class="specialsStatusLabel"/> -->
+            <MessageStrip
+                id="idSpecialsStatusMessage"
+				text="Information with default icon."
+				type="Information"
+				showIcon="true"
+				class="sapUiNoMarginBottom">
+			</MessageStrip>
+                <ToolbarSpacer id="_IDGenToolbarSpacer01"/>
+                <!-- <Button id="_IDDisplaySpecials" 
+                            type="Emphasized" 
+                            icon="sap-icon://show" 
+                            press="onViewSpecials" 
+                            visible="false" 
+                            tooltip="Display Specials"/>  -->
+                <Button id="_IDEditSpecials" 
+                            type="Ghost" 
+                            text="Edit Specials" 
+                            icon="sap-icon://edit" 
+                            press="onEditSpecials" 
+                            visible="false" />
+                <Button id="_IDButtonSaveDraft" 
+                            type="Success" 
+                            text="Save as Draft" 
+                            icon="sap-icon://save"
+                            press="onSaveAsDraftSpecials" 
+                            visible="false" /> 
+                            
+                            <Button id="_IDButtonSaveSubmit" 
+                            type="Critical" 
+                            text="Submit for Approval" 
+                            icon="sap-icon://create"
+                            press="onSubmitSpecials" 
+                            visible="false" /> 
+                            
+            </OverflowToolbar>  
+        </footer>                        
+  </Page> 
+</mvc:View>

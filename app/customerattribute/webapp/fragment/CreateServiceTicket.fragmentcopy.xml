@@ -1,0 +1,96 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="idServiceTicketDialog"
+        draggable="true"
+        resizable="true"
+        title="Create Service Ticket"
+    >
+        <content>
+            <VBox
+                class="sapUiSmallMargin"
+                id="formContainer"
+                items="{
+					path: '/oCustomerAttributesJModel'
+				}"
+            >
+                <f:SimpleForm
+                    id="createTicketForm"
+                    editable="true"
+                    layout="ColumnLayout"
+                >
+                    <f:content>
+                        <core:Title
+                            id="serviceTicketTitle"
+                            text=""
+                        />
+                        <Label
+                            id="lblServiceTicket"
+                            text="{i18n>customername}"
+                            required="false"
+                        />
+                        <Input
+                            id="inpServiceTicket"
+                            value="{oCustomerAttributesJModel>/cust_name}"
+                            maxLength="40"
+                        />
+
+                        <Label
+                            id="lbl2ServiceTicket"
+                            text="{i18n>streetnumber}"
+                            required="true"
+                        />
+                        <Input
+                            id="inp2ServiceTicket"
+                            value="{oCustomerAttributesJModel>/street_no}"
+                            maxLength="10"
+                        />
+
+                        <Label
+                            id="lbl3ServiceTicket"
+                            text="{i18n>streeetadd}"
+                            required="true"
+                        />
+                        <Input
+                            id="inp3ServiceTicket"
+                            value="{oCustomerAttributesJModel>/street_name}"
+                            maxLength="60"
+                        >
+                            <layoutData>
+                                <l:GridData
+                                    id="idGridData_CC3"
+                                    span="XL5 L5 M12 S12"
+                                />
+                            </layoutData>
+                        </Input>
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        <footer>
+            <Toolbar id="tbServiceTicket">
+                <content>
+                
+                    <Button
+                        id="create"
+                        type="Accept"
+                        text="Create"
+                        press="._createServiceTicket"
+                    />
+                    <Button
+                        id="Cancel"
+                        text="Cancel"
+                        type="Reject"
+                        press="onCloseDialog"
+                        ariaHasPopup="Dialog"
+                    />  
+                </content>
+            </Toolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

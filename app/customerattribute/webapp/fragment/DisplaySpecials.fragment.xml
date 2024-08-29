@@ -1,0 +1,294 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:x="sap.uxap">
+    
+ 
+     <x:ObjectPageLayout id="ObjectPageLayout_DS" enableLazyLoading="true" useIconTabBar="false" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
+    <x:headerTitle>
+      <x:ObjectPageDynamicHeaderTitle id="idDynamicHTitle_DS" visible="false"> 
+      
+      </x:ObjectPageDynamicHeaderTitle>
+    </x:headerTitle>
+
+
+    <x:sections>  
+
+      <x:ObjectPageSection id="idPageSectionCustomerRec_DS" titleUppercase="false" title="{i18n>CS_Customer_rec}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idCustomerSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <form:SimpleForm id="idRequestFormCustRec_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
+                  columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+ 
+            <form:content>
+            <core:Title id="hading1_DS" text="Header 1" />
+           
+            <Label id="idlblPSNo_DS" text="{i18n>psnum}"/>
+            <Text id="idPSNo_DS" />
+            <!-- <layoutData>
+                <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
+              </layoutData>
+              </Text>  -->
+            <Label id="idlblCompletionD_DS" text="{i18n>completionDate}" />
+            <Text id="idCompletionD_DS" />
+ 
+            <core:Title id="idH2_DS" text="Header 2"/>
+            <Label id="idlblWorkDesc_DS" text="{i18n>CS_WorkDesc}" />
+            <Text id="idWorkDesc_DS" text="{oSpecialsjmodel>/work_desc}"/>
+            <Label id="idlblMeterNo_DS" text="{i18n>CS_MeterNo}"/>
+            <Text id="idMeterNo_DS" text="{oSpecialsjmodel>/meter_number}"/>
+            <!-- <Label id="idlblkwhr" text="{i18n>kwhrRdg}"/>
+            <Text id="idkwhrrdg"/> -->
+            <Label id="idlblFedFrom_DS" text="{i18n>CS_FedFrom}"/>
+            <Text id="idFedFrom_DS"/>
+                       
+ 
+            <core:Title id="idheadi3_DS" text="Header 3" />
+            <Label id="idlblCableDesc_DS" text="{i18n>CS_cableDesc}"/>
+            <Text id="idCableDesc_DS" />
+            <Label id="idlblCableFootage_DS" text="{i18n>CS_cableFootage}"/>
+            <Text id="idCableFootage_DS" />
+            <Label id="idlblDuctType_DS" text="{i18n>CS_DuctType}"/>
+            <Text id="idDuctType_DS"/>
+ 
+     
+            <core:Title id="idMeasure_DS" text="Measure" />
+            <Label id="idlblCts_DS" text="{i18n>CS_cts}" />
+            <Text id="idCts_DS"/>
+            <Label id="idlblPts_DS" text="{i18n>CS_pts}" />
+            <Text id="idPts_DS"/>
+            <Label id="idlblK_DS" text="{i18n>CS_k}" />
+            <Text id="idK_DS"/>
+            <Label id="idlbM_DS" text="{i18n>CS_m}" />
+            <Text id="idM_DS"/>
+ 
+            <!-- <core:Title id="hedi6" text="Measured Voltage" />
+            <Label id="idlblab" text="{i18n>AB}" />
+            <Text id="idab"/>
+            <Label id="idlblbc" text="{i18n>bc}" />
+            <Text id="idbc"/>
+            <Label id="idlblca" text="{i18n>ca}" />
+            <Text id="idca"/>
+            <Label id="idblan" text="{i18n>an}" />
+            <Text id="idan" />
+            <Label id="idblbn" text="{i18n>bn}" />
+            <Text id="idbn" />
+            <Label id="idblcn" text="{i18n>cn}" />
+            <Text id="idcn" /> -->
+     
+            <core:Title id="idH6_DS" text="Header 6" />
+            <Label id="idlblFusesAt_DS" text="{i18n>CS_FusesAt}" />
+            <Text id="idfusesAt_DS"/>
+            <Label id="idlblSize_DS" text="{i18n>CS_Size}" />
+            <Text id="idSize_DS"/>
+            <Label id="idlblType_DS" text="{i18n>CS_Type}" />
+            <Text id="idType_DS"/>
+            <Label id="idlblCurve_DS" text="{i18n>CS_Curve}" />
+            <Text id="idCurve_DS"/>
+            <Label id="idlblVoltage_DS" text="{i18n>CS_Voltage}" />
+            <Text id="idVoltage_DS"/>
+           
+              </form:content>
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="idPageSectionLBD_DS" titleUppercase="false" title="{i18n>CS_Load_Break_Disc}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idLBDSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <form:SimpleForm id="rquestformLBD_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+            <form:content>
+            <core:Title id="heain2CPSR_DS" />
+            <Label id="idRadiobutton_DS" />
+            <RadioButtonGroup id="idRadio1_DS" columns="5" class="sapUiTinyMarginTopBottom" enabled="false" >
+            <RadioButton id="iddeCoOwned_DS" text="{i18n>CS_DECoOwned}" />
+            <RadioButton id="idCustomerOwned2_DS" text="{i18n>CS_CustomerOwned}" />
+            <RadioButton id="idNone_DS" text="{i18n>CS_None}" />
+            </RadioButtonGroup>  
+            <Label id="idlblMFG_DS" text="{i18n>CS_Manufacturer}" />
+            <Text id="idManufacturer_DS" />
+            <Label id="idlblModel_DS" text="{i18n>CS_Model}" />
+            <Text id="idModel_DS" />
+            <Label id="idlblCC_DS" text="{i18n>CS_ContinuousCurrent}" />
+            <Text id="idCC_DS" />
+            <Label id="idlblLoadIntRat_DS" text="{i18n>CS_LoadIntRat}" />
+            <Text id="idLoadIntRat_DS"/>
+            
+ 
+            <core:Title id="eading3_DS" />
+            <Label id="idlblKAMomentary_DS" text="{i18n>CS_KAMomentary}" />
+            <Text id="idKAMomentary_DS"/>
+            <Label id="idlblType2_DS" text="{i18n>CS_Type2}" />
+            <Text id="idType2_DS" />
+            <Label id="idlblFaultClosing_DS" text="{i18n>CSFaultClosing}" />
+            <Text id="idFaultClosing_DS"/>
+            <Label id="idlblBil_DS" text="{i18n>CS_Bil}" />
+            <Text id="idBil_DS"/>
+            <Label id="idlblSV_DS" text="{i18n>CS_ServiceVoltage}" />
+            <Text id="idSV_DS"/>
+            <Label id="idlbl60Cyc_DS" text="{i18n>CS60Cyc}" />
+            <Text id="id60Cyc_DS"/>  
+            </form:content>
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>  
+
+
+      <x:ObjectPageSection id="idPageSectionFusesAtLBD_DS" titleUppercase="false" title="{i18n>CS_Fuses_At_LBD}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idFusesAtLBDSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <Table id="idTFusesAtLb_DS" alternateRowColors="true" showNoData="true">
+              <columns >                
+                <Column id="idTsize1_DS">
+                  <Label id="idlblsize_DS" text="{i18n>CS_Tsize}" />
+                </Column>
+                <Column id="idtType_DS">
+                  <Label id="idlbltype3_DS" text="{i18n>CS_Ttype}" />
+                </Column>
+                <Column id="idTcurve_DS">
+                  <Label id="idlblcurve2_DS" text="{i18n>CS_Tcurve}" />
+                </Column>
+                <Column id="idTvoltage_DS">
+                  <Label id="idlblvoltage2_DS" text="{i18n>CS_Tvoltage}" />
+                </Column>
+              </columns>
+            <items>
+              <ColumnListItem id="cll6CPSR_DS">
+                <cells>                  
+                  <Text id="idTsize_DS" />
+                  <Text id="idTType_DS" />
+                  <Text id="idTCurve_DS" />
+                  <Text id="idTVoltage_DS" />
+                </cells>
+                </ColumnListItem>
+            </items>
+            </Table>
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="idPageSectionCB_DS" titleUppercase="false" title="{i18n>CS_Circuit_Breaker}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idCBSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <form:SimpleForm id="reqesformCB_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+            <form:content>
+            <core:Title id="idTitle_DS" />
+            <Label id="idlblRadioCB_DS"/>
+             <RadioButtonGroup id="goup6CPSR_DS" columns="5" class="sapUiTinyMarginTopBottom" enabled="false" >
+            <RadioButton id="idAir_DS" text="{i18n>CS_Air}" />
+            <RadioButton id="idOil_DS" text="{i18n>CS_Oil}" />
+            <RadioButton id="idVac_DS" text="{i18n>CS_Vac}" />
+            <RadioButton id="idsf6_DS" text="{i18n>CS_Sf6}" />
+            </RadioButtonGroup>
+            <Label id="idlblCBM_DS" text="{i18n>CS_CBM}" />
+            <Text id="idCBM_DS"/>
+            <Label id="idlblSNo_DS" text="{i18n>CS_Serialno}" />
+            <Text id="idSerialNo_DS"/>
+            <Label id="idlblKAMome_DS" text="{i18n>CS_KAMomenetary}" />
+            <Text id="idKAMome_DS" />
+            
+            <Label id="idlblAmps_DS" text="{i18n>CS_Amps}" />
+            <Text id="idAmps_DS" />
+            
+ 
+            <core:Title id="heding5CPSR_DS" /> 
+            <Label id="idCB1_DS" />
+                 
+            <RadioButtonGroup id="grop5CPSR_DS" columns="5" class="sapUiTinyMarginTopBottom" enabled="false">          
+            <RadioButton id="idDecoOwned_DS" text="{i18n>CS_DECoOwned}" />
+            <RadioButton id="idCustomer_DS" text="{i18n>CS_CustomerOwned}" />
+            </RadioButtonGroup>          
+            <Label id="idlblType4_DS" text="{i18n>CS_Type4}" />
+            <Text id="idType4_DS"/>
+            <Label id="idlblFaultDuty_DS" text="{i18n>CS_FaultDuty}" />
+            <Text id="idFaultDuty_DS" />
+            <Label id="idlblBil2_DS" text="{i18n>CS_Bil2}" />
+            <Text id="idBil2_DS" />
+            </form:content>
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+      <x:ObjectPageSection id="idPageSectionTrans_DS" titleUppercase="false" title="{i18n>CS_Transformer}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idTransSubSection_DS" titleUppercase="false">
+            <x:blocks>           
+              <Table id="tablTrans_DS" alternateRowColors="true" showNoData="true">
+              <headerToolbar>
+                <Toolbar id="_IDGenToolbar1_DS">
+                <RadioButtonGroup id="idOwnedGrp_DS" columns="4" enabled="false">          
+                  <RadioButton id="idDteOwned_DS" text="DTE Owned" />
+                  <RadioButton id="idCustomerOwned" text="Customer Owned" />
+                </RadioButtonGroup>  
+                </Toolbar>      
+            </headerToolbar>
+              <columns >                
+                <Column id="idColumnManufacturer_DS">
+                  <Label id="idlblManufacturer_DS" text="Manufacturer" />
+                </Column>
+                <Column id="idImped_DS">
+                  <Label id="idlblImped_DS" text="% Imped" />
+                </Column>
+                <Column id="idPriVolt1_DS">
+                  <Label id="idlblPriVolt_DS" text="Pri Volt" />
+                </Column>
+                <Column id="idSecVolt1_DS">
+                  <Label id="idlblSecVoltR_DS" text="Sec Volt" />
+                </Column>
+
+                <Column id="idTaps1_DS">
+                  <Label id="idlblTaps_DS" text="Taps" />
+                </Column>
+
+                <Column id="idKVA_DS">
+                  <Label id="idlblKVA_DS" text="KVA" />
+                </Column>
+
+                <Column id="idType5_DS">
+                  <Label id="idlblType5_DS" text="Type" />
+                </Column>
+
+                <Column id="idSerial_DS">
+                  <Label id="idlblSerial_DS" text="Serial" />
+                </Column>
+              </columns>
+            <items>
+              <ColumnListItem id="idColListItem_DS">
+                <cells>                  
+                  <Text id="idManufacturer2_DS"/>
+                  <Text id="idImped2_DS"/>
+                  <Text id="idPriVolt_DS" />
+                  <Text id="idSecVolt_DS"/>
+                  <Text id="idTaps_DS" />
+                  <Text id="idKva_DS" />
+                  <Text id="idType3_DS" />
+                  <Text id="idSerial2_DS"/>
+                </cells>
+                </ColumnListItem>
+            </items>
+            </Table>
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+    </x:sections>
+      
+  </x:ObjectPageLayout> 
+</core:FragmentDefinition>

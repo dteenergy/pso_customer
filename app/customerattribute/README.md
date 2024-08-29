@@ -9,7 +9,7 @@
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/pso/|
 |**Module Name**<br>customerattribute|
-|**Application Title**<br>App Title|
+|**Application Title**<br>Primary Service Order|
 |**Namespace**<br>com.pso|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.127.0|

@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js/hana": "^1",
     "@sap-cloud-sdk/connectivity": "^3.18.0",
     "@sap-cloud-sdk/http-client": "^3.18.0",
     "@sap/cds": "^7",
@@ -18,7 +19,7 @@
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^7",
     "@sap/eslint-plugin-cds": "^3",
-    "@sap/ux-specification": "^1.120.16",
+    "@sap/ux-specification": "^1.120.17",
     "eslint": "^9",
     "rimraf": "^5.0.5"
   },
@@ -28,7 +29,8 @@
     "undeploy": "cf undeploy psocustomerecord --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "watch-customerattribute": "cds watch --open customerattribute/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-customerattribute": "cds watch --open customerattribute/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-searchcustomer": "cds watch --open searchcustomer/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -38,7 +40,7 @@
       "connectbpa": {
         "kind": "rest",
         "credentials": {
-            "destination": "sap_process_automation_service"
+          "destination": "sap_process_automation_service"
         }
       }
     }

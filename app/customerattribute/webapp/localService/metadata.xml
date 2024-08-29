@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZPSO_CHLD_CO_CRE_UPD_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Dropdown" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="field"/>
+                    <PropertyRef Name="seq"/>
+                </Key>
+                <Property Name="field" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Field" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="seq" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="value" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="desc" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Customer_attribute" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="conn_obj"/>
+                </Key>
+                <Property Name="conn_obj" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Connection Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="cust_name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Customer Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="mail_name" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Mailing Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="street_no" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Street Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="street_name" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="city" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zip_code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Zip Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="no_of_lines" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="No Of Lines" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="srv_center" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Service centre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="cable_no" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Cable Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="doc_id" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Document Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="psr" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Primary Service Rep" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="sub_station" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Sub Station" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="sketch_no" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Sketch Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="circuit" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Circuit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="acc_rep" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Account Rep" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="emer_cont_name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Emergency Contact Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="emer_title" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Emergency Title" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="emer_phone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Emergency Phone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="sect_point" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Sect Point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="dc" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="DC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="pl" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="PL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="na" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="NA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="psw" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="PSW" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="prot_equip1" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Protective Equipment 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="prot_equip2" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Protective Equipment 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="throw_type" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Thrower Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="srv_type" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Service Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="on_site_emerg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="On Site Emergency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="on_site_part" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="On Site Part" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="full_generation" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Full Generation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="on_site_nosg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="No On Site Generation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="circuit_doc_id" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Circuit Doc Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="generation" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Generation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="indus_cust" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Industrial Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="pso_site" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="PSO Site" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="demo_site" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Demo Site" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="comments" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Comments" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Customer_search" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="cust_name"/>
+                </Key>
+                <Property Name="cust_name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Customer Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="mail_name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Mailing Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="street_no" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Street Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="street_name" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="city" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zip_code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Zip Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="no_of_lines" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="No of lines" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="srv_centre" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Service centre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="cable_no" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Cable Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="doc_id" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Document Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="psr" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Primary Service Rep" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="sub_station" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Substation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="sketch_no" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Sketch Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="circuit" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Circuit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="acc_rep" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Account Rep" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="superior_flag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="conn_obj" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Connection Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="circuit_dropdown" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="seq_no"/>
+                </Key>
+                <Property Name="seq_no" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sequence Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="substation" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Substation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="dc_pl" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="DC/PL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="circuit" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Circuit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="substation_dropdown" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="seq_no"/>
+                </Key>
+                <Property Name="seq_no" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="substation" Type="Edm.String" Nullable="false" MaxLength="65" sap:unicode="false" sap:label="Substation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZPSO_CHLD_CO_CRE_UPD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="DropdownSet" EntityType="ZPSO_CHLD_CO_CRE_UPD_SRV.Dropdown" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Customer_attributeSet" EntityType="ZPSO_CHLD_CO_CRE_UPD_SRV.Customer_attribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Customer_searchSet" EntityType="ZPSO_CHLD_CO_CRE_UPD_SRV.Customer_search" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="circuit_dropdownSet" EntityType="ZPSO_CHLD_CO_CRE_UPD_SRV.circuit_dropdown" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="substation_dropdownSet" EntityType="ZPSO_CHLD_CO_CRE_UPD_SRV.substation_dropdown" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://devn1-https-isu:8443/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://devn1-https-isu:8443/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

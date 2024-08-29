@@ -1,0 +1,103 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    
+>
+    <Dialog id="_IDGenDialog1"
+        draggable="true"   contentHeight="25em"  contentWidth="100%"    
+        resizable="true" 
+        title="Create Service Ticket" titleAlignment="Center" >
+        <content>
+            <!-- <VBox
+                class="sapUiSmallMargin"             
+                items="{ path: '/oCustomerAttributesJModel'}"> -->
+
+                <f:SimpleForm id="_IDGenSimpleForm1" 
+					editable="false" layout="ResponsiveGridLayout" singleContainerFullSize="false" 
+                    columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                    <f:content>                   
+
+                        <Label id="idlblDCPLIND_ST" />
+                        <RadioButtonGroup id="idDCPLIND_ST" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect" selectedIndex="" enabled="false">
+                        <RadioButton id="DC_ST" text="DC" selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"/>
+                        <RadioButton id="PL_ST" text="PL" selected="{= ${oCustomerAttributesJModel>/pl} === 'X' ? true : false}"/>
+                        <RadioButton id="IND_ST" text="IND" selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"/>
+                        </RadioButtonGroup>
+
+                        <Label id="idlblCustName_ST" text="{i18n>customername}" required="false" />
+                        <Text id="idCustName_ST" text="{oCustomerAttributesJModel>/cust_name}"/>
+
+                        <Label id="idlblStreetAdd_ST"  text="{i18n>streeetadd}" />
+                        <Text id="idStreetAdd_ST"  text="{oCustomerAttributesJModel>/street_name}" />
+
+                        <Label id="idlblCity_ST"  text="{i18n>Fcity}" />
+                        <Text id="idCity_ST" text="{oCustomerAttributesJModel>/city}" />
+
+                        <Label id="idlblZipCode_ST"  text="{i18n>FZipcod}" />
+                        <Text id="idZipCode_ST" text="{oCustomerAttributesJModel>/zip_code}"   />
+
+                        <Label id="idlblSrvCecenter_ST" text="{i18n>servicecenter}" />
+                        <Text id="idSrvCenter_ST" text="{oCustomerAttributesJModel>/srv_center}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST1" span="XL5 L5 M12 S12" />
+                        </layoutData>
+                        </Text>
+
+                        <Label id="idlblSubstation_ST" text="{i18n>substation}" />
+                        <Text id="idSubstation_ST" text="{oCustomerAttributesJModel>/sub_station}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST2" span="XL5 L5 M12 S12" />
+                        </layoutData>
+                        </Text>
+
+                        <Label id="idlblCircuit_ST" text="{i18n>circuit}" />
+                        <Text id="idCircuit_ST" text="{oCustomerAttributesJModel>/circuit}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST3" span="XL5 L5 M12 S12" />
+                        </layoutData>
+                        </Text>
+
+                        <Label id="idlblNoOfLines_ST" text="{i18n>numberoflines}" />
+                        <Text id="idNoOfline_ST" text="{oCustomerAttributesJModel>/no_of_lines}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST4" span="XL5 L5 M12 S12" />
+                        </layoutData>
+                        </Text>
+                        
+                        <Label id="idlblPrimarySrvRep_ST" text="{i18n>primerysrvrep}" />
+                        <Text id="idPrimarySrvRep_ST" text="{oCustomerAttributesJModel>/psr}" />
+                
+
+                    </f:content>
+                </f:SimpleForm>
+
+                
+            <!-- </VBox> -->
+        </content>
+        <footer >
+            <Toolbar id="_IDGenToolbar1" >
+                <content > 
+                <ToolbarSpacer id="_IDGenToolbarSpacerST" />  
+                    <Button
+                    id="_IDGenButtonCreateST"
+                    type="Emphasized"
+                    text="Create Ticket"
+                    icon="sap-icon://create"
+                    press="createServiceTicket"
+                    />
+                    <Button
+                        id="Cancel"
+                        text="Cancel"
+                        type="Reject"
+                        press="onCloseDialog"
+                        icon="sap-icon://cancel"
+                        
+                    />
+                </content>
+            </Toolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

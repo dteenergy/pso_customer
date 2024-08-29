@@ -1,1 +1,35 @@
 /* Enter your custom styles here */
+
+/*Table header Color*/
+.sapMTableTH {
+    background: #007c91 !important;
+    border-bottom: 1px solid #e5e5e5;
+    vertical-align: middle;
+}
+
+/*table header font color*/
+.sapMColumnHeaderContent{
+    color: white !important;
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+}
+
+.sapMIBar.sapMFooter-CTX {
+    background-color: #cbced2 !important;
+    border-top: 1px solid #eff1f2 !important;
+}
+
+.boldLabel {
+    font-weight: bold;
+}
+
+.specialsStatusLabel {
+    font-weight: bold;
+    color: red !important;
+}
+
+/* .srvTicketColor {
+    background-image: none;
+    background-color: #4A412A;
+} */
+

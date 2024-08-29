@@ -1,0 +1,35 @@
+@server = http://localhost:4004/
+@service = {{server}}odata/v4/pso
+POST  {{service}}/PSOSpecials
+Content-Type: application/json
+
+{
+    "connection_object": "123456789",
+    "work_desc": "My Work Desc",
+    "meter_number": "M12345"
+}
+###Read Data from PSO Table based on connection object
+//GET  {{service}}/getSpecialsRecord(connection_object='123456789',meter_number='M12345')
+GET  {{service}}/getSpecialsRecord(connection_object='123456789')
+
+###POST Data to DB with action import
+POST   {{service}}/submitSpecials
+Content-Type: application/json
+
+{ 
+    "context": { 
+        "connection_object": "123456781",
+        "work_desc": "My Work Desc",
+        "meter_number": "M12345"
+       
+    } 
+}
+
+###POST Data to DB with action import
+POST   {{service}}/onApproveRecord1
+Content-Type: application/json
+
+{ 
+    "comment" : "approved", 
+    "approvedBy" : "mickey"
+}

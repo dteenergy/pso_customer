@@ -1,0 +1,307 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:x="sap.uxap" height="100%">
+
+  <x:ObjectPageLayout id="ObjectPageLayout_DC" enableLazyLoading="true" useIconTabBar="false" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
+    <x:headerTitle>
+      <x:ObjectPageDynamicHeaderTitle id="idDynamicHTitle_DC" visible="false">
+        <x:expandedHeading> 
+
+        </x:expandedHeading>
+      </x:ObjectPageDynamicHeaderTitle> 
+    </x:headerTitle>
+
+ 
+    <x:sections>
+
+    <x:ObjectPageSection id="idPageSectionCustomerInfo_DC" titleUppercase="false" title="{i18n>customer_info}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idCustomerSubSection_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idCustomerInfoReqForm_DC" editable="true" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+
+              <form:content> 
+                <!-- <core:Title id="vacation-timerange-heading1" /> -->
+                <Label id="idlblCustomerName_DC" text="{i18n>customername}"/>
+                <Text id="idCustomerName_DC"  text="{oCustomerAttributesJModel>/cust_name}">
+                <layoutData>
+                      <l:GridData id="idGridData_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text> 
+
+                <!-- <core:Title id="vacation-timerange-headi" /> -->
+                <!-- <Label id="idbladdress1" text="{i18n>city}" class="sapUiSmallMarginBeginEnd" width="10em"/>
+                  <Text id="streetad-field1" value="500" width="10em" /> -->
+                <Label id="idlblStreetNo_DC" text="{i18n>streetnumber}"/>
+                <Text id="idStreetno_DC"  text="{oCustomerAttributesJModel>/street_no}">
+                <layoutData>
+                      <l:GridData id="idGridData_DC2" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                <!-- <core:Title id="vacation-timerange-hea" /> -->
+                <Label id="idlblStreetAdd_DC" text="{i18n>streeetadd}"/>
+                <Text id="idStreetAdd_DC"  text="{oCustomerAttributesJModel>/street_name}">
+                <layoutData>
+                      <l:GridData id="idGridData_DC3" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+
+              </form:content>
+
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idSubSecEmerContact_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idrRuestformEmerContact_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+                  <Label id="idlblEmerConName_DC" text="{i18n>emerencyconname}"/>
+                  <Text id="idEmerConName_DC" text="{oCustomerAttributesJModel>/emer_cont_name}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC4" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblEmerTitle_DC" text="{i18n>emergencytitle}" />
+                  <Text id="idEmerTitle_DC" text="{oCustomerAttributesJModel>/emer_title}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC5" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblEmerPhone_DC" text="{i18n>emerencyphone}" />
+                  <Text id="idEmerPhone_DC" text="{oCustomerAttributesJModel>/emer_phone}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC6" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+      
+
+      <x:ObjectPageSection id="idObjectPageSecH2_DC" titleUppercase="false" title="{i18n>other_cust_details}">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idSubPageSecH2_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idReqFormH2_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="idlblPswdocid_DC" text="{i18n>pswdocid}" />
+                  <Text id="idPswdocid_DC" text="{oCustomerAttributesJModel>/doc_id}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC7" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblSectPoint_DC" text="{i18n>sectpoint}" />
+                  <Text id="idSectPoint_DC" text="{oCustomerAttributesJModel>/sect_point}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC8" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblSketchNo_DC" text="{i18n>sketchno}" />
+                  <Text id="idSketchNo_DC" text="{oCustomerAttributesJModel>/sketch_no}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC9" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblNoOfLines_DC" text="{i18n>numberoflines}" />
+                  <Text id="idNoOfline_DC" text="{oCustomerAttributesJModel>/no_of_lines}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC10" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblPsw_DC" text="{i18n>psw}" />
+                  <Text id="idPsw_DC" text="{oCustomerAttributesJModel>/psw}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC11" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+
+      <x:ObjectPageSection id="idObjectPageSecCirInfo_DC" titleUppercase="false" title="{i18n>Circuit_Information}">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idSubSecCirInfo_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idReqFormCirInfo_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="idlblDCPLIND_DC"/>
+                  <RadioButtonGroup id="idDCPLIND_DC" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect" selectedIndex="" enabled="false">
+                    <RadioButton id="DC_DC" text="DC" selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"/>
+                    <RadioButton id="PL_DC" text="PL" selected="{= ${oCustomerAttributesJModel>/pl} === 'X' ? true : false}"/>
+                    <RadioButton id="IND_DC" text="IND" selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"/>
+                  </RadioButtonGroup>
+                  <Label id="idlblTrans_DC" text="{i18n>trans}" />
+                  <Text id="idTrans_DC" text="{oCustomerAttributesJModel>/trans}" visible="false">
+                    
+                    <layoutData>
+                      <l:GridData id="idGridData_DC12" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </Text>
+                  <Label id="idlblSubstation_DC" text="{i18n>substation}" />
+                  <Text id="idSubstation_DC" text="{oCustomerAttributesJModel>/sub_station}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC13" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblCircuit_DC" text="{i18n>circuit}" />
+                  <Text id="idCircuit_DC" text="{oCustomerAttributesJModel>/circuit}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC14" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                   
+                  </Text>
+                  <Label id="idlblCircuitDoc_DC" text="{i18n>circuitdoc}" />
+                  <Text id="idCircuitDoc_DC" text="{oCustomerAttributesJModel>/circuit_doc_id}">
+                  <layoutData>
+                      <l:GridData id="idGridData_DC15" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Text>
+                  <Label id="idlblPsCableno_DC" text="{i18n>pscableno}" />
+                  <Text id="idPsCableno_DC" text="{oCustomerAttributesJModel>/cable_no}">
+                  <layoutData>
+                      <l:GridData id="idGridData_DC16" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Text>
+                    <Label id="idlblSrvCecenter_DC" text="{i18n>servicecenter}" />
+                  <Text id="idSrvCenter_DC" text="{oCustomerAttributesJModel>/srv_center}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC17" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblPrimerySrvRep_DC" text="{i18n>primerysrvrep}" />
+                  <Text id="idPSR_DC" text="{oCustomerAttributesJModel>/psr}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC18" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </Text>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="idObjectPageSecH4_DC" titleUppercase="false" title="{i18n>Equipment_and_Gene}">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idSubSecH4_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idReqFormH4_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="idlblProEqp1_DC" text="{i18n>protectiveeqp1}" />
+                  <Text id="idProEqp1_DC" text="{oCustomerAttributesJModel>/prot_equip1}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC19" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Text>
+                  <Label id="idlblProEqp2_DC" text="{i18n>protectiveeqp2}" />
+                  <Text id="idProEqp2_DC" text="{oCustomerAttributesJModel>/prot_equip2}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC20" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </Text>
+                  <Label id="idlblThType_DC" text="{i18n>throwovertyp}" />
+                  <Text id="idThrowoverTyp_DC" text="{oCustomerAttributesJModel>/throw_type}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC21" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </Text>
+
+
+                  <Label id="idlblSrvType_DC" text="{i18n>servicetype}" />
+                  <Text id="idServiceType_DC" text="{oCustomerAttributesJModel>/srv_type}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC22" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </Text>
+                  <Label id="idlblOnSiteGen_DC" text="{i18n>onsitegen}" />
+                  <RadioButtonGroup id="idGeneration_DC" columns="5" class="sapUiMediumMarginBottom" enabled="false">
+                    <RadioButton id="Emergency_DC" text="Emergency" selected="{= ${oCustomerAttributesJModel>/on_site_emerg} === 'X' ? true : false}"/>
+                    <RadioButton id="Partial_DC" text="Partial" selected="{= ${oCustomerAttributesJModel>/on_site_part} === 'X' ? true : false}"/>
+                    <RadioButton id="Fullgeneration_DC" text="Full generation" selected="{= ${oCustomerAttributesJModel>/full_generation} === 'X' ? true : false}"/>
+                    <RadioButton id="Noonsitegeneration_DC" text="No on-site generation" selected="{= ${oCustomerAttributesJModel>/on_site_nosg} === 'X' ? true : false}"/> 
+                  </RadioButtonGroup>
+
+                  <!-- <Label id="_IDGenLabel36" text="{i18n>glnx}" visible="false"/>
+                  <Text id="_IDGenText36" visible="false" width="50%" />
+                  <Label id="_IDGenLabel37" text="{i18n>glny}" visible="false"/>
+                  <Text id="_IDGenText37" visible="false" width="50%" /> -->
+                  <Label id="idlblTotalGen_DC" text="{i18n>totalgen}" />
+                  <Text id="idGenration_DC" text="{oCustomerAttributesJModel>/generation}">
+                  <layoutData>
+                      <l:GridData id="idGridData_DC23" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Text>
+                  <Text id="idkW_DC" text="kW" />
+                  <!-- <Label id="idlblOTurl_DC" />
+                  <Button id="idOTurl_DC" text="OT url" icon="sap-icon://chain-link" type="Success" press="launchOpentextURL" enabled="true">
+                  <layoutData>
+                      <l:GridData id="idGridData_DC24" span="XL2 L2 M12 S12" />
+                    </layoutData>
+                    </Button> -->
+                  <!-- <ComboBox id="idgeneration" items="{oServicetype>/}" selectedKey="0" width="50%">
+                    <core:Item id="iditemeneration" key="{oServicetype>Key}" text="{oServicetype>value}" />
+                  </ComboBox> -->
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="idObjPageSecComments_DC" titleUppercase="false" title="{i18n>Comments}">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idSubSecComments_DC" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="idReqFormComments_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+                  <Label id="idlblComments_DC" text="Comments"/>
+                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="true" valueLiveUpdate="true" editable="false"  rows="6"/>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+    </x:sections>
+
+  </x:ObjectPageLayout>
+
+
+</core:FragmentDefinition>

@@ -99,7 +99,7 @@
                     "earlyRequests": true
                 }
             },
-            "ISUModel": {
+            "ISUService": {
                 "dataSource": "ISUService",
                 "preload": true,
                 "settings": {}
@@ -129,6 +129,20 @@
                     "target": [
                         "TargetSearchCustomer"
                     ]
+                },
+                {
+                    "name": "CustomerDetails",
+                    "pattern": "CustomerDetails/{scope}",
+                    "target": [
+                        "TargetCustomerDetails"
+                    ]
+                },
+                {
+                    "name": "CustomerSpecials",
+                    "pattern": "CustomerSpecials/{scope}",
+                    "target": [
+                        "TargetCustomerSpecials"
+                    ]
                 }
             ],
             "targets": {
@@ -138,6 +152,20 @@
                     "clearControlAggregation": false,
                     "viewId": "SearchCustomer",
                     "viewName": "SearchCustomer"
+                },
+                "TargetCustomerDetails": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "CustomerDetails",
+                    "viewName": "CustomerDetails"
+                },
+                "TargetCustomerSpecials": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "CustomerSpecials",
+                    "viewName": "CustomerSpecials"
                 }
             }
         },

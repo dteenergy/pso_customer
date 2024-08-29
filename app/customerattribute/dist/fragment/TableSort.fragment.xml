@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <ViewSettingsDialog id="_IDGenViewSettingsDialog1" sortDescending="true" confirm="onTableSortConfirm">
+        <sortItems>
+            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="{i18n>FragCustName}" key="cust_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="{i18n>FragMailingName}" key="mail_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="{i18n>FragStreetAdd}" key="street_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="{i18n>FragStreetNo}" key="street_no"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="{i18n>FragCity}" key="city"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="{i18n>fragZipCode}" key="zip_code"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem7" text="{i18n>FNumberoflines}" key="no_of_lines"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem8" text="{i18n>Fsrvcenter}" key="srv_centre"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem9" text="{i18n>Fcableno}" key="cable_no"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem10" text="{i18n>Fpswidigram}" key="doc_id"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem11" text="{i18n>Fprimeryrvrep}" key="psr"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem12" text="{i18n>Faccountrp}" key="acc_rep"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem13" text="{i18n>Fsustatoin}" key="sub_station"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem14" text="{i18n>Fsrvsktchno}" key="sketch_no"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem15" text="{i18n>Fcircuit}" key="circuit"/>
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,2 @@
+jQuery.sap.declare("com.pso.customerattribute.utils.Formatter");com.pso.customerattribute.utils.Formatter={setIcon:function(t){if(t==="X"){return"sap-icon://tree"}},setColor:function(t){if(t==="X"){return"orange"}}};
+//# sourceMappingURL=Formatter.js.map

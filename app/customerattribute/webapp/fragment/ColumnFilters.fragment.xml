@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <ViewSettingsDialog id="_IDGenViewSettingsDialog1" confirm="onValidReportsColumnFilterConfirm" cancel="onValidReportsColumnFilterCancel" resetFilters="onValidReportsResetColumnFilters">
+        <customTabs>
+            <ViewSettingsCustomTab id="idValidReportsColumnFilters" icon="sap-icon://filter" title="{i18n>columnFilters}" tooltip="{i18n>columnFilters}">
+                <content>
+                    <Panel id="_IDGenPanel1">
+                        <Label id="_IDGenLabel1" text="{i18n>Fcutname}" design="Bold"/>
+                        <Input id="idfragCustName" value=""/>
+                        <Label id="_IDGenLabel2" text="{i18n>FMailingname}" design="Bold"/>
+                        <Input id="idfragMailingName" value=""/>
+                        <Label id="_IDGenLabel3" text="{i18n>FStreetAdd}" design="Bold"/>
+                        <Input id="idfragStreetAdd" value=""/>
+                        <Label id="_IDGenLabel4" text="{i18n>FStreetNo}" design="Bold"/>
+                        <Input id="idfragStreetNo" value=""/>
+                        <Label id="_IDGenLabel5" text="{i18n>Fcity}" design="Bold"/>
+                        <Input id="idFragCity" value=""/>
+                        <Label id="_IDGenLabel6" text="{i18n>FZipcod}" design="Bold"/>
+                        <Input id="idfragZipcode" value=""/>
+                        <Label id="_IDGenLabel7" text="{i18n>FNumberoflines}" design="Bold"/>
+                        <Input id="idfragNoofLines" value=""/>
+                        <Label id="_IDGenLabel8" text="{i18n>Fsrvcenter}" design="Bold"/>
+                        <Input id="idfragSrvCenter" value=""/>
+                        <Label id="_IDGenLabel9" text="{i18n>Fcableno}" design="Bold"/>
+                        <Input id="idfragCableNo" value=""/>
+                        <Label id="_IDGenLabel10" text="{i18n>Fpswidigram}" design="Bold"/>
+                        <Input id="idfragpswdigram" value=""/>
+                        <Label id="_IDGenLabel11" text="{i18n>Fprimeryrvrep}" design="Bold"/>
+                        <Input id="idfragPrimerySrvRep" value=""/>
+                        <Label id="_IDGenLabel12" text="{i18n>Faccountrp}" design="Bold"/>
+                        <Input id="idfragAccRep" value=""/>
+                        <Label id="_IDGenLabel13" text="{i18n>Fsustatoin}" design="Bold"/>
+                        <Input id="idfragSubstation" value=""/>
+                        <Label id="_IDGenLabel14" text="{i18n>Fsrvsktchno}" design="Bold"/>
+                        <Input id="idfragSketchNo" value=""/>
+                        <Label id="_IDGenLabel15" text="{i18n>Fcircuit}" design="Bold"/>
+                        <Input id="idfragCircuit" value=""/>
+                    </Panel>
+                </content>
+            </ViewSettingsCustomTab>
+        </customTabs>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>
