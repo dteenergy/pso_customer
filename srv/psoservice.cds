@@ -31,7 +31,7 @@ service PSOService {
   action   onApproveRecord1(recordID: UUID, comment : String, approvedBy : String) returns wfType;
   action   createSpecials(context : SpecialsContext); //context : SpecialsContext
   //function  createSpecials1() returns String;//context : SpecialsContext
-  action   submitSpecials(ID: UUID, context : SpecialsContext);
+  action   submitSpecials(recordID: UUID, context : SpecialsContext);
   action   updateSpecials(ID: UUID, context : SpecialsContext);
 
 }

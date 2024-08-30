@@ -200,7 +200,7 @@
                       <l:GridData id="idGridData_DC18" span="XL5 L5 M12 S12" />
                     </layoutData>
                     
-                  </Text>
+                  </Text> 
 
                 </form:content>
               </form:SimpleForm >

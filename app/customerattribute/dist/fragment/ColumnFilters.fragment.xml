@@ -10,6 +10,8 @@
                         <Input id="idfragCustName" value=""/>
                         <Label id="_IDGenLabel2" text="{i18n>FMailingname}" design="Bold"/>
                         <Input id="idfragMailingName" value=""/>
+                        <Label id="_IDGenLabelBentity" text="{i18n>FBillingEntity}" design="Bold"/>
+                        <Input id="idfragBillingentity" value=""/>
                         <Label id="_IDGenLabel3" text="{i18n>FStreetAdd}" design="Bold"/>
                         <Input id="idfragStreetAdd" value=""/>
                         <Label id="_IDGenLabel4" text="{i18n>FStreetNo}" design="Bold"/>

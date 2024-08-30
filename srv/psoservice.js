@@ -61,12 +61,12 @@ module.exports = class PSOService extends cds.ApplicationService {
             req.data.context.workflow_status = "running";
             req.data.context.record_status = "submitted";
             console.log(req.data.context);
-            console.log(req.data.ID);
+            console.log(req.data.recordID); //fails on direct submit without saving (1st time)
             //  console.log("WF called completed from submit specials: " + wfId);
             let oResult;
-            if (req.data.ID) { //update exisitng entry
+            if (req.data.recordID) { //update exisitng entry
                 console.log("in update block");
-                const recordID = req.data.ID;
+                const recordID = req.data.recordID;
                 oResult = await UPDATE.entity(PSOSpecials, recordID).set({ 
                     work_desc: req.data.context.work_desc,
                     meter_number: req.data.context.meter_number, 
@@ -139,6 +139,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             let wfPayload = {
                 "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
                 "context": {
+                    "recordID": "bfc20b16-a989-4ccb-bd9a-abe80f4e0d00",
                     "customerID": "123456789",
                     "customerName": "",
                     "address": "",

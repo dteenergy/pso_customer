@@ -73,8 +73,18 @@ sap.ui.define([
                 this.getView().byId("_IDButtonEditRecord").setVisible(false);
                 this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
                 this.getView().byId("idButtonOpentext").setVisible(false);
-                //  this.getView().byId("idButtonView").setVisible(true)
+                this.getView().byId("idButtonView").setVisible(true)
 
+            },
+
+            onViewRecord:function(){
+                this.getView().byId("idpanel").setVisible(false);
+                this.getView().byId("idpanel2").setVisible(true);
+                this.getView().byId("_IDButtonCreateRecord").setVisible(false);
+                this.getView().byId("_IDButtonEditRecord").setVisible(true);
+                this.getView().byId("idButtonCreateServiceTicket").setVisible(true);
+                this.getView().byId("idButtonOpentext").setVisible(true);
+                this.getView().byId("idButtonView").setVisible(false)
             },
 
             // onViewRecord:function(){

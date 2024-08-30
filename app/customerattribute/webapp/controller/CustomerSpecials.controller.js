@@ -115,7 +115,7 @@ sap.ui.define([
                 //if Specials exist, update existing record (ID matching)
                 var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
                 if (oSpecialsjmodelData) {
-                    oOperation.setParameter("ID", oSpecialsjmodelData.ID);
+                    oOperation.setParameter("recordID", oSpecialsjmodelData.ID);
                 }
                 //    console.log(context);
                 //    const connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;

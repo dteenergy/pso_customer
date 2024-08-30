@@ -50,7 +50,15 @@
                     visible="true"
                 />
                 <ToolbarSpacer id="_IDGenToolbarSpacer01" />
-                
+
+                <Button
+                    id="idButtonView"
+                    type="Ghost"
+                    text="View Record"
+                    icon="sap-icon://show"
+                    press="onViewRecord"
+                    visible="false"
+                /> 
                 <Button
                     id="_IDButtonCreateRecord"
                     type="Critical"

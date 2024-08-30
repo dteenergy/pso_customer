@@ -5,6 +5,7 @@
         <sortItems>
             <ViewSettingsItem id="_IDGenViewSettingsItem1" text="{i18n>FragCustName}" key="cust_name"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem2" text="{i18n>FragMailingName}" key="mail_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsBentity" text="{i18n>FBillingEntity}" key="conn_obj"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem3" text="{i18n>FragStreetAdd}" key="street_name"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem4" text="{i18n>FragStreetNo}" key="street_no"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem5" text="{i18n>FragCity}" key="city"/>

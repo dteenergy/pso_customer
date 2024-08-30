@@ -1,29 +1,3 @@
-<!-- <mvc:View controllerName="com.pso.customerattribute.controller.SearchCustomer"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content >
-            <Button id="testscope" text="Click" press="getUserDetails"/>
-
-            <Text id="testText"/>
-    
-            <Button press="launchOpentextURL" text="launchOpentextURL"/>
-
-            <Button press="createWFInstance" text="Submit for Approval"/>
-            </content>
-    </Page>
-</mvc:View> -->
-<!-- <mvc:View controllerName="com.pso.customerrecord.controller.SearchCustomer"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content>
-            <Button id="id1" text="Create" press="fnCreateCustomerDetails"></Button>
-            <Button id="id2" text="Display" press="fnDisplayCustomerDetails"></Button>
-        
-        </content>
-    </Page>
-</mvc:View> -->
 <mvc:View
     controllerName="com.pso.customerattribute.controller.SearchCustomer"
     xmlns:mvc="sap.ui.core.mvc"
@@ -41,15 +15,8 @@
         enableScrolling="true">
         <f:DynamicPage
             id="dynamicPageId"
-            headerExpanded="{/headerExpanded}"
-        >
-            <!-- <f:title>
-<f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
-<f:heading>
-<Title id="_IDGenTitle1" text="Material Documents"/>
-</f:heading>
-</f:DynamicPageTitle>
-</f:title> -->
+            headerExpanded="{/headerExpanded}">
+            
             <f:title>
                 <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
                     <f:heading>
@@ -78,11 +45,7 @@
                             showClearOnFB="true"
                             clear="onClear"> 
                             <fb:filterGroupItems>
-                                <!-- <fb:FilterGroupItem id="_IDGenFilterGroupItem1" groupName="G1" groupTitle="Group1" name="C" label="{i18n>city}" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <Input id="idcity" showValueHelp="false" type="Text" />
-                                    </fb:control>
-                                </fb:FilterGroupItem> -->
+                                
                                 <fb:FilterGroupItem
                                     id="_IDGenFilterGroupItem2"
                                     groupName="G1"
@@ -103,7 +66,7 @@
                                     id="_IDGenFilterGroupItem3"
                                     groupName="G1"
                                     groupTitle="Group1"
-                                    name="Mailing Name"
+                                    name="Billing Name"
                                     label="{i18n>FMailingname}"
                                     visibleInFilterBar="true">
                                     <fb:control>
@@ -113,20 +76,7 @@
                                             maxLength="40"/>
                                     </fb:control>
                                 </fb:FilterGroupItem>
-                                <fb:FilterGroupItem
-                                    id="_IDGenFilterGroupItem4"
-                                    groupName="G2"
-                                    groupTitle="Group2"
-                                    name="Street Address"
-                                    label="{i18n>FStreetAdd2}"
-                                    visibleInFilterBar="true"> 
-                                    <fb:control>
-                                        <Input
-                                            id="idStreetAdd"
-                                            showValueHelp="false"
-                                            maxLength="60"/>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
+                                
                                 <fb:FilterGroupItem
                                     id="_IDGenFilterGroupItem5"
                                     groupName="G2"
@@ -142,6 +92,21 @@
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
+                                    id="_IDGenFilterGroupItem4"
+                                    groupName="G2"
+                                    groupTitle="Group2"
+                                    name="Street Name"
+                                    label="{i18n>FStreetAdd2}"
+                                    visibleInFilterBar="true"> 
+                                    <fb:control>
+                                        <Input
+                                            id="idStreetAdd"
+                                            showValueHelp="false"
+                                            maxLength="60"
+                                            liveChange="onCapitalizeFirtsLater"/>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem
                                     id="_IDGenFilterGroupItem1"
                                     groupName="G2"
                                     groupTitle="Group2"
@@ -152,7 +117,8 @@
                                         <Input
                                             id="idCity"
                                             showValueHelp="false"
-                                            maxLength="40"/>
+                                            maxLength="40"
+                                            liveChange="onCapitalizeFirtsLater"/>
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -297,7 +263,6 @@
                 </f:DynamicPageHeader>
             </f:header>
             <f:content>
-                <!-- <ScrollContainer id="_IDGenScrollContainer1" width="auto" vertical="false" horizontal="true"> -->
                 <Table
                     sticky="ColumnHeaders,HeaderToolbar,InfoToolbar"
                     id="idCustomerListTable"
@@ -309,16 +274,11 @@
                     <headerToolbar>
                         <Toolbar id="_IDGenToolbar1">
                             <content>
-                                <!-- <core:Icon id="_IDGenIcon1" src="sap-icon://border"></core:Icon> -->
-                                <Label
+                               <Label
                                     id="idlblNoofRec"
                                     text="{i18n>noOfRecords}"/>
                                 <Text id="idNoofRec" />
                                 <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                                <!-- <Button id="idcreateButton" text="Create Child" type="Emphasized"  width="auto" press="onCreateChield" />
-                                <Button id="idDisplayButton" text="Display Child" type="Emphasized"  width="auto" press="onDisplayChield" />
-                                <Button id="idDisplayButtonltd" icon="sap-icon://SAP-icons-TNT" text="Limited Display Child" type="Emphasized"  width="auto" press="onDisplayChildLtd" /> -->
-
                                 <SearchField
                                     id="idValidReportsSearch"
                                     width="30%"
@@ -332,7 +292,7 @@
                                     icon="sap-icon://filter"
                                     iconFirst="true"
                                     width="auto"
-                                    enabled="true"
+                                    enabled="true" 
                                     visible="true"
                                     iconDensityAware="false"
                                     press="onTableColumnFilterButtonPress"
@@ -359,6 +319,7 @@
                                     enabled="true"
                                     visible="true"
                                     iconDensityAware="false"
+                                    tooltip="{i18n>Sort_records}"
                                     press="onValidReportsTableSorting"/>
                                 <Button
                                     id="idValidationReportsTableExport"
@@ -370,6 +331,7 @@
                                     enabled="true"
                                     visible="true"
                                     iconDensityAware="false"
+                                    tooltip="{i18n>Download_record}"
                                     press="onValidReportsTableExport"/>
                             </content>
                         </Toolbar>
@@ -381,10 +343,7 @@
                             width="3rem"
                             demandPopin="true"
                             hAlign="Begin"/>
-                        <!-- <Column id="_IDGenColumn1" minScreenWidth="" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText1" text="{i18n>city}"/>
-                        </Column> -->
-
+                        
                         <Column
                             id="_IDGenColumn2"
                             minScreenWidth="1000px"
@@ -395,9 +354,7 @@
                                 id="_IDGenText2"
                                 text="{i18n>Fcutname}"/>
                         </Column>
-                        <!-- <Column id="_IDGenColumn3" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText3" text="{i18n>FMailingname}"/>
-                        </Column> -->
+                        
                         <Column
                             id="_IDGenColumn4"
                             minScreenWidth="1000px"
@@ -463,78 +420,38 @@
                                 id="_IDGenText11"
                                 text="{i18n>Fpswidigram}"/>
                         </Column>
-                        <!-- <Column id="_IDGenColumn5" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText5" text="{i18n>FStreetNo}"/>
-                        </Column> -->
-                        <!-- <Column id="_IDGenColumn6" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText6" text="{i18n>Fcity}"/>
-                        </Column> -->
-                        <!-- <Column id="_IDGenColumn7" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText7" text="{i18n>FZipcod}"/>
-                        </Column> -->
-                        <!-- <Column id="_IDGenColumn8" minScreenWidth="1000px" width="5rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText8" text="{i18n>FNumberoflines}"/>
-                        </Column> -->
                         
-                        
-                        <!-- <Column id="_IDGenColumn15" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText15" text="{i18n>Fsrvsktchno}"/>
-                        </Column> -->
-                        
-                        
-                        <!-- <Column id="_IDGenColumn13" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText13" text="{i18n>Faccountrp}"/>
-                        </Column> -->
-                        
-
-                        <!-- <Column id="_IDGenColumn16" minScreenWidth="1000px" width="12rem" demandPopin="true" hAlign="Begin">
-                            <Text id="_IDGenText16" text="{i18n>Fcircuit}"/>
-                        </Column> -->
                     </columns>
                     <items>
-                        <!-- highlight="{= ${oSearchCustomerJModel>superior_flag} === 'X' ? 'Error' : undefined }"  -->
                         <ColumnListItem
                             id="_IDGenColumnListItem1"
                             type="Navigation"
                             press="handleSelectionChange">
-                            <!-- <customData>
-                            <core:CustomData key="myCustomColor" value="{oSearchCustomerJModel>flag}" writeToDom="true"></core:CustomData>
-                            </customData> -->
-
                             <cells>
                                 <core:Icon
                                     size="22px"
                                     src="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setIcon'}"
                                     id="_IDGenIcon1"
                                     color="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setColor'}"/>
-                                <!-- <Text id="IDGenText1" text="{oSearchCustomerJModel>cust_name}"/>
-                                <Text id="IDGenText2" text="{oSearchCustomerJModel>mail_name}"/> -->
+                                
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier1"
                                     title="{oSearchCustomerJModel>cust_name}"
-                                    text="{= 'Mailing Name: ' + ${oSearchCustomerJModel>mail_name}}"
+                                    text="{= 'Billing Name: ' + ${oSearchCustomerJModel>mail_name} + '\nBilling Entity: ' + ${oSearchCustomerJModel>conn_obj}}"
                                 />
-
-                                <!-- <Text id="IDGenText3" text="{oSearchCustomerJModel>street_name}"/>
-                                <Text id="IDGenText4" text="{oSearchCustomerJModel>street_no}"/>-->
-                                <!-- <Text id="IDGenText5" text="{oSearchCustomerJModel>city}"/> -->
-                                <!-- <Text id="IDGenText6" text="{oSearchCustomerJModel>zip_code}"/>  -->
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier2"
                                     title="{oSearchCustomerJModel>street_name}"
                                     text="{= 'Street No: ' + ${oSearchCustomerJModel>street_no} + '\nCity: ' + ${oSearchCustomerJModel>city}
                                     + '\nZip Code: ' + ${oSearchCustomerJModel>zip_code}}"
                                 />
-                                <!-- <Text id="IDGenText11" text="{oSearchCustomerJModel>PrimeryServiceRep}"/>
-                                <Text id="IDGenText12" text="{oSearchCustomerJModel>AccountRep}"/> -->
+                                
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier4"
                                     title="{oSearchCustomerJModel>psr}"
                                     text="{= 'Account Rep: ' + ${oSearchCustomerJModel>acc_rep}}"
                                 />
 
-                                <!-- <Text id="IDGenText13" text="{oSearchCustomerJModel>Substation}"/>
-                                <Text id="IDGenText15" text="{oSearchCustomerJModel>Circuit}"/> -->
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier5"                                    
                                     title="{oSearchCustomerJModel>sub_station}"
@@ -546,8 +463,6 @@
                                     text="{oSearchCustomerJModel>srv_centre}"
                                 />
 
-                                <!-- <Text id="IDGenText9" text="{oSearchCustomerJModel>CableNo}"/>
-                                <Text id="IDGenText14" text="{oSearchCustomerJModel>ServiceSketchNo}"/> -->
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier3"
                                     title="{oSearchCustomerJModel>cable_no}"
@@ -559,27 +474,11 @@
                                     text="{oSearchCustomerJModel>doc_id}"
                                 />
 
-                                <!-- <ObjectIdentifier id="_IDGenObjectIdentifier1" title="{Name}" text="{parts: [{path: 'Role', type: 'sap.ui.model.type.String'},
-                                                   {path: 'Location', type: 'sap.ui.model.type.String'},
-                                                   {path: 'Location', type: 'sap.ui.model.type.String'}
-                                                    ],formatter: '.formatText'}"/>    -->
-
-                                <!-- <Text
-                                    id="IDGenText7"
-                                    text="{oSearchCustomerJModel>no_of_lines}"
-                                /> -->
-                                
-                                
-
-                                
-                                
-
-                                
-                            </cells>
+                                </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
-                <!-- </ScrollContainer> -->
+                
             </f:content>
         </f:DynamicPage>
         <footer>
