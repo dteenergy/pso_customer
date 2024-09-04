@@ -7,12 +7,12 @@ entity PSOSpecials : cuid, managed {
     work_desc: String;
     meter_number: String;
     
-    record_status: String; // draft,  submitted, logged,
+    record_status: String; // draft,  submitted, logged / approved, rejected
     
     workflow_id: UUID; 
     approvedBy: String; 
     approvedOn: Timestamp;
-    workflow_status : String; //running, approved, rejected
+    approverComment : String; 
 
 
     

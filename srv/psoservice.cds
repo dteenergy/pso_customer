@@ -7,8 +7,7 @@ service PSOService {
   //annotate PSOSpecials with @odata.draft.enabled;
 
   type wfType {
-    comment : String;
-    
+    comment : String;    
   }
 
   type SpecialsContext {
@@ -19,19 +18,22 @@ service PSOService {
     workflow_id       : String;
     approvedBy        : String;
     approvedOn        : String;
-    workflow_status   : String;
+    approverComment   : String;
   }
 
   function userDetails()                                           returns array of String;
-  function launchOpenTextURL()                                     returns String;
-  //function getSpecialsRecord(connection_object: String, meter_number: String) returns  String;
+  function fetchDestinationURL(destName: String)                                     returns String;
+  
   function getSpecialsRecord(connection_object : String)           returns String;
-  function triggerWorkflowPSOSpecials()                            returns String;
-  function onApproveRecord(comment : String)                       returns String;
-  action   onApproveRecord1(recordID: UUID, comment : String, approvedBy : String) returns wfType;
-  action   createSpecials(context : SpecialsContext); //context : SpecialsContext
-  //function  createSpecials1() returns String;//context : SpecialsContext
+  function triggerWorkflowPSOSpecials(recordID: UUID, context : SpecialsContext)                            returns String;
+ 
+  action   onApproveRecord(recordID: UUID, comment : String, approvedBy : String) returns wfType;
+  action   onRejectRecord(recordID: UUID, comment : String, approvedBy : String) returns wfType;
+  action   createSpecials(context : SpecialsContext);
   action   submitSpecials(recordID: UUID, context : SpecialsContext);
-  action   updateSpecials(ID: UUID, context : SpecialsContext);
+  action   updateSpecials(recordID: UUID, context : SpecialsContext);
+  action   initiateWFandUpdateDB(recordID: UUID, context : SpecialsContext);
+  
+  action   createAndSubmitSpecials(context : SpecialsContext);
 
 }

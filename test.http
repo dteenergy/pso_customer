@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ###POST Data to DB with action import
-POST   {{service}}/onApproveRecord1
+POST   {{service}}/onApproveRecord
 Content-Type: application/json
 
 { 

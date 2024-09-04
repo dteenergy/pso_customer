@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
 ],
-    function (Controller, Fragment) {
+    function (Controller, Fragment, MessageBox) {
         "use strict";
 
         return Controller.extend("com.pso.customerattribute.controller.CustomerDetails", {
@@ -27,7 +28,7 @@ sap.ui.define([
                     this.getView().byId("idpanel2").setVisible(false);
                     this.getView().byId("_IDButtonCreateRecord").setVisible(true)
                     this.getView().byId("_IDButtonEditRecord").setVisible(false);
-                     this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+                    this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
                     //this.getView().byId("idButtonView").setVisible(false);
                     this.getView().byId("idButtonOpentext").setVisible(false);
                     this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
@@ -66,6 +67,30 @@ sap.ui.define([
             //**********************Editing Customer*****************************************/
             onEditCustomerAttribute: function () {
                 this.oEditFlag = "X";
+                var oRecord = this.getView().getModel("oCustomerAttributesJModel").getData();
+                if (oRecord.dc === "X") {
+                    this.getView().byId("idDCPLIND_CC").setSelectedIndex(0)
+                }
+                if (oRecord.pl === "X") {
+                    this.getView().byId("idDCPLIND_CC").setSelectedIndex(1)
+                }
+                if (oRecord.na === "X") {
+                    this.getView().byId("idDCPLIND_CC").setSelectedIndex(2)
+                }
+
+                if (oRecord.on_site_emerg === "X") {
+                    this.getView().byId("idGeneration_CC").setSelectedIndex(0)
+                }
+                if (oRecord.on_site_par) {
+                    this.getView().byId("idGeneration_CC").setSelectedIndex(1)
+                }
+                if (oRecord.full_generation) {
+                    this.getView().byId("idGeneration_CC").setSelectedIndex(2)
+                }
+                if (oRecord.on_site_nosg) {
+                    this.getView().byId("idGeneration_CC").setSelectedIndex(3)
+                }
+
                 this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
                 this.getView().byId("idpanel").setVisible(true);
                 this.getView().byId("idpanel2").setVisible(false);
@@ -73,18 +98,8 @@ sap.ui.define([
                 this.getView().byId("_IDButtonEditRecord").setVisible(false);
                 this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
                 this.getView().byId("idButtonOpentext").setVisible(false);
-                this.getView().byId("idButtonView").setVisible(true)
 
-            },
 
-            onViewRecord:function(){
-                this.getView().byId("idpanel").setVisible(false);
-                this.getView().byId("idpanel2").setVisible(true);
-                this.getView().byId("_IDButtonCreateRecord").setVisible(false);
-                this.getView().byId("_IDButtonEditRecord").setVisible(true);
-                this.getView().byId("idButtonCreateServiceTicket").setVisible(true);
-                this.getView().byId("idButtonOpentext").setVisible(true);
-                this.getView().byId("idButtonView").setVisible(false)
             },
 
             // onViewRecord:function(){
@@ -167,7 +182,7 @@ sap.ui.define([
                 var oCircuitJModel = this.getView().getModel("oCircuitJModel");
                 oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
                 // Create filters
-                var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, this.objSubstation.substation);
+                var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, oSubstation);
                 var oFilterDCPLIND = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND);
                 // Combine filters
                 var oFiltersF = [oFilterSubstation, oFilterDCPLIND];
@@ -263,6 +278,7 @@ sap.ui.define([
             getCustomerAttribute: function () {
                 //var that = this;
                 var oConnectionObject = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.conn_obj;
+                this.getDocumentumURL();
                 this.fetchSpecialsRecord(oConnectionObject);
                 var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
                 this.getOwnerComponent().getModel("ISUService").read("/Customer_attributeSet(conn_obj='" + oConnectionObject + "')", {
@@ -350,48 +366,67 @@ sap.ui.define([
             // },
             //****************************DC/PL/IND Logic **************************************************** */
             onDCPLINDSelect: function () {
-                var oCircuit = this.getView().byId("idCircuit_CC");
-                oCircuit.setValue();
                 var oSelected = this.oView.byId("idDCPLIND_CC").getSelectedButton();
                 this.oDCPLIND = oSelected.getText();
                 if (this.oDCPLIND === "IND") {
                     this.oView.byId("idTrans_CC").setVisible(true);
-                    oCircuit.setValue();
-                    oCircuit.setEnabled(false);
+                    this.getView().byId("idCircuit_CC").setEnabled(false);
+                    this.getView().byId("idCircuit_CC").setValue();
                 } else {
                     this.oView.byId("idTrans_CC").setVisible(false);
-                    oCircuit.setEnabled(true);
+                    this.oView.byId("idTrans_CC").setValue();
+                    this.getView().byId("idCircuit_CC").setEnabled(true);
+
                 }
             },
             //**************************Open OPEN TEXT URL **************************************************************/
-            launchOpentextURL: async function (oEvent) {
-                const connection_object = this.getView().getModel("oCustomerAttributesJModel").getData().conn_obj;
-                console.log(connection_object);
-                // const connection_object = "5110267589";
-                const url_dest = "&bokey=" + connection_object + "&language=EN";
+            fetchDestinationURL: async function (destName, parameter) {
+                var that = this;
                 var omodel = this.getOwnerComponent().getModel();
-                var oOperation = omodel.bindContext("/launchOpenTextURL(...)");
-                //     oOperation.setParameter("id", keyField);
+                var oOperation = omodel.bindContext("/fetchDestinationURL(...)");
+                oOperation.setParameter("destName", destName);
                 await oOperation.execute().then(function (res) {
                     var oResults = oOperation.getBoundContext().getObject();
                     console.log(oResults.value);
-                    //     userScope = oResults.value;
-                    let openTextURL = oResults.value + url_dest;
-                    console.log(openTextURL);
-                    window.open(openTextURL, '_blank');
+                    const destinationURL = oResults.value;
+                    if (destName === "OpenText") {
+                        const launchOTURL = destinationURL + parameter + "&language=EN";
+                        console.log(launchOTURL);
+                        window.open(launchOTURL, '_blank');
+                    } else if (destName === "PSO_DocID") {
+                        that.PSOdocURL = oResults.value;
+                        console.log(that.PSOdocURL);
+                    } else if (destName === "C4C") {
+                        that.C4cServiveTicketURL = oResults.value;
+                        console.log(that.C4cServiveTicketURL);
+                    }
+
+                    //return oResults.value;                    
                 }.bind(this), function (err) {
                     //        oBusyDialog3.close();
                     MessageBox.error(err.message);
                 }.bind(this))
-
             },
-
+            getDocumentumURL: async function () {
+                await this.fetchDestinationURL("PSO_DocID");
+                console.log("got url as : " + this.PSOdocURL);
+            },
+            launchOpentextURL: async function () {
+                // const connection_object = "5110267589";
+                const connection_object = this.getView().getModel("oCustomerAttributesJModel").getData().conn_obj;
+                await this.fetchDestinationURL("OpenText", connection_object);
+            },
+            getC4CServiceTicketCreationURL: async function () {
+                await this.fetchDestinationURL("C4C");
+                console.log("got url as : " + this.C4cServiveTicketURL);
+            },
 
             //****************Submit Customer Attrubutes****************************************/
             createCustomerDetails: function () {
                 var oStreetNo = this.getView().byId("idStreetno_CC").getValue();
                 var oStreetAdd = this.getView().byId("idStreetAdd_CC").getValue();
-                if (oStreetNo === "" || oStreetAdd === "") {
+                var oCustName = this.getView().byId("idCustomerName_CC").getValue();
+                if (oStreetNo === "" || oStreetAdd === "" || oCustName === "") {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("document_note_mandatory"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
                         title: this.getView().getModel("i18n").getProperty("error"),
@@ -487,6 +522,7 @@ sap.ui.define([
                     oAttributs.sketch_no = oCustomerAttributes1.sketch_no,
                     oAttributs.circuit = oCustomerAttributes1.circuit,
                     //oAttributs.acc_rep = oCustomerAttributes1.acc_rep,
+                    oAttributs.emer_cont_name = oCustomerAttributes1.emer_cont_name,
                     oAttributs.emer_title = oCustomerAttributes1.emer_title,
                     oAttributs.emer_phone = oCustomerAttributes1.emer_phone,
                     oAttributs.sect_point = oCustomerAttributes1.sect_point,
@@ -503,11 +539,12 @@ sap.ui.define([
                     oAttributs.on_site_part = oPartial,
                     oAttributs.on_site_nosg = oNoOnsiteGen,
                     oAttributs.full_generation = oFullGen,
-                    oAttributs.generation = oCustomerAttributes1.generation + "kW",
+                    oAttributs.generation = oCustomerAttributes1.generation,
                     oAttributs.indus_cust = "",
                     oAttributs.pso_site = "",
                     oAttributs.demo_site = ""
-                oAttributs.comments = Comments;
+                oAttributs.comments = Comments,
+                    oAttributs.indus_cust = oCustomerAttributes1.indus_cust;
 
                 if (this.oEditFlag == "X") {
                     this.getOwnerComponent().getModel("ISUService").update("/Customer_attributeSet('" + oAttributs.conn_obj + "')", oAttributs, {
@@ -529,6 +566,7 @@ sap.ui.define([
                                         text: "OK",
                                         press: function () {
                                             dialog.close();
+                                            window.history.go(-1);
                                             //location.reload();
                                         }
                                     }),
@@ -660,16 +698,18 @@ sap.ui.define([
 
             onCreateSpecials: function (oEvent) {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("CustomerSpecials", {
-                    scope: "cd_create"
-                });
+                oRouter.navTo("CustomerSpecials");
+                // oRouter.navTo("CustomerSpecials", {
+                //     scope: "cd_create"
+                // });
             },
 
             onDiplaySpecials: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("CustomerSpecials", {
-                    scope: "cd_display"
-                });
+                oRouter.navTo("CustomerSpecials");
+                // oRouter.navTo("CustomerSpecials", {
+                //     scope: "cd_display"
+                // });
             },
 
             fetchSpecialsRecord: async function (connection_object) {
@@ -742,56 +782,97 @@ sap.ui.define([
 
             createServiceTicket: function () {
 
-                var SrvTicketAttributesList = [];
-                var oSrvTicketAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
-                var oSelectedKey = this.getView().byId("idDCPLIND_ST").getSelectedIndex();
-                var oDC = "", oPL = "", oNA = "";
-                if (oSelectedKey === 0) {
-                    oDC = "X";
-                } else if (oSelectedKey === 1) {
-                    oPL = "X";
-                } else {
-                    oNA = "X";
-                }
+                this.getC4CServiceTicketCreationURL();
 
-                var oTicketAttributes = {};
-                oTicketAttributes.conn_obj = oCustomerAttributes1.conn_obj,
-                    oTicketAttributes.cust_name = oCustomerAttributes1.cust_name,
-                    oTicketAttributes.street_no = oCustomerAttributes1.street_no,
-                    oTicketAttributes.street_name = oCustomerAttributes1.street_name,
-                    oTicketAttributes.city = oCustomerAttributes1.city,
-                    oTicketAttributes.zip_code = oCustomerAttributes1.zip_code,
-                    oTicketAttributes.no_of_lines = oNooflines,
-                    oTicketAttributes.srv_center = oServiceCentre;
+                console.log("C4C url:" + this.C4cServiveTicketURL);
+                // Prepare the data to be posted
+                var oData = {
+                    Field1: "Value1",
+                    Field2: "Value2"
+                };
 
+                // Get the OData model
+                var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
 
-
-                var oNooflines = this.getView().byId("idNoOfline_ST").getSelectedKey();
-                var oCustomerName = this.getView().byId("idCustName_ST").getSelectedKey();
-                var oCity = this.getView().byId("idCity_ST").getSelectedKey();
-                var oZipCode = this.getView().byId("idZipCode_ST").getSelectedKey();
-                var oSrvCenter = this.getView().byId("idSrvCenter_ST").getSelectedKey();
-                var oSubstation = this.getView().byId("idSubstation_ST").getSelectedKey();
-                var oCircuit = this.getView().byId("idCircuit_ST").getSelectedKey();
-                var oStreetAdd = this.getView().byId("idStreetAdd_ST").getValue();
-                var oPrimarySrvRep = this.getView().byId("idPrimarySrvRep_ST").getValue();
-
-                //             "ProcessingTypeCode": "ZUSR", - Constant
-                // "Name": "4002602245", // Dynamic Function Location ID
-                // "ServiceIssueCategoryID": "SC_2", - Constant
-                // "IncidentServiceIssueCategoryID": "IC_5", - Constant
-                // "ProcessorPartyID": "7000066", //Dynamic EmployeeID – Fetch employee id based on sso userid.
-                // "InstallationPointID": "148", // Dynamic Fetch installation point internal id based on function location id.
-                // "ServiceRequestParty": [
-                //     {
-                //         "PartyID": "1100233509”, // Dynamic Customer ID
-                //         "RoleCode": "10"//Bill-to - Constant
-                //     }
-                // ]
-
-
+                // Call the OData service to create a new entity
+                // oSearchCustomerJModel.create("LINK", oData, {
+                //     // Handle success
+                //     sap.m.MessageToast.show("Entity created successfully.");
+                // },
+                // error: function (oError) {
+                //     // Handle error
+                //     sap.m.MessageBox.show(
+                //         error.message, {
+                //         icon: sap.m.MessageBox.Icon.ERROR,
+                //         title: "Error",
+                //         actions: [sap.m.MessageBox.Action.OK]
+                //     });
+                // }
 
             }
+
+
+            // var oPromiseModel = new sap.ui.model.odata.ODataModel("/sap/c4c/odata/v1/c4codataapi");
+            // this.getOwnerComponent().getModel().read("BusinessUserCollection?$filter=UserID eq 'U62926'", {
+            //     success: function (oData) {
+            //         oSearchCustomerJModel.setData(oData.results);
+
+            //     },
+            //     error: function (error) {
+            //         sap.m.MessageBox.show(
+            //             error.message, {
+            //                 icon: sap.m.MessageBox.Icon.ERROR,
+            //                 title: "Error",
+            //                 actions: [sap.m.MessageBox.Action.OK]
+            //             });
+
+            //     }
+            // });
+
+            // var SrvTicketAttributesList = [];
+            // var oSrvTicketAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
+            // var oSelectedKey = this.getView().byId("idDCPLIND_ST").getSelectedIndex();
+            // var oDC = "", oPL = "", oNA = "";
+            // if (oSelectedKey === 0) {
+            //     oDC = "X";
+            // } else if (oSelectedKey === 1) {
+            //     oPL = "X";
+            // } else {
+            //     oNA = "X";
+            // }
+
+            // var oTicketAttributes = {};
+            // oTicketAttributes.conn_obj = oCustomerAttributes1.conn_obj,
+            //     oTicketAttributes.cust_name = oCustomerAttributes1.cust_name,
+            //     oTicketAttributes.street_no = oCustomerAttributes1.street_no,
+            //     oTicketAttributes.street_name = oCustomerAttributes1.street_name,
+            //     oTicketAttributes.city = oCustomerAttributes1.city,
+            //     oTicketAttributes.zip_code = oCustomerAttributes1.zip_code,
+            //     oTicketAttributes.no_of_lines = oNooflines,
+            //     oTicketAttributes.srv_center = oServiceCentre;
+
+            // var oNooflines = this.getView().byId("idNoOfline_ST").getSelectedKey();
+            // var oCustomerName = this.getView().byId("idCustName_ST").getSelectedKey();
+            // var oCity = this.getView().byId("idCity_ST").getSelectedKey();
+            // var oZipCode = this.getView().byId("idZipCode_ST").getSelectedKey();
+            // var oSrvCenter = this.getView().byId("idSrvCenter_ST").getSelectedKey();
+            // var oSubstation = this.getView().byId("idSubstation_ST").getSelectedKey();
+            // var oCircuit = this.getView().byId("idCircuit_ST").getSelectedKey();
+            // var oStreetAdd = this.getView().byId("idStreetAdd_ST").getValue();
+            // var oPrimarySrvRep = this.getView().byId("idPrimarySrvRep_ST").getValue();
+
+            //             "ProcessingTypeCode": "ZUSR", - Constant
+            // "Name": "4002602245", // Dynamic Function Location ID
+            // "ServiceIssueCategoryID": "SC_2", - Constant
+            // "IncidentServiceIssueCategoryID": "IC_5", - Constant
+            // "ProcessorPartyID": "7000066", //Dynamic EmployeeID – Fetch employee id based on sso userid.
+            // "InstallationPointID": "148", // Dynamic Fetch installation point internal id based on function location id.
+            // "ServiceRequestParty": [
+            //     {
+            //         "PartyID": "1100233509”, // Dynamic Customer ID
+            //         "RoleCode": "10"//Bill-to - Constant
+            //     }
+            // ]           
 
         });
     });

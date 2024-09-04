@@ -11,7 +11,7 @@
     xmlns="sap.m"
 >
     <Page
-        id="page"
+        id="page_CD"
         title="{i18n>title}"
         titleAlignment="Center"
         showNavButton="true"
@@ -31,7 +31,7 @@
             </Panel>
         </content>
         <footer>
-            <OverflowToolbar id="_IDGenOverflowToolbar01">
+            <OverflowToolbar id="_IDGenOverflowToolbar01_CD">
                 
                 <Button
                     id="idButtonCreateServiceTicket"
@@ -40,7 +40,7 @@
                     icon="sap-icon://create"
                     press="onCreateServiceTicket"
                     visible="true"
-                />
+                /> 
                  <Button
                     id="idButtonOpentext"
                     type="Attention"
@@ -49,16 +49,8 @@
                     press="launchOpentextURL"
                     visible="true"
                 />
-                <ToolbarSpacer id="_IDGenToolbarSpacer01" />
+                <ToolbarSpacer id="_IDGenToolbarSpacer01_CD" />
 
-                <Button
-                    id="idButtonView"
-                    type="Ghost"
-                    text="View Record"
-                    icon="sap-icon://show"
-                    press="onViewRecord"
-                    visible="false"
-                /> 
                 <Button
                     id="_IDButtonCreateRecord"
                     type="Critical"

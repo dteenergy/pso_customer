@@ -147,7 +147,7 @@
           <x:ObjectPageSubSection id="idSubSecCirInfo_DC" titleUppercase="false">
             <x:blocks>
               <form:SimpleForm id="idReqFormCirInfo_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-                <form:content>
+                <form:content> 
 
                   <Label id="idlblDCPLIND_DC"/>
                   <RadioButtonGroup id="idDCPLIND_DC" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect" selectedIndex="" enabled="false">
@@ -156,7 +156,7 @@
                     <RadioButton id="IND_DC" text="IND" selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"/>
                   </RadioButtonGroup>
                   <Label id="idlblTrans_DC" text="{i18n>trans}" />
-                  <Text id="idTrans_DC" text="{oCustomerAttributesJModel>/trans}" visible="false">
+                  <Text id="idTrans_DC" text="{oCustomerAttributesJModel>/indus_cust}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
                     
                     <layoutData>
                       <l:GridData id="idGridData_DC12" span="XL5 L5 M12 S12" />
@@ -261,10 +261,10 @@
                   <Label id="idlblTotalGen_DC" text="{i18n>totalgen}" />
                   <Text id="idGenration_DC" text="{oCustomerAttributesJModel>/generation}">
                   <layoutData>
-                      <l:GridData id="idGridData_DC23" span="XL5 L5 M12 S12" />
+                      <l:GridData id="idGridData_DC23" span="XL1 L1 M2 S9" />
                     </layoutData>
                     </Text>
-                  <Text id="idkW_DC" text="kW" />
+                  <Text id="idkW_DC" text="/kW" />
                   <!-- <Label id="idlblOTurl_DC" />
                   <Button id="idOTurl_DC" text="OT url" icon="sap-icon://chain-link" type="Success" press="launchOpentextURL" enabled="true">
                   <layoutData>
@@ -290,7 +290,7 @@
               <form:SimpleForm id="idReqFormComments_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
                   <Label id="idlblComments_DC" text="Comments"/>
-                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="true" valueLiveUpdate="true" editable="false"  rows="6"/>
+                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" valueLiveUpdate="true" editable="false"  rows="3" maxLength="225"/>
 
                 </form:content>
               </form:SimpleForm >

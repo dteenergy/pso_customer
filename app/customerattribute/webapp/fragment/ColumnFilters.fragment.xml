@@ -38,6 +38,8 @@
                         <Input id="idfragSketchNo" value=""/>
                         <Label id="_IDGenLabel15" text="{i18n>Fcircuit}" design="Bold"/>
                         <Input id="idfragCircuit" value=""/>
+                        <Label id="_IDGenLabel16" text="{i18n>FOnSiteGeneration}" design="Bold"/>
+                        <Input id="idfragGeneration" value=""/>
                     </Panel>
                 </content>
             </ViewSettingsCustomTab>

@@ -9,14 +9,13 @@
     xmlns:f="sap.f"
     xmlns:svm="sap.ui.comp.smartvariants">
     <Page
-        id="page"
+        id="page_SC"
         title="{i18n>title}"
         titleAlignment="Center"
-        enableScrolling="true">
+        enableScrolling="true"
+    >
         <f:DynamicPage
-            id="dynamicPageId"
-            headerExpanded="{/headerExpanded}">
-            
+            id="dynamicPageId">
             <f:title>
                 <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
                     <f:heading>
@@ -43,23 +42,25 @@
                             useToolbar="false"
                             search="fetchItems"
                             showClearOnFB="true"
-                            clear="onClear"> 
+                            clear="onClear"
+                        >
                             <fb:filterGroupItems>
-                                
                                 <fb:FilterGroupItem
                                     id="_IDGenFilterGroupItem2"
                                     groupName="G1"
                                     groupTitle="Group1"
                                     name="Customer Name"
                                     label="{i18n>Fcutname}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idcustomer"
                                             change="onchange"
                                             showValueHelp="false"
                                             valueHelpRequest="onCustomerHelpRequested"
-                                            maxLength="40"/>
+                                            maxLength="40"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -68,27 +69,31 @@
                                     groupTitle="Group1"
                                     name="Billing Name"
                                     label="{i18n>FMailingname}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idMailingname"
                                             showValueHelp="false"
-                                            maxLength="40"/>
+                                            maxLength="40"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
-                                
+
                                 <fb:FilterGroupItem
                                     id="_IDGenFilterGroupItem5"
                                     groupName="G2"
                                     groupTitle="Group2"
                                     name="Street Number"
                                     label="{i18n>FStreetNo}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idStreetNo"
                                             showValueHelp="false"
-                                            maxLength="10"/>
+                                            maxLength="10"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -97,13 +102,15 @@
                                     groupTitle="Group2"
                                     name="Street Name"
                                     label="{i18n>FStreetAdd2}"
-                                    visibleInFilterBar="true"> 
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idStreetAdd"
                                             showValueHelp="false"
                                             maxLength="60"
-                                            liveChange="onCapitalizeFirtsLater"/>
+                                            liveChange="onCapitalizeFirtsLater"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -112,13 +119,15 @@
                                     groupTitle="Group2"
                                     name="City"
                                     label="{i18n>Fcity}"
-                                    visibleInFilterBar="true" >
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idCity"
                                             showValueHelp="false"
                                             maxLength="40"
-                                            liveChange="onCapitalizeFirtsLater"/>
+                                            liveChange="onCapitalizeFirtsLater"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -126,12 +135,14 @@
                                     groupName="A"
                                     name="Zip Code"
                                     label="{i18n>FZipcod}"
-                                    visibleInFilterBar="true" >
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idzipcode"
                                             showValueHelp="false"
-                                            maxLength="10"/>
+                                            maxLength="10"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -139,13 +150,15 @@
                                     groupName="A"
                                     name="No Of Line"
                                     label="{i18n>FNumberoflines}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idNoofline"
                                             showValueHelp="false"
                                             maxLength="10"
-                                            type="Number" />
+                                            type="Number"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -153,12 +166,14 @@
                                     groupName="A"
                                     name="Service Center"
                                     label="{i18n>Fsrvcenter}"
-                                    visibleInFilterBar="true" >
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idsrvcenter"
                                             showValueHelp="false"
-                                            maxLength="65"/>
+                                            maxLength="65"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -166,12 +181,14 @@
                                     groupName="A"
                                     name="Cable No"
                                     label="{i18n>Fcableno}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idcableno"
                                             showValueHelp="false"
-                                            maxLength="60"/>
+                                            maxLength="60"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -179,12 +196,14 @@
                                     groupName="A"
                                     name="PS Wiring Diagram"
                                     label="{i18n>Fpswidigram}"
-                                    visibleInFilterBar="true" >
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idPswdigram"
                                             showValueHelp="false"
-                                            maxLength="225"/>
+                                            maxLength="225"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -192,16 +211,19 @@
                                     groupName="A"
                                     name="Primery Service Rep"
                                     label="{i18n>Fprimeryrvrep}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <ComboBox
                                             id="idPrimarySRep"
                                             items="{path: 'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [
-                                                {path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}]}">
+                                                {path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}]}"
+                                        >
                                             <core:Item
                                                 id="_IDGenItem1"
                                                 key="{dropDownJsonModel>value}"
-                                                text="{dropDownJsonModel>value}"/>
+                                                text="{dropDownJsonModel>value}"
+                                            />
                                         </ComboBox>
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -210,12 +232,14 @@
                                     groupName="A"
                                     name="Account Rep"
                                     label="{i18n>Faccountrp}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idAcRep"
                                             showValueHelp="false"
-                                            maxLength="40"/>
+                                            maxLength="40"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -223,12 +247,14 @@
                                     groupName="A"
                                     name="Substation"
                                     label="{i18n>Fsustatoin}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idSubstation"
                                             showValueHelp="false"
-                                            maxLength="65"/>
+                                            maxLength="65"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -236,12 +262,14 @@
                                     groupName="A"
                                     name="Service Sketch No"
                                     label="{i18n>Fsrvsktchno}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idSrvSketchno"
                                             showValueHelp="false"
-                                            maxLength="18"/>
+                                            maxLength="18"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem
@@ -249,15 +277,38 @@
                                     groupName="A"
                                     name="Circuit"
                                     label="{i18n>Fcircuit}"
-                                    visibleInFilterBar="true">
+                                    visibleInFilterBar="true"
+                                >
                                     <fb:control>
                                         <Input
                                             id="idCircuit"
                                             showValueHelp="false"
-                                            maxLength="225"/>
+                                            maxLength="225"
+                                        />
                                     </fb:control>
                                 </fb:FilterGroupItem>
-                             </fb:filterGroupItems>
+                                <fb:FilterGroupItem
+                                    id="_IDGenFilterGroupItemGeneration"
+                                    groupName="A"
+                                    name="On Site Generation"
+                                    label="{i18n>FOnSiteGeneration}"
+                                    visibleInFilterBar="true"
+                                >
+                                    <fb:control>
+                                        <ComboBox
+                                            id="idOnSiteGeneration"
+                                            items="{path: 'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [
+                                                {path: 'field', operator: 'EQ', value1: 'ZPSO_CD_GENERATION'}]}"
+                                        >
+                                            <core:Item
+                                                id="_IDGenItemGeneration"
+                                                key="{dropDownJsonModel>value}"
+                                                text="{dropDownJsonModel>value}"
+                                            />
+                                        </ComboBox>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                            </fb:filterGroupItems>
                         </fb:FilterBar>
                     </f:content>
                 </f:DynamicPageHeader>
@@ -272,11 +323,12 @@
                     alternateRowColors="true"
                 >
                     <headerToolbar>
-                        <Toolbar id="_IDGenToolbar1">
+                        <Toolbar id="_IDGenToolbar_SC">
                             <content>
-                               <Label
+                                <Label
                                     id="idlblNoofRec"
-                                    text="{i18n>noOfRecords}"/>
+                                    text="{i18n>noOfRecords}"
+                                />
                                 <Text id="idNoofRec" />
                                 <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                                 <SearchField
@@ -284,7 +336,8 @@
                                     width="30%"
                                     class="sapUiSmallMargin"
                                     liveChange="handleTableSearch"
-                                    placeholder="{i18n>searchfieldText1}"/>
+                                    placeholder="{i18n>searchfieldText1}"
+                                />
                                 <Button
                                     id="idValidationReportsTableFilter"
                                     text=""
@@ -292,11 +345,12 @@
                                     icon="sap-icon://filter"
                                     iconFirst="true"
                                     width="auto"
-                                    enabled="true" 
+                                    enabled="true"
                                     visible="true"
                                     iconDensityAware="false"
                                     press="onTableColumnFilterButtonPress"
-                                    tooltip="{i18n>columnFilters}" />
+                                    tooltip="{i18n>columnFilters}"
+                                />
                                 <Button
                                     id="idValidationReportsTableFilterRemove"
                                     text=""
@@ -308,7 +362,8 @@
                                     visible="true"
                                     iconDensityAware="false"
                                     press="onValidReportsColumnFilterRemove"
-                                    tooltip="{i18n>removeColumnFilters}" />
+                                    tooltip="{i18n>removeColumnFilters}"
+                                />
                                 <Button
                                     id="idTableSort"
                                     text=""
@@ -320,7 +375,8 @@
                                     visible="true"
                                     iconDensityAware="false"
                                     tooltip="{i18n>Sort_records}"
-                                    press="onValidReportsTableSorting"/>
+                                    press="onValidReportsTableSorting"
+                                />
                                 <Button
                                     id="idValidationReportsTableExport"
                                     text=""
@@ -332,7 +388,8 @@
                                     visible="true"
                                     iconDensityAware="false"
                                     tooltip="{i18n>Download_record}"
-                                    press="onValidReportsTableExport"/>
+                                    press="onValidReportsTableExport"
+                                />
                             </content>
                         </Toolbar>
                     </headerToolbar>
@@ -342,28 +399,33 @@
                             minScreenWidth="1000px"
                             width="3rem"
                             demandPopin="true"
-                            hAlign="Begin"/>
-                        
+                            hAlign="Begin"
+                        />
+
                         <Column
                             id="_IDGenColumn2"
                             minScreenWidth="1000px"
                             width="15rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText2"
-                                text="{i18n>Fcutname}"/>
+                                text="{i18n>Fcutname}"
+                            />
                         </Column>
-                        
+
                         <Column
                             id="_IDGenColumn4"
                             minScreenWidth="1000px"
                             width="14rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText4"
-                                text="{i18n>FStreetAdd}"/>
+                                text="{i18n>FStreetAdd}"
+                            />
                         </Column>
 
                         <Column
@@ -371,10 +433,12 @@
                             minScreenWidth="1000px"
                             width="14rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText12"
-                                text="{i18n>Fprimeryrvrep}"/>
+                                text="{i18n>Fprimeryrvrep}"
+                            />
                         </Column>
 
                         <Column
@@ -382,21 +446,25 @@
                             minScreenWidth="1000px"
                             width="12rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText14"
-                                text="{i18n>Fsustatoin}"/>
+                                text="{i18n>Fsustatoin}"
+                            />
                         </Column>
 
                         <Column
                             id="_IDGenColumn9"
                             minScreenWidth="1000px"
-                            width="8rem"
+                            width="12rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText9"
-                                text="{i18n>Fsrvcenter}"/>
+                                text="{i18n>Fsrvcenter}"
+                            />
                         </Column>
 
                         <Column
@@ -404,10 +472,12 @@
                             minScreenWidth="1000px"
                             width="12rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText10"
-                                text="{i18n>Fcableno}"/>
+                                text="{i18n>Fcableno}"
+                            />
                         </Column>
 
                         <Column
@@ -415,25 +485,28 @@
                             minScreenWidth="1000px"
                             width="10rem"
                             demandPopin="true"
-                            hAlign="Begin">
+                            hAlign="Begin"
+                        >
                             <Text
                                 id="_IDGenText11"
-                                text="{i18n>Fpswidigram}"/>
+                                text="{i18n>Fpswidigram}"
+                            />
                         </Column>
-                        
                     </columns>
                     <items>
                         <ColumnListItem
                             id="_IDGenColumnListItem1"
                             type="Navigation"
-                            press="handleSelectionChange">
+                            press="handleSelectionChange"
+                        >
                             <cells>
                                 <core:Icon
                                     size="22px"
                                     src="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setIcon'}"
                                     id="_IDGenIcon1"
-                                    color="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setColor'}"/>
-                                
+                                    color="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setColor'}"
+                                />
+
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier1"
                                     title="{oSearchCustomerJModel>cust_name}"
@@ -445,7 +518,7 @@
                                     text="{= 'Street No: ' + ${oSearchCustomerJModel>street_no} + '\nCity: ' + ${oSearchCustomerJModel>city}
                                     + '\nZip Code: ' + ${oSearchCustomerJModel>zip_code}}"
                                 />
-                                
+
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier4"
                                     title="{oSearchCustomerJModel>psr}"
@@ -453,32 +526,35 @@
                                 />
 
                                 <ObjectIdentifier
-                                    id="_IDGenObjectIdentifier5"                                    
+                                    id="_IDGenObjectIdentifier5"
                                     title="{oSearchCustomerJModel>sub_station}"
                                     text="{= 'Circuit: ' + ${oSearchCustomerJModel>circuit}}"
                                 />
+                                <ObjectIdentifier
+                                    id="IDGenText8"
+                                    title="{oSearchCustomerJModel>srv_centre}"
+                                    text="{= 'Generation: ' + ${oSearchCustomerJModel>generation}}"
+                                />
 
-                                <Text
+                                <!-- <Text
                                     id="IDGenText8"
                                     text="{oSearchCustomerJModel>srv_centre}"
-                                />
+                                /> -->
 
                                 <ObjectIdentifier
                                     id="_IDGenObjectIdentifier3"
                                     title="{oSearchCustomerJModel>cable_no}"
                                     text="{= 'Sketch No: ' + ${oSearchCustomerJModel>sketch_no}  + '\nNo of Lines: ' + ${oSearchCustomerJModel>no_of_lines}}"
-                                /> 
+                                />
 
                                 <Text
                                     id="IDGenText10"
-                                    text="{oSearchCustomerJModel>doc_id}"
+                                    text="{oSearchCustomerJModel>psw}"
                                 />
-
-                                </cells>
+                            </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
-                
             </f:content>
         </f:DynamicPage>
         <footer>
@@ -489,4 +565,3 @@
         </footer>
     </Page>
 </mvc:View>
-

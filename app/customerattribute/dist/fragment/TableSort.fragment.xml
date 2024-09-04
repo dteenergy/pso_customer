@@ -19,6 +19,7 @@
             <ViewSettingsItem id="_IDGenViewSettingsItem13" text="{i18n>Fsustatoin}" key="sub_station"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem14" text="{i18n>Fsrvsktchno}" key="sketch_no"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem15" text="{i18n>Fcircuit}" key="circuit"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem16" text="{i18n>FOnSiteGeneration}" key="generation"/>
         </sortItems>
     </ViewSettingsDialog>
 </core:FragmentDefinition>

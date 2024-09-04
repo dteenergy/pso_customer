@@ -14,7 +14,7 @@
           </content>
       </Panel>
  
-      <Panel id="idpanelDiplaySpecials" expanded="true" expandable="false" height="40em" visible="false" >
+      <Panel id="idpanelDisplaySpecials" expanded="true" expandable="false" height="40em" visible="false" >
            <content>
             <core:Fragment 
                     fragmentName="com.pso.customerattribute.fragment.DisplaySpecials"
