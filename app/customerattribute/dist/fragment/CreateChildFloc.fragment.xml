@@ -20,7 +20,6 @@
           <x:ObjectPageSubSection id="idCustomerSubSection_CC" titleUppercase="false">
             <x:blocks>
                <form:SimpleForm id="idCustomerInfoReqForm_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12" >
-
               <form:content>
                 <!-- <core:Title id="_IDGenTitle1" text=""/> -->
                 <Label id="idlblCustomerName_CC" text="{i18n>customername}" required="true"/>
@@ -28,29 +27,22 @@
                 <layoutData>
                       <l:GridData id="idGridData_CC" span="XL5 L5 M12 S12" />
                     </layoutData>
-                  </Input>
-
-                
+                  </Input>   
                 <Label id="idlblStreetNo_CC" text="{i18n>streetnumber}" required="true"/>
                 <Input id="idStreetno_CC"  value="{oCustomerAttributesJModel>/street_no}" maxLength="10">
                 <layoutData>
                       <l:GridData id="idGridData_CC2" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Input>
-
-               
                 <Label id="idlblStreetAdd_CC" text="{i18n>streeetadd}" required="true"/>
                 <Input id="idStreetAdd_CC"  value="{oCustomerAttributesJModel>/street_name}" maxLength="60">
                 <layoutData>
                       <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
                     </layoutData>
-                  </Input>
-
-
+                </Input>
+                <Label id="idlblDemolished_site_CC" text="{i18n>Demolished_site}"/>
+                <CheckBox id="idDemolished_site_CC" select="onDemolishedChecked" />
               </form:content>
-
-              
-
             </form:SimpleForm >
             </x:blocks>
           </x:ObjectPageSubSection>
@@ -81,7 +73,6 @@
                       <l:GridData id="idGridData_CC6" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Input>
-
                 </form:content>
               </form:SimpleForm >
             </x:blocks>
@@ -253,12 +244,13 @@
                       <l:GridData id="idGridData_CC7" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Input>
-                  <Link id="idpswdocidlink"
-				text="Open Documentum"
-				target="_blank"
-				href="http://www.sap.com" />
+                  
                   <Label id="idlblComments_CC" text="Comments"/>
-                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225"/>
+                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="idGridData_DC24" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </TextArea>
     
                   <core:Title id="_IDGenTitle2" text=""/>
                    <Label id="idlblDCPLIND_CC2"/>
@@ -267,12 +259,12 @@
                     <RadioButton id="PL_CC2" text="PL" />
                     <RadioButton id="IND_CC2" text="IND"/>
                   </RadioButtonGroup>
-                  <!-- <Label id="idlblTrans_CC2" text="{i18n>trans}" />
+                  <Label id="idlblTrans_CC2" text="{i18n>trans}" />
                   <Input id="idTrans_CC2" maxLength="15" value="{oCustomerAttributesJModel>/indus_cust}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
                     <layoutData>
                       <l:GridData id="idGridData2_CC12" span="XL5 L5 M12 S12" />
                     </layoutData>  
-                  </Input> -->
+                  </Input>
                     <Label id="idlblSubstation2_CC" text="{i18n>substation}" />
                   <Input id="idSubstation2_CC2" showValueHelp="true" showSuggestion="true" valueHelpRequest="onHelpSubstation2" maxLength="65" value="{oCustomerAttributesJModel>/sub_station2}">
                   <layoutData>
@@ -347,7 +339,11 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblComments2_CC" text="Comments"/>
-                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225"/>
+                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="idGridData2_DC25" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </TextArea>
 
                 </form:content>
               </form:SimpleForm >

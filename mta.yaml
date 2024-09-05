@@ -69,23 +69,9 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - compsocustomerecord.zip
-      name: compsocustomerecord
-      target-path: resources/
-    - artifacts:
       - compsocustomerattribute.zip
       name: compsocustomerattribute
-      target-path: resources/    
-- name: compsocustomerecord
-  type: html5
-  path: app/customerecord
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
+      target-path: resources/
 - name: compsocustomerattribute
   type: html5
   path: app/customerattribute

@@ -1,1 +1,0 @@
-using PSOService as service from '../../srv/psoservice';

@@ -35,7 +35,7 @@
   },
   "cds": {
     "requires": {
-      "auth": "dummy",
+      "auth": "xsuaa",
       "db": "hana",
       "connectivity": true,
       "connectbpa": {
@@ -43,7 +43,14 @@
         "credentials": {
           "destination": "sap_process_automation_service"
         }
+      },
+      "C4C": {
+        "kind": "odata",
+        "credentials": {
+          "destination": "C4C"
+        }
       }
+
     }
   }
 }

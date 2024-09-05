@@ -276,7 +276,7 @@ sap.ui.define([
 
             //**************************Getting Cutomer Attrubutes*******************************/
             getCustomerAttribute: function () {
-                //var that = this;
+                var that = this;
                 var oConnectionObject = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.conn_obj;
                 this.getDocumentumURL();
                 this.fetchSpecialsRecord(oConnectionObject);
@@ -285,9 +285,17 @@ sap.ui.define([
                     //    this.oDataModel.read("Customer_searchSet", {
                     success: function (oData) {
                         //that.oBusyIndicator.close()
-
+                        // if(oData.circuit ===""){ //Assignin field for documentum link enable/disable
+                        //     Object.assign(oData,{
+                        //         EnabledLink:false
+                        //     })
+                        // }else{
+                        //     Object.assign(oData,{
+                        //         EnabledLink:true
+                        //     }) 
+                        // }
                         oCustomerAttributesJModel.setData(oData);
-
+                        that.DocumentumDisabled(oData);
 
                     },
                     error: function (error) {
@@ -302,6 +310,45 @@ sap.ui.define([
                     }
                 });
             },
+
+            DocumentumDisabled: function (oData) {
+                if (oData.circuit === "") {
+                    this.getView().byId("idCircuitlink").setEnabled(false);
+                } else {
+                    this.getView().byId("idCircuitlink").setEnabled(true);
+                }
+
+                if (oData.circuit_doc_id === "") {
+                    this.getView().byId("idCircuitDoc_idlink").setEnabled(false);
+                } else {
+                    this.getView().byId("idCircuitDoc_idlink").setEnabled(true);
+                }
+
+                if (oData.doc_id === "") {
+                    this.getView().byId("idpswdocidlink").setEnabled(false);
+                } else {
+                    this.getView().byId("idpswdocidlink").setEnabled(true);
+                }
+
+                if (oData.circuit2 === "") {
+                    this.getView().byId("idCircuitlink2").setEnabled(false);
+                } else {
+                    this.getView().byId("idCircuitlink2").setEnabled(true);
+                }
+
+                if (oData.circuit_doc_id2 === "") {
+                    this.getView().byId("idCircuitDoc_idlink2").setEnabled(false);
+                } else {
+                    this.getView().byId("idCircuitDoc_idlink2").setEnabled(true);
+                }
+
+                if (oData.doc_id2 === "") {
+                    this.getView().byId("idpswdocidlink2").setEnabled(false);
+                } else {
+                    this.getView().byId("idpswdocidlink2").setEnabled(true);
+                }
+            },
+
             //**********************************Loading Fragments*********************************/ 
             // LoadFragmentCreateChield: function () {
             //     var that = this;
@@ -746,6 +793,94 @@ sap.ui.define([
                     //   MessageBox.error(err.message);
                 }.bind(this))
             },
+            //**************************Demolished Check*****************************/
+            onDemolishedChecked: function (oEvent) {
+                var oMessage = "";
+                var that = this;
+                var oChecked = this.getView().byId("idDemolished_site_CC").getSelected();
+                if (oChecked === true) {
+                    oMessage = this.getView().getModel("i18n").getProperty("Demolished_Checked_msg");
+                } else {
+                    oMessage = this.getView().getModel("i18n").getProperty("Demolished_UnChecked_msg");
+                }
+                var dialog = new sap.m.Dialog({
+                    title: "Information",
+                    type: 'Message',
+                    state: 'Success',
+                    content: new sap.m.Text({
+                        text: oMessage
+                    }),
+                    beginButton: new sap.m.Button({
+                        text: "OK",
+                        press: function () {
+                            if (oChecked === false) {
+                                that.getView().byId("idDemolished_site_CC").setSelected(false);
+                            } else {
+                                that.getView().byId("idDemolished_site_CC").setSelected(true);
+                            }
+                            dialog.close();
+                        }
+                    }),
+                    endButton: new sap.m.Button({
+                        text: "Cancel",
+                        press: function () {
+                            if (oChecked === false) {
+                                that.getView().byId("idDemolished_site_CC").setSelected(false);
+                            } else {
+                                that.getView().byId("idDemolished_site_CC").setSelected(true);
+                            }
+                            dialog.close();
+                        }
+                    }),
+
+                    afterClose: function () {
+                        dialog.destroy();
+                    }
+                });
+                dialog.open();
+
+            },
+
+            //**********************Open Documents Url************************/
+            onPressCircuitLink: function () {
+                var that = this;
+                var oCircuit = this.getView().byId("idCircuit_DC").getText();
+                var sUrl = that.PSOdocURL + oCircuit;
+                window.open(sUrl, "_blank");
+
+            },
+            onPressCircuitDocIdLink: function () {
+                var that = this;
+                var oCircuitDocId = this.getView().byId("idCircuitDoc_DC").getText();
+                var sUrl = that.PSOdocURL + oCircuitDocId;
+                window.open(sUrl, "_blank");
+            },
+            onPressPswDocId: function () {
+                var that = this;
+                var oPswDocId = this.getView().byId("idPswdocid_DC").getText();
+                var sUrl = that.PSOdocURL + oPswDocId;
+                window.open(sUrl, "_blank");
+            },
+
+            onPressCircuitLink2: function () {
+                var that = this;
+                var oCircuit2 = this.getView().byId("idCircuit2_DC").getText();
+                var sUrl = that.PSOdocURL + oCircuit2;
+                window.open(sUrl, "_blank");
+
+            },
+            onPressCircuitDocIdLink2: function () {
+                var that = this;
+                var oCircuitDocId2 = this.getView().byId("idCircuitDoc2_DC").getText();
+                var sUrl = that.PSOdocURL + oCircuitDocId2;
+                window.open(sUrl, "_blank");
+            },
+            onPressPswDocId2: function () {
+                var that = this;
+                var oPswDocId2 = this.getView().byId("idPswdocid2_DC").getText();
+                var sUrl = that.PSOdocURL + oPswDocId2;
+                window.open(sUrl, "_blank");
+            },
 
 
 
@@ -782,17 +917,70 @@ sap.ui.define([
 
             createServiceTicket: function () {
 
-                this.getC4CServiceTicketCreationURL();
 
-                console.log("C4C url:" + this.C4cServiveTicketURL);
+                var that = this;
+
                 // Prepare the data to be posted
-                var oData = {
-                    Field1: "Value1",
-                    Field2: "Value2"
+                var oDatac4c = {
+                    "ProcessingTypeCode": "ZUSR",
+                    "Name": "4002602245",
+                    "ServiceIssueCategoryID": "SC_2",
+                    "IncidentServiceIssueCategoryID": "IC_5",
+                    "ProcessorPartyID": "7000066",
+                    "InstallationPointID": "148",
+                    "ServiceRequestParty": [
+                        {
+                            "PartyID": "1100233509",
+                            "RoleCode": "10"
+                        }
+                    ]
+
                 };
 
-                // Get the OData model
-                var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
+                var username;
+                var password;
+
+                // var credentials = btoa(username + ":" + password);
+
+                // AJAX POST request
+                jQuery.ajax({
+                    url: "https://my357326.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection",  // URL to your OData service
+                    type: "POST",
+
+                    data: JSON.stringify(oDatac4c),
+                    // username : "_SCPIODATA",
+                    // password : "Dte@nergy123",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('_SCPIODATA:Dte@nergy123'));
+                    },
+
+                    //     xhrFields: {
+                    //         withCredentials: true
+                    //    },
+                    headers: {
+                        "Access-Control-Allow-Headers": "*",
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+                        alert("success to post");
+                    },
+                    error: function (error) {
+                        alert("Error creating entity.");
+                        console.error("Error details:", error);
+                    }
+                });
+
+                // this.getC4CServiceTicketCreationURL();
+
+                // console.log("C4C url:" + this.C4cServiveTicketURL);
+                // // Prepare the data to be posted
+                // var oData = {
+                //     Field1: "Value1",
+                //     Field2: "Value2"
+                // };
+
+                // // Get the OData model
+                // var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
 
                 // Call the OData service to create a new entity
                 // oSearchCustomerJModel.create("LINK", oData, {

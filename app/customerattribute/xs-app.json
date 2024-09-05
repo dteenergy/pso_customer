@@ -8,7 +8,14 @@
       "destination": "psocustomerecord-srv-api",
       "authenticationType": "xsuaa",
       "csrfProtection": false
-    },    
+    }, 
+    {
+      "source": "^/c4c/(.*)$",
+      "destination": "C4C",
+      "target": "/$1",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },   
     {
       "source": "^/sap/(.*)$",
       "target": "/sap/$1",
