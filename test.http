@@ -33,3 +33,18 @@ Content-Type: application/json
     "comment" : "approved", 
     "approvedBy" : "mickey"
 }
+
+###
+
+POST   {{service}}/createServiceTicket
+Content-Type: application/json
+
+{"context":{
+                "ProcessingTypeCode": "ZUSR",
+                "Name": "4002602245",
+                "ServiceIssueCategoryID": "SC_2",
+                "IncidentServiceIssueCategoryID": "IC_5",
+                "ProcessorPartyID": "7000066",
+                "InstallationPointID": "148"
+
+            }}

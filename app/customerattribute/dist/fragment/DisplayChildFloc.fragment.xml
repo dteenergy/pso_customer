@@ -50,8 +50,9 @@
                       <l:GridData id="idGridData_DC3" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Text>
-
-
+                <Label id="idlblDemolished_site_CD" text="{i18n>Demolished_site}"/>
+                <CheckBox id="idDemolished_site_CD" select="onDemolishedChecked" selected="{= ${oCustomerAttributesJModel>/demo_site} === 'X' ? true : false}" enabled="false" />
+                
               </form:content>
 
             </form:SimpleForm >
@@ -349,7 +350,7 @@
       </x:ObjectPageSection>
 
 
-      <x:ObjectPageSection id="idObjectPageSecH4_DC" titleUppercase="false" title="{i18n>Equipment_and_Gene}">
+      <!-- <x:ObjectPageSection id="idObjectPageSecH4_DC" titleUppercase="false" title="{i18n>Equipment_and_Gene}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecH4_DC" titleUppercase="false">
             <x:blocks>
@@ -361,7 +362,7 @@
             </x:blocks>
           </x:ObjectPageSubSection>
         </x:subSections>
-      </x:ObjectPageSection>
+      </x:ObjectPageSection> -->
     </x:sections>
   </x:ObjectPageLayout>
 </core:FragmentDefinition>

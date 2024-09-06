@@ -8,10 +8,8 @@ sap.ui.define([
 
         return Controller.extend("com.pso.customerattribute.controller.CustomerDetails", {
             onInit: function () {
-                //var currentScope = null;
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute("CustomerDetails").attachMatched(function (oEvent) {
-                    //   currentScope= oEvent.getParameter("arguments").scope;
                     this._loadFragmentPerScope(oEvent.getParameter("arguments").scope);
                 }, this);
 
@@ -21,7 +19,6 @@ sap.ui.define([
             _loadFragmentPerScope: function (currentScope) {
 
                 var superior_flag = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.superior_flag;
-                //  if (currentScope == "cd_create" && superior_flag== "X") {
                 if (superior_flag == "X") { //create child
                     this.getView().byId("_IDButtonCreateRecord").setText("Create Record");
                     this.getView().byId("idpanel").setVisible(true);
@@ -33,8 +30,6 @@ sap.ui.define([
                     this.getView().byId("idButtonOpentext").setVisible(false);
                     this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(false);
-                    //this.LoadFragmentCreateChield(); 
-                    //  } else if (currentScope == "cd_display" && superior_flag== "") {
                 } else if (superior_flag == "") { // display child
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
@@ -42,25 +37,13 @@ sap.ui.define([
                     this.getView().byId("_IDButtonCreateRecord").setVisible(false);
                     this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
                     this.getView().byId("idButtonCreateServiceTicket").setVisible(true);
-                    // this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
-                    // this.getView().byId("idButtonView").setVisible(false)
                     this.getView().byId("idButtonOpentext").setVisible(true);
                     this.getCustomerAttribute();
-                    //this.LoadFragmentDisplayChield();
                 } else if (currentScope == "cd_display_limited" && superior_flag == "") {
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
                     this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
-                    // this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
-                    //this.LoadFragmentDisplayChield();
                 }
-                //cd_display_limited
-                //this.getDropdowns();
-
-                // //Binding Consolidated Dropdown values
-                // var oCreateChildFlockJModel_DD = this.getOwnerComponent().getModel("oCreateChildFlockJModel_DD")
-                // this.oDropdownData = this.getOwnerComponent().getModel("dropDownJsonModel").getProperty("/DropdownData");
-                // oCreateChildFlockJModel_DD.setProperty("/DropdownCreateChildFlock", this.oDropdownData);
 
             },
 
@@ -102,13 +85,6 @@ sap.ui.define([
 
             },
 
-            // onViewRecord:function(){
-            //     this.getView().byId("idpanel").setVisible(false);
-            //     this.getView().byId("idpanel2").setVisible(true);
-            //     this.getView().byId("_IDButtonCreateRecord").setVisible(false);
-            //     this.getView().byId("_IDButtonEditRecord").setVisible(true);
-            //     this.getView().byId("idButtonView").setVisible(false)
-            // },
             onSpecialsExist: function (specialsFlag) {
                 if (specialsFlag) { //specials exist, show display specials button
 
@@ -226,55 +202,7 @@ sap.ui.define([
                 }
             },
 
-            //*********************Getting Circuit and Substation dropdown values **********/
-            // getDropdowns: function () {
-            //     var that = this;
-            //     //var fService = this.getOwnerComponent().getModel().sServiceUrl;
-            //     //var oCRMModel = new sap.ui.model.odata.ODataModel(fService, false);
-            //     var firstCall = new Promise(function (resolve, reject) {
-            //         that.getOwnerComponent().getModel().read("/substation_dropdownSet", {
-            //             //    this.oDataModel.read("Customer_searchSet", {
-            //             success: function (oData) {
-            //                 resolve(oData);
-            //             },
-            //             error: function (error) {
-            //                 sap.m.MessageBox.show(
-            //                     error.message, {
-            //                     icon: sap.m.MessageBox.Icon.ERROR,
-            //                     title: "Error",
-            //                     actions: [sap.m.MessageBox.Action.OK]
-            //                 });
-            //                 resolve(error);
-            //             }
-            //         });
-            //     });
-            //     //var oModel3 = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZAPP_FILE_UPLOAD_DMS_SRV");
-            //     var secondCall = new Promise(function (resolve, reject) {
-            //         that.getOwnerComponent().getModel().read("/circuit_dropdownSet", {
-            //             //    this.oDataModel.read("Customer_searchSet", {
-            //             success: function (oData) {
-            //                 resolve(oData);
-            //             },
-            //             error: function (error) {
-            //                 sap.m.MessageBox.show(
-            //                     error.message, {
-            //                     icon: sap.m.MessageBox.Icon.ERROR,
-            //                     title: "Error",
-            //                     actions: [sap.m.MessageBox.Action.OK]
-            //                 });
-            //                 reject(error);
-            //             }
-            //         });
-            //     });
-            //     Promise.all([firstCall, secondCall]).then(function (aResults) {
-            //         var oData1 = aResults[0];
-            //         var oData2 = aResults[1];
-            //         that.getOwnerComponent().getModel("oSubstationJModel").setProperty("/oSubstation", oData1.results);
-            //         that.getOwnerComponent().getModel("oCircuitJModel").setProperty("/oCircuit", oData2.results);
-            //     });
-            // },
-
-            //**************************Getting Cutomer Attrubutes*******************************/
+            //**************************Get Cutomer Attrubutes***********************/
             getCustomerAttribute: function () {
                 var that = this;
                 var oConnectionObject = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.conn_obj;
@@ -282,24 +210,11 @@ sap.ui.define([
                 this.fetchSpecialsRecord(oConnectionObject);
                 var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
                 this.getOwnerComponent().getModel("ISUService").read("/Customer_attributeSet(conn_obj='" + oConnectionObject + "')", {
-                    //    this.oDataModel.read("Customer_searchSet", {
                     success: function (oData) {
-                        //that.oBusyIndicator.close()
-                        // if(oData.circuit ===""){ //Assignin field for documentum link enable/disable
-                        //     Object.assign(oData,{
-                        //         EnabledLink:false
-                        //     })
-                        // }else{
-                        //     Object.assign(oData,{
-                        //         EnabledLink:true
-                        //     }) 
-                        // }
                         oCustomerAttributesJModel.setData(oData);
                         that.DocumentumDisabled(oData);
-
                     },
                     error: function (error) {
-                        //that.oBusyIndicator.close();
                         sap.m.MessageBox.show(
                             error.message, {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -349,69 +264,7 @@ sap.ui.define([
                 }
             },
 
-            //**********************************Loading Fragments*********************************/ 
-            // LoadFragmentCreateChield: function () {
-            //     var that = this;
-            //     var oCreateChildFlockJModel_DD = this.getOwnerComponent().getModel("oCreateChildFlockJModel_DD");
-            //     // oCreateChildFlockJModel_DD= new sap.ui.model.json.JSONModel();
-            //     that.oDropdownData = this.getOwnerComponent().getModel("dropDownJsonModel").getProperty("/DropdownData");
-            //     oCreateChildFlockJModel_DD.setProperty("/DropdownCreateChildFlock", that.oDropdownData);
-
-            //     var oView = this.getView();
-            //     if (!this._oFragmentA) {
-            //         this._oFragmentA = Fragment.load({
-            //             id: oView.getId(),
-            //             name: "com.pso.customerrecord.fragment.CreateChildFloc",
-            //             controller: this
-            //         }).then(function (oFragment) {
-            //             oView.addDependent(oFragment);
-            //             return oFragment;
-            //         });
-
-
-            //     }
-
-            //     this._oFragmentA.then(function (oFragment) {
-            //         oView.byId("idpanel").removeAllContent(oFragment);
-            //         oView.byId("idpanel").addContent(oFragment);
-            //         //oFragment.setModel(oCreateChildFlockJModel_DD, "oCreateChildFlockJModel_DD");
-
-
-            //     });
-
-            // },
-
-            // LoadFragmentDisplayChield: function () {
-            //     var that = this;
-            //     var oCreateChildFlockJModel_DD = this.getOwnerComponent().getModel("oCreateChildFlockJModel_DD");
-            //     // oCreateChildFlockJModel_DD= new sap.ui.model.json.JSONModel();
-            //     that.oDropdownData = this.getOwnerComponent().getModel("dropDownJsonModel").getProperty("/DropdownData");
-            //     oCreateChildFlockJModel_DD.setProperty("/DropdownCreateChildFlock", that.oDropdownData);
-
-            //     var oView = this.getView();
-            //     if (!this._oFragmentA) {
-            //         this._oFragmentA = Fragment.load({
-            //             id: oView.getId(),
-            //             name: "com.pso.customerrecord.fragment.DisplayChildFloc",
-            //             controller: this
-            //         }).then(function (oFragment) {
-            //             oView.addDependent(oFragment);
-            //             return oFragment;
-            //         });
-
-
-            //     }
-
-            //     this._oFragmentA.then(function (oFragment) {
-            //         oView.byId("idpanel").removeAllContent(oFragment);
-            //         oView.byId("idpanel").addContent(oFragment);
-            //         //oFragment.setModel(oCreateChildFlockJModel_DD, "oCreateChildFlockJModel_DD");
-
-
-            //     });
-
-            // },
-            //****************************DC/PL/IND Logic **************************************************** */
+            //****************************DC/PL/IND Logic ****************************** */
             onDCPLINDSelect: function () {
                 var oSelected = this.oView.byId("idDCPLIND_CC").getSelectedButton();
                 this.oDCPLIND = oSelected.getText();
@@ -443,9 +296,6 @@ sap.ui.define([
                     } else if (destName === "PSO_DocID") {
                         that.PSOdocURL = oResults.value;
                         console.log(that.PSOdocURL);
-                    } else if (destName === "C4C") {
-                        that.C4cServiveTicketURL = oResults.value;
-                        console.log(that.C4cServiveTicketURL);
                     }
 
                     //return oResults.value;                    
@@ -462,10 +312,6 @@ sap.ui.define([
                 // const connection_object = "5110267589";
                 const connection_object = this.getView().getModel("oCustomerAttributesJModel").getData().conn_obj;
                 await this.fetchDestinationURL("OpenText", connection_object);
-            },
-            getC4CServiceTicketCreationURL: async function () {
-                await this.fetchDestinationURL("C4C");
-                console.log("got url as : " + this.C4cServiveTicketURL);
             },
 
             //****************Submit Customer Attrubutes****************************************/
@@ -514,44 +360,15 @@ sap.ui.define([
                 var oThrowovertyp = this.getView().byId("idThrowoverTyp_CC").getSelectedKey();
                 var oServicetype = this.getView().byId("idServiceType_CC").getSelectedKey();
                 var Comments = this.getView().byId("idComents_CC").getValue();
+                var oDemoSiteChecked = this.getView().byId("idDemolished_site_CC").getSelected();
+                var oDemoSite = "";
+                if (oDemoSiteChecked === true) {
+                    oDemoSite = "X";
+                }
+                else {
+                    oDemoSite = "";
+                }
 
-                // var oAttributs = {
-
-                //         "acc_rep": "",
-                //         "cable_no": "12345",
-                //         "circuit": "",
-                //         "circuit_doc_id": "543",
-                //         "city": "Southgate",
-                //         "conn_obj": "4000438944",
-                //         "cust_name": "Connection object Loc",
-                //         "doc_id": "145",
-                //         "emer_phone": "0987654321",
-                //         "emer_title": "Mr",
-                //         "generation": "genkW",
-                //         "indus_cust": "",
-                //         "mail_name": "",
-                //         "na": "",
-                //         "no_of_lines": "3",
-                //         "on_site_emerg": "X",
-                //         "on_site_nosg": "",
-                //         "on_site_part": "",
-                //         "pl": "",
-                //         "prot_equip1": "",
-                //         "prot_equip2": "",
-                //         "pso_site": "",
-                //         "psr": "",
-                //         "psw": "23",
-                //         "sect_point": "454",
-                //         "sketch_no": "2345654",
-                //         "srv_center": "",
-                //         "srv_type": "",
-                //         "street_name": "Waverly St",
-                //         "street_no": "16002",
-                //         "sub_station": "",
-                //         "throw_type": "",
-                //         "zip_code": "33351-4520"
-
-                // };
                 var oAttributs = {};
                 oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
                     oAttributs.cust_name = oCustomerAttributes1.cust_name,
@@ -587,15 +404,13 @@ sap.ui.define([
                     oAttributs.on_site_nosg = oNoOnsiteGen,
                     oAttributs.full_generation = oFullGen,
                     oAttributs.generation = oCustomerAttributes1.generation,
-                    oAttributs.indus_cust = "",
                     oAttributs.pso_site = "",
-                    oAttributs.demo_site = ""
-                oAttributs.comments = Comments,
-                    oAttributs.indus_cust = oCustomerAttributes1.indus_cust;
+                    oAttributs.comments = Comments,
+                    oAttributs.indus_cust = oCustomerAttributes1.indus_cust,
+                    oAttributs.demo_site = oDemoSite;
 
                 if (this.oEditFlag == "X") {
                     this.getOwnerComponent().getModel("ISUService").update("/Customer_attributeSet('" + oAttributs.conn_obj + "')", oAttributs, {
-                        //    this.oDataModel.read("Customer_searchSet", {
                         method: "PUT",
                         success: function (oData, oResponse) {
                             //that.oBusyIndicator.close()
@@ -614,7 +429,6 @@ sap.ui.define([
                                         press: function () {
                                             dialog.close();
                                             window.history.go(-1);
-                                            //location.reload();
                                         }
                                     }),
                                     afterClose: function () {
@@ -622,8 +436,6 @@ sap.ui.define([
                                     }
                                 });
                                 dialog.open();
-
-
                             } else {
                                 sap.m.MessageBox.show(oResponse.statusText, {
                                     icon: sap.m.MessageBox.Icon.ERROR,
@@ -650,7 +462,6 @@ sap.ui.define([
                     });
                 } else {
                     this.getOwnerComponent().getModel("ISUService").create("/Customer_attributeSet", oAttributs, {
-                        //    this.oDataModel.read("Customer_searchSet", {
                         success: function (oData, oResponse) {
                             //that.oBusyIndicator.close()
                             var oMessage = JSON.parse(oResponse.headers["sap-message"]);
@@ -702,31 +513,6 @@ sap.ui.define([
                         }
                     });
                 }
-
-
-
-                //     this.getOwnerComponent().getModel().create("/Customer_attributeSet",CustomerAttributesList, {
-                //         success:fnSuccess,
-                //         error:fnError
-                //     });
-
-                //    var fnSuccess = function (oData, oResponse) {
-                //         //that.oBusyIndicator.close()
-                //         var abc = "";
-
-                //     }
-                //     var fnError = function (oError) {
-                //        // that.oBusyIndicator.close();
-                //         sap.m.MessageBox.show(
-                //             error.message, {
-                //             icon: sap.m.MessageBox.Icon.ERROR,
-                //             title: "Error",
-                //             actions: [sap.m.MessageBox.Action.OK]
-                //         });
-
-                //     }
-
-
             },
 
 
@@ -734,10 +520,6 @@ sap.ui.define([
             //********************************Navigate to privious page**************************/
             //Navigate to privious page
             onBack: function (oEvent) {
-                // var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
-                // oCustomerAttributesJModel.setData({});
-                // oCustomerAttributesJModel.refresh(true);
-                // this.getView().updateBindings();
                 //var oRouter=sap.ui.core.UIComponent.getRouterFor(this);
                 //oRouter.navTo("View1");
                 window.history.go(-1);
@@ -746,17 +528,11 @@ sap.ui.define([
             onCreateSpecials: function (oEvent) {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("CustomerSpecials");
-                // oRouter.navTo("CustomerSpecials", {
-                //     scope: "cd_create"
-                // });
             },
 
             onDiplaySpecials: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("CustomerSpecials");
-                // oRouter.navTo("CustomerSpecials", {
-                //     scope: "cd_display"
-                // });
             },
 
             fetchSpecialsRecord: async function (connection_object) {
@@ -804,27 +580,29 @@ sap.ui.define([
                     oMessage = this.getView().getModel("i18n").getProperty("Demolished_UnChecked_msg");
                 }
                 var dialog = new sap.m.Dialog({
-                    title: "Information",
+                    title: "Confirmation",
                     type: 'Message',
-                    state: 'Success',
+                    state: 'Information',
+                    titleAlignment: 'Center',
                     content: new sap.m.Text({
                         text: oMessage
                     }),
                     beginButton: new sap.m.Button({
-                        text: "OK",
-                        press: function () {
-                            if (oChecked === false) {
-                                that.getView().byId("idDemolished_site_CC").setSelected(false);
-                            } else {
+                        text: "Yes",
+                        press: function (oEvt) {
+                            if (oChecked === true && oEvt.getSource().getText() === "Yes") {
                                 that.getView().byId("idDemolished_site_CC").setSelected(true);
+                            } else {
+                                that.getView().byId("idDemolished_site_CC").setSelected(false);
                             }
+
                             dialog.close();
                         }
                     }),
                     endButton: new sap.m.Button({
-                        text: "Cancel",
-                        press: function () {
-                            if (oChecked === false) {
+                        text: "No",
+                        press: function (oEvt) {
+                            if (oChecked === true && oEvt.getSource().getText() === "No") {
                                 that.getView().byId("idDemolished_site_CC").setSelected(false);
                             } else {
                                 that.getView().byId("idDemolished_site_CC").setSelected(true);
@@ -886,181 +664,131 @@ sap.ui.define([
 
             //****************Invoke this method on Service Ticket Creation****************************************/
             onCreateServiceTicket: function () {
-
                 // create dialog lazily
                 if (!this.oSTDialog) {
                     this.oSTDialog = this.loadFragment({
-
                         name: "com.pso.customerattribute.fragment.CreateServiceTicket"
                     });
                 }
-
                 this.oSTDialog.then(function (oDialog) {
                     this.oDialog = oDialog;
                     this.oDialog.open();
                     this.getView().addDependent(this.oDialog);
-
-                    // this._oMessageManager.registerObject(this.oView.byId("formContainer"), true);
-
-                    //  MessageToast.show('Press "Save" to trigger validation.');
-                    //  this.createMessagePopover();
                 }.bind(this));
-
-                //   this.oDialog = sap.ui.xmlfragment("idServiceTicketDialog","com.pso.customerattribute.fragment.CreateServiceTicket",this);
-                //     this.getView().addDependent(this.oDialog);
-                //   this.oDialog.open();
             },
-
             onCloseDialog: function () {
                 this.oDialog.close();
             },
-
-            createServiceTicket: function () {
-
-
-                var that = this;
-
-                // Prepare the data to be posted
-                var oDatac4c = {
+            getCreateContext: function () {
+                var c4cPayload = {
                     "ProcessingTypeCode": "ZUSR",
                     "Name": "4002602245",
                     "ServiceIssueCategoryID": "SC_2",
                     "IncidentServiceIssueCategoryID": "IC_5",
                     "ProcessorPartyID": "7000066",
-                    "InstallationPointID": "148",
-                    "ServiceRequestParty": [
-                        {
-                            "PartyID": "1100233509",
-                            "RoleCode": "10"
-                        }
-                    ]
-
+                    "InstallationPointID": "148"
                 };
+                return c4cPayload;
+            },
+            createServiceTicket: async function (oEvent) {
+                var isCircuit = this.getView().byId("idCircuit_ST").getText();
+                if (isCircuit === "" || isCircuit === null || isCircuit === undefined) {
+                    sap.m.MessageBox.show("circuit id is not present for this data", {
+                        icon: sap.m.MessageBox.Icon.ERROR,
+                        title: "Error",
+                        actions: [sap.m.MessageBox.Action.OK]
+                    });
+                    this.onCloseDialog();
+                    return false;
+                }
+                var omodel = this.getOwnerComponent().getModel();
+                var oOperation = omodel.bindContext("/createServiceTicket(...)");
 
-                var username;
-                var password;
-
-                // var credentials = btoa(username + ":" + password);
-
-                // AJAX POST request
-                jQuery.ajax({
-                    url: "https://my357326.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection",  // URL to your OData service
-                    type: "POST",
-
-                    data: JSON.stringify(oDatac4c),
-                    // username : "_SCPIODATA",
-                    // password : "Dte@nergy123",
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('_SCPIODATA:Dte@nergy123'));
-                    },
-
-                    //     xhrFields: {
-                    //         withCredentials: true
-                    //    },
-                    headers: {
-                        "Access-Control-Allow-Headers": "*",
-                        "Content-Type": "application/json"
-                    },
-                    success: function (response) {
-                        alert("success to post");
-                    },
-                    error: function (error) {
-                        alert("Error creating entity.");
-                        console.error("Error details:", error);
-                    }
-                });
-
-                // this.getC4CServiceTicketCreationURL();
-
-                // console.log("C4C url:" + this.C4cServiveTicketURL);
-                // // Prepare the data to be posted
-                // var oData = {
-                //     Field1: "Value1",
-                //     Field2: "Value2"
-                // };
-
-                // // Get the OData model
-                // var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
-
-                // Call the OData service to create a new entity
-                // oSearchCustomerJModel.create("LINK", oData, {
-                //     // Handle success
-                //     sap.m.MessageToast.show("Entity created successfully.");
-                // },
-                // error: function (oError) {
-                //     // Handle error
-                //     sap.m.MessageBox.show(
-                //         error.message, {
-                //         icon: sap.m.MessageBox.Icon.ERROR,
-                //         title: "Error",
-                //         actions: [sap.m.MessageBox.Action.OK]
-                //     });
-                // }
-
+                var c4cPayload = this.getCreateContext();
+                oOperation.setParameter("context", c4cPayload);
+                var that = this;
+                await oOperation.execute().then(function (res) {
+                    var oResults = oOperation.getBoundContext().getObject();
+                    console.log(oResults);
+                    if (oResults && oResults.value) { //specials exist - display special button visible
+                        console.log(oResults.value);                    
+                        let msg = "Service Ticket " + oResults.value + " created successfully in C4C";
+                        sap.m.MessageBox.show(msg, {
+                            icon: sap.m.MessageBox.Icon.INFORMATION,
+                            title: "Success",
+                            actions: [sap.m.MessageBox.Action.OK],
+                            emphasizedAction: MessageBox.Action.OK,
+                            onClose: function (sAction) {
+                                that.onCloseDialog();
+                            },
+                            dependentOn: that.getView()
+                        });   
+                    }                
+                    this.onCloseDialog();
+                    console.log("success: = ticket created");
+                }.bind(this), function (err) {
+                    //        oBusyDialog3.close();
+                    console.log("failure: = " + err.message);
+                    sap.m.MessageBox.show("Service Ticket not created", {
+                        icon: sap.m.MessageBox.Icon.ERROR,
+                        title: "Error",
+                        actions: [sap.m.MessageBox.Action.OK]
+                    });
+                    this.onCloseDialog();
+                }.bind(this))
             }
+            // createServiceTicket1: function () {
 
 
-            // var oPromiseModel = new sap.ui.model.odata.ODataModel("/sap/c4c/odata/v1/c4codataapi");
-            // this.getOwnerComponent().getModel().read("BusinessUserCollection?$filter=UserID eq 'U62926'", {
-            //     success: function (oData) {
-            //         oSearchCustomerJModel.setData(oData.results);
+            //     var that = this;
 
+            //     // Prepare the data to be posted
+            //     var c4cPayload = {
+            //         "ProcessingTypeCode": "ZUSR",
+            //         "Name": "4002602245",
+            //         "ServiceIssueCategoryID": "SC_2",
+            //         "IncidentServiceIssueCategoryID": "IC_5",
+            //         "ProcessorPartyID": "7000066",
+            //         "InstallationPointID": "148"
+            //         // "ServiceRequestParty": [
+            //         //     {
+            //         //         "PartyID": "1100233509",
+            //         //         "RoleCode": "10"
+            //         //     }
+            //         // ]
+
+            //     };
+
+            // var credentials = btoa(username + ":" + password);
+
+            // AJAX POST request
+            // jQuery.ajax({
+            //     url: "https://my357326.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection",  // URL to your OData service
+            //     type: "POST",
+
+            //     data: JSON.stringify(oDatac4c),
+            //     // username : "_SCPIODATA",
+            //     // password : "Dte@nergy123",
+            //     beforeSend: function (xhr) {
+            //         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('_SCPIODATA:Dte@nergy123'));
+            //     },
+
+            //     //     xhrFields: {
+            //     //         withCredentials: true
+            //     //    },
+            //     headers: {
+            //         "Access-Control-Allow-Headers": "*",
+            //         "Content-Type": "application/json"
+            //     },
+            //     success: function (response) {
+            //         alert("success to post");
             //     },
             //     error: function (error) {
-            //         sap.m.MessageBox.show(
-            //             error.message, {
-            //                 icon: sap.m.MessageBox.Icon.ERROR,
-            //                 title: "Error",
-            //                 actions: [sap.m.MessageBox.Action.OK]
-            //             });
-
+            //         alert("Error creating entity.");
+            //         console.error("Error details:", error);
             //     }
             // });
 
-            // var SrvTicketAttributesList = [];
-            // var oSrvTicketAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
-            // var oSelectedKey = this.getView().byId("idDCPLIND_ST").getSelectedIndex();
-            // var oDC = "", oPL = "", oNA = "";
-            // if (oSelectedKey === 0) {
-            //     oDC = "X";
-            // } else if (oSelectedKey === 1) {
-            //     oPL = "X";
-            // } else {
-            //     oNA = "X";
-            // }
-
-            // var oTicketAttributes = {};
-            // oTicketAttributes.conn_obj = oCustomerAttributes1.conn_obj,
-            //     oTicketAttributes.cust_name = oCustomerAttributes1.cust_name,
-            //     oTicketAttributes.street_no = oCustomerAttributes1.street_no,
-            //     oTicketAttributes.street_name = oCustomerAttributes1.street_name,
-            //     oTicketAttributes.city = oCustomerAttributes1.city,
-            //     oTicketAttributes.zip_code = oCustomerAttributes1.zip_code,
-            //     oTicketAttributes.no_of_lines = oNooflines,
-            //     oTicketAttributes.srv_center = oServiceCentre;
-
-            // var oNooflines = this.getView().byId("idNoOfline_ST").getSelectedKey();
-            // var oCustomerName = this.getView().byId("idCustName_ST").getSelectedKey();
-            // var oCity = this.getView().byId("idCity_ST").getSelectedKey();
-            // var oZipCode = this.getView().byId("idZipCode_ST").getSelectedKey();
-            // var oSrvCenter = this.getView().byId("idSrvCenter_ST").getSelectedKey();
-            // var oSubstation = this.getView().byId("idSubstation_ST").getSelectedKey();
-            // var oCircuit = this.getView().byId("idCircuit_ST").getSelectedKey();
-            // var oStreetAdd = this.getView().byId("idStreetAdd_ST").getValue();
-            // var oPrimarySrvRep = this.getView().byId("idPrimarySrvRep_ST").getValue();
-
-            //             "ProcessingTypeCode": "ZUSR", - Constant
-            // "Name": "4002602245", // Dynamic Function Location ID
-            // "ServiceIssueCategoryID": "SC_2", - Constant
-            // "IncidentServiceIssueCategoryID": "IC_5", - Constant
-            // "ProcessorPartyID": "7000066", //Dynamic EmployeeID – Fetch employee id based on sso userid.
-            // "InstallationPointID": "148", // Dynamic Fetch installation point internal id based on function location id.
-            // "ServiceRequestParty": [
-            //     {
-            //         "PartyID": "1100233509”, // Dynamic Customer ID
-            //         "RoleCode": "10"//Bill-to - Constant
-            //     }
-            // ]           
 
         });
     });

@@ -141,8 +141,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             let comment1 = "wf comment";
             let wfType = { "comment": comment1 };
             return wfType;
-        });
-        
+        });        
         this.on('userDetails', async (req) => {            
             const userID = req.req.user.tokenInfo.getPayload().user_name;
             console.log("logged in user : "+ userID);
@@ -225,7 +224,6 @@ module.exports = class PSOService extends cds.ApplicationService {
             return res.id;
 
         });
-
         this.on('fetchDestinationURL', async (req) => {
             const destName = req.data.destName;
             const url = "/destination-configuration/v1/subaccountDestinations/"+ destName;
@@ -246,7 +244,60 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log(destinationList);
             return destinationList.data.URL;
         });
+        // this.on('POST','ServiceRequestCollection',async(req,next)=>{
+        //     const service = await cds.connect.to('C4C');
+        //     let data = req.data;
+        //     // let oDatac4c = {
+        //     //     "ProcessingTypeCode": "ZUSR",
+        //     //     "Name": "4002602245",
+        //     //     "ServiceIssueCategoryID": "SC_2",
+        //     //     "IncidentServiceIssueCategoryID": "IC_5",
+        //     //     "ProcessorPartyID": "7000066",
+        //     //     "InstallationPointID": "148",
+        //     //     "ServiceRequestParty": [
+        //     //         {
+        //     //             "PartyID": "1100233509",
+        //     //             "RoleCode": "10"
+        //     //         }
+        //     //     ]
 
+        //     // };
+        //     let response = await service.send({
+        //         method: 'POST',
+        //         path: "/ServiceRequestCollection",
+        //         data: data
+        //     });
+
+        //     return response;
+        // })
+        this.on('createServiceTicket', async (req)=>{
+            let c4cPayload = {
+                "ProcessingTypeCode": req.data.context.ProcessingTypeCode,
+                "Name": req.data.context.Name,
+                "ServiceIssueCategoryID": req.data.context.ServiceIssueCategoryID,
+                "IncidentServiceIssueCategoryID": req.data.context.IncidentServiceIssueCategoryID,
+                "ProcessorPartyID": req.data.context.ProcessorPartyID,
+                "InstallationPointID": req.data.context.InstallationPointID                           
+            };
+            console.log(c4cPayload);
+            const c4c = await cds.connect.to('C4C');
+            const path = "/ServiceRequestCollection";
+            console.log("i am in C4C Trigger");
+            const res = await c4c.send({
+                method: 'POST',
+                path: path,
+                data: c4cPayload
+            });
+            console.log(res);
+            let id = res.ID+"";
+            console.log(id);
+            let result = { "value": id };
+            return result;
+        //    let id1 = id.toString();
+        //    console.log(id1);
+            //return id;
+
+        })
         return super.init();
 
     }

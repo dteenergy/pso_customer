@@ -45,12 +45,12 @@
         }
       },
       "C4C": {
-        "kind": "odata",
+        "kind": "odata-v2",
+        "model": "srv/external/C4C",
         "credentials": {
           "destination": "C4C"
         }
       }
-
     }
   }
 }

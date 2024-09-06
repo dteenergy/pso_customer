@@ -19,12 +19,12 @@ sap.ui.define([
                 this.initializBusyIndicator(); //Initializing busy indicator
                 this.fetchDropdownData();
             },
-            
+
             getUserDetails: async function () {
                 var omodel = this.getOwnerComponent().getModel();
                 let userScope = null;
                 var oOperation = omodel.bindContext("/userDetails(...)");
-            
+
                 await oOperation.execute().then(function (res) {
                     var oResults = oOperation.getBoundContext().getObject();
                     console.log(oResults);
@@ -39,10 +39,10 @@ sap.ui.define([
                 this.userScope = userScope;
                 console.log(this.userScope);
             },
-            
-            
-             //******************Activating Standard and customize filter option************/
-             onActivatingStandardFilter: function () {
+
+
+            //******************Activating Standard and customize filter option************/
+            onActivatingStandardFilter: function () {
                 this.applyData = this.applyData.bind(this);
                 this.fetchData = this.fetchData.bind(this);
                 this.oSmartVariantManagement = this.getView().byId("svm");
@@ -134,7 +134,7 @@ sap.ui.define([
                     }
                 });
             },
-             //********************************End*********************************/
+            //********************************End*********************************/
 
             //*************************Fatching Customer Records****************************/  
             fetchItems: function () {
@@ -160,13 +160,13 @@ sap.ui.define([
                 if (!sCustName && !sMailingName && !sStreetAdd && !sStreetNo && !sCity && !sZipcode
                     && !sNo_of_Lines && !sService_center && !sCable_No && !sPSW_Diagram && !sPrimery_SR && !sAccount_rep
                     && !sSubstation && !sSketch_no && !sCircuit && !sGeneration) {
-                        sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("filter_not_blank"), {
-                            icon: sap.m.MessageBox.Icon.ERROR,
-                            title: "Error",
-                            actions: [sap.m.MessageBox.Action.OK]
-                        });
-                        return false
-                    }
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("filter_not_blank"), {
+                        icon: sap.m.MessageBox.Icon.ERROR,
+                        title: "Error",
+                        actions: [sap.m.MessageBox.Action.OK]
+                    });
+                    return false
+                }
 
                 var aFilters = [];
                 aFilters.push(new Filter("cust_name", FilterOperator.EQ, sCustName));
@@ -217,12 +217,12 @@ sap.ui.define([
             //********************************End*********************************/
 
             //****************************Navigating to View2 page***************************/
-             handleSelectionChange: function (oEvt) {
+            handleSelectionChange: function (oEvt) {
                 var oContext = oEvt.getSource().getBindingContext("oSearchCustomerJModel").getProperty();
                 var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
                 oCustomerAttributesJModel.setData(oContext);
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                if(oContext.conn_obj ===""){
+                if (oContext.conn_obj === "") {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("No_billingEntity_Exist"), {
                         icon: sap.m.MessageBox.Icon.ERROR,
                         title: "Error",
@@ -231,13 +231,13 @@ sap.ui.define([
                 } else {
                     oRouter.navTo("CustomerDetails", {
                         scope: "cd_create"
-                    }); 
+                    });
                 }
             },
             //********************************End*********************************/
 
-            
-             //************************Live filter within table's records*******************/
+
+            //************************Live filter within table's records*******************/
             handleTableSearch: function (oEvet) {
                 var sValue = oEvet.getSource().getValue();
                 var oFilter = new Filter("cust_name", FilterOperator.Contains, sValue);
@@ -260,7 +260,7 @@ sap.ui.define([
                 var oFilterFinal = new Filter([oFilter, oFilter1, oFilter2, oFilter3, oFilter4, oFilter5, oFilter6, oFilter7,
                     oFilter8, oFilter9, oFilter10, oFilter11, oFilter12, oFilter13, oFilter14, oFilter15, oFilter16], false);
                 this.oView.byId("idCustomerListTable").getBinding("items").filter([oFilterFinal]);
-            }, 
+            },
             //********************************End*********************************/
 
             //*************************Adding Column Filters********************************/
@@ -315,8 +315,8 @@ sap.ui.define([
                     , sGeneration = sap.ui.core.Fragment.byId("idColumnFiltersFrag", "idfragGeneration").getValue();
                 if (sCust_Name === "" && sMailing_Name === "" && sBillingEntity === "" && sStreet_Add === "" && sStreet_No === "" && sCity === "" && sZip === ""
                     && sNoofLines === "" && sSrv_center === "" && sCable_No === "" && sPSW_Diagram === "" && sPrimerySrv_rep === ""
-                    && sAccount_rep === "" && sSubstation === "" && sSketch_no === "" && sCircuit === "" && sGeneration ==="") {
-                    oItems.filter([]) 
+                    && sAccount_rep === "" && sSubstation === "" && sSketch_no === "" && sCircuit === "" && sGeneration === "") {
+                    oItems.filter([])
                 } else {
                     var oArray = [];
                     if (sCust_Name !== "") {
@@ -380,7 +380,7 @@ sap.ui.define([
             onValidReportsColumnFilterCancel: function () {
                 var oTable = this.getView().byId("idCustomerListTable");
                 var oItems = oTable.getBinding("items");
-                    oItems.filter([]);
+                oItems.filter([]);
             },
             onValidReportsColumnFilterRemove: function () {
                 var oTable = this.getView().byId("idCustomerListTable");
@@ -415,14 +415,14 @@ sap.ui.define([
             },
             //********************************End*********************************/
 
-             //*************************Export table records in excel*********************/
-             onValidReportsTableExport: function () {
-                var oClumn_Config, oRecords, oObject, oSpradeSheet, oText; 
+            //*************************Export table records in excel*********************/
+            onValidReportsTableExport: function () {
+                var oClumn_Config, oRecords, oObject, oSpradeSheet, oText;
                 var oModel = this.oView.getModel("oSearchCustomerJModel");
                 var oRecords = oModel.getProperty("/CustomersData");
                 var oReource = this.getResourceBundle();
                 oText = oReource.getText("customerReport");
-                if (oRecords.length > 0) { 
+                if (oRecords.length > 0) {
                     oClumn_Config = this.getColumnConfig(oReource);
                     oObject = {
                         workbook: {
@@ -431,10 +431,10 @@ sap.ui.define([
                         dataSource: oRecords,
                         fileName: oText + ".xlsx",
                         worker: true,
-                        sheetName :"Customer Records",
-                        metaSheetName:"Customer Records",
-                        title : "Customer Records",
-                        application:"Records"
+                        sheetName: "Customer Records",
+                        metaSheetName: "Customer Records",
+                        title: "Customer Records",
+                        application: "Records"
                     };
                     oSpradeSheet = new Spreadsheet(oObject);
                     oSpradeSheet.build().finally(function () {
@@ -457,9 +457,9 @@ sap.ui.define([
                     property: "mail_name",
                     width: 20,
                     wrap: true
-                }); 
+                });
                 oRecords.push({
-                    label: oClumn_Config.getText("FBillingEntity"), 
+                    label: oClumn_Config.getText("FBillingEntity"),
                     type: sap.ui.export.EdmType.String,
                     property: "conn_obj",
                     width: 20,
@@ -563,12 +563,12 @@ sap.ui.define([
                     property: "generation",
                     width: 20,
                     wrap: true
-                }); 
+                });
 
                 return oRecords
             },
             //********************************End*********************************/
-            
+
             //*************************Get value of resorce model***************************/
             getResourceBundle: function () {
                 return this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -604,7 +604,7 @@ sap.ui.define([
             // },
 
             //***********************Clearing all filters*************************/
-            onClear:function(){
+            onClear: function () {
                 var oSearchCustomerJModel = this.getOwnerComponent().getModel("oSearchCustomerJModel");
                 oSearchCustomerJModel.setProperty("/CustomersData", []);
                 this.oView.byId("idcustomer").setValue();
@@ -623,12 +623,12 @@ sap.ui.define([
                 this.oView.byId("idSrvSketchno").setValue();
                 this.oView.byId("idCircuit").setValue();
                 this.oView.byId("idOnSiteGeneration").setSelectedKey();
-                this.oView.byId("idNoofRec").setText("0");  
+                this.oView.byId("idNoofRec").setText("0");
             },
             //********************************End*********************************/
 
             //********************Capitialize first later of each word *******************/
-            onCapitalizeFirtsLater:function(oEvent){
+            onCapitalizeFirtsLater: function (oEvent) {
                 var oInput = oEvent.getSource();
                 var sValue = oInput.getValue();
                 // Capitalize the first letter of each word
@@ -636,13 +636,13 @@ sap.ui.define([
                 // Set the formatted value back to the input field
                 oInput.setValue(sCapitalizedValue);
             },
- 
+
             capitalizeFirstLetterOfEachWord: function (str) {
                 return str.replace(/\b\w/g, function (char) {
                     return char.toUpperCase();
                 });
-             }
-        //********************************End*********************************/
+            }
+            //********************************End*********************************/
 
 
         });

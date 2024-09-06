@@ -41,7 +41,7 @@
                     </layoutData>
                 </Input>
                 <Label id="idlblDemolished_site_CC" text="{i18n>Demolished_site}"/>
-                <CheckBox id="idDemolished_site_CC" select="onDemolishedChecked" />
+                <CheckBox id="idDemolished_site_CC" select="onDemolishedChecked" selected="{= ${oCustomerAttributesJModel>/demo_site} === 'X' ? true : false}" /> 
               </form:content>
             </form:SimpleForm >
             </x:blocks>

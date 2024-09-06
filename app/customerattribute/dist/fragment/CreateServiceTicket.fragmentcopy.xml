@@ -22,7 +22,11 @@
                 <f:SimpleForm
                     id="createTicketForm"
                     editable="true"
-                    layout="ColumnLayout"
+                    layout="ResponsiveGridLayout"  
+                    singleContainerFullSize="false" 
+                    columnsXL="2" columnsL="2" 
+                    labelSpanXL="3" labelSpanL="4" 
+                    labelSpanM="12" labelSpanS="12"
                 >
                     <f:content>
                         <core:Title
@@ -63,11 +67,58 @@
                         >
                             <layoutData>
                                 <l:GridData
-                                    id="idGridData_CC3"
+                                    id="idGridData_ST"
                                     span="XL5 L5 M12 S12"
                                 />
                             </layoutData>
                         </Input>
+
+                        <core:Title
+                            id="serviceTicketTitle1"
+                            text=""
+                        />
+                        <Label
+                            id="lblServiceTicket1"
+                            text="{i18n>customername}"
+                            required="false"
+                        />
+                        <Input
+                            id="inpServiceTicket1"
+                            value=""
+                            maxLength="40"
+                        />
+
+                        <Label
+                            id="lbl2ServiceTicket1"
+                            text=""
+                            required="true"
+                        />
+                        <Input
+                            id="inp2ServiceTicket1"
+                            value=""
+                            maxLength="10"
+                        />
+
+                        <Label
+                            id="lbl3ServiceTicket1"
+                            text="{i18n>streeetadd}"
+                            required="true"
+                        />
+                        <Input
+                            id="inp3ServiceTicket1"
+                            value=""
+                            maxLength="60"
+                        >
+                            <layoutData>
+                                <l:GridData
+                                    id="idGridData_CC31"
+                                    span="XL5 L5 M12 S12"
+                                />
+                            </layoutData>
+                        </Input>
+
+
+
                     </f:content>
                 </f:SimpleForm>
             </VBox>
@@ -89,6 +140,7 @@
                         press="onCloseDialog"
                         ariaHasPopup="Dialog"
                     />  
+                    
                 </content>
             </Toolbar>
         </footer>
