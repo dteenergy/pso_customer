@@ -177,23 +177,80 @@ sap.ui.define([
                     console.log("failure: = " + err.message);
                     //   MessageBox.error(err.message);
                 }.bind(this))
-
-
-
             },
+            // formatDate: function (SDateValue) {
+            //     //       var str = "T00:00:00";
+            //     var currentTime = new Date(SDateValue);
+            //     var month = currentTime.getMonth() + 1;
+            //     var day = currentTime.getDate();
+            //     var year = currentTime.getFullYear();
+            //     var date = year + "-" + month + "-" + day;
+            //     return date;
+            // },
             getCreateContext: function () {
                 //const connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
                 var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
 
+                var ownedByLbd=this.getView().byId("idRadio1_CS").getSelectedButton().getText();
+                var ownedByCB=this.getView().byId("grop5CPSR_CS").getSelectedButton().getText();
+                var ownedByTransformer=this.getView().byId("idOwnedGrp").getSelectedButton().getText();
+                var fuelTypeCB=this.getView().byId("goup6CPSR_CS").getSelectedButton().getText();
+
+                
+
                 if (oSpecialsjmodelData.connection_object === "" || oSpecialsjmodelData.connection_object === null || oSpecialsjmodelData.connection_object === undefined) { //retain field value from previous screen
                     oSpecialsjmodelData.connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
-                }
+                }// "completionDate": this.formatDate(oSpecialsjmodelData.completionDate),
                 var context = {
-                    "connection_object": oSpecialsjmodelData.connection_object,
+                    "connection_object": oSpecialsjmodelData.connection_object,                   
                     "work_desc": oSpecialsjmodelData.work_desc,
-                    "meter_number": oSpecialsjmodelData.meter_number,
+                    "meter_number": oSpecialsjmodelData.meter_number,                    
                     "record_status": "draft",
-                    "workflow_id": null
+                    "workflow_id": null,
+
+                    //Customer Record(CR)
+                    "pSNumber": oSpecialsjmodelData.pSNumber,
+                    
+                    "fedFrom": oSpecialsjmodelData.fedFrom,
+                    "cableDescription": oSpecialsjmodelData.cableDescription,
+                    "cableFootage": oSpecialsjmodelData.cableFootage,
+                    "ductType": oSpecialsjmodelData.ductType,
+                    "cts": oSpecialsjmodelData.cts,
+                    "pts": oSpecialsjmodelData.pts,
+                    "k": oSpecialsjmodelData.k,
+                    "m": oSpecialsjmodelData.m,
+                    "fusesAt": oSpecialsjmodelData.fusesAt,
+                    "size": oSpecialsjmodelData.size,
+                    "typeCR": oSpecialsjmodelData.typeCR,
+                    "curve": oSpecialsjmodelData.curve,
+                    "voltage": oSpecialsjmodelData.voltage,
+
+                    //Load Break Disconnect(LBD)
+                    "ownedByLBD": ownedByLbd,
+                    "manufacturer": oSpecialsjmodelData.manufacturer,
+                    "model": oSpecialsjmodelData.model,
+                    "continuousCurrent": oSpecialsjmodelData.continuousCurrent,
+                    "loadIntRating": oSpecialsjmodelData.loadIntRating,
+                    "kAMomentaryLBD": oSpecialsjmodelData.kAMomentaryLBD,
+                    "typeLBD": oSpecialsjmodelData.typeLBD,
+                    "faultClosing": oSpecialsjmodelData.faultClosing,
+                    "bilLBD": oSpecialsjmodelData.bilLBD,
+                    "serviceVoltage": oSpecialsjmodelData.serviceVoltage,
+                    "CycWithstand60": oSpecialsjmodelData.CycWithstand60,
+
+                    //Circuit Breaker(CB)
+                    "fuelTypeCB":fuelTypeCB,
+                    "ownedByCB": ownedByCB,
+                    "circuitBreakerMake":oSpecialsjmodelData.circuitBreakerMake,
+                    "serialNo":oSpecialsjmodelData.serialNo,
+                    "kAMomentaryCB":oSpecialsjmodelData.kAMomentaryCB,
+                    "amps":oSpecialsjmodelData.amps,
+                    "typeCB":oSpecialsjmodelData.typeCB,
+                    "faultDuty":oSpecialsjmodelData.faultDuty,
+                    "bilCB":oSpecialsjmodelData.bilCB,
+
+                    //Transformer
+                    "ownedByTransformer": ownedByTransformer,
                 };
                 console.log(context);
                 return context;

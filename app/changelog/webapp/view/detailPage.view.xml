@@ -1,0 +1,223 @@
+<mvc:View xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f" controllerName="com.pso.changelog.controller.detailPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.uxap"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+    <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageHeader objectTitle="{connection_object}">
+            </ObjectPageHeader>
+        </headerTitle>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" title="Section 1">
+                <subSections>
+                    <ObjectPageSubSection title="Subsection 1" titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Connection Object"></m:Label>
+                                <m:Text text="{connection_object}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Workflow ID"></m:Label>
+                                <m:Text text="{workflow_id}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Work Flow Description"></m:Label>
+                                <m:Text text="{work_desc}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Meter Number"></m:Label>
+                                <m:Text text="{meter_number}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Record Status"></m:Label>
+                                <m:Text text="{record_status}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Approver Comment"></m:Label>
+                                <m:Text text="{approverComment}"></m:Text>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Section 2">
+                <subSections>
+                    <ObjectPageSubSection title="Subsection 1" titleUppercase="false">
+                        <blocks>
+
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Created At"></m:Label>
+                                <m:Text text="{createdAt}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Created By"></m:Label>
+                                <m:Text text="{createdBy}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Modified Date"></m:Label>
+                                <m:Text text="{modifiedAt}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Modified By"></m:Label>
+                                <m:Text text="{modifiedBy}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Approved By"></m:Label>
+                                <m:Text text="{approvedBy}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Approved On"></m:Label>
+                                <m:Text text="{approvedOn}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="PS Number"></m:Label>
+                                <m:Text text="{pSNumber}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Completion Date"></m:Label>
+                                <m:Text text="{completionDate}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="FED From"></m:Label>
+                                <m:Text text="{fedFrom}"></m:Text>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Section 3">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Cable Description"></m:Label>
+                                <m:Text text="{cableDescription}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Cable Footage"></m:Label>
+                                <m:Text text="{cableFootage}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Duct Type"></m:Label>
+                                <m:Text text="{ductType}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="CTS"></m:Label>
+                                <m:Text text="{cts}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="PTS"></m:Label>
+                                <m:Text text="{pts}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Fuses At"></m:Label>
+                                <m:Text text="{fusesAt}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Size"></m:Label>
+                                <m:Text text="{size}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Type CR"></m:Label>
+                                <m:Text text="{typeCR}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Curve"></m:Label>
+                                <m:Text text="{curve}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Voltage"></m:Label>
+                                <m:Text text="{voltage}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Manufacturer"></m:Label>
+                                <m:Text text="{manufacturer}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Model"></m:Label>
+                                <m:Text text="{model}"></m:Text>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Section 4">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Continuous Current"></m:Label>
+                                <m:Text text="{continuousCurrent}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Load Int Rating"></m:Label>
+                                <m:Text text="{loadIntRating}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="kA Momentary LBD"></m:Label>
+                                <m:Text text="{kAMomentaryLBD}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="LBD Type"></m:Label>
+                                <m:Text text="{typeLBD}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Fault Closing"></m:Label>
+                                <m:Text text="{faultClosing}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Bill BD"></m:Label>
+                                <m:Text text="{bilLBD}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Service Voltage"></m:Label>
+                                <m:Text text="{serviceVoltage}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Cyc With Stand60"></m:Label>
+                                <m:Text text="{CycWithstand60}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Circuit Breaker Make"></m:Label>
+                                <m:Text text="{circuitBreakerMake}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Serial No"></m:Label>
+                                <m:Text text="{serialNo}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="kA Momentary CB"></m:Label>
+                                <m:Text text="{kAMomentaryCB}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Amps"></m:Label>
+                                <m:Text text="{amps}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="CB Type"></m:Label>
+                                <m:Text text="{typeCB}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Fault Duty"></m:Label>
+                                <m:Text text="{faultDuty}"></m:Text>
+                            </form:SimpleForm>
+                            <form:SimpleForm layout="ColumnLayout">
+                                <m:Label text="Bill CB"></m:Label>
+                                <m:Text text="{bilCB}"></m:Text>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+
+        </sections>
+
+    </ObjectPageLayout>
+</mvc:View>

@@ -16,13 +16,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             }
             else return res;
         });
-        // this.before('CREATE', 'PSOSpecials', async (req) => {
-        //     const res = await this.triggerWorkflowPSOSpecials(req.data);
-        //     console.log(res);
-        //   //  return next();
-        //   return ;
-        // });
-
+       
         this.on('createSpecials', async (req) => {
             console.log("in create specials");
             req.data.context.record_status = "draft";
@@ -114,7 +108,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             const recordID = req.data.recordID;
             let approvedBy = req.data.approvedBy;
             const record_status= "approved";
-            
+            //approver =>req.user.id
             approvedBy = "mickey"; //to make it runtime ...mickey
             console.log(comment);
             console.log(recordID);
@@ -141,76 +135,134 @@ module.exports = class PSOService extends cds.ApplicationService {
             let comment1 = "wf comment";
             let wfType = { "comment": comment1 };
             return wfType;
-        });        
+        }); 
+        this.on('onVerifyRecordStatus', async (req) => {
+           // const recordID = req.data.recordID;
+           const recordID = 'bc5c7a5c-4513-49f6-b87b-48c9a4228d05';
+            console.log(recordID);//'bc5c7a5c-4513-49f6-b87b-48c9a4228d05'
+            
+            let res = await SELECT.from(PSOSpecials).where({ ID: recordID }).columns('record_status');
+         
+            console.log(res);
+            console.log("success");
+            // let comment1 = "wf comment";
+            // let wfType = { "comment": comment1 };
+            let output = "approved";
+            return output;
+        });    
         this.on('userDetails', async (req) => {            
             const userID = req.req.user.tokenInfo.getPayload().user_name;
             console.log("logged in user : "+ userID);
             const roles = Object.keys(req.req.user.roles);
+            roles.push(userID);
+            console.log(roles);
             return roles;
         });
         this.on('triggerWorkflowPSOSpecials', async (req) => {
             console.log(req.data);           
-
+            //"completionDate": req.data.context.completionDate,
             let wfPayload = 
             {
-                "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
-                "context": {
-                    "customerName": "",
-                    "recordID": req.data.recordID,
-                    "connectionObject": req.data.context.connection_object,
-                    "address": "",
-                    "city": "",
-                    "pSNumber": "",
-                    "workDescription": req.data.context.work_desc,
-                    "meterNumber": req.data.context.meter_number,
-                    "kWHRRdg": "",
-                    "kVARHRdg": "",
-                    "fedFrom": "",
-                    "cableDescription": "",
-                    "cableFootage": "",
-                    "ductType": "",
-                    "aB": "",
-                    "bC": "",
-                    "cA": "",
-                    "aN": "",
-                    "bN": "",
-                    "cN": "",
-                    "cTs": "",
-                    "pTs": "",
-                    "_k": "",
-                    "_m": "",
-                    "fusesAt": "",
-                    "size": "",
-                    "_type": "",
-                    "curve": "",
-                    "voltage": "",
-                    "ownedByLBD": "DTE Owned",
-                    "manufacturer": "",
-                    "model": "",
-                    "continousCurrent": "",
-                    "loadIntRating": "",
-                    "kAMomentary": "",
-                    "_type_1": "",
-                    "faultClosing": "",
-                    "bil": "",
-                    "serviceVoltage": "",
-                    "_60CycWithstand": "",
-                    "fusesTable": [
+                    "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
+                    "context": {
+                        "recordID": req.data.recordID,
+                        "connectionObject": req.data.context.connection_object,
+                        "pSNumber": req.data.context.pSNumber,
+                        
+                        "workDescription": req.data.context.work_desc,
+                        "meterNumber": req.data.context.meter_number,
+                        "fedFrom": req.data.context.fedFrom,
+                        "cableDescription": req.data.context.cableDescription,
+                        "cableFootage": req.data.context.cableFootage,
+                        "ductType": req.data.context.ductType,
+                        "cTs": req.data.context.cts,
+                        "pTs": req.data.context.pts,
+                        "_k": req.data.context.k,
+                        "_m": req.data.context.m,
+                        "fusesAt": req.data.context.fusesAt,
+                        "size": req.data.context.size,
+                        "_type": req.data.context.typeCR,
+                        "curve": req.data.context.curve,
+                        "voltage": req.data.context.voltage,
+
+                        "ownedByLBD": req.data.context.ownedByLBD,
+                        "manufacturer": req.data.context.manufacturer,
+                        "model": req.data.context.model,
+                        "continousCurrent": req.data.context.continousCurrent,
+                        "loadIntRating": req.data.context.loadIntRating,
+                        "kAMomentaryLBD": req.data.context.kAMomentaryLBD,
+                        "typeLBD": req.data.context.typeLBD,
+                        "faultClosing": req.data.context.faultClosing,
+                        "bilLBD": req.data.context.bilLBD,
+                        "serviceVoltage": req.data.context.serviceVoltage,
+                        "_60CycWithstand": req.data.context.CycWithstand60,
+                        "fusesTable": [
+                            
+                        ],
+
+                        "fuelTypeCB": req.data.context.fuelTypeCB,
+                        "ownedByCB": req.data.context.ownedByCB,
+                        "circuitBreakerMake": req.data.context.circuitBreakerMake,
+                        "serialNumber": req.data.context.serialNo,
+                        "kAMomentaryCB": req.data.context.kAMomentaryCB,
+                        "amps": req.data.context.amps,
+                        "typeCB": req.data.context.typeCB,
+                        "faultDuty": req.data.context.faultDuty,
+                        "bilCB": req.data.context.bilCB,
+
+                        "ownedByTransformer": req.data.context.ownedByTransformer,
+                        "transformerTable": [
+                            
+                        ]
+                    }
+                
+                // "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
+                // "context": {
+                //     "recordID": req.data.recordID,
+                //     "connectionObject": req.data.context.connection_object,
+                //     "pSNumber": req.data.context.pSNumber,
+                //     "workDescription": req.data.context.work_desc,
+                //     "meterNumber": req.data.context.meter_number,
+                //     "fedFrom": req.data.context.fedFrom,
+                //     "cableDescription": req.data.context.cableDescription,
+                //     "cableFootage": req.data.context.cableFootage,
+                //     "ductType": req.data.context.ductType,
+                //     "cTs": req.data.context.cts,
+                //     "pTs": req.data.context.pts,
+                //     "_k": req.data.context.k,
+                //     "_m": req.data.context.m,
+                //     "fusesAt": req.data.context.fusesAt,
+                //     "size": req.data.context.size,
+                //     "_type": req.data.context.typeCR,
+                //     "curve": req.data.context.curve,
+                //     "voltage": req.data.context.voltage,
+                //     "ownedByLBD": "DTE Owned",
+                //     "manufacturer": req.data.context.manufacturer,
+                //     "model": req.data.context.model,
+                //     "continousCurrent": req.data.context.continuousCurrent,
+                //     "loadIntRating": req.data.context.loadIntRating,
+                //     "kAMomentary": req.data.context.kAMomentaryLBD,
+                //     "_type_1": req.data.context.typeLBD,
+                //     "faultClosing": req.data.context.faultClosing,
+                //     "bil": req.data.context.bilLBD,
+                //     "serviceVoltage": req.data.context.serviceVoltage,
+                //     "_60CycWithstand": req.data.context.CycWithstand60,
+                //     "fusesTable": [
                        
-                    ],
-                    "fuelTypeCB": "Oil",
-                    "ownedByCB": "DTE Owned",
-                    "circuitBreakerMake": "",
-                    "serialNumber": "",
-                    "kAMomentary_1": "",
-                    "amps": "",
-                    "_type_3": "",
-                    "faultDuty": "",
-                    "ownedByTransformer": "DTE Owned",
-                    "transformerTable": [
+                //     ],
+                //     "fuelTypeCB": "Oil",
+                //     "ownedByCB": "DTE Owned",
+                //     "circuitBreakerMake": req.data.context.circuitBreakerMake,
+                //     "serialNumber": req.data.context.serialNo,
+                //     "kAMomentary_1": req.data.context.kAMomentaryCB,
+                //     "amps": req.data.context.amps,
+                //     "_type_3": req.data.context.typeCB,
+                //     "faultDuty": req.data.context.faultDuty,
+                //     "ownedByTransformer": "DTE Owned",
+                //     "transformerTable": [
                        
-                    ]
-                }
+                //     ]
+                // }
             }
             const bp = await cds.connect.to('connectbpa');
             const path = "/workflow/rest/v1/workflow-instances";
@@ -233,51 +285,38 @@ module.exports = class PSOService extends cds.ApplicationService {
 
             const inMemoryDestination = await transformServiceBindingToDestination(Service);
             await registerDestination(inMemoryDestination);
-            // const destinationList = await executeHttpRequest(
-            //     { destinationName: 'destination_api' },
-            //     { method: 'get', url: `/destination-configuration/v1/subaccountDestinations/Dev-OpenText` }
-            // );
+           
             const destinationList = await executeHttpRequest(
                 { destinationName: 'destination_api' },
                 { method: 'get', url: url }
             );
             console.log(destinationList);
             return destinationList.data.URL;
-        });
-        // this.on('POST','ServiceRequestCollection',async(req,next)=>{
-        //     const service = await cds.connect.to('C4C');
-        //     let data = req.data;
-        //     // let oDatac4c = {
-        //     //     "ProcessingTypeCode": "ZUSR",
-        //     //     "Name": "4002602245",
-        //     //     "ServiceIssueCategoryID": "SC_2",
-        //     //     "IncidentServiceIssueCategoryID": "IC_5",
-        //     //     "ProcessorPartyID": "7000066",
-        //     //     "InstallationPointID": "148",
-        //     //     "ServiceRequestParty": [
-        //     //         {
-        //     //             "PartyID": "1100233509",
-        //     //             "RoleCode": "10"
-        //     //         }
-        //     //     ]
-
-        //     // };
-        //     let response = await service.send({
-        //         method: 'POST',
-        //         path: "/ServiceRequestCollection",
-        //         data: data
-        //     });
-
-        //     return response;
-        // })
+        });        
         this.on('createServiceTicket', async (req)=>{
+            
             let c4cPayload = {
-                "ProcessingTypeCode": req.data.context.ProcessingTypeCode,
+                "ProcessingTypeCode": req.data.context.ProcessingTypeCode,               
                 "Name": req.data.context.Name,
                 "ServiceIssueCategoryID": req.data.context.ServiceIssueCategoryID,
                 "IncidentServiceIssueCategoryID": req.data.context.IncidentServiceIssueCategoryID,
-                "ProcessorPartyID": req.data.context.ProcessorPartyID,
-                "InstallationPointID": req.data.context.InstallationPointID                           
+                "InstallationPointID": req.data.context.InstallationPointID,
+                "ProcessorPartyID": req.data.context.ProcessorPartyID,     
+                "Z_PSO_City_KUT": req.data.context.Z_PSO_City_KUT,
+                "Z_PSO_DCPLIND_KUT": req.data.context.Z_PSO_DCPLIND_KUT,
+                "Z_PSO_ServiceCenter_KUT": req.data.context.Z_PSO_ServiceCenter_KUT, 
+                "Z_PSO_Substation_KUT": req.data.context.Z_PSO_Substation_KUT,
+                "Z_PSO_Circuit_Trans_KUT":req.data.context.Z_PSO_Circuit_Trans_KUT,
+                "Z_PSO_PSCableNo_KUT": req.data.context.Z_PSO_PSCableNo_KUT,
+                "Z_PSO_StreetAddress_KUT": req.data.context.Z_PSO_StreetAddress_KUT,
+                "Z_PSO_CustomerName_KUT": req.data.context.Z_PSO_CustomerName_KUT,
+                "Z_PSO_ZIP_KUT": req.data.context.Z_PSO_ZIP_KUT,
+                "ServiceRequestParty": [
+                    {
+                        "PartyID":  req.data.context.PartyID,
+                        "RoleCode":  req.data.context.RoleCode             
+                    }
+                ]
             };
             console.log(c4cPayload);
             const c4c = await cds.connect.to('C4C');
@@ -293,10 +332,6 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log(id);
             let result = { "value": id };
             return result;
-        //    let id1 = id.toString();
-        //    console.log(id1);
-            //return id;
-
         })
         return super.init();
 

@@ -43,9 +43,15 @@ sap.ui.define([
                 var oSubstationJModel = new sap.ui.model.json.JSONModel();
                 this.setModel(oSubstationJModel, "oSubstationJModel");
 
+                var oSubstationJModel2 = new sap.ui.model.json.JSONModel();
+                this.setModel(oSubstationJModel2, "oSubstationJModel2");
+
                 //This is uesd for Circuit F4 Help
                 var oCircuitJModel = new sap.ui.model.json.JSONModel();
                 this.setModel(oCircuitJModel, "oCircuitJModel");
+
+                var oCircuitJModel2 = new sap.ui.model.json.JSONModel();
+                this.setModel(oCircuitJModel2, "oCircuitJModel2");
 
                 //This is used for all customer attributes
                 var oCustomerAttributesJModel = new sap.ui.model.json.JSONModel();
@@ -54,6 +60,10 @@ sap.ui.define([
                 //This is specials model
                 var oSpecialsjmodel = new sap.ui.model.json.JSONModel();
                 this.setModel(oSpecialsjmodel, "oSpecialsjmodel");
+
+                //User Scope model
+                var oUserScopeJModel = new sap.ui.model.json.JSONModel();
+                this.setModel(oUserScopeJModel, "oUserScopeJModel");
 
             }
         });

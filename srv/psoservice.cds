@@ -1,39 +1,86 @@
 using {com.pso.specials as db} from '../db/pso-schema';
-using {c4c} from './external/c4c';
-
+//using {c4c} from './external/c4c';
 
 service PSOService {
 
-
-  entity PSOSpecials              as projection on db.PSOSpecials;
-  //annotate PSOSpecials with @odata.draft.enabled;
-
+  entity PSOSpecials as projection on db.PSOSpecials;
+ 
   type wfType {
     comment : String;
   }
   type result {
-    value: String;
+    value : String;
   }
 
   type SpecialsContext {
-    connection_object : String;
-    work_desc         : String;
-    meter_number      : String;
-    record_status     : String;
-    workflow_id       : String;
-    approvedBy        : String;
-    approvedOn        : String;
-    approverComment   : String;
+    connection_object  : String;
+    work_desc          : String;
+    meter_number       : String;
+    record_status      : String;
+    workflow_id        : String;
+    approvedBy         : String;
+    approvedOn         : String;
+    approverComment    : String;
+    //Customer Record(CR)
+    pSNumber           : String;
+    completionDate     : String;
+    fedFrom            : String;
+    cableDescription   : String;
+    cableFootage       : String;
+    ductType           : String;
+    cts                : String;
+    pts                : String;
+    k                  : String;
+    m                  : String;
+    fusesAt            : String;
+    size               : String;
+    typeCR             : String;
+    curve              : String;
+    voltage            : String;
+    //Load Break Disconnect(LBD)
+    ownedByLBD         : String;    //Radiobutton
+    manufacturer       : String;
+    model              : String;
+    continuousCurrent  : String;
+    loadIntRating      : String;
+    kAMomentaryLBD     : String;
+    typeLBD            : String;
+    faultClosing       : String;
+    bilLBD             : String;
+    serviceVoltage     : String;
+    CycWithstand60     : String;
+    //Circuit Breaker(CB)
+    fuelTypeCB         : String;    //Radiobutton
+    ownedByCB          : String;    //Radiobutton
+    circuitBreakerMake : String;
+    serialNo           : String;
+    kAMomentaryCB      : String;
+    amps               : String;
+    typeCB             : String;
+    faultDuty          : String;
+    bilCB              : String;
+    //Transformer
+    ownedByTransformer          : String;    //Radiobutton
   }
 
   type C4CPayload {
-    ProcessingTypeCode            : String;
+    ProcessingTypeCode             : String;
     Name                           : String;
-    ServiceIssueCategoryID        : String;
+    ServiceIssueCategoryID         : String;
     IncidentServiceIssueCategoryID : String;
-    ProcessorPartyID             : String;
-    InstallationPointID            : String;   
-
+    ProcessorPartyID               : String;
+    InstallationPointID            : String;
+    PartyID                        : String;
+    RoleCode                       : String;
+    Z_PSO_City_KUT                 : String;
+    Z_PSO_DCPLIND_KUT              : String;
+    Z_PSO_ServiceCenter_KUT        : String;
+    Z_PSO_Substation_KUT           : String;
+    Z_PSO_Circuit_Trans_KUT        : String;
+    Z_PSO_PSCableNo_KUT            : String;
+    Z_PSO_StreetAddress_KUT        : String;
+    Z_PSO_CustomerName_KUT         : String;
+    Z_PSO_ZIP_KUT                  : String;
   }
 
 
@@ -50,4 +97,5 @@ service PSOService {
   action   createAndSubmitSpecials(context : SpecialsContext);
   //entity   ServiceRequestCollection as projection on c4c.ServiceRequestCollection;
   action   createServiceTicket(context : C4CPayload)                               returns result;
+  function onVerifyRecordStatus(recordID : UUID) returns String;
 }

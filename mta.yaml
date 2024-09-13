@@ -72,9 +72,23 @@ modules:
       - compsocustomerattribute.zip
       name: compsocustomerattribute
       target-path: resources/
+    - artifacts:
+      - compsochangelog.zip
+      name: compsochangelog
+      target-path: resources/
 - name: compsocustomerattribute
   type: html5
   path: app/customerattribute
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: compsochangelog
+  type: html5
+  path: app/changelog
   build-parameters:
     build-result: dist
     builder: custom

@@ -61,7 +61,7 @@
         </x:subSections>
       </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" visible="true">
+      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" >
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecEmerContact_DC" titleUppercase="false">
             <x:blocks>
@@ -132,10 +132,10 @@
                   <Label id="idlblTotalGen_DC" text="{i18n>totalgen}" />
                   <Text id="idGenration_DC" text="{oCustomerAttributesJModel>/generation}">
                   <layoutData>
-                      <l:GridData id="idGridData_DC23" span="XL1 L1 M2 S9" />
+                      <l:GridData id="idGridData_DC23" span="XL3 L3 M2 S9" />
                     </layoutData>
                     </Text>
-                  <Text id="idkW_DC" text="/kW" />
+                  <Text id="idkW_DC" text="kW" />
                 </form:content>
               </form:SimpleForm >
             </x:blocks>
@@ -174,9 +174,9 @@
                       <l:GridData id="idGridData_DC14" span="XL5 L5 M12 S12" />
                     </layoutData>
                    </Text>
-                   <Link id="idCircuitlink"
+                   <!-- <Link id="idCircuitlink"
 				                text="Open Documentum"
-				                press="onPressCircuitLink"/>
+				                press="onPressCircuitLink"/> -->
                   <Label id="idlblCircuitDoc_DC" text="{i18n>circuitdoc}" />
                   <Text id="idCircuitDoc_DC" text="{oCustomerAttributesJModel>/circuit_doc_id}">
                   <layoutData>
@@ -239,7 +239,7 @@
 				                text="Open Documentum"
 				                press="onPressPswDocId"/>
                   <Label id="idlblComments_DC" text="Comments"/>
-                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" valueLiveUpdate="true" editable="false"  rows="3" maxLength="225">
+                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" valueLiveUpdate="true" editable="false"  rows="6" maxLength="225">
                     <layoutData>
                       <l:GridData id="idGridData2_DC10" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -249,12 +249,12 @@
                   <core:Title id="_IDGenTitle_DC2" text=""/>
                   <Label id="idlblDCPLIND_DC2"/>
                   <RadioButtonGroup id="idDCPLIND_DC2" columns="5" enabled="false">
-                    <RadioButton id="DC_DC2" text="DC" />
-                    <RadioButton id="PL_DC2" text="PL" />
-                    <RadioButton id="IND_DC2" text="IND"/>
+                    <RadioButton id="DC_DC2" text="DC" selected="{= ${oCustomerAttributesJModel>/dc2} === 'X' ? true : false}"/>
+                    <RadioButton id="PL_DC2" text="PL" selected="{= ${oCustomerAttributesJModel>/pl2} === 'X' ? true : false}"/>
+                    <RadioButton id="IND_DC2" text="IND" selected="{= ${oCustomerAttributesJModel>/na2} === 'X' ? true : false}"/>
                   </RadioButtonGroup>
                   <Label id="idlblTrans_DC2" text="{i18n>trans}" />
-                  <Text id="idTrans_DC2" text="{oCustomerAttributesJModel>/indus_cust}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
+                  <Text id="idTrans_DC2" text="{oCustomerAttributesJModel>/indus_cust2}" visible="{= ${oCustomerAttributesJModel>/na2} === 'X' ? true : false}">
                     <layoutData>
                       <l:GridData id="idGridData2_DC12" span="XL5 L5 M12 S12" />
                     </layoutData>  
@@ -271,9 +271,9 @@
                       <l:GridData id="idGridData2_DC14" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Text>
-                  <Link id="idCircuitlink2"
+                  <!-- <Link id="idCircuitlink2"
 				                text="Open Documentum"
-				                press="onPressCircuitLink2"/>
+				                press="onPressCircuitLink2"/> -->
                   <Label id="idlblCircuitDoc2_DC" text="{i18n>circuitdoc}" />
                   <Text id="idCircuitDoc2_DC" text="{oCustomerAttributesJModel>/circuit_doc_id2}">
                   <layoutData>
@@ -337,7 +337,7 @@
 				                text="Open Documentum"
 				                press="onPressPswDocId2"/>
                   <Label id="idlblComments2_DC" text="Comments"/>
-                  <TextArea id="idComents2_DC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="3" maxLength="225">
+                  <TextArea id="idComents2_DC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
                   <layoutData>
                       <l:GridData id="idGridData2_DC11" span="XL5 L5 M12 S12" />
                     </layoutData>

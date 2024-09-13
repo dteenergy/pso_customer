@@ -20,7 +20,7 @@
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^7.9.7",
     "@sap/eslint-plugin-cds": "^3",
-    "@sap/ux-specification": "^1.120.17",
+    "@sap/ux-specification": "^1.124.0",
     "eslint": "^9",
     "rimraf": "^5.0.5"
   },
@@ -31,11 +31,14 @@
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "watch-customerattribute": "cds watch --open customerattribute/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-searchcustomer": "cds watch --open searchcustomer/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-searchcustomer": "cds watch --open searchcustomer/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-changelog": "cds watch --open changelog/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
-      "auth": "xsuaa",
+     "uaa": {
+        "kind": "mocked"
+      },
       "db": "hana",
       "connectivity": true,
       "connectbpa": {
@@ -46,10 +49,14 @@
       },
       "C4C": {
         "kind": "odata-v2",
-        "model": "srv/external/C4C",
         "credentials": {
           "destination": "C4C"
         }
+      }
+    },
+    "auth": {
+      "passport": {
+        "strategy": "JWT"
       }
     }
   }

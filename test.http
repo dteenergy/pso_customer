@@ -48,3 +48,8 @@ Content-Type: application/json
                 "InstallationPointID": "148"
 
             }}
+
+
+###Read Data for recordPOST Data to DB with action import
+GET   {{service}}/onVerifyRecordStatus(recordID='bc5c7a5c-4513-49f6-b87b-48c9a4228d05')
+

@@ -11,33 +11,49 @@ sap.ui.define([
 
         return Controller.extend("com.pso.customerattribute.controller.SearchCustomer", {
             onInit: function () {
-                //this.getUserScope();
-                this.getUserDetails();
-                //this.oDataModel = this.getOwnerComponent().getModel(); //make the change
-                this.oView = this.getView();
+                this.hasRecordCreateAccess = false;
+                this.getUserDetails();  
                 this.onActivatingStandardFilter(); //Activating standard filters
                 this.initializBusyIndicator(); //Initializing busy indicator
                 this.fetchDropdownData();
-            },
 
+            },
             getUserDetails: async function () {
-                var omodel = this.getOwnerComponent().getModel();
+                var that = this;
                 let userScope = null;
-                var oOperation = omodel.bindContext("/userDetails(...)");
+                let oUserScopeJModel = this.getOwnerComponent().getModel("oUserScopeJModel");
+                oUserScopeJModel.setData(userScope);
+                let omodel = this.getOwnerComponent().getModel();                
+                let oOperation = omodel.bindContext("/userDetails(...)");
 
                 await oOperation.execute().then(function (res) {
-                    var oResults = oOperation.getBoundContext().getObject();
+                    let oResults = oOperation.getBoundContext().getObject();
                     console.log(oResults);
-                    userScope = oResults.value;
-
+                    //userScope = oResults.value;
+                    if(oResults && oResults.value){
+                        oUserScopeJModel.setData(oResults.value);
+                        //new code
+                        for (var i = 0; i < oResults.value.length; i++) {
+                            if(oResults.value[i].includes("pso_customer_details_create")){
+                                that.hasRecordCreateAccess = true;
+                                console.log("has create access")
+                                break;
+                            }                                
+                        }
+                    }
+                    else {
+                        //role definition incomplete message
+                    }
                 }.bind(this), function (err) {
                     //        oBusyDialog3.close();
                     //MessageBox.error(err.message);
                     console.log(err.message);
                 }.bind(this))
                 // return userScope;
-                this.userScope = userScope;
-                console.log(this.userScope);
+                //this.userScope = userScope;
+                //console.log(this.userScope);
+                // var oUserScopeJModel = this.getOwnerComponent().getModel("oUserScopeJModel");
+                // oUserScopeJModel.setData(this.userScope);
             },
 
 
@@ -104,7 +120,7 @@ sap.ui.define([
                 this.oBusyIndicator = (this.oBusyIndicator) ? this.oBusyIndicator
                     : new sap.m.BusyDialog({
                         text: '',
-                        title: "Fetching data..."
+                        title: ""
                     });
                 return this.oBusyIndicator;
             },
@@ -139,23 +155,23 @@ sap.ui.define([
             //*************************Fatching Customer Records****************************/  
             fetchItems: function () {
                 var that = this;
-                var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
-                var sCustName = this.oView.byId("idcustomer").getValue();
-                var sMailingName = this.oView.byId("idMailingname").getValue();
-                var sStreetAdd = this.oView.byId("idStreetAdd").getValue();
-                var sStreetNo = this.oView.byId("idStreetNo").getValue();
-                var sCity = this.oView.byId("idCity").getValue();
-                var sZipcode = this.oView.byId("idzipcode").getValue();
-                var sNo_of_Lines = this.oView.byId("idNoofline").getValue();
-                var sService_center = this.oView.byId("idsrvcenter").getValue();
-                var sCable_No = this.oView.byId("idcableno").getValue();
-                var sPSW_Diagram = this.oView.byId("idPswdigram").getValue();
-                var sPrimery_SR = this.oView.byId("idPrimarySRep").getSelectedKey();
-                var sAccount_rep = this.oView.byId("idAcRep").getValue();
-                var sSubstation = this.oView.byId("idSubstation").getValue();
-                var sSketch_no = this.oView.byId("idSrvSketchno").getValue();
-                var sCircuit = this.oView.byId("idCircuit").getValue();
-                var sGeneration = this.oView.byId("idOnSiteGeneration").getSelectedKey();
+                var oSearchCustomerJModel = this.getView().getModel("oSearchCustomerJModel");
+                var sCustName = this.getView().byId("idcustomer").getValue();
+                var sMailingName = this.getView().byId("idMailingname").getValue();
+                var sStreetAdd = this.getView().byId("idStreetAdd").getValue();
+                var sStreetNo = this.getView().byId("idStreetNo").getValue();
+                var sCity = this.getView().byId("idCity").getValue();
+                var sZipcode = this.getView().byId("idzipcode").getValue();
+                var sNo_of_Lines = this.getView().byId("idNoofline").getValue();
+                var sService_center = this.getView().byId("idsrvcenter").getValue();
+                var sCable_No = this.getView().byId("idcableno").getValue();
+                var sPSW_Diagram = this.getView().byId("idPswdigram").getValue();
+                var sPrimery_SR = this.getView().byId("idPrimarySRep").getSelectedKey();
+                var sAccount_rep = this.getView().byId("idAcRep").getValue();
+                var sSubstation = this.getView().byId("idSubstation").getValue();
+                var sSketch_no = this.getView().byId("idSrvSketchno").getValue();
+                var sCircuit = this.getView().byId("idCircuit").getValue();
+                var sGeneration = this.getView().byId("idOnSiteGeneration").getSelectedKey();
 
                 if (!sCustName && !sMailingName && !sStreetAdd && !sStreetNo && !sCity && !sZipcode
                     && !sNo_of_Lines && !sService_center && !sCable_No && !sPSW_Diagram && !sPrimery_SR && !sAccount_rep
@@ -187,15 +203,42 @@ sap.ui.define([
                 aFilters.push(new Filter("generation", FilterOperator.EQ, sGeneration));
                 this.oBusyIndicator.open();
                 //mickey
+                try{//rohit/ram
+                
                 this.getOwnerComponent().getModel("ISUService").read("/Customer_searchSet", {
                     //    this.oDataModel.read("Customer_searchSet", {
                     filters: [aFilters],
                     success: function (oData) {
                         that.oBusyIndicator.close()
+                        var noData=false;
                         if (oData.results.length > 0) {
-                            that.oView.byId("idNoofRec").setText(oData.results.length);
-                            oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
+                            if (!that.hasRecordCreateAccess) {
+                                console.log("in odata has NO create access");                         
+                                var arr = [];
+                                for (var i = 0; i < oData.results.length; i++) {
+                                    if (oData.results[i].superior_flag === "") {
+                                        arr.push(oData.results[i]);
+                                    }
+                                }
+                                if(arr.length >0){
+                                    that.oView.byId("idNoofRec").setText(arr.length);
+                                oSearchCustomerJModel.setProperty("/CustomersData", arr);
+                                }
+                                else{
+                                    noData= true;
+                                }
+                                
+                            }
+                            else {
+                                that.oView.byId("idNoofRec").setText(oData.results.length);
+                                oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
+                            }
                         } else {
+                            noData= true;
+                            // oSearchCustomerJModel.setData([]);
+                            // that.oView.byId("idNoofRec").setText(oData.results.length);
+                        }
+                        if(noData){
                             oSearchCustomerJModel.setData([]);
                             that.oView.byId("idNoofRec").setText(oData.results.length);
                         }
@@ -213,6 +256,10 @@ sap.ui.define([
                         that.oView.byId("idNoofRec").setText("");
                     }
                 });
+                }
+                catch{
+                    
+                }
             },
             //********************************End*********************************/
 
@@ -259,13 +306,13 @@ sap.ui.define([
                 var oFilter16 = new Filter("generation", FilterOperator.Contains, sValue);
                 var oFilterFinal = new Filter([oFilter, oFilter1, oFilter2, oFilter3, oFilter4, oFilter5, oFilter6, oFilter7,
                     oFilter8, oFilter9, oFilter10, oFilter11, oFilter12, oFilter13, oFilter14, oFilter15, oFilter16], false);
-                this.oView.byId("idCustomerListTable").getBinding("items").filter([oFilterFinal]);
+                this.getView().byId("idCustomerListTable").getBinding("items").filter([oFilterFinal]);
             },
             //********************************End*********************************/
 
             //*************************Adding Column Filters********************************/
             onTableColumnFilterButtonPress: function () {
-                var oModel = this.oView.getModel("oSearchCustomerJModel");
+                var oModel = this.getView().getModel("oSearchCustomerJModel");
                 var oGet_dat = oModel.getProperty("/CustomersData");
                 if (oGet_dat.length > 0) {
                     if (!this._oColumnFilterDialog) {
@@ -393,7 +440,7 @@ sap.ui.define([
                 this._getValidReportsTableSortDialog().open()
             },
             _getValidReportsTableSortDialog: function () {
-                var e = this.oView.getModel("oSearchCustomerJModel");
+                var e = this.getView().getModel("oSearchCustomerJModel");
                 if (!this._oValidReportsTableSortDialog) {
                     this._oValidReportsTableSortDialog = sap.ui.xmlfragment(this.createId("idValidReportsTableSortFrag"), "com.pso.customerattribute.fragment.TableSort", this);
                     this.getView().addDependent(this._oValidReportsTableSortDialog)
@@ -418,7 +465,7 @@ sap.ui.define([
             //*************************Export table records in excel*********************/
             onValidReportsTableExport: function () {
                 var oClumn_Config, oRecords, oObject, oSpradeSheet, oText;
-                var oModel = this.oView.getModel("oSearchCustomerJModel");
+                var oModel = this.getView().getModel("oSearchCustomerJModel");
                 var oRecords = oModel.getProperty("/CustomersData");
                 var oReource = this.getResourceBundle();
                 oText = oReource.getText("customerReport");
@@ -574,56 +621,27 @@ sap.ui.define([
                 return this.getOwnerComponent().getModel("i18n").getResourceBundle();
             },
 
-            //
-            // getUserScope: async function () {
-            //     var sUserName,
-            //         sScopes = null;
-            //     await fetch("/getUserInfo")
-            //         .then(res => res.json())
-            //         .then(data => {
-            //             sUserName = data.decodedJWTToken.email;
-            //             sScopes = data.decodedJWTToken.scope;
-            //         });
-            //     console.log(sUserName);
-            //     console.log(sScopes);
-
-            //     var currentScope;
-            //     for (var i = 0; i < sScopes.length; i++) {
-            //         if (sScopes[i].includes('pso_customer_details_create')) {
-            //             console.log("scope = pso_customer_details_create");
-            //             currentScope = "cd_create"
-            //         }
-            //         else if (sScopes[i].includes('pso_customer_details_display')) {
-            //             console.log("scope = pso_customer_details_display");
-            //             currentScope = "cd_display"
-            //         }
-            //     }
-            //     this.currentScope = currentScope;
-            //     //   return sScopes;
-
-            // },
-
             //***********************Clearing all filters*************************/
             onClear: function () {
                 var oSearchCustomerJModel = this.getOwnerComponent().getModel("oSearchCustomerJModel");
                 oSearchCustomerJModel.setProperty("/CustomersData", []);
-                this.oView.byId("idcustomer").setValue();
-                this.oView.byId("idMailingname").setValue();
-                this.oView.byId("idStreetAdd").setValue();
-                this.oView.byId("idStreetNo").setValue();
-                this.oView.byId("idCity").setValue();
-                this.oView.byId("idzipcode").setValue();
-                this.oView.byId("idNoofline").setValue();
-                this.oView.byId("idsrvcenter").setValue();
-                this.oView.byId("idcableno").setValue();
-                this.oView.byId("idPswdigram").setValue();
-                this.oView.byId("idPrimarySRep").setSelectedKey();
-                this.oView.byId("idAcRep").setValue();
-                this.oView.byId("idSubstation").setValue();
-                this.oView.byId("idSrvSketchno").setValue();
-                this.oView.byId("idCircuit").setValue();
-                this.oView.byId("idOnSiteGeneration").setSelectedKey();
-                this.oView.byId("idNoofRec").setText("0");
+                this.getView().byId("idcustomer").setValue();
+                this.getView().byId("idMailingname").setValue();
+                this.getView().byId("idStreetAdd").setValue();
+                this.getView().byId("idStreetNo").setValue();
+                this.getView().byId("idCity").setValue();
+                this.getView().byId("idzipcode").setValue();
+                this.getView().byId("idNoofline").setValue();
+                this.getView().byId("idsrvcenter").setValue();
+                this.getView().byId("idcableno").setValue();
+                this.getView().byId("idPswdigram").setValue();
+                this.getView().byId("idPrimarySRep").setSelectedKey();
+                this.getView().byId("idAcRep").setValue();
+                this.getView().byId("idSubstation").setValue();
+                this.getView().byId("idSrvSketchno").setValue();
+                this.getView().byId("idCircuit").setValue();
+                this.getView().byId("idOnSiteGeneration").setSelectedKey();
+                this.getView().byId("idNoofRec").setText("0");
             },
             //********************************End*********************************/
 
@@ -636,11 +654,15 @@ sap.ui.define([
                 // Set the formatted value back to the input field
                 oInput.setValue(sCapitalizedValue);
             },
-
+            //Captalize first word capital and rest of small.
             capitalizeFirstLetterOfEachWord: function (str) {
-                return str.replace(/\b\w/g, function (char) {
-                    return char.toUpperCase();
-                });
+                return str
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(' ');
+                // return str.replace(/\b\w/g, function (char) {
+                //     return char.toUpperCase();
+                // });
             }
             //********************************End*********************************/
 

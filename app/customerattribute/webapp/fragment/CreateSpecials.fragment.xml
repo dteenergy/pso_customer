@@ -28,13 +28,13 @@
             <core:Title id="hading1_CS" text="Header 1" />
            
             <Label id="idlblPSNo_CS" text="{i18n>psnum}"/>
-            <Input id="idPSNo_CS" />
+            <Input id="idPSNo_CS" value="{oSpecialsjmodel>/pSNumber}"/>
             <!-- <layoutData>
                 <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
               </layoutData>
               </Input>  -->
             <Label id="idlblCompletionD_CS" text="{i18n>completionDate}" />
-            <DatePicker id="idCompletionD_CS" value="{path: '/date',type: 'sap.ui.model.type.Date'}" />
+            <DatePicker id="idCompletionD_CS" value="{oSpecialsjmodel>/completionDate}" />
  
             <core:Title id="idH2_CS" text="Header 2"/> 
             <Label id="idlblWorkDesc_CS" text="{i18n>CS_WorkDesc}" />
@@ -44,29 +44,29 @@
             <!-- <Label id="idlblkwhr" text="{i18n>kwhrRdg}"/>
             <Input id="idkwhrrdg"/> -->
             <Label id="idlblFedFrom_CS" text="{i18n>CS_FedFrom}"/>
-            <Input id="idFedFrom_CS"/>
+            <Input id="idFedFrom_CS" value="{oSpecialsjmodel>/fedFrom}"/>
                        
  
             <core:Title id="idheadi3_CS" text="Header 3" />
             <Label id="idlblCableDesc_CS" text="{i18n>CS_cableDesc}"/>
-            <ComboBox id="idCableDesc_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idCableDesc_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/cableDescription}">
               <core:Item id="idSCItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblCableFootage_CS" text="{i18n>CS_cableFootage}"/>
-            <Input id="idCableFootage_CS" />
+            <Input id="idCableFootage_CS" value="{oSpecialsjmodel>/cableFootage}"/>
             <Label id="idlblDuctType_CS" text="{i18n>CS_DuctType}"/>
-            <Input id="idDuctType_CS"/>
+            <Input id="idDuctType_CS" value="{oSpecialsjmodel>/ductType}"/>
  
      
             <core:Title id="idMeasure_CS" text="Measure" />
             <Label id="idlblCts_CS" text="{i18n>CS_cts}" />
-            <Input id="idCts_CS"/>
+            <Input id="idCts_CS" value="{oSpecialsjmodel>/cts}"/>
             <Label id="idlblPts_CS" text="{i18n>CS_pts}" />
-            <Input id="idPts_CS"/>
+            <Input id="idPts_CS" value="{oSpecialsjmodel>/pts}"/>
             <Label id="idlblK_CS" text="{i18n>CS_k}" />
-            <Input id="idK_CS"/>
+            <Input id="idK_CS" value="{oSpecialsjmodel>/k}"/>
             <Label id="idlbM_CS" text="{i18n>CS_m}" />
-            <Input id="idM_CS"/>
+            <Input id="idM_CS" value="{oSpecialsjmodel>/m}"/>
  
             <!-- <core:Title id="hedi6" text="Measured Voltage" />
             <Label id="idlblab" text="{i18n>AB}" />
@@ -84,15 +84,15 @@
      
             <core:Title id="idH6_CS" text="Header 6" />
             <Label id="idlblFusesAt_CS" text="{i18n>CS_FusesAt}" />
-            <Input id="idfusesAt_CS"/>
+            <Input id="idfusesAt_CS" value="{oSpecialsjmodel>/fusesAt}"/>
             <Label id="idlblSize_CS" text="{i18n>CS_Size}" />
-            <Input id="idSize_CS"/>
+            <Input id="idSize_CS" value="{oSpecialsjmodel>/size}"/>
             <Label id="idlblType_CS" text="{i18n>CS_Type}" />
-            <Input id="idType_CS"/>
+            <Input id="idType_CS" value="{oSpecialsjmodel>/typeCR}"/>
             <Label id="idlblCurve_CS" text="{i18n>CS_Curve}" />
-            <Input id="idCurve_CS"/>
+            <Input id="idCurve_CS" value="{oSpecialsjmodel>/curve}"/>
             <Label id="idlblVoltage_CS" text="{i18n>CS_Voltage}" />
-            <Input id="idVoltage_CS"/>
+            <Input id="idVoltage_CS" value="{oSpecialsjmodel>/voltage}"/>
            
               </form:content>
             </form:SimpleForm >
@@ -110,44 +110,44 @@
             <form:content>
             <core:Title id="heain2CPSR_CS" />
             <Label id="idRadiobutton_CS" />
-            <RadioButtonGroup id="idRadio1_CS" columns="5" class="sapUiTinyMarginTopBottom" >
-            <RadioButton id="iddeCoOwned_CS" text="{i18n>CS_DECoOwned}" />
+            <RadioButtonGroup id="idRadio1_CS" columns="5" >
+            <RadioButton id="iddeCoOwned_CS" text="{i18n>CS_DTEOwned}" />
             <RadioButton id="idCustomerOwned2_CS" text="{i18n>CS_CustomerOwned}" />
             <RadioButton id="idNone_CS" text="{i18n>CS_None}" />
             </RadioButtonGroup>  
             <Label id="idlblMFG_CS" text="{i18n>CS_Manufacturer}" />
-            <ComboBox id="idManufacturer_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idManufacturer_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MANUFACTURER'}] }" selectedKey="{oSpecialsjmodel>/manufacturer}">
               <core:Item id="idMFitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblModel_CS" text="{i18n>CS_Model}" />
-            <ComboBox id="idModel_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idModel_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MODEL'}] }" selectedKey="{oSpecialsjmodel>/model}">
               <core:Item id="idModelitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblCC_CS" text="{i18n>CS_ContinuousCurrent}" />
-            <ComboBox id="idCC_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idCC_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD CONTINOUS CURRENT'}] }" selectedKey="{oSpecialsjmodel>/continuousCurrent}">
               <core:Item id="idCCitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblLoadIntRat_CS" text="{i18n>CS_LoadIntRat}" />
-            <Input id="idLoadIntRat_CS"/>
+            <Input id="idLoadIntRat_CS" value="{oSpecialsjmodel>/loadIntRating}"/>
             
  
             <core:Title id="eading3_CS" />
             <Label id="idlblKAMomentary_CS" text="{i18n>CS_KAMomentary}" />
-            <Input id="idKAMomentary_CS"/>
+            <Input id="idKAMomentary_CS" value="{oSpecialsjmodel>/kAMomentaryLBD}"/>
             <Label id="idlblType2_CS" text="{i18n>CS_Type2}" />
-            <ComboBox id="idType2_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idType2_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD TYPE'}] }" selectedKey="{oSpecialsjmodel>/typeLBD}">
               <core:Item id="idType2item_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblFaultClosing_CS" text="{i18n>CSFaultClosing}" />
-            <Input id="idFaultClosing_CS"/>
+            <Input id="idFaultClosing_CS" value="{oSpecialsjmodel>/faultClosing}"/>
             <Label id="idlblBil_CS" text="{i18n>CS_Bil}" />
-            <Input id="idBil_CS"/>
+            <Input id="idBil_CS" value="{oSpecialsjmodel>/bilLBD}"/>
             <Label id="idlblSV_CS" text="{i18n>CS_ServiceVoltage}" />
-            <ComboBox id="idSV_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idSV_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD SERVICE VOLTAGE'}] }" selectedKey="{oSpecialsjmodel>/serviceVoltage}">
               <core:Item id="idSV2item_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlbl60Cyc_CS" text="{i18n>CS60Cyc}" />
-            <Input id="id60Cyc_CS"/>  
+            <Input id="id60Cyc_CS" value="{oSpecialsjmodel>/CycWithstand60}"/>  
             </form:content>
             </form:SimpleForm >
             </x:blocks>
@@ -181,13 +181,13 @@
                   <ComboBox id="idTsize_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
                     <core:Item id="idSizeitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                   </ComboBox>
-                  <ComboBox id="idTType_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                  <ComboBox id="idTType_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
                     <core:Item id="idTypeitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                   </ComboBox>
-                  <ComboBox id="idTCurve_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                  <ComboBox id="idTCurve_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE CURVE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
                     <core:Item id="idCurveitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                   </ComboBox>
-                  <ComboBox id="idTVoltage_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                  <ComboBox id="idTVoltage_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE VOLTAGE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
                     <core:Item id="idCVoltageitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                   </ComboBox>
                 </cells>
@@ -215,16 +215,16 @@
             <RadioButton id="idsf6_CS" text="{i18n>CS_Sf6}" />
             </RadioButtonGroup>
             <Label id="idlblCBM_CS" text="{i18n>CS_CBM}" />
-            <Input id="idCBM_CS"/>
+            <Input id="idCBM_CS" value="{oSpecialsjmodel>/circuitBreakerMake}"/>
             <Label id="idlblSNo_CS" text="{i18n>CS_Serialno}" />
-            <Input id="idSerialNo_CS"/>
-            <Label id="idlblKAMome_CS" text="{i18n>CS_KAMomenetary}" />
+            <Input id="idSerialNo_CS" value="{oSpecialsjmodel>/serialNo}"/>
+            <Label id="idlblKAMome_CS" text="{i18n>CS_KAMomentary}" />
             <ComboBox id="idKAMome_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
               <core:Item id="idKAMomeitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             
             <Label id="idlblAmps_CS" text="{i18n>CS_Amps}" />
-            <ComboBox id="idAmps_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idAmps_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TYPE'}] }" selectedKey="{oSpecialsjmodel>/typeCB}">
               <core:Item id="idAmpsitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             
@@ -233,7 +233,7 @@
             <Label id="idCB1_CS" />
                  
             <RadioButtonGroup id="grop5CPSR_CS" columns="5" class="sapUiTinyMarginTopBottom" >          
-            <RadioButton id="idDecoOwned_CS" text="{i18n>CS_DECoOwned}" />
+            <RadioButton id="idDecoOwned_CS" text="{i18n>CS_DTEOwned}" />
             <RadioButton id="idCustomer_CS" text="{i18n>CS_CustomerOwned}" />
             </RadioButtonGroup>          
             <Label id="idlblType4_CS" text="{i18n>CS_Type4}" />
@@ -241,7 +241,7 @@
               <core:Item id="idType4item_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblFaultDuty_CS" text="{i18n>CS_FaultDuty}" />
-            <ComboBox id="idFaultDuty_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+            <ComboBox id="idFaultDuty_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: ''}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
               <core:Item id="idFaultDutyitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
             </ComboBox>
             <Label id="idlblBil2_CS" text="{i18n>CS_Bil2}" />
@@ -263,8 +263,8 @@
               <headerToolbar>
                 <Toolbar id="_IDGenToolbar1">
                 <RadioButtonGroup id="idOwnedGrp" columns="4" >          
-                  <RadioButton id="idDteOwned_CS" text="DTE Owned" />
-                  <RadioButton id="idCustomerOwned_CS" text="Customer Owned" />
+                  <RadioButton id="idDteOwned_CS" text="{i18n>CS_DTEOwned}" />
+                  <RadioButton id="idCustomerOwned_CS" text="{i18n>CS_CustomerOwned}" />
                 </RadioButtonGroup>  
                 </Toolbar>      
             </headerToolbar>

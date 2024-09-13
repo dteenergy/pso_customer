@@ -1,0 +1,252 @@
+<core:FragmentDefinition
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:u="sap.m.upload"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.f"
+    xmlns:svm="sap.ui.comp.smartvariants"
+>
+    <Table
+        sticky="ColumnHeaders,HeaderToolbar,InfoToolbar"
+        id="idCustomerListTable"
+        items="{oSearchCustomerJModel>/CustomersData}"
+        growing="true"
+        growingThreshold="15"
+        alternateRowColors="true"
+    >
+        <headerToolbar>
+            <Toolbar id="_IDGenToolbar_SC">
+                <content>
+                    <Label
+                        id="idlblNoofRec"
+                        text="{i18n>noOfRecords}"
+                    />
+                    <Text id="idNoofRec" />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                    <SearchField
+                        id="idValidReportsSearch"
+                        width="30%"
+                        class="sapUiSmallMargin"
+                        liveChange="handleTableSearch"
+                        placeholder="{i18n>searchfieldText1}"
+                    />
+                    <Button
+                        id="idValidationReportsTableFilter"
+                        text=""
+                        type="Default"
+                        icon="sap-icon://filter"
+                        iconFirst="true"
+                        width="auto"
+                        enabled="true"
+                        visible="true"
+                        iconDensityAware="false"
+                        press="onTableColumnFilterButtonPress"
+                        tooltip="{i18n>columnFilters}"
+                    />
+                    <Button
+                        id="idValidationReportsTableFilterRemove"
+                        text=""
+                        type="Default"
+                        icon="sap-icon://decline"
+                        iconFirst="true"
+                        width="auto"
+                        enabled="true"
+                        visible="true"
+                        iconDensityAware="false"
+                        press="onValidReportsColumnFilterRemove"
+                        tooltip="{i18n>removeColumnFilters}"
+                    />
+                    <Button
+                        id="idTableSort"
+                        text=""
+                        type="Default"
+                        icon="sap-icon://sort"
+                        iconFirst="true"
+                        width="auto"
+                        enabled="true"
+                        visible="true"
+                        iconDensityAware="false"
+                        tooltip="{i18n>Sort_records}"
+                        press="onValidReportsTableSorting"
+                    />
+                    <Button
+                        id="idValidationReportsTableExport"
+                        text=""
+                        type="Default"
+                        icon="sap-icon://excel-attachment"
+                        iconFirst="true"
+                        width="auto"
+                        enabled="true"
+                        visible="true"
+                        iconDensityAware="false"
+                        tooltip="{i18n>Download_record}"
+                        press="onValidReportsTableExport"
+                    />
+                </content>
+            </Toolbar>
+        </headerToolbar>
+        <columns>
+            <Column
+                id="_IDGenColumn15"
+                minScreenWidth="1000px"
+                width="3rem"
+                demandPopin="true"
+                hAlign="Begin"
+            />
+
+            <Column
+                id="_IDGenColumn2"
+                minScreenWidth="1000px"
+                width="15rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText2"
+                    text="{i18n>Fcutname}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn4"
+                minScreenWidth="1000px"
+                width="14rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText4"
+                    text="{i18n>FStreetAdd}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn12"
+                minScreenWidth="1000px"
+                width="14rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText12"
+                    text="{i18n>Fprimeryrvrep}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn14"
+                minScreenWidth="1000px"
+                width="12rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText14"
+                    text="{i18n>Fsustatoin}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn9"
+                minScreenWidth="1000px"
+                width="12rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText9"
+                    text="{i18n>Fsrvcenter}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn10"
+                minScreenWidth="1000px"
+                width="12rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText10"
+                    text="{i18n>Fcableno}"
+                />
+            </Column>
+
+            <Column
+                id="_IDGenColumn11"
+                minScreenWidth="1000px"
+                width="10rem"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <Text
+                    id="_IDGenText11"
+                    text="{i18n>Fpswidigram}"
+                />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem
+                id="_IDGenColumnListItem1"
+                type="Navigation"
+                press="handleSelectionChange"
+            >
+                <cells>
+                    <core:Icon
+                        size="22px"
+                        src="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setIcon'}"
+                        id="_IDGenIcon1"
+                        color="{path:'oSearchCustomerJModel>superior_flag', formatter:'com.pso.customerattribute.utils.Formatter.setColor'}"
+                    />
+
+                    <ObjectIdentifier
+                        id="_IDGenObjectIdentifier1"
+                        title="{oSearchCustomerJModel>cust_name}"
+                        text="{= 'Billing Name: ' + ${oSearchCustomerJModel>mail_name} + '\nBilling Entity: ' + ${oSearchCustomerJModel>conn_obj}}"
+                    />
+                    <ObjectIdentifier
+                        id="_IDGenObjectIdentifier2"
+                        title="{oSearchCustomerJModel>street_name}"
+                        text="{= 'Street No: ' + ${oSearchCustomerJModel>street_no} + '\nCity: ' + ${oSearchCustomerJModel>city}
+                                    + '\nZip Code: ' + ${oSearchCustomerJModel>zip_code}}"
+                    />
+
+                    <ObjectIdentifier
+                        id="_IDGenObjectIdentifier4"
+                        title="{oSearchCustomerJModel>psr}"
+                        text="{= 'Account Rep: ' + ${oSearchCustomerJModel>acc_rep}}"
+                    />
+
+                    <ObjectIdentifier
+                        id="_IDGenObjectIdentifier5"
+                        title="{oSearchCustomerJModel>sub_station}"
+                        text="{= 'Circuit: ' + ${oSearchCustomerJModel>circuit}}"
+                    />
+                    <ObjectIdentifier
+                        id="IDGenText8"
+                        title="{oSearchCustomerJModel>srv_centre}"
+                        text="{= 'Generation: ' + ${oSearchCustomerJModel>generation}}"
+                    />
+
+                    <!-- <Text
+                                    id="IDGenText8"
+                                    text="{oSearchCustomerJModel>srv_centre}"
+                                /> -->
+
+                    <ObjectIdentifier
+                        id="_IDGenObjectIdentifier3"
+                        title="{oSearchCustomerJModel>cable_no}"
+                        text="{= 'Sketch No: ' + ${oSearchCustomerJModel>sketch_no}  + '\nNo of Lines: ' + ${oSearchCustomerJModel>no_of_lines}}"
+                    />
+
+                    <Text
+                        id="IDGenText10"
+                        text="{oSearchCustomerJModel>psw}"
+                    />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

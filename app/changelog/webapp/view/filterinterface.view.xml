@@ -1,0 +1,53 @@
+<mvc:View xmlns:f="sap.f" controllerName="com.pso.changelog.controller.filterinterface"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:mdct="sap.ui.mdc.table"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <f:DynamicPage>
+            <f:header>
+                <f:DynamicPageHeader >
+                    <fb:FilterBar class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true" >
+                                <fb:control>
+                                    <MultiInput id="idApprBy" valueHelpRequest="onValueHelpApprovedBy" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Connection Object" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:DynamicPageHeader>
+            </f:header>
+            <f:content>
+                <Table id="idTable" items="{/PSOSpecials}" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{i18n>title}">
+                    <columns>
+                        <Column>
+                            <Label text="Approved By"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Connection Object"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Approved On"></Label>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation">
+                            <cells>
+                                <Text text="{approvedBy}"></Text>
+                                <Text text="{connection_object}"></Text>
+                                <Text text="{approvedOn}"></Text>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </f:content>
+        </f:DynamicPage>
+    </Page>
+</mvc:View>

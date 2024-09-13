@@ -35,7 +35,7 @@
                     </layoutData>
                   </Input>
                 <Label id="idlblStreetAdd_CC" text="{i18n>streeetadd}" required="true"/>
-                <Input id="idStreetAdd_CC"  value="{oCustomerAttributesJModel>/street_name}" maxLength="60">
+                <Input id="idStreetAdd_CC"  value="{oCustomerAttributesJModel>/street_name}" liveChange="onCapitalizeFirtsLater" maxLength="60">
                 <layoutData>
                       <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -48,8 +48,8 @@
           </x:ObjectPageSubSection>
         </x:subSections>
       </x:ObjectPageSection>
-
-      <x:ObjectPageSection id="idPageSecEmerContact_CC" titleUppercase="false" title="{i18n>emergency_contact}" visible="true">
+ 
+      <x:ObjectPageSection id="idPageSecEmerContact_CC" titleUppercase="false" title="{i18n>emergency_contact}" >
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecEmerContact_CC" titleUppercase="false">
             <x:blocks>
@@ -101,7 +101,7 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblSrvCecenter_CC" text="{i18n>servicecenter}" />
-                  <ComboBox id="idSrvCenter_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                  <ComboBox id="idSrvCenter_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_center}">
                     <core:Item id="idSCItem_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC17" span="XL5 L5 M12 S12" />
@@ -246,13 +246,13 @@
                   </Input>
                   
                   <Label id="idlblComments_CC" text="Comments"/>
-                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225">
+                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" valueLiveUpdate="true" rows="6" maxLength="225">
                   <layoutData>
                       <l:GridData id="idGridData_DC24" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </TextArea>
     
-                  <core:Title id="_IDGenTitle2" text=""/>
+                  <core:Title id="_IDGenTitle2" text=""/> 
                    <Label id="idlblDCPLIND_CC2"/>
                   <RadioButtonGroup id="idDCPLIND_CC2" columns="5" select="onDCPLINDSelect2" >
                     <RadioButton id="DC_CC2" text="DC" />
@@ -260,7 +260,7 @@
                     <RadioButton id="IND_CC2" text="IND"/>
                   </RadioButtonGroup>
                   <Label id="idlblTrans_CC2" text="{i18n>trans}" />
-                  <Input id="idTrans_CC2" maxLength="15" value="{oCustomerAttributesJModel>/indus_cust}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
+                  <Input id="idTrans_CC2" maxLength="15" value="{oCustomerAttributesJModel>/indus_cust2}" visible="{= ${oCustomerAttributesJModel>/na2} === 'X' ? true : false}">
                     <layoutData>
                       <l:GridData id="idGridData2_CC12" span="XL5 L5 M12 S12" />
                     </layoutData>  
@@ -339,7 +339,7 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblComments2_CC" text="Comments"/>
-                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" rows="3" maxLength="225">
+                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" rows="6" maxLength="225">
                   <layoutData>
                       <l:GridData id="idGridData2_DC25" span="XL5 L5 M12 S12" />
                     </layoutData>

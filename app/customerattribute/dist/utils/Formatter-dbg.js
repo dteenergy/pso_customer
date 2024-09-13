@@ -10,7 +10,7 @@ com.pso.customerattribute.utils.Formatter = {
 
     setColor:function(status){
         if(status ==="X"){
-            return "orange";
+            return "#007c91";
         }
     }
 };

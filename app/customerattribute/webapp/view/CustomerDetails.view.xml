@@ -36,10 +36,9 @@
                 <Button
                     id="idButtonCreateServiceTicket"
                     type="Accept"
-                    text="Create Service Ticket"
+                    text="POO"
                     icon="sap-icon://create"
-                    press="onCreateServiceTicket"
-                    visible="true"
+                    press="onCreateServiceTicket"                    
                 /> 
                  <Button
                     id="idButtonOpentext"
@@ -48,6 +47,7 @@
                     icon="sap-icon://chain-link"
                     press="launchOpentextURL"
                     visible="true"
+                    enabled="false"
                 />
                 <ToolbarSpacer id="_IDGenToolbarSpacer01_CD" />
 
@@ -58,6 +58,7 @@
                     icon="sap-icon://create"
                     press="createCustomerDetails"
                     visible="false"
+                    
                 />
                 <!-- <Button
                     id="idButtonView"
@@ -74,6 +75,7 @@
                     icon="sap-icon://edit"
                     press="onEditCustomerAttribute"
                     visible="false"
+                   
                 />
                 <Button
                     id="_IDGenButtonCreateSp"
@@ -81,15 +83,17 @@
                     text="Create Specials"
                     icon="sap-icon://create"
                     press="onCreateSpecials"
-                    visible="true"
+                    visible="false"
+                   
                 />  
                 <Button
                     id="_IDGenButtonDisplaySp"
                     type="Default"
                     text="Display Specials"
                     icon="sap-icon://display"
-                     press="onDiplaySpecials"
-                    visible="true"
+                    press="onDiplaySpecials"
+                    visible="false"
+                   
                 />
             </OverflowToolbar>
         </footer>
