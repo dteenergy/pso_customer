@@ -50,6 +50,6 @@ Content-Type: application/json
             }}
 
 
-###Read Data for recordPOST Data to DB with action import
-GET   {{service}}/onVerifyRecordStatus(recordID='bc5c7a5c-4513-49f6-b87b-48c9a4228d05')
+###Read Data for recordPOST Data to DB with action import //'5ba89a2b-db78-42e2-8a00-a784cd176fab'
+GET {{service}}/onVerifyRecordStatus(recordID=f2a94256-e290-4bdf-be4d-49ae2b0bc3a1)
 

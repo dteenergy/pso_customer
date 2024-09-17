@@ -49,7 +49,7 @@
                                 <form:content>
                                     <core:Title
                                         id="hading1_DS"
-                                        text="Header 1"
+                                        
                                     />
 
                                     <Label
@@ -74,7 +74,7 @@
 
                                     <core:Title
                                         id="idH2_DS"
-                                        text="Header 2"
+                                        
                                     />
                                     <Label
                                         id="idlblWorkDesc_DS"
@@ -102,7 +102,7 @@
 
                                     <core:Title
                                         id="idheadi3_DS"
-                                        text="Header 3"
+                                        
                                     />
                                     <Label
                                         id="idlblCableDesc_DS"
@@ -122,7 +122,7 @@
 
                                     <core:Title
                                         id="idMeasure_DS"
-                                        text="Measure"
+                                        
                                     />
                                     <Label
                                         id="idlblCts_DS"
@@ -161,7 +161,7 @@
 
                                     <core:Title
                                         id="idH6_DS"
-                                        text="Header 6"
+                                        
                                     />
                                     <Label
                                         id="idlblFusesAt_DS"
@@ -294,64 +294,6 @@
                 </x:subSections>
             </x:ObjectPageSection>
 
-            <x:ObjectPageSection
-                id="idPageSectionFusesAtLBD_DS"
-                titleUppercase="false"
-                title="{i18n>CS_Fuses_At_LBD}"
-                visible="true"
-            >
-                <x:subSections>
-                    <x:ObjectPageSubSection
-                        id="idFusesAtLBDSubSection_DS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <Table
-                                id="idTFusesAtLb_DS"
-                                alternateRowColors="true"
-                                showNoData="true"
-                            >
-                                <columns>
-                                    <Column id="idTsize1_DS">
-                                        <Label
-                                            id="idlblsize_DS"
-                                            text="{i18n>CS_Tsize}"
-                                        />
-                                    </Column>
-                                    <Column id="idtType_DS">
-                                        <Label
-                                            id="idlbltype3_DS"
-                                            text="{i18n>CS_Ttype}"
-                                        />
-                                    </Column>
-                                    <Column id="idTcurve_DS">
-                                        <Label
-                                            id="idlblcurve2_DS"
-                                            text="{i18n>CS_Tcurve}"
-                                        />
-                                    </Column>
-                                    <Column id="idTvoltage_DS">
-                                        <Label
-                                            id="idlblvoltage2_DS"
-                                            text="{i18n>CS_Tvoltage}"
-                                        />
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem id="cll6CPSR_DS">
-                                        <cells>
-                                            <Text id="idTsize_DS" />
-                                            <Text id="idTType_DS" />
-                                            <Text id="idTCurve_DS" />
-                                            <Text id="idTVoltage_DS" />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </x:blocks>
-                    </x:ObjectPageSubSection>
-                </x:subSections>
-            </x:ObjectPageSection>
 
             <x:ObjectPageSection
                 id="idPageSectionCB_DS"
@@ -460,6 +402,65 @@
             </x:ObjectPageSection>
 
             <x:ObjectPageSection
+                id="idPageSectionFusesAtLBD_DS"
+                titleUppercase="false"
+                title="{i18n>CS_Fuses_At_LBD}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idFusesAtLBDSubSection_DS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <Table
+                                id="idTFusesAtLb_DS"
+                                alternateRowColors="true"
+                                showNoData="true"
+                            >
+                                <columns>
+                                    <Column id="idTsize1_DS">
+                                        <Label
+                                            id="idlblsize_DS"
+                                            text="{i18n>CS_Tsize}"
+                                        />
+                                    </Column>
+                                    <Column id="idtType_DS">
+                                        <Label
+                                            id="idlbltype3_DS"
+                                            text="{i18n>CS_Ttype}"
+                                        />
+                                    </Column>
+                                    <Column id="idTcurve_DS">
+                                        <Label
+                                            id="idlblcurve2_DS"
+                                            text="{i18n>CS_Tcurve}"
+                                        />
+                                    </Column>
+                                    <Column id="idTvoltage_DS">
+                                        <Label
+                                            id="idlblvoltage2_DS"
+                                            text="{i18n>CS_Tvoltage}"
+                                        />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="cll6CPSR_DS">
+                                        <cells>
+                                            <Text id="idTsize_DS" />
+                                            <Text id="idTType_DS" />
+                                            <Text id="idTCurve_DS" />
+                                            <Text id="idTVoltage_DS" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
+
+            <x:ObjectPageSection
                 id="idPageSectionTrans_DS"
                 titleUppercase="false"
                 title="{i18n>CS_Transformer}"
@@ -562,11 +563,74 @@
                                         </cells>
                                     </ColumnListItem>
                                 </items>
+                                
                             </Table>
                         </x:blocks>
                     </x:ObjectPageSubSection>
                 </x:subSections>
             </x:ObjectPageSection>
+
+            <x:ObjectPageSection id="idPageSection_DS" titleUppercase="false" title="{i18n>CS_other}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idDSSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <form:SimpleForm id="reqesform_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+            <form:content>
+            <core:Title id="idTitle_DS1" />
+            <Label id="idmeasure_DS" />
+
+            <Label id="idlblAB_DS" text="{i18n>CS_AB}" />
+            <Text id="idAB_DS" text="{oSpecialsjmodel>/AB}"/>
+            <Label id="idlblBC_DS" text="{i18n>CS_BC}" />
+            <Text id="idBC_DS" text="{oSpecialsjmodel>/BC}"/>
+            <Label id="idlblCA_DS" text="{i18n>CS_CA}" />
+            <Text id="idCA_DS" text="{oSpecialsjmodel>/CA}"/>
+            <Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
+            <Text id="idAN_DS" text="{oSpecialsjmodel>/AN}"/>
+            <Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
+            <Text id="idBN_DS" text="{oSpecialsjmodel>/BN}"/>
+            <Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
+            <Text id="idCN_DS" text="{oSpecialsjmodel>/CN}"/>
+            <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
+            <TextArea id="idcomment_DS" growing="true" value="{oCustomerAttributesJModel>/comment}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </TextArea> 
+            <Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
+            <Text id="idCNpsw_DS" text="{oSpecialsjmodel>/psw}"/>
+            
+ 
+            <core:Title id="heding5CPSR_DS1" /> 
+                    
+            <Label id="idlblGround_DS" text="{i18n>CS_ground}" />     
+            <Text id="idground_DS" text="{oSpecialsjmodel>/ground}"/>
+            <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
+            <Text id="idmethod_DS" text="{oSpecialsjmodel>/method}"/>
+            <Label id="idlbldate_DS" text="{i18n>CS_date}" />     
+            <Text id="iddate_DS" text="{oSpecialsjmodel>/date}"/>
+            <Label id="idlblverified_DS" text="{i18n>CS_verified}" />     
+            <Text id="idverified_DS" text="{oSpecialsjmodel>/verified}"/>
+            <Label id="idlblservice_DS" text="{i18n>CS_service}" />     
+            <Text id="idservice_DS" text="{oSpecialsjmodel>/service}"/>
+            <Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
+            <Text id="idCNTO_DS" text="{oSpecialsjmodel>/TO}"/>
+            <Label id="idlblrep_DS" text="{i18n>CS_rep}" />     
+            <Text id="idCNrep_DS" text="{oSpecialsjmodel>/rep}"/>
+            <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
+            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approveby}"/>
+            <Label id="idlblapprovedate_DS" text="{i18n>CS_approvedate}" />     
+            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approvedate}"/>
+
+            </form:content>
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+
         </x:sections>
     </x:ObjectPageLayout>
 </core:FragmentDefinition>

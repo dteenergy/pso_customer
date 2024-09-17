@@ -10,6 +10,10 @@
 	xmlns:vhfb="sap.ui.mdc.filterbar.vh">
 
 	<ValueHelpDialog title="Approved By" id="idVhStoreDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="approvedBy" >
+	<filterBar>
+	<fb:FilterBar advancedMode="true">
+	</fb:FilterBar>
+	</filterBar>
 	</ValueHelpDialog>
 
 </core:FragmentDefinition>

@@ -22,10 +22,9 @@
         <x:subSections>
           <x:ObjectPageSubSection id="idCustomerSubSection_DC" titleUppercase="false">
             <x:blocks>
-              <form:SimpleForm id="idCustomerInfoReqForm_DC" editable="true" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-
+              <form:SimpleForm id="idCustomerInfoReqForm_DC" editable="true" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12">
               <form:content> 
-                <!-- <core:Title id="vacation-timerange-heading1" /> -->
+                <core:Title id="idCTitleCustomerInfoReqForm1_DC" />
                 <Label id="idlblCustomerName_DC" text="{i18n>customername}"/>
                 <Text id="idCustomerName_DC"  text="{oCustomerAttributesJModel>/cust_name}">
                 <layoutData>
@@ -42,8 +41,6 @@
                       <l:GridData id="idGridData_DC2" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </Text>
-
-                <!-- <core:Title id="vacation-timerange-hea" /> -->
                 <Label id="idlblStreetAdd_DC" text="{i18n>streeetadd}"/>
                 <Text id="idStreetAdd_DC"  text="{oCustomerAttributesJModel>/street_name}">
                 <layoutData>
@@ -53,6 +50,26 @@
                 <Label id="idlblDemolished_site_CD" text="{i18n>Demolished_site}"/>
                 <CheckBox id="idDemolished_site_CD" select="onDemolishedChecked" selected="{= ${oCustomerAttributesJModel>/demo_site} === 'X' ? true : false}" enabled="false" />
                 
+                <core:Title id="idCTitleCustomerInfoReqForm2_DC" />
+                <Label id="idlblEmerConName_DC" text="{i18n>emerencyconname}"/>
+                  <Text id="idEmerConName_DC" text="{oCustomerAttributesJModel>/emer_cont_name}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC4" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblEmerTitle_DC" text="{i18n>emergencytitle}" />
+                  <Text id="idEmerTitle_DC" text="{oCustomerAttributesJModel>/emer_title}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC5" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  <Label id="idlblEmerPhone_DC" text="{i18n>emerencyphone}" />
+                  <Text id="idEmerPhone_DC" text="{oCustomerAttributesJModel>/emer_phone}">
+                    <layoutData>
+                      <l:GridData id="idGridData_DC6" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
               </form:content>
 
             </form:SimpleForm >
@@ -61,7 +78,7 @@
         </x:subSections>
       </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" >
+      <!-- <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" >
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecEmerContact_DC" titleUppercase="false">
             <x:blocks>
@@ -90,14 +107,15 @@
             </x:blocks>
           </x:ObjectPageSubSection>
         </x:subSections>
-      </x:ObjectPageSection>
+      </x:ObjectPageSection> -->
 
       <x:ObjectPageSection id="idObjectPageSecH2_DC" titleUppercase="false" title="{i18n>other_cust_details}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubPageSecH2_DC" titleUppercase="false">
             <x:blocks>
-              <form:SimpleForm id="idReqFormH2_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+              <form:SimpleForm id="idReqFormH2_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
+                <core:Title id="_IDTitleReqFormH1_DC" text=""/>
                  <Label id="idlblNoOfLines_DC" text="{i18n>numberoflines}" />
                   <Text id="idNoOfline_DC" text="{oCustomerAttributesJModel>/no_of_lines}">
                     <layoutData>
@@ -136,6 +154,41 @@
                     </layoutData>
                     </Text>
                   <Text id="idkW_DC" text="kW" />
+
+                  <core:Title id="_IDTitleReqFormH2_DC" text=""/>
+                  <Label id="idlblCreatedBy_DC" text="{i18n>created_by}" /> 
+                  <Text id="idCreatedByDCC" text="{oCustomerAttributesJModel>/created_by}">
+                  <layoutData>
+                      <l:GridData id="idGridDataCreatedby_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  
+                  <Label id="idlblCreatedOn_DC" text="{i18n>create_on}" /> 
+                  <Text id="idCreatedOn_DC" text="{oCustomerAttributesJModel>/created_det}">
+                  <layoutData>
+                      <l:GridData id="idGridDataCreatedon_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                  <Label id="idlblModifiedBy_DC" text="{i18n>modified_by}" /> 
+                  <Text id="idModifiedBy_DC" text="{oCustomerAttributesJModel>/modified_by}">
+                  <layoutData>
+                      <l:GridData id="idGridDataModifiedby_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                  <Label id="idlblModifiedOn_DC" text="{i18n>modified_on}" /> 
+                  <Text id="idModifiedOn_DC" text="{oCustomerAttributesJModel>/modified_det}">
+                  <layoutData>
+                      <l:GridData id="idGridDataModifiedon_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text> 
+                  <Label id="idlblBillingEntity_DC" text="{i18n>billing_entity}" /> 
+                  <Text id="idBillingEntity_DC" text="{oCustomerAttributesJModel>/conn_obj}">
+                  <layoutData>
+                      <l:GridData id="idGridBillingEntity_DC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text> 
                 </form:content>
               </form:SimpleForm >
             </x:blocks>
@@ -184,7 +237,7 @@
                     </layoutData>
                     </Text>
                     <Link id="idCircuitDoc_idlink"
-				                text="Open Documentum"
+				                text="{i18n>open_circuit_doc}"
 				                press="onPressCircuitDocIdLink"/>
                   <Label id="idlblSketchNo_DC" text="{i18n>sketchno}" />
                   <Text id="idSketchNo_DC" text="{oCustomerAttributesJModel>/sketch_no}">
@@ -236,7 +289,7 @@
                     </layoutData>
                   </Text>
                   <Link id="idpswdocidlink"
-				                text="Open Documentum"
+				                text="{i18n>open_psw_doc}"
 				                press="onPressPswDocId"/>
                   <Label id="idlblComments_DC" text="Comments"/>
                   <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" valueLiveUpdate="true" editable="false"  rows="6" maxLength="225">
@@ -281,7 +334,7 @@
                     </layoutData>
                     </Text>
                     <Link id="idCircuitDoc_idlink2"
-				                text="Open Documentum"
+				                text="{i18n>open_circuit_doc}"
 				                press="onPressCircuitDocIdLink2"/>
                   <Label id="idlblSketchNo2_DC" text="{i18n>sketchno}" />
                   <Text id="idSketchNo2_DC" text="{oCustomerAttributesJModel>/sketch_no2}">
@@ -334,7 +387,7 @@
                     </layoutData>
                   </Text>
                   <Link id="idpswdocidlink2"
-				                text="Open Documentum"
+				                text="{i18n>open_psw_doc}"
 				                press="onPressPswDocId2"/>
                   <Label id="idlblComments2_DC" text="Comments"/>
                   <TextArea id="idComents2_DC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">

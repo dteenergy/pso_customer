@@ -33,3 +33,31 @@
     background-color: #4A412A;
 } */
 
+.sapUiSizeCompact .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 0.3rem !important;
+    line-height: 0.1rem !important;
+}
+
+.sapUiFormResGrid>div {
+    padding: 0.1rem 0.1rem !important;
+    box-sizing: border-box !important;
+}
+.sapUiFormResGridCont {
+    padding-bottom: 0.1rem !important;
+}
+
+.TicketToolbarstyle{
+    background-color: #75d7e8 !important;
+}
+.TicketToolbarstyle .sapMLabel {
+    color: #383b3b !important;
+    font-size: .875rem;
+    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: text;
+    overflow: hidden;
+    box-sizing: border-box;
+    --_sap_m_Label_ReservedSpace: 0%;
+}

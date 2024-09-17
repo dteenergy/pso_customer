@@ -37,7 +37,7 @@
   "cds": {
     "requires": {
      "uaa": {
-        "kind": "mocked"
+        "kind": "dummy"
       },
       "db": "hana",
       "connectivity": true,

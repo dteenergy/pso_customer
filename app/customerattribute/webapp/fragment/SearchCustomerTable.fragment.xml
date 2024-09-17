@@ -27,7 +27,7 @@
                     <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                     <SearchField
                         id="idValidReportsSearch"
-                        width="30%"
+                        width="20%"
                         class="sapUiSmallMargin"
                         liveChange="handleTableSearch"
                         placeholder="{i18n>searchfieldText1}"

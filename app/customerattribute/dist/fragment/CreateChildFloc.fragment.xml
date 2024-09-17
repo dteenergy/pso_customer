@@ -19,9 +19,9 @@
         <x:subSections>
           <x:ObjectPageSubSection id="idCustomerSubSection_CC" titleUppercase="false">
             <x:blocks>
-               <form:SimpleForm id="idCustomerInfoReqForm_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12" >
+               <form:SimpleForm id="idCustomerInfoReqForm_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" >
               <form:content>
-                <!-- <core:Title id="_IDGenTitle1" text=""/> -->
+                <core:Title id="_IDGenTitle1_CC" text=""/>
                 <Label id="idlblCustomerName_CC" text="{i18n>customername}" required="true"/>
                 <Input id="idCustomerName_CC"  value="{oCustomerAttributesJModel>/cust_name}" maxLength="40">
                 <layoutData>
@@ -42,6 +42,27 @@
                 </Input>
                 <Label id="idlblDemolished_site_CC" text="{i18n>Demolished_site}"/>
                 <CheckBox id="idDemolished_site_CC" select="onDemolishedChecked" selected="{= ${oCustomerAttributesJModel>/demo_site} === 'X' ? true : false}" /> 
+                
+                <core:Title id="_IDGenTitle2_CC" text=""/>
+                <Label id="idlblEmerConName_CC" text="{i18n>emerencyconname}"/>
+                  <Input id="idEmerConName_CC" value="{oCustomerAttributesJModel>/emer_cont_name}" maxLength="40">
+                    <layoutData>
+                      <l:GridData id="idGridData_CC4" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="idlblEmerTitle_CC" text="{i18n>emergencytitle}" />
+                  <Input id="idEmerTitle_CC" value="{oCustomerAttributesJModel>/emer_title}" maxLength="4">
+                    <layoutData> 
+                      <l:GridData id="idGridData_CC5" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="idlblEmerPhone_CC" text="{i18n>emerencyphone}" />
+                  <Input id="idEmerPhone_CC" value="{oCustomerAttributesJModel>/emer_phone}" maxLength="30">
+                    <layoutData>
+                      <l:GridData id="idGridData_CC6" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+
               </form:content>
             </form:SimpleForm >
             </x:blocks>
@@ -49,7 +70,7 @@
         </x:subSections>
       </x:ObjectPageSection>
  
-      <x:ObjectPageSection id="idPageSecEmerContact_CC" titleUppercase="false" title="{i18n>emergency_contact}" >
+      <!-- <x:ObjectPageSection id="idPageSecEmerContact_CC" titleUppercase="false" title="{i18n>emergency_contact}" >
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecEmerContact_CC" titleUppercase="false">
             <x:blocks>
@@ -78,15 +99,15 @@
             </x:blocks>
           </x:ObjectPageSubSection>
         </x:subSections>
-      </x:ObjectPageSection>
+      </x:ObjectPageSection> -->
 
       <x:ObjectPageSection id="idObjectPageSecH2_CC" titleUppercase="false" title="{i18n>other_cust_details}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubPageSecH2_CC" titleUppercase="false">
             <x:blocks>
-              <form:SimpleForm id="idReqFormH2_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+              <form:SimpleForm id="idReqFormH_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
-
+                  <core:Title id="_IDTitleReqFormH1_CC" text=""/>
                   <Label id="idlblNoOfLines_CC" text="{i18n>numberoflines}" />
                   <ComboBox id="idNoOfline_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'NUMBER OF LINES'}] }" selectedKey="{oCustomerAttributesJModel>/no_of_lines}">
                     <core:Item id="_IDNolineItem1_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
@@ -134,7 +155,43 @@
                       <l:GridData id="idGridData_CC23" span="XL5 L5 M12 S12" />
                     </layoutData>
                     </Input>
-                  <Text id="idkW_CC" text="/kW" />
+                  <Text id="idkW_CC" text="kW" />
+
+                  <core:Title id="_IDTitleReqFormH2_CC" text=""/>
+                  <Label id="idlblCreatedBy_CC" text="{i18n>created_by}" /> 
+                  <Text id="idCreatedBy_CC" text="{oCustomerAttributesJModel>/created_by}">
+                  <layoutData>
+                      <l:GridData id="idGridDataCreatedby_CC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+                  
+                  <Label id="idlblCreatedOn_CC" text="{i18n>create_on}" /> 
+                  <Text id="idCreatedOn_CC" text="{oCustomerAttributesJModel>/created_det}">
+                  <layoutData>
+                      <l:GridData id="idGridDataCreatedon_CC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                  <Label id="idlblModifiedBy_CC" text="{i18n>modified_by}" /> 
+                  <Text id="idModifiedBy_CC" text="{oCustomerAttributesJModel>/modified_by}">
+                  <layoutData>
+                      <l:GridData id="idGridDataModifiedby_CC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
+
+                  <Label id="idlblModifiedOn_CC" text="{i18n>modified_on}" /> 
+                  <Text id="idModifiedOn_CC" text="{oCustomerAttributesJModel>/modified_det}">
+                  <layoutData>
+                      <l:GridData id="idGridDataModifiedon_CC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text> 
+
+                  <Label id="idlblBillingEntity_CC" text="{i18n>billing_entity}" /> 
+                  <Text id="idBillingEntity_CC" text="{oCustomerAttributesJModel>/conn_obj}">
+                  <layoutData>
+                      <l:GridData id="idGridBillingEntity_CC" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text> 
 
                 </form:content>
               </form:SimpleForm >
@@ -149,7 +206,7 @@
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecCirInfo_CC" titleUppercase="false">
             <x:blocks>
-              <form:SimpleForm id="idReqFormCirInfo_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+              <form:SimpleForm id="idReqFormCirInfo_CC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
                   <core:Title id="_IDGenTitle" text=""/>
                   <Label id="idlblDCPLIND_CC"/>

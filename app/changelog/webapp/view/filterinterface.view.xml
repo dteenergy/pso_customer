@@ -1,23 +1,34 @@
-<mvc:View xmlns:f="sap.f" controllerName="com.pso.changelog.controller.filterinterface"
+<mvc:View xmlns:core="sap.ui.core"
+    xmlns:f="sap.f" controllerName="com.pso.changelog.controller.filterinterface"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:mdc="sap.ui.mdc"
     xmlns:mdct="sap.ui.mdc.table"
     xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-        <f:DynamicPage>
+        <f:DynamicPage headerExpanded="true">
             <f:header>
-                <f:DynamicPageHeader >
-                    <fb:FilterBar class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch">
+                <f:DynamicPageHeader pinnable="false" backgroundDesign="Solid">
+                    <fb:FilterBar class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch" useToolbar="false" persistencyKey="POSpecials" afterVariantLoad=".onAfterVariantLoad">
                         <fb:filterGroupItems>
-                            <fb:FilterGroupItem id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true" >
+                            <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Connection Object" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idApprBy" valueHelpRequest="onValueHelpApprovedBy" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Connection Object" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
                                 <fb:control>
-                                    <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
+                                    <Select items="{localModel>/recordStatsVH}">
+                                        <items>
+                                            <core:Item key="{localModel>key}" text="{localModel>text}"></core:Item>
+                                        </items>
+                                    </Select>
                                 </fb:control>
                             </fb:FilterGroupItem>
                         </fb:filterGroupItems>
@@ -25,7 +36,7 @@
                 </f:DynamicPageHeader>
             </f:header>
             <f:content>
-                <Table id="idTable" items="{/PSOSpecials}" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{i18n>title}">
+                <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="10" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}">
                     <columns>
                         <Column>
                             <Label text="Approved By"></Label>
@@ -36,13 +47,29 @@
                         <Column>
                             <Label text="Approved On"></Label>
                         </Column>
+                        <Column>
+                            <Label text="Record Status"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Created By"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Created On"></Label>
+                        </Column>
                     </columns>
+                    <noData>
+                        <IllustratedMessage id="im" illustrationType="sapIllus-FilterTable" illustrationSize="Dialog">
+                        </IllustratedMessage>
+                    </noData>
                     <items>
                         <ColumnListItem type="Navigation">
                             <cells>
-                                <Text text="{approvedBy}"></Text>
-                                <Text text="{connection_object}"></Text>
-                                <Text text="{approvedOn}"></Text>
+                                <Text text="{localModel>approvedBy}"></Text>
+                                <Text text="{localModel>connection_object}"></Text>
+                                <Text text="{localModel>approvedOn}"></Text>
+                                <Text text="{localModel>record_status}"></Text>
+                                <Text text="{localModel>createdBy}"></Text>
+                                <Text text="{localModel>createdAt}"></Text>
                             </cells>
                         </ColumnListItem>
                     </items>

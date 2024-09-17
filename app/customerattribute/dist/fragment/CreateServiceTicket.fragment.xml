@@ -8,62 +8,27 @@
     <Dialog
         id="_IDGenDialog1"
         draggable="true"
-        contentHeight="25em"
-        contentWidth="65%"
+        contentHeight="22em"
+        contentWidth="70%"
         resizable="true"
         title="Create Service Ticket"
         titleAlignment="Center"
     >
-        <content>
-            <!-- <VBox
-                class="sapUiSmallMargin"             
-                items="{ path: '/oCustomerAttributesJModel'}"> -->
-<Toolbar >
-    <Label id="idPOOSelMsg" text="Please select relevant data set to create primary operating order"/>
-                
-</Toolbar>
+        <content> 
+            
             <f:SimpleForm
-                id="_IDGenSimpleForm1"
+                id="_IDGenSimpleForm_Tickt"
                 editable="false"
                 layout="ResponsiveGridLayout"
                 singleContainerFullSize="false"
-                columnsXL="2"
-                columnsL="2"
-                labelSpanXL="3"
-                labelSpanL="4"
-                labelSpanM="12"
-                labelSpanS="12"
+                columnsXL="1"
+                columnsL="1"
+                labelSpanXL="5"
+                labelSpanL="5"
+                labelSpanM="5"
+                labelSpanS="5"
             >
                 <f:content>
-                    <core:Title id="serviceTicketTitleST0" />
-                    <Label id="idlblsetA" />
-                    <RadioButtonGroup id="GroupA" select="oSelectA">
-			            <RadioButton id="idSetA" text="Set A" selected="true"/>
-		            </RadioButtonGroup>
-                    <Label id="idlblDCPLIND_ST" />
-                    <RadioButtonGroup
-                        id="idDCPLIND_ST"
-                        columns="5"
-                        select="onDCPLINDSelectST1"
-                        enabled="false"
-                    >
-                        <RadioButton
-                            id="DC_ST"
-                            text="DC"
-                            selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"
-                        />
-                        <RadioButton
-                            id="PL_ST"
-                            text="PL"
-                            selected="{= ${oCustomerAttributesJModel>/pl} === 'X' ? true : false}"
-                        />
-                        <RadioButton
-                            id="IND_ST"
-                            text="IND"
-                            selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"
-                        />
-                    </RadioButtonGroup>
-
                     <Label
                         id="idlblCustName_ST"
                         text="{i18n>customername}"
@@ -109,14 +74,64 @@
                         id="idSrvCenter_ST"
                         text="{oCustomerAttributesJModel>/srv_center}"
                     >
-                        <layoutData>
-                            <l:GridData
-                                id="idGridData_ST1"
-                                span="XL5 L5 M12 S12"
-                            />
-                        </layoutData>
                     </Text>
-
+                    <Label
+                        id="idlblPrimarySrvRep_ST"
+                        text="{i18n>primerysrvrep}"
+                    />
+                    <Text
+                        id="idPrimarySrvRep_ST"
+                        text="{oCustomerAttributesJModel>/psr}"
+                    />
+                </f:content>
+            </f:SimpleForm>
+<Toolbar id="idToolbarPOO" class="TicketToolbarstyle">
+<ToolbarSpacer id="_idToolbarSpacerTic1" />
+    <Label id="idPOOSelMsg" text="{i18n>ticket_notice}"/>  
+    <ToolbarSpacer id="_idToolbarSpacerTic2" />           
+</Toolbar>
+<!--****Set A and Set B******-->
+            <f:SimpleForm
+                id="_IDGenSimpleForm1"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                singleContainerFullSize="false"
+                columnsXL="2"
+                columnsL="2"
+                labelSpanXL="3"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+            >
+                <f:content>
+                    <core:Title id="serviceTicketTitleST0" />
+                    <Label id="idlblsetA" />
+                    <RadioButtonGroup id="GroupA" select="oSelectA">
+			            <RadioButton id="idSetA" text="Set A" selected="true"/>
+		            </RadioButtonGroup>
+                    <Label id="idlblDCPLIND_ST" />
+                    <RadioButtonGroup
+                        id="idDCPLIND_ST"
+                        columns="5"
+                        select="onDCPLINDSelectST1"
+                        enabled="false"
+                    >
+                        <RadioButton
+                            id="DC_ST"
+                            text="DC"
+                            selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"
+                        />
+                        <RadioButton
+                            id="PL_ST"
+                            text="PL"
+                            selected="{= ${oCustomerAttributesJModel>/pl} === 'X' ? true : false}"
+                        />
+                        <RadioButton
+                            id="IND_ST"
+                            text="IND"
+                            selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"
+                        />
+                    </RadioButtonGroup>
                     <Label
                         id="idlblSubstation_ST"
                         text="{i18n>substation}"
@@ -148,31 +163,7 @@
                             />
                         </layoutData>
                     </Text>
-
-                    <!-- <Label
-                        id="idlblCableNo_ST"
-                        text="{i18n>pscableno}"
-                    />
-                    <Text
-                        id="idCableNo_ST"
-                        text="{oCustomerAttributesJModel>/cable_no}"
-                    >
-                        <layoutData>
-                            <l:GridData
-                                id="idGridData_ST4"
-                                span="XL5 L5 M12 S12"
-                            />
-                        </layoutData>
-                    </Text> -->
-
-                    <Label
-                        id="idlblPrimarySrvRep_ST"
-                        text="{i18n>primerysrvrep}"
-                    />
-                    <Text
-                        id="idPrimarySrvRep_ST"
-                        text="{oCustomerAttributesJModel>/psr}"
-                    />
+                    
 
                     <core:Title id="serviceTicketTitleST" />
                     <Label id="idlblsetB"  />
@@ -202,60 +193,6 @@
                             selected="{= ${oCustomerAttributesJModel>/na2} === 'X' ? true : false}"
                         />
                     </RadioButtonGroup>
-
-                    <Label
-                        id="idlblCustName_ST1"
-                        text="{i18n>customername}"
-                        required="false"
-                    />
-                    <Text
-                        id="idCustName_ST1"
-                        text="{oCustomerAttributesJModel>/cust_name}"
-                    />
-
-                    <Label
-                        id="idlblStreetAdd_ST1"
-                        text="{i18n>streeetadd}"
-                    />
-                    <Text
-                        id="idStreetAdd_ST1"
-                        text="{oCustomerAttributesJModel>/street_name}"
-                    />
-
-                    <Label
-                        id="idlblCity_ST1"
-                        text="{i18n>Fcity}"
-                    />
-                    <Text
-                        id="idCity_ST1"
-                        text="{oCustomerAttributesJModel>/city}"
-                    />
-
-                    <Label
-                        id="idlblZipCode_ST1"
-                        text="{i18n>FZipcod}"
-                    />
-                    <Text
-                        id="idZipCode_ST1"
-                        text="{oCustomerAttributesJModel>/zip_code}"
-                    />
-
-                    <Label
-                        id="idlblSrvCecenter_ST1"
-                        text="{i18n>servicecenter}"
-                    />
-                    <Text
-                        id="idSrvCenter_ST1"
-                        text="{oCustomerAttributesJModel>/srv_center}"
-                    >
-                        <layoutData>
-                            <l:GridData
-                                id="idGridData_ST11"
-                                span="XL5 L5 M12 S12"
-                            />
-                        </layoutData>
-                    </Text>
-
                     <Label
                         id="idlblSubstation_ST1"
                         text="{i18n>substation}"
@@ -287,35 +224,9 @@
                             />
                         </layoutData>
                     </Text>
-
-                    <Label
-                        id="idlblCableNo_ST1"
-                        text="{i18n>pscableno}"
-                    />
-                    <!-- <Text
-                        id="idCableNo_ST1"
-                        text="{oCustomerAttributesJModel>/cable_no2}"
-                    >
-                        <layoutData>
-                            <l:GridData
-                                id="idGridData_ST14"
-                                span="XL5 L5 M12 S12"
-                            />
-                        </layoutData>
-                    </Text> -->
-
-                    <Label
-                        id="idlblPrimarySrvRep_ST1"
-                        text="{i18n>primerysrvrep}"
-                    />
-                    <Text
-                        id="idPrimarySrvRep_ST1"
-                        text="{oCustomerAttributesJModel>/psr}"
-                    />
                 </f:content>
             </f:SimpleForm>
 
-            <!-- </VBox> -->
         </content>
         <footer>
             <Toolbar id="_IDGenToolbar11">

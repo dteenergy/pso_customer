@@ -10,6 +10,10 @@
 	xmlns:vhfb="sap.ui.mdc.filterbar.vh">
 
 	<ValueHelpDialog title="Connection Object" id="idVhConObjDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="connection_object" >
+	<filterBar>
+	<fb:FilterBar advancedMode="true">
+	</fb:FilterBar>
+	</filterBar>
 	</ValueHelpDialog>
 
 </core:FragmentDefinition>

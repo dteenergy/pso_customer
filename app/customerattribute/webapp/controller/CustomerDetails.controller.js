@@ -61,13 +61,13 @@ sap.ui.define([
                 }//end for loop
 
                 if (this.hasLimitedDisplay) { //hide phone numbers
-                    this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
-                    this.getView().byId("idPageSecEmerContact_CC").setVisible(false);
+                    //this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
+                    //this.getView().byId("idPageSecEmerContact_CC").setVisible(false);
                 }
                 else {
 
-                    this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
-                    this.getView().byId("idPageSecEmerContact_CC").setVisible(true);
+                    //this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
+                    //this.getView().byId("idPageSecEmerContact_CC").setVisible(true);
                 }
                 if (this.hasRecordCreateAccess) {
                     //create button visible
@@ -557,6 +557,7 @@ sap.ui.define([
 
             //****************Submit Customer Attrubutes****************************************/
             createCustomerDetails: function () {
+                var that = this;
                 var oStreetNo = this.getView().byId("idStreetno_CC").getValue();
                 var oStreetAdd = this.getView().byId("idStreetAdd_CC").getValue();
                 var oCustName = this.getView().byId("idCustomerName_CC").getValue();
@@ -681,10 +682,11 @@ sap.ui.define([
                     oAttributs.comments2 = Comments2;
 
                 if (this.oEditFlag == "X") {
+                    that.oBusyIndicator.open();
                     this.getOwnerComponent().getModel("ISUService").update("/Customer_attributeSet('" + oAttributs.conn_obj + "')", oAttributs, {
                         method: "PUT",
                         success: function (oData, oResponse) {
-                            //that.oBusyIndicator.close()
+                            that.oBusyIndicator.close();
                             if (oResponse.statusCode === "204") {
                                 var oMessage = JSON.parse(oResponse.headers["sap-message"]);
 
@@ -708,6 +710,7 @@ sap.ui.define([
                                 });
                                 dialog.open();
                             } else {
+                                that.oBusyIndicator.close();
                                 sap.m.MessageBox.show(oResponse.statusText, {
                                     icon: sap.m.MessageBox.Icon.ERROR,
                                     title: this.getView().getModel("i18n").getProperty("error"),
@@ -719,7 +722,7 @@ sap.ui.define([
                         },
 
                         error: function (error) {
-                            //that.oBusyIndicator.close();
+                            that.oBusyIndicator.close();
                             var oError = JSON.parse(error.responseText);
                             var oMessage = oError.error.message.value;
                             sap.m.MessageBox.show(
@@ -732,9 +735,10 @@ sap.ui.define([
                         }
                     });
                 } else {
+                    that.oBusyIndicator.open();
                     this.getOwnerComponent().getModel("ISUService").create("/Customer_attributeSet", oAttributs, {
                         success: function (oData, oResponse) {
-                            //that.oBusyIndicator.close()
+                            that.oBusyIndicator.close();
                             var oMessage = JSON.parse(oResponse.headers["sap-message"]);
                             if (oResponse.statusCode === "201") {
 
@@ -760,6 +764,7 @@ sap.ui.define([
 
 
                             } else {
+                                that.oBusyIndicator.close();
                                 sap.m.MessageBox.show(oMessage.message, {
                                     icon: sap.m.MessageBox.Icon.ERROR,
                                     title: this.getView().getModel("i18n").getProperty("error"),
@@ -771,7 +776,7 @@ sap.ui.define([
                         },
 
                         error: function (error) {
-                            //that.oBusyIndicator.close();
+                            that.oBusyIndicator.close();
                             var oError = JSON.parse(error.responseText);
                             var oMessage = oError.error.message.value
                             sap.m.MessageBox.show(
@@ -992,16 +997,32 @@ sap.ui.define([
                 let oConnectionObject = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.conn_obj;
                 let name = "Primary Operating Order - " + oConnectionObject;
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
-                let dcplind_flag = "", oCircuitTrans = "";
-                if (oTicketData.dc === "X") {
-                    dcplind_flag = "101";
-                    oCircuitTrans = oTicketData.circuit;
-                } else if (oTicketData.pl === "X") {
-                    dcplind_flag = "111";
-                    oCircuitTrans = oTicketData.circuit;
-                } else if (oTicketData.na === "X") {
-                    dcplind_flag = "112";
-                    oCircuitTrans = oTicketData.indus_cust;
+                let dcplind_flag = "", oCircuitTrans = "",oSubstation="";
+                
+                if(this.oSelectedSetA){
+                    oSubstation = oTicketData.sub_station;
+                    if (oTicketData.dc === "X") {
+                        dcplind_flag = "101";
+                        oCircuitTrans = oTicketData.circuit;
+                    } else if (oTicketData.pl === "X") {
+                        dcplind_flag = "111";
+                        oCircuitTrans = oTicketData.circuit;
+                    } else if (oTicketData.na === "X") {
+                        dcplind_flag = "112";
+                        oCircuitTrans = oTicketData.indus_cust;
+                    }
+                }else if(this.oSelectedSetB){
+                    oSubstation = oTicketData.sub_station2;
+                    if (oTicketData.dc2 === "X") {
+                        dcplind_flag = "101";
+                        oCircuitTrans = oTicketData.circuit2;
+                    } else if (oTicketData.pl2 === "X") {
+                        dcplind_flag = "111";
+                        oCircuitTrans = oTicketData.circuit2;
+                    } else if (oTicketData.na2 === "X") {
+                        dcplind_flag = "112";
+                        oCircuitTrans = oTicketData.indus_cust2;
+                    }
                 }
 
                 let c4cPayload = {
@@ -1016,7 +1037,7 @@ sap.ui.define([
                     "Z_PSO_City_KUT": oTicketData.city,
                     "Z_PSO_DCPLIND_KUT": dcplind_flag,
                     "Z_PSO_ServiceCenter_KUT": oTicketData.srv_center,
-                    "Z_PSO_Substation_KUT": oTicketData.sub_station,
+                    "Z_PSO_Substation_KUT": oSubstation,
                     "Z_PSO_Circuit_Trans_KUT": oCircuitTrans,
                     "Z_PSO_PSCableNo_KUT": oTicketData.cable_no,
                     "Z_PSO_StreetAddress_KUT": oTicketData.street_name,
@@ -1051,9 +1072,8 @@ sap.ui.define([
                     }
                 }
 
-                //do not remove this will use later
-                // this.oSelectedSetA = this.getView().byId("idSetA").getText();
-                //this.oSelectedSetB = this.getView().byId("idSetB").getText();
+                this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
+                this.oSelectedSetB = this.getView().byId("idSetB").getSelected();
 
                 var omodel = this.getOwnerComponent().getModel();
                 var oOperation = omodel.bindContext("/createServiceTicket(...)");

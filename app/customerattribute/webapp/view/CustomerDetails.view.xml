@@ -38,7 +38,8 @@
                     type="Accept"
                     text="POO"
                     icon="sap-icon://create"
-                    press="onCreateServiceTicket"                    
+                    press="onCreateServiceTicket" 
+                    visible="false"                   
                 /> 
                  <Button
                     id="idButtonOpentext"
@@ -47,7 +48,7 @@
                     icon="sap-icon://chain-link"
                     press="launchOpentextURL"
                     visible="true"
-                    enabled="false"
+                    enabled="true"
                 />
                 <ToolbarSpacer id="_IDGenToolbarSpacer01_CD" />
 

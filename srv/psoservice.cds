@@ -61,6 +61,8 @@ service PSOService {
     bilCB              : String;
     //Transformer
     ownedByTransformer          : String;    //Radiobutton
+
+    //new fields
   }
 
   type C4CPayload {
@@ -96,6 +98,6 @@ service PSOService {
   action   initiateWFandUpdateDB(recordID : UUID, context : SpecialsContext);
   action   createAndSubmitSpecials(context : SpecialsContext);
   //entity   ServiceRequestCollection as projection on c4c.ServiceRequestCollection;
-  action   createServiceTicket(context : C4CPayload)                               returns result;
-  function onVerifyRecordStatus(recordID : UUID) returns String;
+  action   createServiceTicket(context : C4CPayload)    returns result;
+  function onVerifyRecordStatus(workflowID : UUID) returns Boolean;
 }
