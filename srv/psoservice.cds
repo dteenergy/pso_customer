@@ -21,6 +21,7 @@ service PSOService {
     approvedBy         : String;
     approvedOn         : String;
     approverComment    : String;
+
     //Customer Record(CR)
     pSNumber           : String;
     completionDate     : String;
@@ -63,6 +64,26 @@ service PSOService {
     ownedByTransformer          : String;    //Radiobutton
 
     //new fields
+    // meter_number2       : String;
+    // ab                  : String;
+    // bc                  : String;
+    // ca                  : String;
+    // an                  : String;
+    // bn                  : String;
+    // cn                  : String;
+    // groundMatResistance : String;
+    // methodUsed          : String;
+    // dateMergered        : String;
+    // comment             : String;
+    // typeofService       : String;
+    // typeofTO            : String;
+    // pswDiagramNumber    : String;
+    // primaryServiceRep   : String;
+
+    // // createdBy: String;
+    // // createdOn: Timestamp;
+    // // modifiedBy: String;
+    // // modifiedOn: Timestamp;
   }
 
   type C4CPayload {

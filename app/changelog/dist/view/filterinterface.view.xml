@@ -10,7 +10,7 @@
         <f:DynamicPage headerExpanded="true">
             <f:header>
                 <f:DynamicPageHeader pinnable="false" backgroundDesign="Solid">
-                    <fb:FilterBar class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch" useToolbar="false" persistencyKey="POSpecials" afterVariantLoad=".onAfterVariantLoad">
+                    <fb:FilterBar id="idFilterBar" class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch" useToolbar="false" showClearOnFB="true" clear="onFilterBarClear" persistencyKey="POSpecials" afterVariantLoad=".onAfterVariantLoad">
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Connection Object" visibleInFilterBar="true">
                                 <fb:control>
@@ -36,25 +36,25 @@
                 </f:DynamicPageHeader>
             </f:header>
             <f:content>
-                <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="10" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}">
+                <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="5" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}">
                     <columns>
                         <Column>
-                            <Label text="Approved By"></Label>
-                        </Column>
-                        <Column>
                             <Label text="Connection Object"></Label>
-                        </Column>
-                        <Column>
-                            <Label text="Approved On"></Label>
-                        </Column>
-                        <Column>
-                            <Label text="Record Status"></Label>
                         </Column>
                         <Column>
                             <Label text="Created By"></Label>
                         </Column>
                         <Column>
                             <Label text="Created On"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Approved By"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Approved On"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Record Status"></Label>
                         </Column>
                     </columns>
                     <noData>
@@ -64,12 +64,12 @@
                     <items>
                         <ColumnListItem type="Navigation">
                             <cells>
-                                <Text text="{localModel>approvedBy}"></Text>
                                 <Text text="{localModel>connection_object}"></Text>
-                                <Text text="{localModel>approvedOn}"></Text>
-                                <Text text="{localModel>record_status}"></Text>
                                 <Text text="{localModel>createdBy}"></Text>
                                 <Text text="{localModel>createdAt}"></Text>
+                                <Text text="{localModel>approvedBy}"></Text>
+                                <Text text="{localModel>approvedOn}"></Text>
+                                <Text text="{localModel>record_status}"></Text>
                             </cells>
                         </ColumnListItem>
                     </items>

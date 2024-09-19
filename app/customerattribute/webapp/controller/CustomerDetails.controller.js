@@ -572,6 +572,11 @@ sap.ui.define([
 
                 var CustomerAttributesList = [];
                 var oCustomerAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
+                var oUserScope = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+                var userid="";
+                if (oUserScope.length > 0) {
+                    userid = oUserScope[oUserScope.length - 1];
+                }
                 var oSelectedKey = this.getView().byId("idDCPLIND_CC").getSelectedIndex();
                 var oDC = "", oPL = "", oNA = "";
                 if (oSelectedKey === 0) {
@@ -621,65 +626,68 @@ sap.ui.define([
                 if (oDemoSiteChecked === true) {
                     oDemoSite = "X";
                 }
-                else {
-                    oDemoSite = "";
-                }
 
                 var oAttributs = {};
-                oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
-                    oAttributs.cust_name = oCustomerAttributes1.cust_name,
-                    //Attributs.mail_name = oCustomerAttributes1.mail_name,
-                    oAttributs.street_no = oCustomerAttributes1.street_no,
-                    oAttributs.street_name = oCustomerAttributes1.street_name,
-                    oAttributs.city = oCustomerAttributes1.city,
-                    oAttributs.zip_code = oCustomerAttributes1.zip_code,
-                    oAttributs.no_of_lines = oNooflines,
-                    oAttributs.srv_center = oServiceCentre,
-                    oAttributs.psr = oPrimerySrvRep
-                    //oAttributs.acc_rep = oCustomerAttributes1.acc_rep,
-                    oAttributs.emer_cont_name = oCustomerAttributes1.emer_cont_name,
-                    oAttributs.emer_title = oCustomerAttributes1.emer_title,
-                    oAttributs.emer_phone = oCustomerAttributes1.emer_phone,
-                    oAttributs.psw = oCustomerAttributes1.psw,
-                    oAttributs.on_site_emerg = oEmergency,
-                    oAttributs.on_site_part = oPartial,
-                    oAttributs.on_site_nosg = oNoOnsiteGen,
-                    oAttributs.full_generation = oFullGen,
-                    oAttributs.generation = oCustomerAttributes1.generation,
-                    oAttributs.pso_site = "",
-                    oAttributs.demo_site = oDemoSite,
-                    oAttributs.dc = oDC,
-                    oAttributs.pl = oPL,
-                    oAttributs.na = oNA,
-                    oAttributs.sub_station = oCustomerAttributes1.sub_station,
-                    oAttributs.indus_cust = oCustomerAttributes1.indus_cust,
-                    oAttributs.circuit = oCustomerAttributes1.circuit,
-                    oAttributs.circuit_doc_id = oCustomerAttributes1.circuit_doc_id,
-                    oAttributs.sketch_no = oCustomerAttributes1.sketch_no,
-                    oAttributs.cable_no = oCustomerAttributes1.cable_no,
-                    oAttributs.throw_type = oThrowovertyp,
-                    oAttributs.prot_equip1 = oProact1,
-                    oAttributs.prot_equip2 = oProact2,
-                    oAttributs.srv_type = oServicetype,
-                    oAttributs.sect_point = oCustomerAttributes1.sect_point,
-                    oAttributs.doc_id = oCustomerAttributes1.doc_id,
-                    oAttributs.comments = Comments,
-                    oAttributs.dc2 = oDC2,
-                    oAttributs.pl2 = oPL2,
-                    oAttributs.na2 = oNA2,
-                    oAttributs.sub_station2 = oCustomerAttributes1.sub_station2,
-                    oAttributs.indus_cust2 = oCustomerAttributes1.indus_cust2,
-                    oAttributs.circuit2 = oCustomerAttributes1.circuit2,
-                    oAttributs.circuit_doc_id2 = oCustomerAttributes1.circuit_doc_id2,
-                    oAttributs.sketch_no2 = oCustomerAttributes1.sketch_no2,
-                    oAttributs.cable_no2 = oCustomerAttributes1.cable_no2,
-                    oAttributs.throw_type2 = oThrowovertyp2,
-                    oAttributs.prot_equip1_2 = oProact1_2,
-                    oAttributs.prot_equip2_2 = oProact2_2,
-                    oAttributs.srv_type2 = oServicetype2,
-                    oAttributs.sect_point2 = oCustomerAttributes1.sect_point2,
-                    oAttributs.doc_id2 = oCustomerAttributes1.doc_id2,
+                    oAttributs.conn_obj = oCustomerAttributes1.conn_obj;
+                    oAttributs.cust_name = oCustomerAttributes1.cust_name;
+                    //Attributs.mail_name = oCustomerAttributes1.mail_name;
+                    oAttributs.street_no = oCustomerAttributes1.street_no;
+                    oAttributs.street_name = oCustomerAttributes1.street_name;
+                    oAttributs.city = oCustomerAttributes1.city;
+                    oAttributs.zip_code = oCustomerAttributes1.zip_code;
+                    oAttributs.no_of_lines = oNooflines;
+                    oAttributs.srv_center = oServiceCentre;
+                    oAttributs.psr = oPrimerySrvRep;
+                    //oAttributs.acc_rep = oCustomerAttributes1.acc_rep;
+                    oAttributs.emer_cont_name = oCustomerAttributes1.emer_cont_name;
+                    oAttributs.emer_title = oCustomerAttributes1.emer_title;
+                    oAttributs.emer_phone = oCustomerAttributes1.emer_phone;
+                    oAttributs.psw = oCustomerAttributes1.psw;
+                    oAttributs.on_site_emerg = oEmergency;
+                    oAttributs.on_site_part = oPartial;
+                    oAttributs.on_site_nosg = oNoOnsiteGen;
+                    oAttributs.full_generation = oFullGen;
+                    oAttributs.generation = oCustomerAttributes1.generation;
+                    oAttributs.pso_site = "";
+                    oAttributs.demo_site = oDemoSite;
+                    oAttributs.dc = oDC;
+                    oAttributs.pl = oPL;
+                    oAttributs.na = oNA;
+                    oAttributs.sub_station = oCustomerAttributes1.sub_station;
+                    oAttributs.indus_cust = oCustomerAttributes1.indus_cust;
+                    oAttributs.circuit = oCustomerAttributes1.circuit;
+                    oAttributs.circuit_doc_id = oCustomerAttributes1.circuit_doc_id;
+                    oAttributs.sketch_no = oCustomerAttributes1.sketch_no;
+                    oAttributs.cable_no = oCustomerAttributes1.cable_no;
+                    oAttributs.throw_type = oThrowovertyp;
+                    oAttributs.prot_equip1 = oProact1;
+                    oAttributs.prot_equip2 = oProact2;
+                    oAttributs.srv_type = oServicetype;
+                    oAttributs.sect_point = oCustomerAttributes1.sect_point;
+                    oAttributs.doc_id = oCustomerAttributes1.doc_id;
+                    oAttributs.comments = Comments;
+                    oAttributs.dc2 = oDC2;
+                    oAttributs.pl2 = oPL2;
+                    oAttributs.na2 = oNA2;
+                    oAttributs.sub_station2 = oCustomerAttributes1.sub_station2;
+                    oAttributs.indus_cust2 = oCustomerAttributes1.indus_cust2;
+                    oAttributs.circuit2 = oCustomerAttributes1.circuit2;
+                    oAttributs.circuit_doc_id2 = oCustomerAttributes1.circuit_doc_id2;
+                    oAttributs.sketch_no2 = oCustomerAttributes1.sketch_no2;
+                    oAttributs.cable_no2 = oCustomerAttributes1.cable_no2;
+                    oAttributs.throw_type2 = oThrowovertyp2;
+                    oAttributs.prot_equip1_2 = oProact1_2;
+                    oAttributs.prot_equip2_2 = oProact2_2;
+                    oAttributs.srv_type2 = oServicetype2;
+                    oAttributs.sect_point2 = oCustomerAttributes1.sect_point2;
+                    oAttributs.doc_id2 = oCustomerAttributes1.doc_id2;
                     oAttributs.comments2 = Comments2;
+                    if(this.oEditFlag == "X"){
+                        oAttributs.modified_by = userid;
+                    }else{
+                        oAttributs.created_by = userid;
+                    }
+                    
 
                 if (this.oEditFlag == "X") {
                     that.oBusyIndicator.open();
@@ -999,7 +1007,6 @@ sap.ui.define([
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 let dcplind_flag = "", oCircuitTrans = "",oSubstation="";
                 
-                if(this.oSelectedSetA){
                     oSubstation = oTicketData.sub_station;
                     if (oTicketData.dc === "X") {
                         dcplind_flag = "101";
@@ -1011,19 +1018,32 @@ sap.ui.define([
                         dcplind_flag = "112";
                         oCircuitTrans = oTicketData.indus_cust;
                     }
-                }else if(this.oSelectedSetB){
-                    oSubstation = oTicketData.sub_station2;
-                    if (oTicketData.dc2 === "X") {
-                        dcplind_flag = "101";
-                        oCircuitTrans = oTicketData.circuit2;
-                    } else if (oTicketData.pl2 === "X") {
-                        dcplind_flag = "111";
-                        oCircuitTrans = oTicketData.circuit2;
-                    } else if (oTicketData.na2 === "X") {
-                        dcplind_flag = "112";
-                        oCircuitTrans = oTicketData.indus_cust2;
-                    }
-                }
+                
+                // if(this.oSelectedSetA){
+                //     oSubstation = oTicketData.sub_station;
+                //     if (oTicketData.dc === "X") {
+                //         dcplind_flag = "101";
+                //         oCircuitTrans = oTicketData.circuit;
+                //     } else if (oTicketData.pl === "X") {
+                //         dcplind_flag = "111";
+                //         oCircuitTrans = oTicketData.circuit;
+                //     } else if (oTicketData.na === "X") {
+                //         dcplind_flag = "112";
+                //         oCircuitTrans = oTicketData.indus_cust;
+                //     }
+                // }else if(this.oSelectedSetB){
+                //     oSubstation = oTicketData.sub_station2;
+                //     if (oTicketData.dc2 === "X") {
+                //         dcplind_flag = "101";
+                //         oCircuitTrans = oTicketData.circuit2;
+                //     } else if (oTicketData.pl2 === "X") {
+                //         dcplind_flag = "111";
+                //         oCircuitTrans = oTicketData.circuit2;
+                //     } else if (oTicketData.na2 === "X") {
+                //         dcplind_flag = "112";
+                //         oCircuitTrans = oTicketData.indus_cust2;
+                //     }
+                // }
 
                 let c4cPayload = {
                     "ProcessingTypeCode": "ZUSR",
@@ -1043,12 +1063,22 @@ sap.ui.define([
                     "Z_PSO_StreetAddress_KUT": oTicketData.street_name,
                     "Z_PSO_CustomerName_KUT": oTicketData.cust_name,
                     "Z_PSO_ZIP_KUT": oTicketData.zip_code
+                    //"ServiceRequestUserLifeCycleStatusCode": "1"
                 };
                 //
                 return c4cPayload;
             },
             createServiceTicket: async function (oEvent) {
+                //this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
+                //this.oSelectedSetB = this.getView().byId("idSetB").getSelected(); 
                 var isCircuit = this.getView().byId("idCircuit_ST").getText();
+                // var isCircuit="";
+                // if(this.oSelectedSetA){
+                //     isCircuit = this.getView().byId("idCircuit_ST").getText();
+                // }else if(this.oSelectedSetB){
+                //     isCircuit = this.getView().byId("idCircuit_ST1").getText();
+                // }
+                
                 if (isCircuit === "" || isCircuit === null || isCircuit === undefined) {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Circuit_msg"), {
                         icon: sap.m.MessageBox.Icon.ERROR,
@@ -1071,9 +1101,6 @@ sap.ui.define([
                         return false;
                     }
                 }
-
-                this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
-                this.oSelectedSetB = this.getView().byId("idSetB").getSelected();
 
                 var omodel = this.getOwnerComponent().getModel();
                 var oOperation = omodel.bindContext("/createServiceTicket(...)");

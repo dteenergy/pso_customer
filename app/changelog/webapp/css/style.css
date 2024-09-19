@@ -1,5 +1,15 @@
 /* Enter your custom styles here */
 
-.sapMListHdr {
+/* .sapMListHdr {
     background-color: #EBF8FF;
+} */
+
+.sapMTableTH {
+    background: #007c91 !important;
+    border-bottom: 1px solid #e5e5e5;
+    vertical-align: middle;
+}
+
+.sapUiTableHeaderDataCell .sapMLabel, .sapMListTbl .sapMColumnHeader .sapMLabel {
+    color :white
 }

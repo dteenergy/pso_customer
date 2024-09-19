@@ -12,15 +12,46 @@ sap.ui.define([
                 this.localModel = this.getOwnerComponent().getModel("localModel");
                 this.localModel.setProperty('/tableItemsCount', `Items(0)`);
                 this.readApprByVH();
-                // this.oBundle = this.getView().getModel("i18n").getResourceBundle();
-                // this.byId('idTable').refreshItems(false)
-                // this.byId('idTable').attachUpdateFinished(function(oEvent){
-                    
-                //     // debugger;
-                // }.bind(this))
+            },
+            filterVH: function (aFilters, vhname) {
+                let data = this.model.bindList('/PSOSpecials', undefined, undefined, aFilters);
+                let oApprBy = { 'dataToDisplay': [] };
+                let oConnObj = { 'dataToDisplay': [] };
+
+                data.requestContexts(0, Infinity).then(function (aContext) {
+                    aContext.forEach(context => {
+                        let appryBy = context.getObject()['approvedBy'];
+                        if (!oApprBy.hasOwnProperty(appryBy)) {
+                            oApprBy[appryBy] = context.getObject()['approvedBy'];
+                            oApprBy['dataToDisplay'].push({
+                                "approvedBy": appryBy
+                            })
+                        }
+
+                        let connObj = context.getObject()['connection_object'];
+                        if (!oConnObj.hasOwnProperty(connObj)) {
+                            oConnObj[connObj] = context.getObject()['connection_object'];
+                            oConnObj['dataToDisplay'].push({
+                                "connection_object": connObj
+                            })
+                        }
+
+
+                    });
+
+                    this.localModel.refresh(true);
+                }.bind(this))
+                if (vhname == 'approvedBy') {
+                    this.localModel.setProperty('/connectionObjVH', oConnObj.dataToDisplay);
+
+                }
+                else if (vhname == 'connection_object') {
+                    this.localModel.setProperty('/approvedByVH', oApprBy.dataToDisplay);
+
+                }
             },
             readApprByVH: function (aFilters) {
-                let data = this.model.bindList('/PSOSpecials',undefined, undefined, aFilters);
+                let data = this.model.bindList('/PSOSpecials', undefined, undefined, aFilters);
                 let aData = [];
                 let oApprBy = { 'dataToDisplay': [] };
                 let oConnObj = { 'dataToDisplay': [] };
@@ -59,17 +90,17 @@ sap.ui.define([
 
                     });
                     // this.localModel.setProperty('/PSOSpecials', aData);
-                    if(!aFilters){
-                    this.localModel.setProperty('/approvedByVH', oApprBy.dataToDisplay);
-                    this.localModel.setProperty('/connectionObjVH', oConnObj.dataToDisplay);
-                    this.localModel.setProperty('/recordStatsVH', oRecStats.dataToDisplay);
+                    if (!aFilters) {
+                        this.localModel.setProperty('/approvedByVH', oApprBy.dataToDisplay);
+                        this.localModel.setProperty('/connectionObjVH', oConnObj.dataToDisplay);
+                        this.localModel.setProperty('/recordStatsVH', oRecStats.dataToDisplay);
                     }
-                    else{
+                    else {
                         this.localModel.setProperty('/tableItemsCount', `Items(${aData.length})`);
                         this.localModel.setProperty('/PSOSpecials', aData);
                         this.byId('idTable').setBusy(false);
                     }
-                    
+
                     // this.byId('idTable').bindAggregation("items", {
                     //     path: "localModel>/PSOSpecials",
                     //     model : "localModel"
@@ -77,30 +108,43 @@ sap.ui.define([
                     this.localModel.refresh(true);
                 }.bind(this))
             },
-            onBasicSearch : async function(oEvent){
+            onBasicSearch: async function (oEvent) {
                 let field = this.byId(this._tokensForInput).getParent().getName();
-                if(field == 'approvedBy'){
+                if (field == 'approvedBy') {
                     let oVHTable = await this.apprDialog.getTableAsync();
-                    if(oVHTable.bindRows){
-                        oVHTable.getBinding('rows').filter(new Filter(this.byId(field,'Contains',oEvent.getParameter('newValue'))))                       
+                    if (oVHTable.bindRows) {
+                        oVHTable.getBinding('rows').filter(new Filter(this.byId(field, 'Contains', oEvent.getParameter('newValue'))))
                     }
-                    else if(oVHTable.bindItems){
-                        oVHTable.getBinding('items').filter(new Filter(this.byId(field,'Contains',oEvent.getParameter('newValue'))))
+                    else if (oVHTable.bindItems) {
+                        oVHTable.getBinding('items').filter(new Filter(this.byId(field, 'Contains', oEvent.getParameter('newValue'))))
                     }
                 }
-                else if(field == 'connection_object'){
+                else if (field == 'connection_object') {
                     let oVHTable = await this.conObjDialog.getTableAsync();
-                    if(oVHTable.bindRows){
-                        oVHTable.getBinding('rows').filter(new Filter(field,'Contains',oEvent.getParameter('newValue')))                       
+                    if (oVHTable.bindRows) {
+                        oVHTable.getBinding('rows').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
                     }
-                    else if(oVHTable.bindItems){
-                        oVHTable.getBinding('items').filter(new Filter(field,'Contains',oEvent.getParameter('newValue')))
+                    else if (oVHTable.bindItems) {
+                        oVHTable.getBinding('items').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
                     }
                 }
             },
             onValueHelpApprovedBy: function (oEvent) {
                 this._tokensForInput = oEvent.getSource().getId();
-                this.readApprByVH();
+                //start
+                let aApprVHTokens = this.byId('idConnObj').getTokens();
+                if (aApprVHTokens.length > 0) {
+                    let aFilters = [];
+                    aApprVHTokens.forEach(token => {
+                        aFilters.push(new Filter(this.byId('idConnObj').getParent().getName(), 'EQ', token.getKey()));
+                    });
+                    this.filterVH(aFilters, this.byId('idConnObj').getParent().getName());
+                }
+                else {
+                    this.readApprByVH();
+                }
+                //end
+                // this.readApprByVH();
                 var that = this;
                 if (!this.apprDialog) {
                     Fragment.load({
@@ -111,15 +155,19 @@ sap.ui.define([
                         oDialog.setModel(this.localModel);
                         this.apprDialog = oDialog;
                         this.getView().addDependent(this.apprDialog);
-                        
+
                         this.apprDialog.getFilterBar().setBasicSearch(new sap.m.SearchField({
-                            liveChange : [that.onBasicSearch,that],
-                            value : '{localModel>/basicSearch}',
-                            showSearchButton : true
+                            liveChange: [that.onBasicSearch, that],
+                            value: '{localModel>/basicSearch}',
+                            showSearchButton: true
                         }))
                         this.apprDialog.getTableAsync().then(oTable => {
                             oTable.setModel(that.localModel);
                             if (oTable.bindRows) {
+                                oTable.attachRowSelectionChange(function (oEvent) {
+                                    this.onValueHelpOkPress();
+                                }.bind(this));
+                                oTable.setSelectionMode('Single');
                                 oTable.bindAggregation("rows", {
                                     path: "/approvedByVH",
                                     events: {
@@ -138,6 +186,7 @@ sap.ui.define([
                             }))
 
                             if (oTable.bindItems) {
+                                oTable.setMode('SingleSelect');
                                 oTable.bindAggregation("items", {
                                     path: "/approvedByVH",
                                     template: new sap.m.ColumnListItem({
@@ -156,6 +205,7 @@ sap.ui.define([
                             }
                         })
                         oDialog.update();
+                        sap.ui.getCore().byId('idVhStoreDialog-tokenizerGrid').setVisible(false);
                         this.apprDialog.open()
                     })
                 }
@@ -164,9 +214,24 @@ sap.ui.define([
                 }
             },
             onValueHelpConnObj: function (oEvent) {
+
+
                 this._tokensForInput = oEvent.getSource().getId();
                 // if (!this.localModel.getData().hasOwnProperty('PSOSpecials')) {
+
+                //start
+                let aApprVHTokens = this.byId('idApprBy').getTokens();
+                if (aApprVHTokens.length > 0) {
+                    let aFilters = [];
+                    aApprVHTokens.forEach(token => {
+                        aFilters.push(new Filter(this.byId('idApprBy').getParent().getName(), 'EQ', token.getKey()));
+                    });
+                    this.filterVH(aFilters, this.byId('idApprBy').getParent().getName());
+                }
+                else {
                     this.readApprByVH();
+                }
+                //end
                 // }
                 if (!this.conObjDialog) {
                     Fragment.load({
@@ -179,13 +244,17 @@ sap.ui.define([
                         this.getView().addDependent(this.conObjDialog);
                         var that = this;
                         this.conObjDialog.getFilterBar().setBasicSearch(new sap.m.SearchField({
-                            liveChange : [that.onBasicSearch,that],
-                            value : '{localModel>/basicSearch}',
-                            showSearchButton : true
+                            liveChange: [that.onBasicSearch, that],
+                            value: '{localModel>/basicSearch}',
+                            showSearchButton: true
                         }))
                         this.conObjDialog.getTableAsync().then(oTable => {
                             oTable.setModel(that.localModel);
                             if (oTable.bindRows) {
+                                oTable.attachRowSelectionChange(function (oEvent) {
+                                    this.onValueHelpOkPress();
+                                }.bind(this))
+                                oTable.setSelectionMode('Single');
                                 oTable.bindAggregation("rows", {
                                     path: "/connectionObjVH",
                                     events: {
@@ -204,6 +273,7 @@ sap.ui.define([
                             }))
 
                             if (oTable.bindItems) {
+                                oTable.setMode('SingleSelect');
                                 oTable.bindAggregation("items", {
                                     path: "/connectionObjVH",
                                     template: new sap.m.ColumnListItem({
@@ -222,6 +292,7 @@ sap.ui.define([
                             }
                         })
                         oDialog.update();
+                        sap.ui.getCore().byId('idVhConObjDialog-tokenizerGrid').setVisible(false)
                         this.conObjDialog.open()
                     })
                 }
@@ -235,10 +306,30 @@ sap.ui.define([
             },
             onValueHelpOkPress: function (oEvent) {
                 if (this._tokensForInput !== undefined) {
-                    this.byId(this._tokensForInput).setTokens(oEvent.getSource()._getTokenizer().getTokens());
+                    if (oEvent != undefined) {
+                        this.byId(this._tokensForInput).setTokens(oEvent.getSource()._getTokenizer().getTokens());
+                        oEvent.getSource().close();
+                        this._tokensForInput = undefined;
+                    }
+                    else {
+                        let oDialog;
+                        if (this._tokensForInput.includes('idConnObj')) {
+                            oDialog = this.conObjDialog;
+                        }
+                        else {
+                            oDialog = this.apprDialog;
+                        }
+                        this.byId(this._tokensForInput).setTokens(oDialog._getTokenizer().getTokens());
+                        oDialog.close();
+
+                        if (oDialog.getTable().getSelectedIndex() != -1) {
+                            this._tokensForInput = undefined;
+                        }
+                    }
+
                 }
-                this._tokensForInput = undefined;
-                oEvent.getSource().close();
+
+
 
             },
             onRowSelect: function (oEvent) {
@@ -248,7 +339,26 @@ sap.ui.define([
                     connection_object: oEvent.getParameters().listItem.getBindingContext('localModel').getObject().connection_object
                 })
             },
+            onFilterBarClear : function(oEvent){
+                oEvent.mParameters.selectionSet.forEach(filter=>{
+                    if(filter.getMetadata().getName().toLowerCase().includes('multiinput')){
+                        filter.removeAllTokens();
+                    }
+                    else if(filter.getMetadata().getName().toLowerCase().includes('select')){
+                        filter.setSelectedKey('approved');
+                    }
+                });
+
+                this.byId('idFilterBar').fireSearch({
+                    firedFromFilterBar : true,
+                    selectionSet : oEvent.getParameters().selectionSet
+                })
+            },
             onFilterBarSearch: function (oEvent) {
+                // if (this.byId('idConnObj').getTokens().length == 0) {
+                //     sap.m.MessageBox.error('Please select the connection object!');
+                //     return;
+                // }
                 this.byId('idTable').setBusy(true);
                 let aFilters = [];
                 oEvent.getParameter('selectionSet').forEach(filterItem => {
@@ -261,7 +371,7 @@ sap.ui.define([
                     }
                     else {
                         aFilters.push(
-                            new Filter(filterItem.getParent().getName(), 'EQ',filterItem.getSelectedItem().getKey())
+                            new Filter(filterItem.getParent().getName(), 'EQ', filterItem.getSelectedItem().getKey())
                         )
                     }
 

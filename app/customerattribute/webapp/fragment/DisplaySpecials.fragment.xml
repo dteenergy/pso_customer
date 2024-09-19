@@ -39,30 +39,18 @@
                                 editable="true"
                                 layout="ResponsiveGridLayout"
                                 singleContainerFullSize="false"
-                                columnsXL="3"
-                                columnsL="3"
-                                labelSpanXL="3"
-                                labelSpanL="4"
-                                labelSpanM="12"
-                                labelSpanS="12"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
                             >
                                 <form:content>
                                     <core:Title
-                                        id="hading1_DS"
+                                        id="idcoreTrecord1_DS"
                                         
                                     />
 
-                                    <Label
-                                        id="idlblPSNo_DS"
-                                        text="{i18n>psnum}"
+                                    <Label id="idlblPSNo_DS" text="{i18n>psnum}"/>
+                                    <Text id="idPSNo_DS" text="{oSpecialsjmodel>/pSNumber}" 
                                     />
-                                    <Text id="idPSNo_DS" 
-                                        text="{oSpecialsjmodel>/pSNumber}" 
-                                    />
-                                    <!-- <layoutData>
-                <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
-              </layoutData>
-              </Text>  -->
+                                  
                                     <Label
                                         id="idlblCompletionD_DS"
                                         text="{i18n>completionDate}"
@@ -70,11 +58,6 @@
                                     />
                                     <Text id="idCompletionD_DS" 
                                             
-                                    />
-
-                                    <core:Title
-                                        id="idH2_DS"
-                                        
                                     />
                                     <Label
                                         id="idlblWorkDesc_DS"
@@ -92,17 +75,23 @@
                                         id="idMeterNo_DS"
                                         text="{oSpecialsjmodel>/meter_number}"
                                     />
-                                    <!-- <Label id="idlblkwhr" text="{i18n>kwhrRdg}"/>
-            <Text id="idkwhrrdg"/> -->
+                                    <Label
+                                        id="idlblMeterNo2_DS"
+                                        text="{i18n>CS_MeterNo2}"
+                                    />
+                                    <Text
+                                        id="idMeterNo2_DS"
+                                        text="{oSpecialsjmodel>/meter_number2}"
+                                    />                                   
                                     <Label
                                         id="idlblFedFrom_DS"
                                         text="{i18n>CS_FedFrom}"
                                     />
                                     <Text id="idFedFrom_DS" text="{oSpecialsjmodel>/fedFrom}"/>
 
+
                                     <core:Title
-                                        id="idheadi3_DS"
-                                        
+                                        id="idcoreTrecord2_DS"  
                                     />
                                     <Label
                                         id="idlblCableDesc_DS"
@@ -114,16 +103,6 @@
                                         text="{i18n>CS_cableFootage}" 
                                     />
                                     <Text id="idCableFootage_DS" text="{oSpecialsjmodel>/cableFootage}" />
-                                    <Label
-                                        id="idlblDuctType_DS"
-                                        text="{i18n>CS_DuctType}"
-                                    />
-                                    <Text id="idDuctType_DS" text="{oSpecialsjmodel>/ductType}" />
-
-                                    <core:Title
-                                        id="idMeasure_DS"
-                                        
-                                    />
                                     <Label
                                         id="idlblCts_DS"
                                         text="{i18n>CS_cts}"
@@ -145,24 +124,17 @@
                                     />
                                     <Text id="idM_DS" text="{oSpecialsjmodel>/m}" />
 
-                                    <!-- <core:Title id="hedi6" text="Measured Voltage" />
-            <Label id="idlblab" text="{i18n>AB}" />
-            <Text id="idab"/>
-            <Label id="idlblbc" text="{i18n>bc}" />
-            <Text id="idbc"/>
-            <Label id="idlblca" text="{i18n>ca}" />
-            <Text id="idca"/>
-            <Label id="idblan" text="{i18n>an}" />
-            <Text id="idan" />
-            <Label id="idblbn" text="{i18n>bn}" />
-            <Text id="idbn" />
-            <Label id="idblcn" text="{i18n>cn}" />
-            <Text id="idcn" /> -->
 
                                     <core:Title
-                                        id="idH6_DS"
+                                        id="idcoreTrecord3_DS"
                                         
                                     />
+                                    <Label
+                                        id="idlblDuctType_DS"
+                                        text="{i18n>CS_DuctType}"
+                                    />
+                                    <Text id="idDuctType_DS" text="{oSpecialsjmodel>/ductType}" />
+                                    
                                     <Label
                                         id="idlblFusesAt_DS"
                                         text="{i18n>CS_FusesAt}"
@@ -212,9 +184,10 @@
                                 editable="true"
                                 layout="ResponsiveGridLayout"
                                 singleContainerFullSize="false"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
                             >
                                 <form:content>
-                                    <core:Title id="heain2CPSR_DS" />
+                                    <core:Title id="idcoreTLBD1_DS" />
                                     <Label id="idRadiobutton_DS" />
                                     <RadioButtonGroup
                                         id="idRadio1_DS"
@@ -250,13 +223,14 @@
                                         text="{i18n>CS_ContinuousCurrent}"
                                     />
                                     <Text id="idCC_DS" text="{oSpecialsjmodel>/continuousCurrent}"/>
+
+
+                                    <core:Title id="idcoreTLBD2_DS" />
                                     <Label
                                         id="idlblLoadIntRat_DS"
                                         text="{i18n>CS_LoadIntRat}"
                                     />
                                     <Text id="idLoadIntRat_DS" text="{oSpecialsjmodel>/loadIntRating}"/>
-
-                                    <core:Title id="eading3_DS" />
                                     <Label
                                         id="idlblKAMomentary_DS"
                                         text="{i18n>CS_KAMomentary}"
@@ -272,6 +246,8 @@
                                         text="{i18n>CSFaultClosing}"
                                     />
                                     <Text id="idFaultClosing_DS" text="{oSpecialsjmodel>/faultClosing}"/>
+
+                                    <core:Title id="idcoreTLBD3_DS" />
                                     <Label
                                         id="idlblBil_DS"
                                         text="{i18n>CS_Bil}"
@@ -312,9 +288,10 @@
                                 editable="true"
                                 layout="ResponsiveGridLayout"
                                 singleContainerFullSize="false"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
                             >
                                 <form:content>
-                                    <core:Title id="idTitle_DS" />
+                                    <core:Title id="idcoreTCB1_DS" />
                                     <Label id="idlblRadioCB_DS" />
                                     <RadioButtonGroup
                                         id="goup6CPSR_DS"
@@ -349,19 +326,9 @@
                                         text="{i18n>CS_Serialno}"
                                     />
                                     <Text id="idSerialNo_DS" text="{oSpecialsjmodel>/serialNo}"/>
-                                    <Label
-                                        id="idlblKAMome_DS"
-                                        text="{i18n>CS_KAMomenetary}"
-                                    />
-                                    <Text id="idKAMome_DS" text="{oSpecialsjmodel>/kAMomentaryCB}"/>
 
-                                    <Label
-                                        id="idlblAmps_DS"
-                                        text="{i18n>CS_Amps}"
-                                    />
-                                    <Text id="idAmps_DS" text="{oSpecialsjmodel>/amps}"/>
 
-                                    <core:Title id="heding5CPSR_DS" />
+                                    <core:Title id="idcoreTCB2_DS" />
                                     <Label id="idCB1_DS" />
 
                                     <RadioButtonGroup
@@ -379,6 +346,20 @@
                                             text="{i18n>CS_CustomerOwned}"
                                         />
                                     </RadioButtonGroup>
+                                    <Label
+                                        id="idlblKAMome_DS"
+                                        text="{i18n>CS_KAMomenetary}"
+                                    />
+                                    <Text id="idKAMome_DS" text="{oSpecialsjmodel>/kAMomentaryCB}"/>
+
+                                    <Label
+                                        id="idlblAmps_DS"
+                                        text="{i18n>CS_Amps}"
+                                    />
+                                    <Text id="idAmps_DS" text="{oSpecialsjmodel>/amps}"/>
+
+
+                                    <core:Title id="idcoreTCB3_DS" />
                                     <Label
                                         id="idlblType4_DS"
                                         text="{i18n>CS_Type4}"
@@ -400,6 +381,76 @@
                     </x:ObjectPageSubSection>
                 </x:subSections>
             </x:ObjectPageSection>
+
+
+            <x:ObjectPageSection id="idPageSection_DS" titleUppercase="false" title="{i18n>CS_other}" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="idDSSubSection_DS" titleUppercase="false">
+            <x:blocks>
+               <form:SimpleForm id="reqesform_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
+               columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+            <form:content>
+
+            <core:Title id="idcoreTOther1_DS" />
+            <Label id="idlblAB_DS" text="{i18n>CS_AB}" />
+            <Text id="idAB_DS" text="{oSpecialsjmodel>/AB}"/>
+            <Label id="idlblBC_DS" text="{i18n>CS_BC}" />
+            <Text id="idBC_DS" text="{oSpecialsjmodel>/BC}"/>
+            <Label id="idlblCA_DS" text="{i18n>CS_CA}" />
+            <Text id="idCA_DS" text="{oSpecialsjmodel>/CA}"/>
+            <Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
+            <Text id="idAN_DS" text="{oSpecialsjmodel>/AN}"/>
+            <Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
+            <Text id="idBN_DS" text="{oSpecialsjmodel>/BN}"/>
+            <Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
+            <Text id="idCN_DS" text="{oSpecialsjmodel>/CN}"/>
+            <Label id="idlblGround_DS" text="{i18n>CS_ground}" />     
+            <Text id="idground_DS" text="{oSpecialsjmodel>/groundMatResistance}"/>
+            <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
+            <Text id="idmethod_DS" text="{oSpecialsjmodel>/methodUsed}"/>
+            
+            
+
+            <core:Title id="idcoreTOther2_DS" />
+            <Label id="idlbldate_DS" text="{i18n>CS_date}" />     
+            <Text id="iddate_DS" text="{oSpecialsjmodel>/dateMergered}"/>
+            <Label id="idlblservice_DS" text="{i18n>CS_service}" />     
+            <Text id="idservice_DS" text="{oSpecialsjmodel>/typeofService}"/>
+            <Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
+            <Text id="idCNTO_DS" text="{oSpecialsjmodel>/typeofTO}"/>
+            <Label id="idlblrep_DS" text="{i18n>CS_rep}" />     
+            <Text id="idCNrep_DS" text="{oSpecialsjmodel>/primaryServiceRep}"/>
+            <Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
+            <Text id="idCNpsw_DS" text="{oSpecialsjmodel>/pswDiagramNumber}"/>
+            <Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
+            <Text id="idcreatedby_DS" text="{oSpecialsjmodel>/createdBy}"/>
+            <Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
+            <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdOn}"/>
+            <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
+            <Text id="idmodifiedby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
+            
+            
+            <core:Title id="idcoreTOther3_DS" />  
+            <Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
+            <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedOn}"/>   
+            <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
+            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approveBy}"/>
+            <Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
+            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approveOn}"/>
+            <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
+            <TextArea id="idcomment_DS" growing="true" value="{oCustomerAttributesJModel>/comment}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
+                <!-- <layoutData>
+                    <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
+                </layoutData> -->
+            </TextArea> 
+            
+
+            </form:content>
+            </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
 
             <x:ObjectPageSection
                 id="idPageSectionFusesAtLBD_DS"
@@ -569,65 +620,6 @@
                     </x:ObjectPageSubSection>
                 </x:subSections>
             </x:ObjectPageSection>
-
-            <x:ObjectPageSection id="idPageSection_DS" titleUppercase="false" title="{i18n>CS_other}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idDSSubSection_DS" titleUppercase="false">
-            <x:blocks>
-               <form:SimpleForm id="reqesform_DS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false">
-            <form:content>
-            <core:Title id="idTitle_DS1" />
-            <Label id="idmeasure_DS" />
-
-            <Label id="idlblAB_DS" text="{i18n>CS_AB}" />
-            <Text id="idAB_DS" text="{oSpecialsjmodel>/AB}"/>
-            <Label id="idlblBC_DS" text="{i18n>CS_BC}" />
-            <Text id="idBC_DS" text="{oSpecialsjmodel>/BC}"/>
-            <Label id="idlblCA_DS" text="{i18n>CS_CA}" />
-            <Text id="idCA_DS" text="{oSpecialsjmodel>/CA}"/>
-            <Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
-            <Text id="idAN_DS" text="{oSpecialsjmodel>/AN}"/>
-            <Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
-            <Text id="idBN_DS" text="{oSpecialsjmodel>/BN}"/>
-            <Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
-            <Text id="idCN_DS" text="{oSpecialsjmodel>/CN}"/>
-            <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
-            <TextArea id="idcomment_DS" growing="true" value="{oCustomerAttributesJModel>/comment}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
-                  <layoutData>
-                      <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
-                    </layoutData>
-                    </TextArea> 
-            <Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
-            <Text id="idCNpsw_DS" text="{oSpecialsjmodel>/psw}"/>
-            
- 
-            <core:Title id="heding5CPSR_DS1" /> 
-                    
-            <Label id="idlblGround_DS" text="{i18n>CS_ground}" />     
-            <Text id="idground_DS" text="{oSpecialsjmodel>/ground}"/>
-            <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
-            <Text id="idmethod_DS" text="{oSpecialsjmodel>/method}"/>
-            <Label id="idlbldate_DS" text="{i18n>CS_date}" />     
-            <Text id="iddate_DS" text="{oSpecialsjmodel>/date}"/>
-            <Label id="idlblverified_DS" text="{i18n>CS_verified}" />     
-            <Text id="idverified_DS" text="{oSpecialsjmodel>/verified}"/>
-            <Label id="idlblservice_DS" text="{i18n>CS_service}" />     
-            <Text id="idservice_DS" text="{oSpecialsjmodel>/service}"/>
-            <Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
-            <Text id="idCNTO_DS" text="{oSpecialsjmodel>/TO}"/>
-            <Label id="idlblrep_DS" text="{i18n>CS_rep}" />     
-            <Text id="idCNrep_DS" text="{oSpecialsjmodel>/rep}"/>
-            <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
-            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approveby}"/>
-            <Label id="idlblapprovedate_DS" text="{i18n>CS_approvedate}" />     
-            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approvedate}"/>
-
-            </form:content>
-            </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
 
 
 

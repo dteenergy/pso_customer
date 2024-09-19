@@ -9,9 +9,9 @@
 	xmlns:vhc="sap.ui.mdc.valuehelp.content"
 	xmlns:vhfb="sap.ui.mdc.filterbar.vh">
 
-	<ValueHelpDialog title="Approved By" id="idVhStoreDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="approvedBy" >
+	<ValueHelpDialog title="Approved By" id="idVhStoreDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="approvedBy" contentWidth="40px">
 	<filterBar>
-	<fb:FilterBar advancedMode="true">
+	<fb:FilterBar advancedMode="true" showGoOnFB="false">
 	</fb:FilterBar>
 	</filterBar>
 	</ValueHelpDialog>

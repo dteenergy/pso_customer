@@ -21,7 +21,7 @@
                     type="XML" />
           </content>
       </Panel>     
-        
+         
        <footer>
             <OverflowToolbar id="_IDGenOverflowToolbar01">
             <!-- <Label id="idSpecialsStatusMessage" text="" class="specialsStatusLabel"/> -->
@@ -51,7 +51,7 @@
                             icon="sap-icon://save"
                             press="onSaveAsDraftSpecials" 
                             visible="false" /> 
-                            
+                             
                             <Button id="_IDButtonSaveSubmit" 
                             type="Critical" 
                             text="Submit for Approval" 

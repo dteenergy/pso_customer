@@ -50,22 +50,27 @@ entity PSOSpecials : cuid, managed {
         faultDuty           : String;
         bilCB               : String;
         ownedByTransformer  : String;
-        ab                  : String;
-        bc                  : String;
-        ca                  : String;
-        an                  : String;
-        bn                  : String;
-        cn                  : String;
-        groundMatResistance : String;
-        methodUsed          : String;
-        dateMergered        : String;
-        amaVerifiedBy       : String;
-        comment             : String;
-        typeofService       : String;
-        typeofTO            : String;
-        pswDiagramNumber    : String;
-        primaryServiceRep   : String;
-//approvedBy : String;
-//approvedDate : String; //approvedOn
+        // meter_number2       : String;
+        // ab                  : String;
+        // bc                  : String;
+        // ca                  : String;
+        // an                  : String;
+        // bn                  : String;
+        // cn                  : String;
+        // groundMatResistance : String;
+        // methodUsed          : String;
+        // dateMergered        : String;
+        // amaVerifiedBy       : String;
+        // comment             : String;
+        // typeofService       : String;
+        // typeofTO            : String;
+        // pswDiagramNumber    : String;
+        // primaryServiceRep   : String;
+        
+        
+        // // createdBy: String;
+        // // createdOn: Timestamp;
+        // // modifiedBy: String;
+        // // modifiedOn: Timestamp;
 
 }

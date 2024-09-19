@@ -4,6 +4,7 @@ const { transformServiceBindingToDestination, registerDestination } = require('@
 const xsenv = require('@sap/xsenv');
 const { nextTick } = require('process');
 const { PSOSpecials } = cds.entities;
+let userToken;
 module.exports = class PSOService extends cds.ApplicationService {
     init() {
         this.on('getSpecialsRecord', async (req) => {
@@ -19,7 +20,7 @@ module.exports = class PSOService extends cds.ApplicationService {
 
         this.on('createSpecials', async (req) => {
             console.log("in create specials");
-            req.data.context.record_status = "draft";
+            req.data.context.record_status = "Draft";
             console.log(req.data.context);
             const insertResult = await INSERT.into(PSOSpecials).entries(req.data.context);
             console.log("post success createSpecials: " + insertResult.results[0].affectedRows);
@@ -36,7 +37,74 @@ module.exports = class PSOService extends cds.ApplicationService {
                 work_desc: req.data.context.work_desc,
                 meter_number: req.data.context.meter_number,
                 record_status: req.data.context.record_status,
-                workflow_id: req.data.context.workflow_id
+                workflow_id: req.data.context.workflow_id,
+
+                connection_object  : req.data.context.connection_object,
+                approvedBy         : req.data.context.approvedBy,
+                approvedOn         : req.data.context.approvedOn,
+                approverComment    : req.data.context.approverComment,
+                //Customer Record(CR)
+                pSNumber           : req.data.context.pSNumber,
+                completionDate     : req.data.context.completionDate,
+                fedFrom            : req.data.context.fedFrom,
+                cableDescription   : req.data.context.cableDescription,
+                cableFootage       : req.data.context.cableFootage,
+                ductType           : req.data.context.ductType,
+                cts                : req.data.context.cts,
+                pts                : req.data.context.pts,
+                k                  : req.data.context.k,
+                m                  : req.data.context.m,
+                fusesAt            : req.data.context.fusesAt,
+                size               : req.data.context.size,
+                typeCR             : req.data.context.typeCR,
+                curve              : req.data.context.curve,
+                voltage            : req.data.context.voltage,
+                //Load Break Disconnect(LBD)
+                ownedByLBD         : req.data.context.ownedByLBD,    //Radiobutton
+                manufacturer       : req.data.context.manufacturer,
+                model              : req.data.context.model,
+                continuousCurrent  : req.data.context.continuousCurrent,
+                loadIntRating      : req.data.context.loadIntRating,
+                kAMomentaryLBD     : req.data.context.kAMomentaryLBD,
+                typeLBD            : req.data.context.typeLBD,
+                faultClosing       : req.data.context.faultClosing,
+                bilLBD             : req.data.context.bilLBD,
+                serviceVoltage     : req.data.context.serviceVoltage,
+                CycWithstand60     : req.data.context.CycWithstand60,
+                //Circuit Breaker(CB)
+                fuelTypeCB         : req.data.context.fuelTypeCB,    //Radiobutton
+                ownedByCB          : req.data.context.ownedByCB,   //Radiobutton
+                circuitBreakerMake : req.data.context.circuitBreakerMake,
+                serialNo           : req.data.context.serialNo,
+                kAMomentaryCB      : req.data.context.kAMomentaryCB,
+                amps               : req.data.context.amps,
+                typeCB             : req.data.context.typeCB,
+                faultDuty          : req.data.context.faultDuty,
+                bilCB              : req.data.context.bilCB,
+                //Transformer
+                ownedByTransformer          : req.data.context.ownedByTransformer,    //Radiobutton
+
+                //new fields
+                // meter_number2       : req.data.context.meter_number,
+                // ab                  : req.data.context.ab,
+                // bc                  : req.data.context.bc,
+                // ca                  : req.data.context.ca,
+                // an                  : req.data.context.an,
+                // bn                  : req.data.context.bn,
+                // cn                  : req.data.context.cn,
+                // groundMatResistance : req.data.context.groundMatResistance,
+                // methodUsed          : req.data.context.methodUsed,
+                // dateMergered        : req.data.context.dateMergered,
+                // comment             : req.data.context.comment,
+                // typeofService       : req.data.context.typeofService,
+                // typeofTO            : req.data.context.typeofTO,
+                // pswDiagramNumber    : req.data.context.pswDiagramNumber,
+                // primaryServiceRep   : req.data.context.primaryServiceRep
+                // // createdBy: req.data.context.createdBy,
+                // // createdOn: req.data.context.createdOn,
+                // // modifiedBy: req.data.context.modifiedBy,
+                // // modifiedOn: req.data.context.modifiedOn
+
             });
             console.log("post success createSpecials: " + oResult);
             return "success updateSpecials....";
@@ -46,7 +114,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log(req.data.context);
             const wfId = await this.triggerWorkflowPSOSpecials(req.data.recordID, req.data.context);
             if (wfId) {
-                req.data.context.record_status = "submitted";
+                req.data.context.record_status = "Submitted";
                 req.data.context.workflow_id = wfId;
                 //    req.data.context.workflow_status = "running";
             }
@@ -58,13 +126,19 @@ module.exports = class PSOService extends cds.ApplicationService {
 
         });
         this.on('submitSpecials', async (req) => {
+            userToken =req.headers.authorization.slice(7);
+           // userToken = req.req.user.tokenInfo.getTokenValue();
+            console.log(userToken);
             console.log("in submit specials");
             let oResult = this.initiateWFandUpdateDB(req.data.recordID, req.data.context);
             console.log("submit specials success : " + oResult);
             return "success submitSpecials....";
         });
         this.on('createAndSubmitSpecials', async (req) => {
-            req.data.context.record_status = "draft"
+            userToken =req.headers.authorization.slice(7);
+            //userToken = req.req.user.tokenInfo.getTokenValue();
+            console.log(userToken);
+            req.data.context.record_status = "Draft"
             const insertResult = await INSERT.into(PSOSpecials).entries(req.data.context);
             console.log("new record created: ");
             console.log(insertResult);
@@ -78,7 +152,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             const comment = req.data.comment;
             const recordID = req.data.recordID;
             let approvedBy = req.data.approvedBy;
-            const record_status = "approved";
+            const record_status = "Approved";
             //approver =>req.user.id
             approvedBy = "mickey"; //to make it runtime ...mickey
             console.log(comment);
@@ -86,6 +160,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approverComment: comment });
             console.log("success");
             console.log(updateResult);
+            //update ISU POST/Update call
             let comment1 = "wf comment";
             let wfType = { "comment": comment1 };
             return wfType;
@@ -94,7 +169,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             const comment = req.data.comment;
             const recordID = req.data.recordID;
             let approvedBy = req.data.approvedBy;
-            const record_status = "rejected";
+            const record_status = "Rejected";
 
             approvedBy = "mickey"; //to make it runtime ...mickey
             console.log(comment);
@@ -115,7 +190,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             
             if(res && res.lenght>0){
                 const record_status = res[0].record_status;
-                if (record_status === "approved" || record_status === "rejected") {
+                if (record_status === "Approved" || record_status === "Rejected") {
                     return true;
                 } else return false;
             }
@@ -233,17 +308,48 @@ module.exports = class PSOService extends cds.ApplicationService {
                     ]
                 }               
             }
-            const bp = await cds.connect.to('connectbpa');
-            const path = "/workflow/rest/v1/workflow-instances";
-            console.log("i am in WF Trigger");
-            const res = await bp.send({
-                method: 'POST',
-                path: path,
-                data: wfPayload
-            });
-            console.log(res);
-            return res.id;
+            // const bp = await cds.connect.to('connectbpa');
+            // console.log(bp);
+            // let jwtToken = "Bearer " + userToken;
+            // console.log("i am in WF Trigger");
+            // const res = await bp.send({
+            //     headers: {
+            //         "authorization":jwtToken
+            //     }, 
+            //     method: 'POST',
+            //     path: resourceUrl,
+            //     data: wfPayload                
+            // });
+            
+//////////////////////////////////////////////////
+const resourceUrl = "/workflow/rest/v1/workflow-instances";
+            
+            const response = await executeHttpRequest(
+                { destinationName: 'sap_process_automation_service_user_token', jwt: userToken },
+                {
+                    method: 'POST',
+                    url: resourceUrl,
+                    headers: {
+                       'Content-Type': 'application/json; charset=utf-8',
+                        Accept: 'application/json'                       
+                    },
+                    data: JSON.stringify(wfPayload)
+                }
+            )
 
+            console.log(response);
+
+///////////////////////////////////////////////
+           
+      
+            // const res = await bp.send({         
+            //     method: 'POST',
+            //     path: path,
+            //     data: wfPayload                
+            // });
+
+            //console.log(res);
+            return "success wf";
         });
         this.on('fetchDestinationURL', async (req) => {
             const destName = req.data.destName;
@@ -280,6 +386,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 "Z_PSO_StreetAddress_KUT": req.data.context.Z_PSO_StreetAddress_KUT,
                 "Z_PSO_CustomerName_KUT": req.data.context.Z_PSO_CustomerName_KUT,
                 "Z_PSO_ZIP_KUT": req.data.context.Z_PSO_ZIP_KUT,
+                "ServiceRequestUserLifeCycleStatusCode":"1",
                 "ServiceRequestParty": [
                     {
                         "PartyID": req.data.context.PartyID,
@@ -301,7 +408,27 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log(id);
             let result = { "value": id };
             return result;
-        })
+        });
+        this.on('updateSpecialsinISU', async (req) => {
+
+            let isuPayload = {
+            };
+            console.log(isuPayload);
+            const isu = await cds.connect.to('ISU');
+            const path = "/ServiceRequestCollection";//
+            console.log("i am in ISU upload");
+            const res = await isu.send({
+                method: 'POST',
+                path: path,
+                data: isuPayload
+            });
+            console.log(res);
+            let id = res.ID + "";
+            console.log(id);
+            let result = { "value": id };
+            return result;
+        
+        });
         return super.init();
 
     }

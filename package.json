@@ -44,13 +44,19 @@
       "connectbpa": {
         "kind": "rest",
         "credentials": {
-          "destination": "sap_process_automation_service"
+          "destination": "sap_process_automation_service_user_token"
         }
       },
       "C4C": {
         "kind": "odata-v2",
         "credentials": {
           "destination": "C4C"
+        }
+      },
+      "ISU": {
+        "kind": "odata-v2",
+        "credentials": {
+          "destination": "ISU"
         }
       }
     },

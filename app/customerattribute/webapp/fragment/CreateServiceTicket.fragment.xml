@@ -167,7 +167,7 @@
 
                     <core:Title id="serviceTicketTitleST" />
                     <Label id="idlblsetB"  />
-                    <RadioButtonGroup id="GroupB" select="oSelectB">
+                    <RadioButtonGroup id="GroupB" select="oSelectB" enabled="true">
 			            <RadioButton id="idSetB" text="Set B" selected="false"/>
 		            </RadioButtonGroup>
                     <Label id="idlblDCPLIND_ST1" />

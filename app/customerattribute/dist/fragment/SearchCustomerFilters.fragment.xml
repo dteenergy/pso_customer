@@ -130,7 +130,7 @@
                                         <Input
                                             id="idNoofline"
                                             showValueHelp="false"
-                                            maxLength="10"
+                                            maxLength="2"
                                             type="Number"
                                         />
                                     </fb:control>
@@ -146,7 +146,7 @@
                                         <Input
                                             id="idsrvcenter"
                                             showValueHelp="false"
-                                            maxLength="65"
+                                            maxLength="5"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -161,7 +161,7 @@
                                         <Input
                                             id="idcableno"
                                             showValueHelp="false"
-                                            maxLength="60"
+                                            maxLength="10"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -176,7 +176,7 @@
                                         <Input
                                             id="idPswdigram"
                                             showValueHelp="false"
-                                            maxLength="225"
+                                            maxLength="10"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -227,7 +227,7 @@
                                         <Input
                                             id="idSubstation"
                                             showValueHelp="false"
-                                            maxLength="65"
+                                            maxLength="30"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -257,7 +257,7 @@
                                         <Input
                                             id="idCircuit"
                                             showValueHelp="false"
-                                            maxLength="225"
+                                            maxLength="20"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
