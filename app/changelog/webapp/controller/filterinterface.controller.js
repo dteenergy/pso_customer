@@ -79,8 +79,8 @@ sap.ui.define([
                         }
 
                         let record_status = context.getObject()['record_status'];
-                        if (!oRecStats.hasOwnProperty(record_status)) {
-                            oRecStats[record_status] = context.getObject()['record_status'];
+                        if (!oRecStats.hasOwnProperty(record_status.toLowerCase()) && record_status !== null) {
+                            oRecStats[record_status.toLowerCase()] = context.getObject()['record_status'].toLowerCase();
                             oRecStats['dataToDisplay'].push({
                                 "key": record_status,
                                 "text": record_status.replace(/^./, record_status[0].toUpperCase())
@@ -164,6 +164,7 @@ sap.ui.define([
                         this.apprDialog.getTableAsync().then(oTable => {
                             oTable.setModel(that.localModel);
                             if (oTable.bindRows) {
+                                oTable.removeAllExtension();
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     this.onValueHelpOkPress();
                                 }.bind(this));
@@ -251,6 +252,7 @@ sap.ui.define([
                         this.conObjDialog.getTableAsync().then(oTable => {
                             oTable.setModel(that.localModel);
                             if (oTable.bindRows) {
+                                oTable.removeAllExtension();
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     this.onValueHelpOkPress();
                                 }.bind(this))

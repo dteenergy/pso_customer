@@ -4,10 +4,11 @@ using {com.pso.specials as db} from '../db/pso-schema';
 service PSOService {
 
   entity PSOSpecials as projection on db.PSOSpecials;
- 
+
   type wfType {
     comment : String;
   }
+
   type result {
     value : String;
   }
@@ -21,7 +22,6 @@ service PSOService {
     approvedBy         : String;
     approvedOn         : String;
     approverComment    : String;
-
     //Customer Record(CR)
     pSNumber           : String;
     completionDate     : String;
@@ -39,7 +39,7 @@ service PSOService {
     curve              : String;
     voltage            : String;
     //Load Break Disconnect(LBD)
-    ownedByLBD         : String;    //Radiobutton
+    ownedByLBD         : String; //Radiobutton
     manufacturer       : String;
     model              : String;
     continuousCurrent  : String;
@@ -51,8 +51,8 @@ service PSOService {
     serviceVoltage     : String;
     CycWithstand60     : String;
     //Circuit Breaker(CB)
-    fuelTypeCB         : String;    //Radiobutton
-    ownedByCB          : String;    //Radiobutton
+    fuelTypeCB         : String; //Radiobutton
+    ownedByCB          : String; //Radiobutton
     circuitBreakerMake : String;
     serialNo           : String;
     kAMomentaryCB      : String;
@@ -61,29 +61,36 @@ service PSOService {
     faultDuty          : String;
     bilCB              : String;
     //Transformer
-    ownedByTransformer          : String;    //Radiobutton
+    ownedByTransformer : String; //Radiobutton
 
     //new fields
-    // meter_number2       : String;
-    // ab                  : String;
-    // bc                  : String;
-    // ca                  : String;
-    // an                  : String;
-    // bn                  : String;
-    // cn                  : String;
-    // groundMatResistance : String;
-    // methodUsed          : String;
-    // dateMergered        : String;
-    // comment             : String;
-    // typeofService       : String;
-    // typeofTO            : String;
-    // pswDiagramNumber    : String;
-    // primaryServiceRep   : String;
+    meter_number2       : String;
+    ab                  : String;
+    bc                  : String;
+    ca                  : String;
+    an                  : String;
+    bn                  : String;
+    cn                  : String;
+    groundMatResistance : String;
+    methodUsed          : String;
+    dateMergered        : String;
+    comment             : String;
+    typeofService       : String;
+    typeofTO            : String;
+    pswDiagramNumber    : String;
+    primaryServiceRep   : String;
+  }
 
-    // // createdBy: String;
-    // // createdOn: Timestamp;
-    // // modifiedBy: String;
-    // // modifiedOn: Timestamp;
+  type user {
+    userName                 : String;
+    email                    : String;
+    hasLimitedDisplay        : Boolean;
+    hasRecordCreateAccess    : Boolean;
+    hasRecordDisplayAccess   : Boolean;
+    hasRecordEditAccess      : Boolean;
+    hasSpecialsCreateAccess  : Boolean;
+    hasSpecialsDisplayAccess : Boolean;
+    hasSpecialsEditAccess    : Boolean;
   }
 
   type C4CPayload {
@@ -106,8 +113,8 @@ service PSOService {
     Z_PSO_ZIP_KUT                  : String;
   }
 
-
-  function userDetails()                                                           returns array of String;
+  function userDetails()                                      returns array of String;
+ // function userDetails()                                                           returns user;
   function fetchDestinationURL(destName : String)                                  returns String;
   function getSpecialsRecord(connection_object : String)                           returns String;
   function triggerWorkflowPSOSpecials(recordID : UUID, context : SpecialsContext)  returns String;
@@ -119,6 +126,6 @@ service PSOService {
   action   initiateWFandUpdateDB(recordID : UUID, context : SpecialsContext);
   action   createAndSubmitSpecials(context : SpecialsContext);
   //entity   ServiceRequestCollection as projection on c4c.ServiceRequestCollection;
-  action   createServiceTicket(context : C4CPayload)    returns result;
-  function onVerifyRecordStatus(workflowID : UUID) returns Boolean;
+  action   createServiceTicket(context : C4CPayload)                               returns result;
+  function onVerifyRecordStatus(workflowID : UUID)                                 returns Boolean;
 }

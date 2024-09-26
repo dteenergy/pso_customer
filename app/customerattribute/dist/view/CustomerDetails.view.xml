@@ -94,7 +94,7 @@
                     icon="sap-icon://display"
                     press="onDiplaySpecials"
                     visible="false"
-                   
+                
                 />
             </OverflowToolbar>
         </footer>

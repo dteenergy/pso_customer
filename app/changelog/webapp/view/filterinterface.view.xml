@@ -6,7 +6,7 @@
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:svm="sap.ui.comp.smartvariants"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page">
         <f:DynamicPage headerExpanded="true">
             <f:header>
                 <f:DynamicPageHeader pinnable="false" backgroundDesign="Solid">
@@ -56,6 +56,9 @@
                         <Column>
                             <Label text="Record Status"></Label>
                         </Column>
+                        <Column>
+                            <Label text="Approver Comment"></Label>
+                        </Column>
                     </columns>
                     <noData>
                         <IllustratedMessage id="im" illustrationType="sapIllus-FilterTable" illustrationSize="Dialog">
@@ -70,6 +73,7 @@
                                 <Text text="{localModel>approvedBy}"></Text>
                                 <Text text="{localModel>approvedOn}"></Text>
                                 <Text text="{localModel>record_status}"></Text>
+                                <Text text="{localModel>approverComment}"></Text>
                             </cells>
                         </ColumnListItem>
                     </items>

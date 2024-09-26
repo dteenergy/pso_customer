@@ -4,7 +4,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns="sap.m" > 
-    <Page id="page" title="{i18n>title}" titleAlignment="Center" showNavButton="true" navButtonPress="onBack" enableScrolling="false">
+    <Page id="page" title="{i18n>title_CS}" titleAlignment="Center" showNavButton="true" navButtonPress="onBack" enableScrolling="false">
          
       <Panel id="idpanelCreateSpecials" expanded="true" expandable="false" height="40em" visible="false" >
            <content>

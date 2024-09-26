@@ -46,6 +46,8 @@
                                         id="idcoreTrecord1_DS"
                                         
                                     />
+                                    <Label id="idlblConnObj_DS" text="{i18n>CS_BEntity}"/>
+                                    <Text id="idConnObj_DS" text="{oSpecialsjmodel>/connection_object}" />
 
                                     <Label id="idlblPSNo_DS" text="{i18n>psnum}"/>
                                     <Text id="idPSNo_DS" text="{oSpecialsjmodel>/pSNumber}" 
@@ -53,12 +55,8 @@
                                   
                                     <Label
                                         id="idlblCompletionD_DS"
-                                        text="{i18n>completionDate}"
-                                       
-                                    />
-                                    <Text id="idCompletionD_DS" 
-                                            
-                                    />
+                                        text="{i18n>completionDate}"/>
+                                    <Text id="idCompletionD_DS" text="{oSpecialsjmodel>/completionDate}"/>
                                     <Label
                                         id="idlblWorkDesc_DS"
                                         text="{i18n>CS_WorkDesc}"
@@ -198,14 +196,17 @@
                                         <RadioButton
                                             id="iddeCoOwned_DS"
                                             text="{i18n>CS_DTEOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'DTE Owned' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idCustomerOwned2_DS"
                                             text="{i18n>CS_CustomerOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'Customer Owned' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idNone_DS"
                                             text="{i18n>CS_None}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
                                         />
                                     </RadioButtonGroup>
                                     <Label
@@ -216,7 +217,7 @@
                                     <Label
                                         id="idlblModel_DS"
                                         text="{i18n>CS_Model}"
-                                    />
+                                    /> 
                                     <Text id="idModel_DS" text="{oSpecialsjmodel>/model}"/>
                                     <Label
                                         id="idlblCC_DS"
@@ -302,18 +303,22 @@
                                         <RadioButton
                                             id="idAir_DS"
                                             text="{i18n>CS_Air}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Air' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idOil_DS"
                                             text="{i18n>CS_Oil}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Oil' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idVac_DS"
                                             text="{i18n>CS_Vac}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Vac' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idsf6_DS"
                                             text="{i18n>CS_Sf6}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
                                     <Label
@@ -340,10 +345,12 @@
                                         <RadioButton
                                             id="idDecoOwned_DS"
                                             text="{i18n>CS_DTEOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idCustomer_DS"
                                             text="{i18n>CS_CustomerOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
                                         />
                                     </RadioButtonGroup>
                                     <Label
@@ -374,7 +381,7 @@
                                         id="idlblBil2_DS"
                                         text="{i18n>CS_Bil2}"
                                     />
-                                    <Text id="idBil2_DS" />
+                                    <Text id="idBil2_DS" text="{oSpecialsjmodel>/bilCB}"/>
                                 </form:content>
                             </form:SimpleForm>
                         </x:blocks>
@@ -393,17 +400,17 @@
 
             <core:Title id="idcoreTOther1_DS" />
             <Label id="idlblAB_DS" text="{i18n>CS_AB}" />
-            <Text id="idAB_DS" text="{oSpecialsjmodel>/AB}"/>
+            <Text id="idAB_DS" text="{oSpecialsjmodel>/ab}"/>
             <Label id="idlblBC_DS" text="{i18n>CS_BC}" />
-            <Text id="idBC_DS" text="{oSpecialsjmodel>/BC}"/>
+            <Text id="idBC_DS" text="{oSpecialsjmodel>/bc}"/>
             <Label id="idlblCA_DS" text="{i18n>CS_CA}" />
-            <Text id="idCA_DS" text="{oSpecialsjmodel>/CA}"/>
+            <Text id="idCA_DS" text="{oSpecialsjmodel>/ca}"/>
             <Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
-            <Text id="idAN_DS" text="{oSpecialsjmodel>/AN}"/>
+            <Text id="idAN_DS" text="{oSpecialsjmodel>/an}"/>
             <Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
-            <Text id="idBN_DS" text="{oSpecialsjmodel>/BN}"/>
+            <Text id="idBN_DS" text="{oSpecialsjmodel>/bn}"/>
             <Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
-            <Text id="idCN_DS" text="{oSpecialsjmodel>/CN}"/>
+            <Text id="idCN_DS" text="{oSpecialsjmodel>/cn}"/>
             <Label id="idlblGround_DS" text="{i18n>CS_ground}" />     
             <Text id="idground_DS" text="{oSpecialsjmodel>/groundMatResistance}"/>
             <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
@@ -425,25 +432,25 @@
             <Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
             <Text id="idcreatedby_DS" text="{oSpecialsjmodel>/createdBy}"/>
             <Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
-            <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdOn}"/>
+            <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdAt}"/>
             <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
             <Text id="idmodifiedby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
             
             
             <core:Title id="idcoreTOther3_DS" />  
             <Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
-            <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedOn}"/>   
+            <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedAt}"/>   
             <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
-            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approveBy}"/>
+            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approvedBy}"/>
             <Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
-            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approveOn}"/>
+            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approvedOn}"/>
             <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
-            <TextArea id="idcomment_DS" growing="true" value="{oCustomerAttributesJModel>/comment}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
+            <TextArea id="idcomment_DS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" editable="false" rows="7" maxLength="1300">
                 <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
             </TextArea> 
-            
+        
 
             </form:content>
             </form:SimpleForm >
@@ -538,10 +545,12 @@
                                             <RadioButton
                                                 id="idDteOwned_DS"
                                                 text="DTE Owned"
+                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'DTE Owned' ? true : false}"
                                             />
                                             <RadioButton
                                                 id="idCustomerOwned"
                                                 text="Customer Owned"
+                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
                                             />
                                         </RadioButtonGroup>
                                     </Toolbar>

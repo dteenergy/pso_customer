@@ -292,7 +292,7 @@
 				                text="{i18n>open_psw_doc}"
 				                press="onPressPswDocId"/>
                   <Label id="idlblComments_DC" text="Comments"/>
-                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" valueLiveUpdate="true" editable="false"  rows="6" maxLength="225">
+                  <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="false" rows="8" editable="false" maxLength="1300">
                     <layoutData>
                       <l:GridData id="idGridData2_DC10" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -390,7 +390,7 @@
 				                text="{i18n>open_psw_doc}"
 				                press="onPressPswDocId2"/>
                   <Label id="idlblComments2_DC" text="Comments"/>
-                  <TextArea id="idComents2_DC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" editable="false" rows="6" maxLength="225">
+                  <TextArea id="idComents2_DC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" editable="false" rows="8" maxLength="1300">
                   <layoutData>
                       <l:GridData id="idGridData2_DC11" span="XL5 L5 M12 S12" />
                     </layoutData>

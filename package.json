@@ -36,9 +36,7 @@
   },
   "cds": {
     "requires": {
-     "uaa": {
-        "kind": "dummy"
-      },
+      "auth":"xsuaa",
       "db": "hana",
       "connectivity": true,
       "connectbpa": {
@@ -55,14 +53,11 @@
       },
       "ISU": {
         "kind": "odata-v2",
+        "csrf": true, 
+        "csrfInBatch": true,
         "credentials": {
           "destination": "ISU"
         }
-      }
-    },
-    "auth": {
-      "passport": {
-        "strategy": "JWT"
       }
     }
   }

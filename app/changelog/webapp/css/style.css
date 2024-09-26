@@ -10,6 +10,15 @@
     vertical-align: middle;
 }
 
-.sapUiTableHeaderDataCell .sapMLabel, .sapMListTbl .sapMColumnHeader .sapMLabel {
+.sapMListTbl .sapMColumnHeader .sapMLabel {
     color :white
+}
+
+.formTitle .sapUiFormTitle {
+    visibility: hidden;
+}
+
+.sapUiSizeCompact .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 0rem;
+    line-height: 0rem;
 }

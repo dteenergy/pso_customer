@@ -303,7 +303,7 @@
                   </Input>
                   
                   <Label id="idlblComments_CC" text="Comments"/>
-                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" valueLiveUpdate="true" rows="6" maxLength="255">
+                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" rows="8" maxLength="1300">
                   <layoutData>
                       <l:GridData id="idGridData_DC24" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -396,7 +396,7 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblComments2_CC" text="Comments"/>
-                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false" valueLiveUpdate="true" rows="6" maxLength="255">
+                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false"  rows="8" maxLength="1300">
                   <layoutData>
                       <l:GridData id="idGridData2_DC25" span="XL5 L5 M12 S12" />
                     </layoutData>
