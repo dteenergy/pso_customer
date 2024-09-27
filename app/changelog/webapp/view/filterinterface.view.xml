@@ -31,6 +31,21 @@
                                     </Select>
                                 </fb:control>
                             </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="custName" groupName="__$INTERNAL$" name="custName" label="Customer Name" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idCustName" valueHelpRequest="onValueHelpCustName" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="street" groupName="__$INTERNAL$" name="street" label="Street" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idStreet" valueHelpRequest="onValueHelpStreet" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="streetAddr" groupName="__$INTERNAL$" name="streetAddr" label="Street Address" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idStreetAddr" valueHelpRequest="onValueHelpStreetAddr" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
                         </fb:filterGroupItems>
                     </fb:FilterBar>
                 </f:DynamicPageHeader>
