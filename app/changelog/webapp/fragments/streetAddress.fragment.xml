@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns:m="sap.m"
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core"
+	xmlns:mdc="sap.ui.mdc"
+	xmlns:mdct="sap.ui.mdc.table"
+	xmlns:vh="sap.ui.mdc.valuehelp"
+	xmlns:vhc="sap.ui.mdc.valuehelp.content"
+	xmlns:vhfb="sap.ui.mdc.filterbar.vh">
+
+	<ValueHelpDialog title="Connection Object" id="idVhConObjDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="connection_object" afterOpen="onAfterDialogOpen" contentWidth="40px">
+	<filterBar>
+	<fb:FilterBar advancedMode="true" showGoOnFB="false">
+	</fb:FilterBar>
+	</filterBar>
+	</ValueHelpDialog>
+
+</core:FragmentDefinition>

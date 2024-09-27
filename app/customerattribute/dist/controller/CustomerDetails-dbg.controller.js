@@ -582,9 +582,10 @@ sap.ui.define([
                 var oCustomerAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
                 var oUserScope = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 var userid = "";
-                if (oUserScope.length > 0) {
-                    userid = oUserScope[oUserScope.length - 1];
+                if (oUserScope.userName !== "" || oUserScope.userName !== undefined || oUserScope.userName !== null) {
+                    userid = oUserScope.userName;
                 }
+                
                 var oSelectedKey = this.getView().byId("idDCPLIND_CC").getSelectedIndex();
                 var oDC = "", oPL = "", oNA = "";
                 if (oSelectedKey === 0) {
@@ -1125,16 +1126,15 @@ sap.ui.define([
                 }
 
                 var oUserScope = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
-                if (oUserScope.length > 0) {
-                    this.oUserId = oUserScope[oUserScope.length - 1];
-                    if (this.oUserId === "") {
-                        sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("user_auth_msg"), {
+                if (oUserScope.userName === "" || oUserScope.userName === undefined || oUserScope.userName === null) {
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("user_auth_msg"), {
                             icon: sap.m.MessageBox.Icon.ERROR,
                             title: "Error",
                             actions: [sap.m.MessageBox.Action.OK]
                         });
                         return false;
-                    }
+                }else{
+                    this.oUserId = oUserScope.userName;
                 }
 
                 var omodel = this.getOwnerComponent().getModel();
