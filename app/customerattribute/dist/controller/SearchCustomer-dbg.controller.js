@@ -12,37 +12,44 @@ sap.ui.define([
         return Controller.extend("com.pso.customerattribute.controller.SearchCustomer", {
             onInit: function () {
                 this.hasRecordCreateAccess = false;
-                this.getUserDetails();  
+                this.getUserDetails();
                 this.onActivatingStandardFilter(); //Activating standard filters
                 this.initializBusyIndicator(); //Initializing busy indicator
                 this.fetchDropdownData();
 
             },
             getUserDetails: async function () {
-                var that = this;
-                let userScope = null;
+              //  var that = this;
+              //  let userScope = null;
                 let oUserScopeJModel = this.getOwnerComponent().getModel("oUserScopeJModel");
-                oUserScopeJModel.setData(userScope);
-                let omodel = this.getOwnerComponent().getModel();                
+                //   oUserScopeJModel.setData(userScope);
+                oUserScopeJModel.setData("");
+
+                let omodel = this.getOwnerComponent().getModel();
                 let oOperation = omodel.bindContext("/userDetails(...)");
 
                 await oOperation.execute().then(function (res) {
                     let oResults = oOperation.getBoundContext().getObject();
                     console.log(oResults);
                     //userScope = oResults.value;
-                    if(oResults && oResults.value){
-                        oUserScopeJModel.setData(oResults.value);
-                        //new code
-                        for (var i = 0; i < oResults.value.length; i++) {
-                            if(oResults.value[i].includes("pso_customer_details_create")){
-                                that.hasRecordCreateAccess = true;
-                                console.log("has create access")
-                                break;
-                            }                                
-                        }
-                    }
-                    else {
-                        //role definition incomplete message
+                    // if(oResults && oResults.value){
+                    //     oUserScopeJModel.setData(oResults.value);
+                    //     //new code
+                    //     for (var i = 0; i < oResults.value.length; i++) {
+                    //         if(oResults.value[i].includes("pso_customer_details_create")){
+                    //             that.hasRecordCreateAccess = true;
+                    //             console.log("has create access")
+                    //             break;
+                    //         }                                
+                    //     }
+                    // }
+                    // else {
+                    //     //role definition incomplete message
+                    // }
+                    if (oResults) {
+                        oUserScopeJModel.setData(oResults);
+                    } else {
+                        //msg -> assign proper roles
                     }
                 }.bind(this), function (err) {
                     //        oBusyDialog3.close();
@@ -203,62 +210,67 @@ sap.ui.define([
                 aFilters.push(new Filter("generation", FilterOperator.EQ, sGeneration));
                 this.oBusyIndicator.open();
                 //mickey
-                try{//rohit/ram
-                
-                this.getOwnerComponent().getModel("ISUService").read("/Customer_searchSet", {
-                    //    this.oDataModel.read("Customer_searchSet", {
-                    filters: [aFilters],
-                    success: function (oData) {
-                        that.oBusyIndicator.close()
-                        var noData=false;
-                        if (oData.results.length > 0) {
-                            if (!that.hasRecordCreateAccess) {
-                                console.log("in odata has NO create access");                         
-                                var arr = [];
-                                for (var i = 0; i < oData.results.length; i++) {
-                                    if (oData.results[i].superior_flag === "") {
-                                        arr.push(oData.results[i]);
-                                    }
-                                }
-                                if(arr.length >0){
-                                    that.oView.byId("idNoofRec").setText(arr.length);
-                                oSearchCustomerJModel.setProperty("/CustomersData", arr);
-                                }
-                                else{
-                                    noData= true;
-                                }
-                                
-                            }
-                            else {
-                                that.oView.byId("idNoofRec").setText(oData.results.length);
-                                oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
-                            }
-                        } else {
-                            noData= true;
-                            // oSearchCustomerJModel.setData([]);
-                            // that.oView.byId("idNoofRec").setText(oData.results.length);
-                        }
-                        if(noData){
-                            oSearchCustomerJModel.setData([]);
-                            that.oView.byId("idNoofRec").setText(oData.results.length);
-                        }
 
-                    },
-                    error: function (error) {
-                        that.oBusyIndicator.close();
-                        sap.m.MessageBox.show(
-                            error.statusText, {
-                            icon: sap.m.MessageBox.Icon.ERROR,
-                            title: "Error",
-                            actions: [sap.m.MessageBox.Action.OK]
-                        });
-                        oSearchCustomerJModel.setData([]);
-                        that.oView.byId("idNoofRec").setText("");
-                    }
-                });
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+                console.log(oUserScopeJModelData);
+                
+                try {//rohit/ram
+
+                    this.getOwnerComponent().getModel("ISUService").read("/Customer_searchSet", {
+                        //    this.oDataModel.read("Customer_searchSet", {
+                        filters: [aFilters],
+                        success: function (oData) {
+                            that.oBusyIndicator.close()
+                            var noData = false;
+                            if (oData.results.length > 0) {
+                                //   if (!that.hasRecordCreateAccess) {
+                                if (!oUserScopeJModelData.hasCustomerCreateAccess) {
+                                    console.log("in odata has NO create access");
+                                    var arr = [];
+                                    for (var i = 0; i < oData.results.length; i++) {
+                                        if (oData.results[i].superior_flag === "") {
+                                            arr.push(oData.results[i]);
+                                        }
+                                    }
+                                    if (arr.length > 0) {
+                                        that.oView.byId("idNoofRec").setText(arr.length);
+                                        oSearchCustomerJModel.setProperty("/CustomersData", arr);
+                                    }
+                                    else {
+                                        noData = true;
+                                    }
+
+                                }
+                                else {
+                                    that.oView.byId("idNoofRec").setText(oData.results.length);
+                                    oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
+                                }
+                            } else {
+                                noData = true;
+                                // oSearchCustomerJModel.setData([]);
+                                // that.oView.byId("idNoofRec").setText(oData.results.length);
+                            }
+                            if (noData) {
+                                oSearchCustomerJModel.setData([]);
+                                that.oView.byId("idNoofRec").setText(oData.results.length);
+                            }
+
+                        },
+                        error: function (error) {
+                            that.oBusyIndicator.close();
+                            sap.m.MessageBox.show(
+                                error.statusText, {
+                                icon: sap.m.MessageBox.Icon.ERROR,
+                                title: "Error",
+                                actions: [sap.m.MessageBox.Action.OK]
+                            });
+                            oSearchCustomerJModel.setData([]);
+                            that.oView.byId("idNoofRec").setText("");
+                        }
+                    });
                 }
-                catch{
-                    
+                catch {
+
                 }
             },
             //********************************End*********************************/

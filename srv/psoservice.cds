@@ -81,13 +81,13 @@ service PSOService {
     primaryServiceRep   : String;
   }
 
-  type user {
+  type userInfo {
     userName                 : String;
     email                    : String;
     hasLimitedDisplay        : Boolean;
-    hasRecordCreateAccess    : Boolean;
-    hasRecordDisplayAccess   : Boolean;
-    hasRecordEditAccess      : Boolean;
+    hasCustomerCreateAccess    : Boolean;
+    hasCustomerDisplayAccess   : Boolean;
+    hasCustomerEditAccess      : Boolean;
     hasSpecialsCreateAccess  : Boolean;
     hasSpecialsDisplayAccess : Boolean;
     hasSpecialsEditAccess    : Boolean;
@@ -113,8 +113,8 @@ service PSOService {
     Z_PSO_ZIP_KUT                  : String;
   }
 
-  function userDetails()                                      returns array of String;
- // function userDetails()                                                           returns user;
+ // function userDetails()                                      returns array of String;
+  function userDetails()                                                           returns userInfo;
   function fetchDestinationURL(destName : String)                                  returns String;
   function getSpecialsRecord(connection_object : String)                           returns String;
   function triggerWorkflowPSOSpecials(recordID : UUID, context : SpecialsContext)  returns String;
@@ -128,4 +128,4 @@ service PSOService {
   //entity   ServiceRequestCollection as projection on c4c.ServiceRequestCollection;
   action   createServiceTicket(context : C4CPayload)                               returns result;
   function onVerifyRecordStatus(workflowID : UUID)                                 returns Boolean;
-}
+};

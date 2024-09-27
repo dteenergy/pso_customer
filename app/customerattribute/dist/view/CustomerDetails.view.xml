@@ -9,15 +9,11 @@
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns="sap.m"
+    xmlns:p="sap.f"
 >
-    <Page
-        id="page_CD"
-        title="{i18n>title}"
-        titleAlignment="Center"
-        showNavButton="true"
-        navButtonPress="onBack"
-        enableScrolling="false">
-        <content>
+    <p:DynamicPage   id="page_CD"    showFooter="true">
+        <p:content>
+        <VBox id="id_cd_vbox" height="100%" width="100%">
             <Panel id="idpanel" expanded="true" expandable="false" height="600px" visible='true'>
                 <core:Fragment
                     fragmentName="com.pso.customerattribute.fragment.CreateChildFloc"
@@ -29,8 +25,9 @@
                     fragmentName="com.pso.customerattribute.fragment.DisplayChildFloc"
                     type="XML"/>
             </Panel>
-        </content>
-        <footer>
+             </VBox>
+        </p:content>
+        <p:footer>
             <OverflowToolbar id="_IDGenOverflowToolbar01_CD">
                 
                 <Button
@@ -97,6 +94,6 @@
                 
                 />
             </OverflowToolbar>
-        </footer>
-    </Page>
+        </p:footer>
+    </p:DynamicPage>
 </mvc:View>

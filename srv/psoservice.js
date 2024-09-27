@@ -14,7 +14,6 @@ module.exports = class PSOService extends cds.ApplicationService {
                 return null;
             }
             else {
-
                 return res[0];
             }
         });
@@ -64,16 +63,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 console.log("create failure : ");
                 return "fail createAndSubmitSpecials...."
             }
-            //           const recordID = insertResult.results[0].values[44]; // need to optimize this
-            //          console.log(recordID);
-            //         const newRecord = this.getSpecialsRecord(connection_object);
-            // if(newRecord){
-            //     const oResult = await initiateWFandUpdateDB(recordID, req.data.context);
-            //     console.log("submit post success : " + oResult);
-            // }
-            //    const oResult = await initiateWFandUpdateDB(recordID, req.data.context);
-            //    console.log("submit post success : " + oResult);
-            //  return "success createAndSubmitSpecials....";
+            
         });
         this.on('onApproveRecord', async (req) => {
             const recordID = req.data.recordID;
@@ -139,50 +129,63 @@ module.exports = class PSOService extends cds.ApplicationService {
             //  roles.push(req.req.user.tokenInfo.getPayload().email);
             roles.push(req.req.authInfo.getEmail());
             console.log(roles);
-            let user = [];
+           // let user = {};
             //req.req.authInfo.getLogonName() ..hd be same as user_name..need to check
-            user.userName = req.req.user.tokenInfo.getPayload().user_name; //U id if DTE SSO otherwise email
-            user.email = req.req.user.tokenInfo.getPayload().email;
-            user.hasLimitedDisplay = false;
-            user.hafsRecordCreateAccess = false;
-            user.hasRecordDisplayAccess = false;
-            user.hasRecordEditAccess = false;
-            user.hasSpecialsCreateAccess = false;
-            user.hasSpecialsDisplayAccess = false;
-            user.hasSpecialsEditAccess = false;
+            let userName = req.req.user.tokenInfo.getPayload().user_name, //U id if DTE SSO otherwise email
+            email = req.req.user.tokenInfo.getPayload().email,
+            hasLimitedDisplay = false,
+             hasCustomerCreateAccess = false,
+            hasCustomerDisplayAccess = false,
+             hasCustomerEditAccess = false,
+            hasSpecialsCreateAccess = false,
+            hasSpecialsDisplayAccess = false,
+            hasSpecialsEditAccess = false;
 
             for (var i = 0; i < roles.length; i++) {
                 let scope = roles[i];
                 switch (scope) {
                     case "pso_customer_details_create":
-                        user.hasRecordCreateAccess = true;
+                          hasCustomerCreateAccess = true;
                         break;
                     case "pso_customer_details_edit":
-                        user.hasRecordEditAccess = true;
+                          hasCustomerEditAccess = true;
                         break;
                     case "pso_customer_details_display":
-                        user.hasRecordDisplayAccess = true;
+                         hasCustomerDisplayAccess = true;
                         break;
                     case "pso_customer_details_display_limited":
-                        user.hasLimitedDisplay = true;
+                         hasLimitedDisplay = true;
                         break;
                     case "pso_customer_specials_display":
                         /** Logged in user has limited display and cannot view/edit phone numbers */
-                        user.hasSpecialsDisplayAccess = true;
+                         hasSpecialsDisplayAccess = true;
                         break;
                     case "pso_customer_specials_edit":
-                        user.hasSpecialsEditAccess = true;
+                         hasSpecialsEditAccess = true;
                         break;
                     case "pso_customer_specials_create":
-                        user.hasSpecialsCreateAccess = true;
+                         hasSpecialsCreateAccess = true;
                         break;
                     default:
                     // code block
                 }
 
             }//end for loop
-            console.log(user);
-            return roles;
+           // console.log(user);
+          //  let result = { "value": id };
+            let userInfo ={
+                "userName"                 : userName,
+                "email"                    : email,
+                "hasLimitedDisplay"        : hasLimitedDisplay,
+                "hasCustomerCreateAccess"    : hasCustomerCreateAccess,
+                "hasCustomerDisplayAccess"   : hasCustomerDisplayAccess,
+                "hasCustomerEditAccess"      : hasCustomerEditAccess,
+                "hasSpecialsCreateAccess"  : hasSpecialsCreateAccess,
+                "hasSpecialsDisplayAccess" : hasSpecialsDisplayAccess,
+                "hasSpecialsEditAccess"    : hasSpecialsEditAccess
+              };
+              console.log(userInfo);
+            return userInfo;
 
         });
         this.on('fetchDestinationURL', async (req) => {
@@ -498,112 +501,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log("#########:" + res);
             return res.id;
         }
-        // async function initiateWFandUpdateDB(req) {
-
-        //     console.log(req.data);
-        //     const wfId = await triggerWorkflowPSOSpecials(req);
-        //     if (wfId) {
-        //         req.data.context.record_status = "Submitted";
-        //         req.data.context.workflow_id = wfId;
-        //     }
-        //     console.log(req.data.context);
-        //     const updateResult = await _oUpdateSpecials(req);
-        //     console.log(updateResult);
-        //     console.log("success initiateWFandUpdateDB");
-        //     return "success initiateWFandUpdateDB";
-        // };
-        // async function triggerWorkflowPSOSpecials(req) {
-        //     console.log(req.data);
-        //     let comp_date = req.data.context.completionDate + "";
-        //     console.log("comp date is: " + comp_date);
-        //     let wfPayload =
-        //     {
-        //         "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
-        //         "context": {
-        //             "recordID": req.data.recordID,
-        //             "connectionObject": req.data.context.connection_object,
-        //             "pSNumber": req.data.context.pSNumber,
-        //             "completionDate": comp_date,
-        //             "workDescription": req.data.context.work_desc,
-        //             "meterNumber": req.data.context.meter_number,
-        //             "meter_number2": req.data.context.meter_number2,
-        //             "fedFrom": req.data.context.fedFrom,
-        //             "cableDescription": req.data.context.cableDescription,
-        //             "cableFootage": req.data.context.cableFootage,
-        //             "ductType": req.data.context.ductType,
-        //             "cTs": req.data.context.cts,
-        //             "pTs": req.data.context.pts,
-        //             "_k": req.data.context.k,
-        //             "_m": req.data.context.m,
-        //             "fusesAt": req.data.context.fusesAt,
-        //             "size": req.data.context.size,
-        //             "_type": req.data.context.typeCR,
-        //             "curve": req.data.context.curve,
-        //             "voltage": req.data.context.voltage,
-
-        //             "ownedByLBD": req.data.context.ownedByLBD,
-        //             "manufacturer": req.data.context.manufacturer,
-        //             "model": req.data.context.model,
-        //             "continousCurrent": req.data.context.continousCurrent,
-        //             "loadIntRating": req.data.context.loadIntRating,
-        //             "kAMomentaryLBD": req.data.context.kAMomentaryLBD,
-        //             "typeLBD": req.data.context.typeLBD,
-        //             "faultClosing": req.data.context.faultClosing,
-        //             "bilLBD": req.data.context.bilLBD,
-        //             "serviceVoltage": req.data.context.serviceVoltage,
-        //             "_60CycWithstand": req.data.context.CycWithstand60,
-        //             "fusesTable": [
-
-        //             ],
-
-        //             "fuelTypeCB": req.data.context.fuelTypeCB,
-        //             "ownedByCB": req.data.context.ownedByCB,
-        //             "circuitBreakerMake": req.data.context.circuitBreakerMake,
-        //             "serialNumber": req.data.context.serialNo,
-        //             "kAMomentaryCB": req.data.context.kAMomentaryCB,
-        //             "amps": req.data.context.amps,
-        //             "typeCB": req.data.context.typeCB,
-        //             "faultDuty": req.data.context.faultDuty,
-        //             "bilCB": req.data.context.bilCB,
-
-        //             "ownedByTransformer": req.data.context.ownedByTransformer,
-        //             "transformerTable": [
-        //             ],
-        //             //Other Attributes
-        //             "ab": req.data.context.ab,
-        //             "bc": req.data.context.bc,
-        //             "ca": req.data.context.ca,
-        //             "an": req.data.context.an,
-        //             "bn": req.data.context.bn,
-        //             "cn": req.data.context.cn,
-        //             "groundMatResistance": req.data.context.groundMatResistance,
-        //             "methodUsed": req.data.context.methodUsed,
-        //             "dateMergered": req.data.context.dateMergered,
-        //             "typeofService": req.data.context.typeofService,
-        //             "typeofTO": req.data.context.typeofTO,
-        //             "primaryServiceRep": req.data.context.primaryServiceRep,
-        //             "pswDiagramNumber": req.data.context.pswDiagramNumber,
-        //             "comment": req.data.context.comment
-        //             //"created_det": oCreatedAt, //req.data.context.createdAt,
-        //             //"created_by": req.data.context.createdBy,
-        //             //"modified_det": oModifiedAt,//req.data.context.modifiedAt,
-        //             //"modified_by": req.data.context.modifiedBy,
-        //         }
-        //     }
-        //     console.log(wfPayload);
-        //     const resourceUrl = "/workflow/rest/v1/workflow-instances";
-        //     console.log("#########startingworkflow#####");
-        //     const bp = await cds.connect.to('connectbpa');
-        //     console.log(bp);
-        //     console.log("i am in WF Trigger");
-        //     const res = await bp.send({
-        //         method: 'POST',
-        //         path: resourceUrl,
-        //         data: wfPayload
-        //     });
-        //     console.log("#########:" + res);
-        //     return res.id;
-        // }
+        
         async function updateSpecialsinISU(req) {
 
             const recordId = req.data.recordID;

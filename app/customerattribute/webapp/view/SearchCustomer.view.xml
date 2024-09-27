@@ -8,11 +8,11 @@
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:f="sap.f"
     xmlns:svm="sap.ui.comp.smartvariants">
-    <Page
+    <!-- <Page
         id="page_SC"
         title="{i18n>title}"
         titleAlignment="Center"
-        enableScrolling="true">
+        enableScrolling="true"> -->
         <f:DynamicPage
             id="dynamicPageId">
             <f:title>
@@ -41,10 +41,14 @@
                     fragmentName="com.pso.customerattribute.fragment.SearchCustomerTable"
                     type="XML" />
             </f:content>
-        </f:DynamicPage>
-        <footer>
+            <f:footer>
             <OverflowToolbar id="_IDGenOverflowToolbar1">
             </OverflowToolbar>
-        </footer>
-    </Page>
+            </f:footer>
+        </f:DynamicPage>
+        <!-- <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar1">
+            </OverflowToolbar>
+        </footer> -->
+    <!-- </Page> -->
 </mvc:View>

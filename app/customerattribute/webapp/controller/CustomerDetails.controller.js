@@ -19,90 +19,90 @@ sap.ui.define([
             onBeforeRendering: function () {
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 console.log(oUserScopeJModelData);
-                this.hasLimitedDisplay = false;
-                this.hasRecordCreateAccess = false;
-                this.hasRecordDisplayAccess = false;
-                this.hasRecordEditAccess = false;
-                this.hasSpecialsCreateAccess = false;
-                this.hasSpecialsDisplayAccess = false;
-                this.hasSpecialsEditAccess = false;
-                for (var i = 0; i < oUserScopeJModelData.length; i++) {
-                    /** Logged in user has limited display and cannot view/edit phone numbers */
+                // this.hasLimitedDisplay = false;
+                // this.hasRecordCreateAccess = false;
+                // this.hasRecordDisplayAccess = false;
+                // this.hasRecordEditAccess = false;
+                // this.hasSpecialsCreateAccess = false;
+                // this.hasSpecialsDisplayAccess = false;
+                // this.hasSpecialsEditAccess = false;
+                // for (var i = 0; i < oUserScopeJModelData.length; i++) {
+                //     /** Logged in user has limited display and cannot view/edit phone numbers */
 
-                    let scope = oUserScopeJModelData[i];
-                    switch (scope) {
+                //     let scope = oUserScopeJModelData[i];
+                //     switch (scope) {
 
-                        case "pso_customer_details_create":
-                            this.hasRecordCreateAccess = true;
-                            break;
-                        case "pso_customer_details_edit":
-                            this.hasRecordEditAccess = true;
-                            break;
-                        case "pso_customer_details_display":
-                            this.hasRecordDisplayAccess = true;
-                            break;
-                        case "pso_customer_details_display_limited":
-                            this.hasLimitedDisplay = true;
-                            break;
-                        case "pso_customer_specials_display":
-                            this.hasSpecialsDisplayAccess = true;
-                            break;
-                        case "pso_customer_specials_edit":
-                            this.hasSpecialsEditAccess = true;
-                            break;
-                        case "pso_customer_specials_create":
-                            this.hasSpecialsCreateAccess = true;
-                            break;
+                //         case "pso_customer_details_create":
+                //             this.hasRecordCreateAccess = true;
+                //             break;
+                //         case "pso_customer_details_edit":
+                //             this.hasRecordEditAccess = true;
+                //             break;
+                //         case "pso_customer_details_display":
+                //             this.hasRecordDisplayAccess = true;
+                //             break;
+                //         case "pso_customer_details_display_limited":
+                //             this.hasLimitedDisplay = true;
+                //             break;
+                //         case "pso_customer_specials_display":
+                //             this.hasSpecialsDisplayAccess = true;
+                //             break;
+                //         case "pso_customer_specials_edit":
+                //             this.hasSpecialsEditAccess = true;
+                //             break;
+                //         case "pso_customer_specials_create":
+                //             this.hasSpecialsCreateAccess = true;
+                //             break;
 
-                        default:
-                        // code block
-                    }
+                //         default:
+                //         // code block
+                //     }
 
-                }//end for loop
+                // }//end for loop
 
-                if (this.hasLimitedDisplay) { //hide phone numbers
-                    //this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
-                    //this.getView().byId("idPageSecEmerContact_CC").setVisible(false);
-                }
-                else {
+                // if (oUserScopeJModelData.hasLimitedDisplay) { //hide phone numbers
+                //     //this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
+                //     //this.getView().byId("idPageSecEmerContact_CC").setVisible(false);
+                // }
+                // else {
 
-                    //this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
-                    //this.getView().byId("idPageSecEmerContact_CC").setVisible(true);
-                }
-                if (this.hasRecordCreateAccess) {
+                //     //this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
+                //     //this.getView().byId("idPageSecEmerContact_CC").setVisible(true);
+                // }
+                // if (oUserScopeJModelData.hasRecordCreateAccess) {
                     //create button visible
                     // this.getView().byId("_IDButtonCreateRecord").setVisible(true);
-                }
-                if (this.hasRecordDisplayAccess) {
+               // }
+                // if (oUserScopeJModelData.hasRecordDisplayAccess) {
 
-                }
-                if (this.hasRecordEditAccess) {
-                    // this.getView().byId("_IDButtonEditRecord").setVisible(true);
-                }
+                // }
+                // if (oUserScopeJModelData.hasRecordEditAccess) {
+                //     // this.getView().byId("_IDButtonEditRecord").setVisible(true);
+                // }
 
-                if (this.hasSpecialsCreateAccess) {
-
+                if (oUserScopeJModelData.hasSpecialsCreateAccess) {
                     this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
                 }
-                if (this.hasSpecialsDisplayAccess) {
-
+                if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
-
                 }
-                if (this.hasSpecialsEditAccess) {
+                // if (oUserScopeJModelData.hasSpecialsEditAccess) {
 
-                }
+                // }
             },
 
             _loadFragmentPerScope: function (currentScope) {
                 this.oEditFlag = "";
                 this.initializBusyIndicator(); //Initializing busy indicator
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+                console.log(oUserScopeJModelData);
+              
                 var superior_flag = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.superior_flag;
                 if (superior_flag == "X") { //create child
                     this.getView().byId("_IDButtonCreateRecord").setText("Create Record");
                     this.getView().byId("idpanel").setVisible(true);
                     this.getView().byId("idpanel2").setVisible(false);
-                    if (this.hasRecordCreateAccess) {
+                    if (oUserScopeJModelData.hasCustomerCreateAccess) {
                         this.getView().byId("_IDButtonCreateRecord").setVisible(true);
                     }
                     this.getView().byId("idDemolished_site_CC").setVisible(false);
@@ -118,10 +118,10 @@ sap.ui.define([
                     // if (this.hasRecordCreateAccess) {
                     //     this.getView().byId("_IDButtonCreateRecord").setVisible(true);
                     // }
-                    if (this.hasRecordCreateAccess) {
+                    if (oUserScopeJModelData.hasCustomerCreateAccess) {
                         this.getView().byId("idButtonCreateServiceTicket").setVisible(true);
                     }
-                    if (this.hasRecordEditAccess) {
+                    if (oUserScopeJModelData.hasCustomerEditAccess) {
                         this.getView().byId("_IDButtonEditRecord").setVisible(true);
                         this.getView().byId("idDemolished_site_CC").setVisible(true);
                     }
@@ -141,15 +141,18 @@ sap.ui.define([
             },
 
             onSpecialsExist: function (specialsFlag) {
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+                console.log(oUserScopeJModelData);
+              
                 if (specialsFlag) { //specials exist, show display specials button
 
                     this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
-                    if (this.hasSpecialsDisplayAccess) {
+                    if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                         this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
                     }
                 }
                 else {//specials does not exist, show create specials button
-                    if (this.hasSpecialsCreateAccess) {
+                    if (oUserScopeJModelData.hasSpecialsCreateAccess) {
                         this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
                     }
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(false);
@@ -207,7 +210,7 @@ sap.ui.define([
                 this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
                 this.getView().byId("idpanel").setVisible(true);
                 this.getView().byId("idpanel2").setVisible(false);
-                if (this.hasRecordCreateAccess) {
+                if (oUserScopeJModelData.hasCustomerCreateAccess) {
                     this.getView().byId("_IDButtonCreateRecord").setVisible(true);
                 }
                 this.getView().byId("_IDButtonEditRecord").setVisible(false);
@@ -266,8 +269,9 @@ sap.ui.define([
             onHelpSubstation2: function (oEvt) {
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/substation_dropdownSet";
                 var oSubstationJModel2 = this.getView().getModel("oSubstationJModel2");
+                this.oBusyIndicator.open();
                 oSubstationJModel2.loadData(sPath, null, false, "GET", false, false, null);
-
+                this.oBusyIndicator.close();
                 var _valueHelpSubstationDialog2 = new sap.m.SelectDialog({
 
                     title: "Substation", contentHeight: "50%", titleAlignment: "Center",
@@ -320,8 +324,10 @@ sap.ui.define([
                 this.oDCPLIND = this.getView().byId("idDCPLIND_CC").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel = this.getView().getModel("oCircuitJModel");
-                oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
-                // Create filters
+                    this.oBusyIndicator.open();
+                    oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
+                    this.oBusyIndicator.close();
+                    // Create filters
                 var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, oSubstation);
                 var oFilterDCPLIND = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND);
                 // Combine filters
@@ -382,7 +388,9 @@ sap.ui.define([
                 this.oDCPLIND2 = this.getView().byId("idDCPLIND_CC2").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel2 = this.getView().getModel("oCircuitJModel2");
-                oCircuitJModel2.loadData(sPath, null, false, "GET", false, false, null);
+                    this.oBusyIndicator.open();    
+                    oCircuitJModel2.loadData(sPath, null, false, "GET", false, false, null);
+                    this.oBusyIndicator.close();
                 // Create filters
                 var oFilterSubstation2 = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, oSubstation2);
                 var oFilterDCPLIND2 = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND2);
