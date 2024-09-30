@@ -79,8 +79,17 @@ service PSOService {
     typeofTO            : String;
     pswDiagramNumber    : String;
     primaryServiceRep   : String;
+    fuses: fuses;
   }
 
+type fuses {
+ fuseSize  : String;
+    fuseType : String;
+    fuseCurve : String;
+    fuseVoltage : String;
+    fuseSeqNo: String;
+    connection_object   : String;
+}
   type userInfo {
     userName                 : String;
     email                    : String;

@@ -426,7 +426,7 @@
             <Label id="idlblrep_DS" text="{i18n>CS_rep}" />     
             <Text id="idCNrep_DS" text="{oSpecialsjmodel>/primaryServiceRep}"/>
             <Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
-            <Text id="idCNpsw_DS" text="{oSpecialsjmodel>/pswDiagramNumber}"/>
+            <Text id="idCNpsw_DS" text="{oCustomerAttributesJModel>/psw}"/>
             <Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
             <Text id="idcreatedby_DS" text="{oSpecialsjmodel>/createdBy}"/>
             <Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     

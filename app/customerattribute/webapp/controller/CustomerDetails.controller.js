@@ -922,6 +922,14 @@ sap.ui.define([
                                 "fuseVoltage" : "",
                                 "fuseSeqNo": "",
                                 "connection_object"   : connection_object
+                            },
+                            {
+                                "fuseSize"  : "",
+                                "fuseType" : "",
+                                "fuseCurve" : "",
+                                "fuseVoltage" : "",
+                                "fuseSeqNo": "",
+                                "connection_object"   : connection_object
                             }]
 
 

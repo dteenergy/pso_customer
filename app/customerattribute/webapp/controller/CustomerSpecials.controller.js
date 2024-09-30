@@ -217,7 +217,6 @@ sap.ui.define([
             getCreateContext: function () {
                 //const connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
                 var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
-
                 var ownedByLbd=this.getView().byId("idRadio1_CS").getSelectedButton().getText();
                 var ownedByCB=this.getView().byId("grop5CPSR_CS").getSelectedButton().getText();
                 var ownedByTransformer=this.getView().byId("idOwnedGrp").getSelectedButton().getText();
@@ -231,15 +230,18 @@ sap.ui.define([
                 var oTypeofTo = this.getView().byId("idTypeTO_CS").getSelectedKey();
                 var oPSR = this.getView().byId("idrep_CS").getSelectedKey();
                 var oComments = this.getView().byId("idcomment_CS").getValue();
+                var oPSW = this.getView().byId("idCNpsw_CS").getText();
 
 
                 if (oSpecialsjmodelData.connection_object === "" || oSpecialsjmodelData.connection_object === null || oSpecialsjmodelData.connection_object === undefined) { //retain field value from previous screen
                     oSpecialsjmodelData.connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
                 }// "completionDate": this.formatDate(oSpecialsjmodelData.completionDate),
+
                 var context = {
                     "connection_object": oSpecialsjmodelData.connection_object,                   
                     "work_desc": oSpecialsjmodelData.work_desc,
-                    "meter_number": oSpecialsjmodelData.meter_number,                    
+                    "meter_number": oSpecialsjmodelData.meter_number,
+                    "meter_number2": oSpecialsjmodelData.meter_number2,                    
                     "record_status": oSpecialsjmodelData.record_status,
                     "workflow_id": oSpecialsjmodelData.workflow_id,
 
@@ -287,7 +289,6 @@ sap.ui.define([
                     //Transformer
                     "ownedByTransformer": ownedByTransformer,
                     //remaing fields
-                    "meter_number2": oSpecialsjmodelData.meter_number2,
                     "ab": oSpecialsjmodelData.ab,
                     "bc": oSpecialsjmodelData.bc,
                     "ca": oSpecialsjmodelData.ca,
@@ -300,16 +301,9 @@ sap.ui.define([
                     "comment": oComments,
                     "typeofService": oSpecialsjmodelData.typeofService,
                     "typeofTO": oTypeofTo,
-                    "pswDiagramNumber": oSpecialsjmodelData.pswDiagramNumber,
+                    "pswDiagramNumber": oPSW,
                     "primaryServiceRep": oPSR,
-                    "fuses": [{
-                        "fuseSize"  : "",
-                        "fuseType" : "",
-                        "fuseCurve" : "",
-                        "fuseVoltage" : "",
-                        "fuseSeqNo": "",
-                        "connection_object"   : connection_object
-                    }]
+                    "fuses":oSpecialsjmodelData.fuses                    
                 };
                 console.log(context);
                 return context;

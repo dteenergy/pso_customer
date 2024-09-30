@@ -239,9 +239,12 @@
           <x:ObjectPageSubSection id="idFusesAtLBDSubSection_CS" titleUppercase="false">
             <x:blocks>
                <Table id="idTFusesAtLb_CS" alternateRowColors="true" showNoData="true" 
-               items="{oSpecialsjmodel>/Fuses}"
-               growingThreshold="5" growing="false">
-              <columns >                
+               items="{oSpecialsjmodel>/fuses}"
+               >
+              <columns >   
+              <Column id="id21CPSR_CO">
+                  <Label id="idlblsize_CS_CO" text="Billing Entity" />
+                </Column>             
                 <Column id="id21CPSR">
                   <Label id="idlblsize_CS" text="{i18n>CS_Tsize}" />
                 </Column>
@@ -258,6 +261,7 @@
             <items>
               <ColumnListItem id="cliFuses_CS">
                 <cells>                  
+                  <Text id="idFuse_CO" text="{oSpecialsjmodel>connection_object}"/>
                   <Input id="idTsize_CS" value="{oSpecialsjmodel>fuseSize}"/>
                   <ComboBox id="idTType_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] }" selectedKey="{oSpecialsjmodel>/fuseType}">
                     <core:Item id="idTypeitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
