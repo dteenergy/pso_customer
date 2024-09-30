@@ -17,18 +17,33 @@
                                     <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true">
+                            <fb:FilterGroupItem visible="{localModel>/filterVisible/apprvBy}" id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idApprBy" valueHelpRequest="onValueHelpApprovedBy" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
+                            <fb:FilterGroupItem visible="{localModel>/filterVisible/apprvBy}" id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
                                 <fb:control>
                                     <Select items="{localModel>/recordStatsVH}">
                                         <items>
                                             <core:Item key="{localModel>key}" text="{localModel>text}"></core:Item>
                                         </items>
                                     </Select>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="custName" groupName="__$INTERNAL$" name="custName" label="Customer Name" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idCustName" valueHelpRequest="onValueHelpCustName" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="street" groupName="__$INTERNAL$" name="street" label="Street" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idStreet" valueHelpRequest="onValueHelpStreet" tokenUpdate="onTokenUpdate"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="streetAddr" groupName="__$INTERNAL$" name="streetAddr" label="Street Address" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="idStreetAddr" valueHelpRequest="onValueHelpStreetAddr" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
                         </fb:filterGroupItems>

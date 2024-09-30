@@ -4,7 +4,7 @@ using {com.pso.specials as db} from '../db/pso-schema';
 service PSOService {
 
   entity PSOSpecials as projection on db.PSOSpecials;
-
+  entity Fuses as projection on db.Fuses;
   type wfType {
     comment : String;
   }

@@ -163,7 +163,13 @@
                             />
                         </layoutData>
                     </Text>
-                    
+                    <Label id="idlblTrans_ST" text="{i18n>trans}" />
+                    <Text id="idTrans_ST" text="{oCustomerAttributesJModel>/indus_cust}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST4" span="XL5 L5 M12 S12" />
+                        </layoutData>
+                    </Text>
+                     
 
                     <core:Title id="serviceTicketTitleST" />
                     <Label id="idlblsetB"  />
@@ -222,6 +228,12 @@
                                 id="idGridData_ST13"
                                 span="XL5 L5 M12 S12"
                             />
+                        </layoutData>
+                    </Text>
+                    <Label id="idlblTrans_ST1" text="{i18n>trans}" />
+                    <Text id="idTrans_ST1" text="{oCustomerAttributesJModel>/indus_cust2}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
+                        <layoutData>
+                        <l:GridData id="idGridData_ST14" span="XL5 L5 M12 S12" />
                         </layoutData>
                     </Text>
                 </f:content>

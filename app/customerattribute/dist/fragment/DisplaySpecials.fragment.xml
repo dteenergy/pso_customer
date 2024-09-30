@@ -415,12 +415,10 @@
             <Text id="idground_DS" text="{oSpecialsjmodel>/groundMatResistance}"/>
             <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
             <Text id="idmethod_DS" text="{oSpecialsjmodel>/methodUsed}"/>
-            
-            
-
-            <core:Title id="idcoreTOther2_DS" />
             <Label id="idlbldate_DS" text="{i18n>CS_date}" />     
             <Text id="iddate_DS" text="{oSpecialsjmodel>/dateMergered}"/>
+            
+            <core:Title id="idcoreTOther2_DS" />
             <Label id="idlblservice_DS" text="{i18n>CS_service}" />     
             <Text id="idservice_DS" text="{oSpecialsjmodel>/typeofService}"/>
             <Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
@@ -435,21 +433,28 @@
             <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdAt}"/>
             <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
             <Text id="idmodifiedby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
-            
-            
-            <core:Title id="idcoreTOther3_DS" />  
             <Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
             <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedAt}"/>   
+            
+            <core:Title id="idcoreTOther3_DS" />  
             <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
             <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approvedBy}"/>
             <Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
             <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approvedOn}"/>
-            <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
-            <TextArea id="idcomment_DS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" editable="false" rows="7" maxLength="1300">
+            <Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />     
+            <TextArea id="idApproverCmnts_DS" growing="true" value="{oSpecialsjmodel>/approverComment}" showExceededText="false" editable="false" rows="6" maxLength="1300">
                 <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
-            </TextArea> 
+            </TextArea>  
+            
+            <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
+            <TextArea id="idcomment_DS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" editable="false" rows="6" maxLength="1300">
+                <!-- <layoutData>
+                    <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
+                </layoutData> -->
+            </TextArea>
+            
         
 
             </form:content>

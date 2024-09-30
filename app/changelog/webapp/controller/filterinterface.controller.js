@@ -12,6 +12,27 @@ sap.ui.define([
                 this.localModel = this.getOwnerComponent().getModel("localModel");
                 this.localModel.setProperty('/tableItemsCount', `Items(0)`);
                 this.readApprByVH();
+                this.checkAuth();
+            },
+           
+            checkAuth : function(){
+                let oContext = this.getOwnerComponent().getModel().bindContext('/userDetails(...)');
+                var that = this;
+                oContext.execute().then((context)=>{
+                    let data = oContext.getBoundContext().getObject();
+                    if(data.hasCustomerDisplayAccess  & data.hasSpecialsDisplayAccess){
+                        that.localModel.setProperty('/filterVisible',{
+                            'apprvBy' : false,
+                            'recrdStats' : false
+                        })
+                    }
+                    else{
+                        that.localModel.setProperty('/filterVisible',{
+                            'apprvBy' : true,
+                            'recrdStats' : true
+                        })
+                    }
+                })
             },
             filterVH: function (aFilters, vhname) {
                 let data = this.model.bindList('/PSOSpecials', undefined, undefined, aFilters);

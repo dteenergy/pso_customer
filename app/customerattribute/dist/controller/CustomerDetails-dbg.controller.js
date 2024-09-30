@@ -206,7 +206,7 @@ sap.ui.define([
                 if (oRecord.on_site_nosg) {
                     this.getView().byId("idGeneration_CC").setSelectedIndex(3)
                 }
-
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
                 this.getView().byId("idpanel").setVisible(true);
                 this.getView().byId("idpanel2").setVisible(false);
@@ -847,9 +847,10 @@ sap.ui.define([
                     }
                     else { //specials does not exist - create special button visible
                         console.log("No Specials exist for this child connection object");
+                        const connection_object = that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
                         //create special should come
                         oSpecialsjmodel.setData({
-                            "connection_object": that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj,
+                            "connection_object": connection_object,
                             "work_desc": "",
                             "meter_number": "",
                             "record_status": "",
@@ -913,7 +914,15 @@ sap.ui.define([
                             "typeofService": "",
                             "typeofTO": "",
                             "pswDiagramNumber": "",
-                            "primaryServiceRep": ""
+                            "primaryServiceRep": "",
+                            "fuses": [{
+                                "fuseSize"  : "",
+                                "fuseType" : "",
+                                "fuseCurve" : "",
+                                "fuseVoltage" : "",
+                                "fuseSeqNo": "",
+                                "connection_object"   : connection_object
+                            }]
 
 
                         });
@@ -1105,25 +1114,42 @@ sap.ui.define([
                 return c4cPayload;
             },
             createServiceTicket: async function (oEvent) {
+                let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 //this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
                 //this.oSelectedSetB = this.getView().byId("idSetB").getSelected(); 
                 var isCircuit = this.getView().byId("idCircuit_ST").getText();
-                // var isCircuit="";
+                var isTrans = this.getView().byId("idTrans_ST").getText();
+                // var isCircuit="", isTrans="";
                 // if(this.oSelectedSetA){
                 //     isCircuit = this.getView().byId("idCircuit_ST").getText();
+                    // isTrans = this.getView().byId("idTrans_ST").getText();
                 // }else if(this.oSelectedSetB){
                 //     isCircuit = this.getView().byId("idCircuit_ST1").getText();
+                //     isTrans = this.getView().byId("idTrans_ST1").getText();
                 // }
-
-                if (isCircuit === "" || isCircuit === null || isCircuit === undefined) {
-                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Circuit_msg"), {
-                        icon: sap.m.MessageBox.Icon.ERROR,
-                        title: "Error",
-                        actions: [sap.m.MessageBox.Action.OK]
-                    });
-                    this.onCloseDialog();
-                    return false;
+                if(oTicketData.na === "X"){
+                    if (isTrans === "" || isTrans === null || isTrans === undefined) {
+                        sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Trans_msg"), {
+                            icon: sap.m.MessageBox.Icon.ERROR,
+                            title: "Error",
+                            actions: [sap.m.MessageBox.Action.OK]
+                        });
+                        this.onCloseDialog();
+                        return false;
+                    }
+                }else{
+                    if (isCircuit === "" || isCircuit === null || isCircuit === undefined) {
+                        sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Circuit_msg"), {
+                            icon: sap.m.MessageBox.Icon.ERROR,
+                            title: "Error",
+                            actions: [sap.m.MessageBox.Action.OK]
+                        });
+                        this.onCloseDialog();
+                        return false;
+                    }
                 }
+
+                
 
                 var oUserScope = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 if (oUserScope.userName === "" || oUserScope.userName === undefined || oUserScope.userName === null) {

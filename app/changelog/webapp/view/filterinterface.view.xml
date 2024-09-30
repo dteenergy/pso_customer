@@ -17,12 +17,12 @@
                                     <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true">
+                            <fb:FilterGroupItem visible="{localModel>/filterVisible/apprvBy}" id="approvedBy" groupName="__$INTERNAL$" name="approvedBy" label="Approved By" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idApprBy" valueHelpRequest="onValueHelpApprovedBy" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
+                            <fb:FilterGroupItem visible="{localModel>/filterVisible/apprvBy}" id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
                                 <fb:control>
                                     <Select items="{localModel>/recordStatsVH}">
                                         <items>

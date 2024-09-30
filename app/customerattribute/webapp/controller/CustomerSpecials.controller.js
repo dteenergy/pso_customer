@@ -301,7 +301,15 @@ sap.ui.define([
                     "typeofService": oSpecialsjmodelData.typeofService,
                     "typeofTO": oTypeofTo,
                     "pswDiagramNumber": oSpecialsjmodelData.pswDiagramNumber,
-                    "primaryServiceRep": oPSR
+                    "primaryServiceRep": oPSR,
+                    "fuses": [{
+                        "fuseSize"  : "",
+                        "fuseType" : "",
+                        "fuseCurve" : "",
+                        "fuseVoltage" : "",
+                        "fuseSeqNo": "",
+                        "connection_object"   : connection_object
+                    }]
                 };
                 console.log(context);
                 return context;
