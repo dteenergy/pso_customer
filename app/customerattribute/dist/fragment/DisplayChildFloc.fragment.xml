@@ -141,12 +141,17 @@
                     </layoutData>
                   </Text> 
                   <Label id="idlblOnSiteGen_DC" text="{i18n>onsitegen}" />
-                  <RadioButtonGroup id="idGeneration_DC" columns="5" enabled="false">
+                  <Text id="idGeneration_DC" >
+                  <layoutData>
+                      <l:GridData id="idGridData_DCGen23" span="XL3 L3 M2 S9" />
+                    </layoutData>
+                    </Text>
+                  <!-- <RadioButtonGroup id="idGeneration_DC" columns="5" enabled="false">
                     <RadioButton id="Emergency_DC" text="Emergency" selected="{= ${oCustomerAttributesJModel>/on_site_emerg} === 'X' ? true : false}"/>
                     <RadioButton id="Partial_DC" text="Partial" selected="{= ${oCustomerAttributesJModel>/on_site_part} === 'X' ? true : false}"/>
                     <RadioButton id="Fullgeneration_DC" text="Full generation" selected="{= ${oCustomerAttributesJModel>/full_generation} === 'X' ? true : false}"/>
                     <RadioButton id="Noonsitegeneration_DC" text="No on-site generation" selected="{= ${oCustomerAttributesJModel>/on_site_nosg} === 'X' ? true : false}"/> 
-                  </RadioButtonGroup>
+                  </RadioButtonGroup> -->
                   <Label id="idlblTotalGen_DC" text="{i18n>totalgen}" />
                   <Text id="idGenration_DC" text="{oCustomerAttributesJModel>/generation}">
                   <layoutData>

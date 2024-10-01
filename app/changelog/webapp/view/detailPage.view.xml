@@ -1,4 +1,4 @@
-<mvc:View xmlns:form="sap.ui.layout.form"
+<mvc:View xmlns:tnt="sap.tnt" xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form"
     xmlns:f="sap.f" controllerName="com.pso.changelog.controller.detailPage"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:core="sap.ui.core"
@@ -16,19 +16,19 @@
                 <subSections>
                     <ObjectPageSubSection title="Customer Records" titleUppercase="false">
                         <blocks>
-                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                            <form:SimpleForm layout="ResponsiveGridLayout" editable="true" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
                                 <core:Title/>
-                                <m:Label text="Connection Object"></m:Label>
+                                <m:Label text="Billing Entity"></m:Label>
                                 <m:Text text="{connection_object}"></m:Text>
-                                <m:Label text="Workflow ID"></m:Label>
-                                <m:Text text="{workflow_id}"></m:Text>
-                                <m:Label text="Work Flow Description"></m:Label>
-                                <m:Text text="{work_desc}"></m:Text>
+                                <!-- <m:Label text="Workflow ID"></m:Label>
+                                <m:Text text="{workflow_id}"></m:Text> -->
+                                <!-- <m:Label text="Work Flow Description"></m:Label>
+                                <m:Text text="{work_desc}"></m:Text> -->
                                 <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Meter Number" class="sapUiTinyMarginTop"></m:Label>
+                                <m:Label text="Meter Number"></m:Label>
                                 <m:Text text="{meter_number}"></m:Text>
-                                <m:Label text="Record Status"></m:Label>
-                                <m:Text text="{record_status}"></m:Text>
+                                <!-- <m:Label text="Record Status"></m:Label>
+                                <m:Text text="{record_status}"></m:Text> -->
                                 <m:Label text="Approver Comment"></m:Label>
                                 <m:Text text="{approverComment}"></m:Text>
                                 <core:Title/>
@@ -38,6 +38,7 @@
                                 <m:Text text="{createdBy}"></m:Text>
                                 <m:Label text="Modified Date"></m:Label>
                                 <m:Text text="{modifiedAt}"></m:Text>
+                                <core:Title/>
                                 <m:Label text="Modified By"></m:Label>
                                 <m:Text text="{modifiedBy}"></m:Text>
                                 <m:Label text="Approved By"></m:Label>
@@ -72,10 +73,37 @@
             </ObjectPageSection>
 
             <ObjectPageSection titleUppercase="false" title="Section 2">
+                <!-- <heading>
+                <m:OverflowToolbar >
+                <m:ToolbarSpacer ></m:ToolbarSpacer>
+                <m:HBox alignContent="End" justifyContent="End">
+                <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information">
+			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
+			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
+			<m:RadioButton id="RB3" text="None" />
+		</m:RadioButtonGroup>
+                </m:HBox>
+                </m:OverflowToolbar>
+                </heading> -->
                 <subSections>
                     <ObjectPageSubSection title="Load Break Disconnect" titleUppercase="false">
+                    <actions>
+                    <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information">
+			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
+			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
+			<m:RadioButton id="RB3" text="None" />
+		</m:RadioButtonGroup>
+                    </actions>
                         <blocks>
-                            <form:SimpleForm editable="false" layout="ResponsiveGridLayout">
+                            <m:VBox>
+                            <!-- <m:HBox justifyContent="Center">
+                            <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information">
+			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
+			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
+			<m:RadioButton id="RB3" text="None" />
+		</m:RadioButtonGroup>
+                            </m:HBox> -->
+                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
                                 <core:Title/>
 
                                 <m:Label text="PS Number"></m:Label>
@@ -84,7 +112,7 @@
                                 <m:Text text="{completionDate}"></m:Text>
                                 <m:Label text="FED From"></m:Label>
                                 <m:Text text="{fedFrom}"></m:Text>
-
+                                <core:Title/>
                                 <m:Label text="Continuous Current"></m:Label>
                                 <m:Text text="{continuousCurrent}"></m:Text>
                                 <m:Label text="Load Int Rating"></m:Label>
@@ -98,12 +126,11 @@
                                 <m:Text text="{faultClosing}"></m:Text>
                                 <m:Label text="Bill BD"></m:Label>
                                 <m:Text text="{bilLBD}"></m:Text>
-                                <m:Label text="Service Voltage"></m:Label>
-                                <m:Text text="{serviceVoltage}"></m:Text>
-                                <m:Label text="Cyc With Stand60"></m:Label>
-                                <m:Text text="{CycWithstand60}"></m:Text>
+                                <!-- <core:Title/> -->
+
 
                             </form:SimpleForm>
+                            </m:VBox>
                             <!-- <form:SimpleForm layout="ColumnLayout">
                                 <m:Label text="Created At"></m:Label>
                                 <m:Text text="{createdAt}"></m:Text>
@@ -150,16 +177,22 @@
                 <subSections>
                     <ObjectPageSubSection titleUppercase="false">
                         <blocks>
-                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
                                 <core:Title ></core:Title>
+                                <m:Label text="Service Voltage"></m:Label>
+                                <m:Text text="{serviceVoltage}"></m:Text>
+                                <m:Label text="Cyc With Stand60"></m:Label>
+                                <m:Text text="{CycWithstand60}"></m:Text>
                                 <m:Label text="Circuit Breaker Make"></m:Label>
                                 <m:Text text="{circuitBreakerMake}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="Serial No"></m:Label>
                                 <m:Text text="{serialNo}"></m:Text>
                                 <m:Label text="kA Momentary CB"></m:Label>
                                 <m:Text text="{kAMomentaryCB}"></m:Text>
                                 <m:Label text="Amps"></m:Label>
                                 <m:Text text="{amps}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="CB Type"></m:Label>
                                 <m:Text text="{typeCB}"></m:Text>
                                 <m:Label text="Fault Duty"></m:Label>
@@ -173,13 +206,20 @@
                                 <m:Text text="{cableFootage}"></m:Text>
                                 <m:Label text="Duct Type"></m:Label>
                                 <m:Text text="{ductType}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="CTS"></m:Label>
                                 <m:Text text="{cts}"></m:Text>
                                 <m:Label text="PTS"></m:Label>
                                 <m:Text text="{pts}"></m:Text>
                                 <m:Label text="Fuses At"></m:Label>
                                 <m:Text text="{fusesAt}"></m:Text>
-
+                                <core:Title ></core:Title>
+                                <m:Label text="Size"></m:Label>
+                                <m:Text text="{size}"></m:Text>
+                                <m:Label text="Type CR"></m:Label>
+                                <m:Text text="{typeCR}"></m:Text>
+                                <m:Label text="Curve"></m:Label>
+                                <m:Text text="{curve}"></m:Text>
                             </form:SimpleForm>
 
 
@@ -240,46 +280,44 @@
                 <subSections>
                     <ObjectPageSubSection titleUppercase="false">
                         <blocks>
-                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
+
                                 <core:Title ></core:Title>
-                                <m:Label text="Size"></m:Label>
-                                <m:Text text="{size}"></m:Text>
-                                <m:Label text="Type CR"></m:Label>
-                                <m:Text text="{typeCR}"></m:Text>
-                                <m:Label text="Curve"></m:Label>
-                                <m:Text text="{curve}"></m:Text>
                                 <m:Label text="Voltage"></m:Label>
                                 <m:Text text="{voltage}"></m:Text>
                                 <m:Label text="Manufacturer"></m:Label>
                                 <m:Text text="{manufacturer}"></m:Text>
                                 <m:Label text="Model"></m:Label>
                                 <m:Text text="{model}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="Continuous Current"></m:Label>
                                 <m:Text text="{continuousCurrent}"></m:Text>
                                 <m:Label text="Load Int Rating"></m:Label>
                                 <m:Text text="{loadIntRating}"></m:Text>
                                 <m:Label text="kA Momentary LBD"></m:Label>
                                 <m:Text text="{kAMomentaryLBD}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="LBD Type"></m:Label>
                                 <m:Text text="{typeLBD}"></m:Text>
                                 <m:Label text="Fault Closing"></m:Label>
                                 <m:Text text="{faultClosing}"></m:Text>
-                                <core:Title ></core:Title>  
-                                
                                 <m:Label text="Bill BD"></m:Label>
-                                <m:Text text="{bilLBD}"></m:Text>                             
+                                <m:Text text="{bilLBD}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="Service Voltage"></m:Label>
                                 <m:Text text="{serviceVoltage}"></m:Text>
                                 <m:Label text="Cyc With Stand60"></m:Label>
                                 <m:Text text="{CycWithstand60}"></m:Text>
                                 <m:Label text="Circuit Breaker Make"></m:Label>
                                 <m:Text text="{circuitBreakerMake}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="Serial No"></m:Label>
                                 <m:Text text="{serialNo}"></m:Text>
                                 <m:Label text="kA Momentary CB"></m:Label>
                                 <m:Text text="{kAMomentaryCB}"></m:Text>
                                 <m:Label text="Amps"></m:Label>
                                 <m:Text text="{amps}"></m:Text>
+                                <core:Title ></core:Title>
                                 <m:Label text="CB Type"></m:Label>
                                 <m:Text text="{typeCB}"></m:Text>
                                 <m:Label text="Fault Duty"></m:Label>
@@ -348,6 +386,45 @@
                                 <m:Label text="Bill CB"></m:Label>
                                 <m:Text text="{bilCB}"></m:Text>
                             </form:SimpleForm> -->
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Fuses at LBD">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Table items="{/fuses}" growingScrollToLoad="true" growing="true" growingThreshold="5">
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Size">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Type">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Curve">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Voltage">
+                                        </m:Label>
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{fuseSize}"/>
+                                            <m:Text text="{fuseType}"/>
+                                            <m:Text text="{fuseCurve}"/>
+                                            <m:Text text="{fuseVoltage}"/>
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>

@@ -10,15 +10,13 @@ entity Fuses : cuid , managed {
     fuseType : String;
     fuseCurve : String;
     fuseVoltage : String;
-    fuseSeqNo: String;
-    key connection_object   : String;
-    psospecials : Association to PSOSpecials on psospecials.connection_object = $self.connection_object;
-  
+    fuseSeqNo: String;    
+    psospecials : Association to PSOSpecials;  
  }
 
 entity PSOSpecials : cuid, managed {
     key connection_object   : String;
-    fuses : Association to many Fuses on fuses.connection_object = $self.connection_object;
+        fuses : Composition of many Fuses on fuses.psospecials = $self;
         work_desc           : String;
         meter_number        : String;
         record_status       : String; // draft,  submitted, approved, rejected
@@ -77,6 +75,9 @@ entity PSOSpecials : cuid, managed {
         typeofTO            : String;
         pswDiagramNumber    : String;
         primaryServiceRep   : String;
+        customerName: String;
+        streetNumber: String;
+        streetName: String;
 
 }
  

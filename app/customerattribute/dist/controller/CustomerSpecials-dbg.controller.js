@@ -228,6 +228,7 @@ sap.ui.define([
                 var oTypeLBD = this.getView().byId("idType2_CS").getSelectedKey();
                 var oServiceVoltage = this.getView().byId("idSV_CS").getSelectedKey();
                 var oTypeofTo = this.getView().byId("idTypeTO_CS").getSelectedKey();
+                var oMethodUsed = this.getView().byId("idmethod_CS").getSelectedKey();
                 var oPSR = this.getView().byId("idrep_CS").getSelectedKey();
                 var oComments = this.getView().byId("idcomment_CS").getValue();
                 var oPSW = this.getView().byId("idCNpsw_CS").getText();
@@ -296,14 +297,17 @@ sap.ui.define([
                     "bn": oSpecialsjmodelData.bn,
                     "cn": oSpecialsjmodelData.cn,
                     "groundMatResistance": oSpecialsjmodelData.groundMatResistance,
-                    "methodUsed": oSpecialsjmodelData.methodUsed,
+                    "methodUsed": oMethodUsed,
                     "dateMergered": oSpecialsjmodelData.dateMergered,
                     "comment": oComments,
                     "typeofService": oSpecialsjmodelData.typeofService,
                     "typeofTO": oTypeofTo,
                     "pswDiagramNumber": oPSW,
                     "primaryServiceRep": oPSR,
-                    "fuses":oSpecialsjmodelData.fuses                    
+                    "customerName": oSpecialsjmodelData.customerName,
+                    "streetNumber": oSpecialsjmodelData.streetNumber,
+                    "streetName": oSpecialsjmodelData.streetName
+                    //"fuses":fuses                    
                 };
                 console.log(context);
                 return context;
@@ -311,6 +315,49 @@ sap.ui.define([
             onBack: function () {
                 window.history.go(-1); //navTo preffered
             },
+            //*********************************
+            onMeterMatch:function(evt){
+            var oAttributes =  this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
+                var oMeter = evt.getSource().getValue();
+                if(oAttributes.meter_number ===oMeter || oAttributes.meter_number2 ===oMeter){
+                    MessageBox.information("?????????????????????");
+                }
+            },
+            //******************************* */
+            onAddnewFusesRow:function(oEvt){
+                var oSpecialsjmodel = this.getView().getModel("oSpecialsjmodel");
+                var aData = oSpecialsjmodel.getProperty("/fuses") || []; // Get current items
+    
+                // Create a new item with empty values
+                var newItem = {
+                    connection_object:"4000444719",
+                    fuseSize: "",   // For the Input field
+                    fuseType: "",  // For the ComboBox
+                    fuseVoltage:"",// For the ComboBox
+                    fuseSeqNo:""// For the ComboBox
+                };
+    
+                // Add the new item to the existing items
+                aData.push(newItem);
+    
+                // Update the model with the new items array
+                oSpecialsjmodel.setProperty("/fuses", aData);
+            },
+            onFuseTypeChange: function(oEvent){
+                // console.log(oEvent);
+                // const selectedKey = oEvent.getParameters().selectedItem.mProperties.key;
+                // const selectedValue = oEvent.getParameters().selectedItem.mProperties.text;
+                // const arr = oEvent.getSource().getId().split('-');
+                // const rowNo = arr[arr.length-1];
+                var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
+                console.log(oSpecialsjmodelData);
+                var oSpecialsjmodelData_view = this.getView().getModel("oSpecialsjmodel").getData();
+                console.log(oSpecialsjmodelData_view);
+                // oSpecialsjmodelData.fuses[rowNo].fuseType = selectedValue;
+                // oSpecialsjmodelData_view.fuses[rowNo].fuseType = selectedValue;
+
+                
+            }
             //***************************** */
 
 

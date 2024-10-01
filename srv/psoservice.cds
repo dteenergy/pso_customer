@@ -79,6 +79,9 @@ service PSOService {
     typeofTO            : String;
     pswDiagramNumber    : String;
     primaryServiceRep   : String;
+    customerName: String;
+    streetNumber: String;
+    streetName: String;
     fuses: fuses;
   }
 

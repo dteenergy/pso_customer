@@ -190,7 +190,6 @@
                                     <RadioButtonGroup
                                         id="idRadio1_DS"
                                         columns="5"
-                                        class="sapUiTinyMarginTopBottom"
                                         enabled="false"
                                     >
                                         <RadioButton
@@ -297,7 +296,6 @@
                                     <RadioButtonGroup
                                         id="goup6CPSR_DS"
                                         columns="5"
-                                        class="sapUiTinyMarginTopBottom"
                                         enabled="false"
                                     >
                                         <RadioButton
@@ -334,22 +332,21 @@
 
 
                                     <core:Title id="idcoreTCB2_DS" />
-                                    <Label id="idCB1_DS" />
+                                    <Label id="idCB1_DS" text="{i18n>CS_owned_CB}"/>
 
                                     <RadioButtonGroup
                                         id="grop5CPSR_DS"
                                         columns="5"
-                                        class="sapUiTinyMarginTopBottom"
                                         enabled="false"
                                     >
                                         <RadioButton
                                             id="idDecoOwned_DS"
-                                            text="{i18n>CS_DTEOwned}"
+                                            text="{i18n>CS_DTEOwned_CB}"
                                             selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
                                         />
                                         <RadioButton
                                             id="idCustomer_DS"
-                                            text="{i18n>CS_CustomerOwned}"
+                                            text="{i18n>CS_CustomerOwned_CB}"
                                             selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
                                         />
                                     </RadioButtonGroup>
@@ -431,16 +428,16 @@
             <Text id="idcreatedby_DS" text="{oSpecialsjmodel>/createdBy}"/>
             <Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
             <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdAt}"/>
-            <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
+            <!-- <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
             <Text id="idmodifiedby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
             <Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
-            <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedAt}"/>   
-            
-            <core:Title id="idcoreTOther3_DS" />  
+            <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedAt}"/>    -->
             <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
-            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approvedBy}"/>
+            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
             <Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
-            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/approvedOn}"/>
+            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/modifiedAt}"/>
+            <core:Title id="idcoreTOther3_DS" />  
+            
             <Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />     
             <TextArea id="idApproverCmnts_DS" growing="true" value="{oSpecialsjmodel>/approverComment}" showExceededText="false" editable="false" rows="6" maxLength="1300">
                 <!-- <layoutData>

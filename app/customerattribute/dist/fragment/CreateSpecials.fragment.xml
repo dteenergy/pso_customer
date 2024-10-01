@@ -1,280 +1,877 @@
-<core:FragmentDefinition xmlns="sap.m"
-    xmlns:core="sap.ui.core" 
-    xmlns:mvc="sap.ui.core.mvc" 
+<core:FragmentDefinition
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns:form="sap.ui.layout.form"
-    xmlns:l="sap.ui.layout" 
-    xmlns:f="sap.ui.layout.form" 
-    xmlns:x="sap.uxap">
-    
-     <x:ObjectPageLayout id="ObjectPageLayout_CS" enableLazyLoading="true" useIconTabBar="false" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
-    <x:headerTitle>
-      <x:ObjectPageDynamicHeaderTitle id="idDynamicHTitle_CS" visible="false"> 
-      
-      </x:ObjectPageDynamicHeaderTitle>
-    </x:headerTitle>
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:x="sap.uxap"
+>
+    <x:ObjectPageLayout
+        id="ObjectPageLayout_CS"
+        enableLazyLoading="true"
+        useIconTabBar="false"
+        showTitleInHeaderContent="true"
+        upperCaseAnchorBar="false"
+    >
+        <x:headerTitle>
+            <x:ObjectPageDynamicHeaderTitle
+                id="idDynamicHTitle_CS"
+                visible="false"
+            />
+        </x:headerTitle>
 
+        <x:sections>
+            <x:ObjectPageSection
+                id="idPageSectionCustomerRec_CS"
+                titleUppercase="false"
+                title="{i18n>CS_Customer_rec}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idCustomerSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="idRequestFormCustRec_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTrecord1_CS" />
+                                    <Label
+                                        id="idlblConnObj_CS"
+                                        text="{i18n>CS_BEntity}"
+                                    />
+                                    <Text
+                                        id="idConnObj_CS"
+                                        text="{oSpecialsjmodel>/connection_object}"
+                                    />
+                                    <Label
+                                        id="idlblPSNo_CS"
+                                        text="{i18n>psnum}"
+                                    />
+                                    <Input
+                                        id="idPSNo_CS"
+                                        value="{oSpecialsjmodel>/pSNumber}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblCompletionD_CS"
+                                        text="{i18n>completionDate}"
+                                    />
+                                    <DatePicker
+                                        id="idCompletionD_CS"
+                                        value="{oSpecialsjmodel>/completionDate}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
+                                    <Label
+                                        id="idlblWorkDesc_CS"
+                                        text="{i18n>CS_WorkDesc}"
+                                    />
+                                    <Input
+                                        id="idWorkDesc_CS"
+                                        value="{oSpecialsjmodel>/work_desc}"
+                                        maxLength="255"
+                                    />
+                                    <Label
+                                        id="idlblMeterNo_CS"
+                                        text="{i18n>CS_MeterNo}"
+                                    />
+                                    <Input
+                                        id="idMeterNo_CS"
+                                        value="{oSpecialsjmodel>/meter_number}"
+                                        change="onMeterMatch"
+                                        maxLength="18"
+                                    />
+                                    <Label
+                                        id="idlblMeterNo2_CS"
+                                        text="{i18n>CS_MeterNo2}"
+                                    />
+                                    <Input
+                                        id="idMeterNo2_CS"
+                                        value="{oSpecialsjmodel>/meter_number2}"
+                                        change="onMeterMatch"
+                                        maxLength="18"
+                                    />
+                                    <Label
+                                        id="idlblFedFrom_CS"
+                                        text="{i18n>CS_FedFrom}"
+                                    />
+                                    <Input
+                                        id="idFedFrom_CS"
+                                        value="{oSpecialsjmodel>/fedFrom}"
+                                        maxLength="40"
+                                    />
 
-    <x:sections> 
+                                    <core:Title id="idcoreTrecord2_CS" />
+                                    <Label
+                                        id="idlblCableDesc_CS"
+                                        text="{i18n>CS_cableDesc}"
+                                    />
+                                    <Input
+                                        id="idCableDesc_CS"
+                                        value="{oSpecialsjmodel>/cableDescription}"
+                                        maxLength="65"
+                                    />
+                                    <Label
+                                        id="idlblCableFootage_CS"
+                                        text="{i18n>CS_cableFootage}"
+                                    />
+                                    <Input
+                                        id="idCableFootage_CS"
+                                        value="{oSpecialsjmodel>/cableFootage}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblCts_CS"
+                                        text="{i18n>CS_cts}"
+                                    />
+                                    <Input
+                                        id="idCts_CS"
+                                        value="{oSpecialsjmodel>/cts}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblPts_CS"
+                                        text="{i18n>CS_pts}"
+                                    />
+                                    <Input
+                                        id="idPts_CS"
+                                        value="{oSpecialsjmodel>/pts}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblK_CS"
+                                        text="{i18n>CS_k}"
+                                    />
+                                    <Input
+                                        id="idK_CS"
+                                        value="{oSpecialsjmodel>/k}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlbM_CS"
+                                        text="{i18n>CS_m}"
+                                    />
+                                    <Input
+                                        id="idM_CS"
+                                        value="{oSpecialsjmodel>/m}"
+                                        maxLength="60"
+                                    />
 
-      <x:ObjectPageSection id="idPageSectionCustomerRec_CS" titleUppercase="false" title="{i18n>CS_Customer_rec}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idCustomerSubSection_CS" titleUppercase="false">
-            <x:blocks>
-               <form:SimpleForm id="idRequestFormCustRec_CS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
-                  columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
- 
-            <form:content>
-            <core:Title id="idcoreTrecord1_CS"/>
-            <Label id="idlblConnObj_CS" text="{i18n>CS_BEntity}"/>
-            <Text id="idConnObj_CS" text="{oSpecialsjmodel>/connection_object}" />
-            <Label id="idlblPSNo_CS" text="{i18n>psnum}"/>
-            <Input id="idPSNo_CS" value="{oSpecialsjmodel>/pSNumber}" maxLength="40"/>
-            <Label id="idlblCompletionD_CS" text="{i18n>completionDate}" />
-            <DatePicker id="idCompletionD_CS" value="{oSpecialsjmodel>/completionDate}" valueFormat="MM/dd/yy" displayFormat="MM/dd/yy"/>
-            <Label id="idlblWorkDesc_CS" text="{i18n>CS_WorkDesc}" />
-            <Input id="idWorkDesc_CS" value="{oSpecialsjmodel>/work_desc}" maxLength="255"/> 
-            <Label id="idlblMeterNo_CS" text="{i18n>CS_MeterNo}"/>
-            <Input id="idMeterNo_CS" value="{oSpecialsjmodel>/meter_number}" maxLength="18" />
-            <Label id="idlblMeterNo2_CS" text="{i18n>CS_MeterNo2}"/>
-            <Input id="idMeterNo2_CS" value="{oSpecialsjmodel>/meter_number2}" maxLength="18" />
-            <Label id="idlblFedFrom_CS" text="{i18n>CS_FedFrom}"/>
-            <Input id="idFedFrom_CS" value="{oSpecialsjmodel>/fedFrom}" maxLength="40"/>
+                                    <core:Title id="idcoreTrecord3_CS" />
+                                    <Label
+                                        id="idlblDuctType_CS"
+                                        text="{i18n>CS_DuctType}"
+                                    />
+                                    <Input
+                                        id="idDuctType_CS"
+                                        value="{oSpecialsjmodel>/ductType}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblFusesAt_CS"
+                                        text="{i18n>CS_FusesAt}"
+                                    />
+                                    <Input
+                                        id="idfusesAt_CS"
+                                        value="{oSpecialsjmodel>/fusesAt}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblSize_CS"
+                                        text="{i18n>CS_Size}"
+                                    />
+                                    <Input
+                                        id="idSize_CS"
+                                        value="{oSpecialsjmodel>/size}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblType_CS"
+                                        text="{i18n>CS_Type}"
+                                    />
+                                    <Input
+                                        id="idType_CS"
+                                        value="{oSpecialsjmodel>/typeCR}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblCurve_CS"
+                                        text="{i18n>CS_Curve}"
+                                    />
+                                    <Input
+                                        id="idCurve_CS"
+                                        value="{oSpecialsjmodel>/curve}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblVoltage_CS"
+                                        text="{i18n>CS_Voltage}"
+                                    />
+                                    <Input
+                                        id="idVoltage_CS"
+                                        value="{oSpecialsjmodel>/voltage}"
+                                        maxLength="60"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
 
-            <core:Title id="idcoreTrecord2_CS" /> 
-            <Label id="idlblCableDesc_CS" text="{i18n>CS_cableDesc}"/> 
-            <Input id="idCableDesc_CS" value="{oSpecialsjmodel>/cableDescription}" maxLength="65"/>
-            <Label id="idlblCableFootage_CS" text="{i18n>CS_cableFootage}"/>
-            <Input id="idCableFootage_CS" value="{oSpecialsjmodel>/cableFootage}" maxLength="40"/>
-            <Label id="idlblCts_CS" text="{i18n>CS_cts}" />
-            <Input id="idCts_CS" value="{oSpecialsjmodel>/cts}" maxLength="60"/>
-            <Label id="idlblPts_CS" text="{i18n>CS_pts}" />
-            <Input id="idPts_CS" value="{oSpecialsjmodel>/pts}" maxLength="60"/>
-            <Label id="idlblK_CS" text="{i18n>CS_k}" />
-            <Input id="idK_CS" value="{oSpecialsjmodel>/k}" maxLength="60"/>
-            <Label id="idlbM_CS" text="{i18n>CS_m}" />
-            <Input id="idM_CS" value="{oSpecialsjmodel>/m}" maxLength="60"/>
-            
-            <core:Title id="idcoreTrecord3_CS"  />
-            <Label id="idlblDuctType_CS" text="{i18n>CS_DuctType}"/>
-            <Input id="idDuctType_CS" value="{oSpecialsjmodel>/ductType}" maxLength="40"/>
-            <Label id="idlblFusesAt_CS" text="{i18n>CS_FusesAt}" />
-            <Input id="idfusesAt_CS" value="{oSpecialsjmodel>/fusesAt}" maxLength="60"/>
-            <Label id="idlblSize_CS" text="{i18n>CS_Size}" />
-            <Input id="idSize_CS" value="{oSpecialsjmodel>/size}" maxLength="60"/>
-            <Label id="idlblType_CS" text="{i18n>CS_Type}" />
-            <Input id="idType_CS" value="{oSpecialsjmodel>/typeCR}" maxLength="60"/>
-            <Label id="idlblCurve_CS" text="{i18n>CS_Curve}" />
-            <Input id="idCurve_CS" value="{oSpecialsjmodel>/curve}" maxLength="60"/>
-            <Label id="idlblVoltage_CS" text="{i18n>CS_Voltage}" />
-            <Input id="idVoltage_CS" value="{oSpecialsjmodel>/voltage}" maxLength="60"/>
+            <x:ObjectPageSection
+                id="idPageSectionLBD_CS"
+                titleUppercase="false"
+                title="{i18n>CS_Load_Break_Disc}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idLBDSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="rquestformLBD_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTLBD1_CS" />
+                                    <Label id="idRadiobutton_CS" />
+                                    <RadioButtonGroup
+                                        id="idRadio1_CS"
+                                        columns="5"
+                                    >
+                                        <RadioButton
+                                            id="iddeCoOwned_CS"
+                                            text="{i18n>CS_DTEOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'DTE Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idCustomerOwned2_CS"
+                                            text="{i18n>CS_CustomerOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'Customer Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idNone_CS"
+                                            text="{i18n>CS_None}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                                    <Label
+                                        id="idlblMFG_CS"
+                                        text="{i18n>CS_Manufacturer}"
+                                    />
+                                    <ComboBox
+                                        id="idManufacturer_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MANUFACTURER'}] }"
+                                        selectedKey="{oSpecialsjmodel>/manufacturer}"
+                                    >
+                                        <core:Item
+                                            id="idMFitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <Label
+                                        id="idlblModel_CS"
+                                        text="{i18n>CS_Model}"
+                                    />
+                                    <ComboBox
+                                        id="idModel_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MODEL'}] }"
+                                        selectedKey="{oSpecialsjmodel>/model}"
+                                    >
+                                        <core:Item
+                                            id="idModelitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <Label
+                                        id="idlblCC_CS"
+                                        text="{i18n>CS_ContinuousCurrent}"
+                                    />
+                                    <ComboBox
+                                        id="idCC_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD CONTINOUS CURRENT'}] }"
+                                        selectedKey="{oSpecialsjmodel>/continuousCurrent}"
+                                    >
+                                        <core:Item
+                                            id="idCCitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
 
-              </form:content>
-            </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
+                                    <core:Title id="idcoreTLBD2_CS" />
+                                    <Label
+                                        id="idlblLoadIntRat_CS"
+                                        text="{i18n>CS_LoadIntRat}"
+                                    />
+                                    <Input
+                                        id="idLoadIntRat_CS"
+                                        value="{oSpecialsjmodel>/loadIntRating}"
+                                        maxLength="15"
+                                    />
+                                    <Label
+                                        id="idlblKAMomentary_CS"
+                                        text="{i18n>CS_KAMomentary}"
+                                    />
+                                    <Input
+                                        id="idKAMomentary_CS"
+                                        value="{oSpecialsjmodel>/kAMomentaryLBD}"
+                                        maxLength="15"
+                                    />
+                                    <Label
+                                        id="idlblType2_CS"
+                                        text="{i18n>CS_Type2}"
+                                    />
+                                    <ComboBox
+                                        id="idType2_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD TYPE'}] }"
+                                        selectedKey="{oSpecialsjmodel>/typeLBD}"
+                                    >
+                                        <core:Item
+                                            id="idType2item_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <Label
+                                        id="idlblFaultClosing_CS"
+                                        text="{i18n>CSFaultClosing}"
+                                    />
+                                    <Input
+                                        id="idFaultClosing_CS"
+                                        value="{oSpecialsjmodel>/faultClosing}"
+                                        maxLength="20"
+                                    />
 
+                                    <core:Title id="idcoreTLBD3_CS" />
+                                    <Label
+                                        id="idlblBil_CS"
+                                        text="{i18n>CS_Bil}"
+                                    />
+                                    <Input
+                                        id="idBil_CS"
+                                        value="{oSpecialsjmodel>/bilLBD}"
+                                        maxLength="5"
+                                    />
+                                    <Label
+                                        id="idlblSV_CS"
+                                        text="{i18n>CS_ServiceVoltage}"
+                                    />
+                                    <ComboBox
+                                        id="idSV_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD SERVICE VOLTAGE'}] }"
+                                        selectedKey="{oSpecialsjmodel>/serviceVoltage}"
+                                    >
+                                        <core:Item
+                                            id="idSV2item_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <Label
+                                        id="idlbl60Cyc_CS"
+                                        text="{i18n>CS60Cyc}"
+                                    />
+                                    <Input
+                                        id="id60Cyc_CS"
+                                        value="{oSpecialsjmodel>/CycWithstand60}"
+                                        maxLength="15"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSectionLBD_CS" titleUppercase="false" title="{i18n>CS_Load_Break_Disc}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idLBDSubSection_CS" titleUppercase="false">
-            <x:blocks>
-               <form:SimpleForm id="rquestformLBD_CS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" 
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-            <form:content>
-            <core:Title id="idcoreTLBD1_CS" />
-            <Label id="idRadiobutton_CS" />
-            <RadioButtonGroup id="idRadio1_CS" columns="5" >
-            <RadioButton id="iddeCoOwned_CS" text="{i18n>CS_DTEOwned}" selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'DTE Owned' ? true : false}"/>
-            <RadioButton id="idCustomerOwned2_CS" text="{i18n>CS_CustomerOwned}" selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'Customer Owned' ? true : false}"/>
-            <RadioButton id="idNone_CS" text="{i18n>CS_None}" selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"/>
-            </RadioButtonGroup>  
-            <Label id="idlblMFG_CS" text="{i18n>CS_Manufacturer}" />
-            <ComboBox id="idManufacturer_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MANUFACTURER'}] }" selectedKey="{oSpecialsjmodel>/manufacturer}">
-              <core:Item id="idMFitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>
-            <Label id="idlblModel_CS" text="{i18n>CS_Model}" />
-            <ComboBox id="idModel_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MODEL'}] }" selectedKey="{oSpecialsjmodel>/model}">
-              <core:Item id="idModelitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>
-            <Label id="idlblCC_CS" text="{i18n>CS_ContinuousCurrent}" />
-            <ComboBox id="idCC_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD CONTINOUS CURRENT'}] }" selectedKey="{oSpecialsjmodel>/continuousCurrent}">
-              <core:Item id="idCCitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>
-            
-            <core:Title id="idcoreTLBD2_CS" />
-            <Label id="idlblLoadIntRat_CS" text="{i18n>CS_LoadIntRat}" />
-            <Input id="idLoadIntRat_CS" value="{oSpecialsjmodel>/loadIntRating}" maxLength="15"/>
-            <Label id="idlblKAMomentary_CS" text="{i18n>CS_KAMomentary}" />
-            <Input id="idKAMomentary_CS" value="{oSpecialsjmodel>/kAMomentaryLBD}" maxLength="15"/>
-            <Label id="idlblType2_CS" text="{i18n>CS_Type2}" />
-            <ComboBox id="idType2_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD TYPE'}] }" selectedKey="{oSpecialsjmodel>/typeLBD}">
-              <core:Item id="idType2item_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>
-            <Label id="idlblFaultClosing_CS" text="{i18n>CSFaultClosing}" />
-            <Input id="idFaultClosing_CS" value="{oSpecialsjmodel>/faultClosing}" maxLength="20"/>
+            <x:ObjectPageSection
+                id="idPageSectionCB_CS"
+                titleUppercase="false"
+                title="{i18n>CS_Circuit_Breaker}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idCBSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesformCB_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTCB1_CS" />
+                                    <Label id="idlblRadioCB_CS" />
+                                    <RadioButtonGroup
+                                        id="goup6CPSR_CS"
+                                        columns="5"
+                                        class="sapUiTinyMarginTopBottom"
+                                    >
+                                        <RadioButton
+                                            id="idAir_CS"
+                                            text="{i18n>CS_Air}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Air' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idOil_CS"
+                                            text="{i18n>CS_Oil}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Oil' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idVac_CS"
+                                            text="{i18n>CS_Vac}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Vac' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idsf6_CS"
+                                            text="{i18n>CS_Sf6}"
+                                            selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                                    <Label
+                                        id="idlblCBM_CS"
+                                        text="{i18n>CS_CBM}"
+                                    />
+                                    <Input
+                                        id="idCBM_CS"
+                                        value="{oSpecialsjmodel>/circuitBreakerMake}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblSNo_CS"
+                                        text="{i18n>CS_Serialno}"
+                                    />
+                                    <Input
+                                        id="idSerialNo_CS"
+                                        value="{oSpecialsjmodel>/serialNo}"
+                                        maxLength="40"
+                                    />
 
-            <core:Title id="idcoreTLBD3_CS" />
-            <Label id="idlblBil_CS" text="{i18n>CS_Bil}" />
-            <Input id="idBil_CS" value="{oSpecialsjmodel>/bilLBD}" maxLength="5"/>
-            <Label id="idlblSV_CS" text="{i18n>CS_ServiceVoltage}" />
-            <ComboBox id="idSV_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD SERVICE VOLTAGE'}] }" selectedKey="{oSpecialsjmodel>/serviceVoltage}">
-              <core:Item id="idSV2item_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>
-            <Label id="idlbl60Cyc_CS" text="{i18n>CS60Cyc}" />
-            <Input id="id60Cyc_CS" value="{oSpecialsjmodel>/CycWithstand60}" maxLength="15"/>  
-            </form:content>
-            </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>  
+                                    <core:Title id="idcoreTCB2_CS" />
+                                    <Label id="idCB1_CS" />
+                                    <RadioButtonGroup
+                                        id="grop5CPSR_CS"
+                                        columns="5"
+                                        class="sapUiTinyMarginTopBottom"
+                                    >
+                                        <RadioButton
+                                            id="idDecoOwned_CS"
+                                            text="{i18n>CS_DTEOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idCustomer_CS"
+                                            text="{i18n>CS_CustomerOwned}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                                    <Label
+                                        id="idlblKAMome_CS"
+                                        text="{i18n>CS_KAMomentary}"
+                                    />
+                                    <Input
+                                        id="idKAMome_CS"
+                                        value="{oSpecialsjmodel>/kAMomentaryCB}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblAmps_CS"
+                                        text="{i18n>CS_Amps}"
+                                    />
+                                    <Input
+                                        id="idAmps_CS"
+                                        value="{oSpecialsjmodel>/amps}"
+                                        maxLength="40"
+                                    />
 
+                                    <core:Title id="idcoreTCB3_CS" />
+                                    <Label
+                                        id="idlblType4_CS"
+                                        text="{i18n>CS_Type4}"
+                                    />
+                                    <Input
+                                        id="idType4_CS"
+                                        value="{oSpecialsjmodel>/typeCB}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblFaultDuty_CS"
+                                        text="{i18n>CS_FaultDuty}"
+                                    />
+                                    <Input
+                                        id="idFaultDuty_CS"
+                                        value="{oSpecialsjmodel>/faultDuty}"
+                                        maxLength="40"
+                                    />
+                                    <Label
+                                        id="idlblBil2_CS"
+                                        text="{i18n>CS_Bil2}"
+                                    />
+                                    <Input
+                                        id="idBil2_CS"
+                                        value="{oSpecialsjmodel>/bilCB}"
+                                        maxLength="40"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSectionCB_CS" titleUppercase="false" title="{i18n>CS_Circuit_Breaker}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idCBSubSection_CS" titleUppercase="false">
-            <x:blocks>
-               <form:SimpleForm id="reqesformCB_CS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-            <form:content>
+            <x:ObjectPageSection
+                id="idPageSection_CS"
+                titleUppercase="false"
+                title="{i18n>CS_other}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idCSSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesform_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTOther1_CS" />
+                                    <Label id="idmeasure_CS" />
+                                    <Label
+                                        id="idlblAB_CS"
+                                        text="{i18n>CS_AB}"
+                                    />
+                                    <Input
+                                        id="idAB_CS"
+                                        value="{oSpecialsjmodel>/ab}"
+                                        maxLength="20"
+                                    />
+                                    <Label
+                                        id="idlblBC_CS"
+                                        text="{i18n>CS_BC}"
+                                    />
+                                    <Input
+                                        id="idBC_CS"
+                                        value="{oSpecialsjmodel>/bc}"
+                                        maxLength="20"
+                                    />
+                                    <Label
+                                        id="idlblCA_CS"
+                                        text="{i18n>CS_CA}"
+                                    />
+                                    <Input
+                                        id="idCA_CS"
+                                        value="{oSpecialsjmodel>/ca}"
+                                        maxLength="20"
+                                    />
+                                    <Label
+                                        id="idlblAN_CS"
+                                        text="{i18n>CS_AN}"
+                                    />
+                                    <Input
+                                        id="idAN_CS"
+                                        value="{oSpecialsjmodel>/an}"
+                                        maxLength="20"
+                                    />
+                                    <Label
+                                        id="idlblBN_CS"
+                                        text="{i18n>CS_BN}"
+                                    />
+                                    <Input
+                                        id="idBN_CS"
+                                        value="{oSpecialsjmodel>/bn}"
+                                        maxLength="20"
+                                    />
+                                    <Label
+                                        id="idlbLCN_CS"
+                                        text="{i18n>CS_CN}"
+                                    />
+                                    <Input
+                                        id="idCN_CS"
+                                        value="{oSpecialsjmodel>/cn}"
+                                        maxLength="20"
+                                    />
 
-            <core:Title id="idcoreTCB1_CS" />
-            <Label id="idlblRadioCB_CS"/>
-             <RadioButtonGroup id="goup6CPSR_CS" columns="5" class="sapUiTinyMarginTopBottom" >
-            <RadioButton id="idAir_CS" text="{i18n>CS_Air}" selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Air' ? true : false}"/>
-            <RadioButton id="idOil_CS" text="{i18n>CS_Oil}" selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Oil' ? true : false}"/>
-            <RadioButton id="idVac_CS" text="{i18n>CS_Vac}" selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'Vac' ? true : false}"/>
-            <RadioButton id="idsf6_CS" text="{i18n>CS_Sf6}" selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"/>
-            </RadioButtonGroup>
-            <Label id="idlblCBM_CS" text="{i18n>CS_CBM}" />
-            <Input id="idCBM_CS" value="{oSpecialsjmodel>/circuitBreakerMake}" maxLength="40"/>
-            <Label id="idlblSNo_CS" text="{i18n>CS_Serialno}" />
-            <Input id="idSerialNo_CS" value="{oSpecialsjmodel>/serialNo}" maxLength="40"/>
-            
-            <core:Title id="idcoreTCB2_CS" /> 
-            <Label id="idCB1_CS" />
-            <RadioButtonGroup id="grop5CPSR_CS" columns="5" class="sapUiTinyMarginTopBottom" >          
-            <RadioButton id="idDecoOwned_CS" text="{i18n>CS_DTEOwned}" selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"/>
-            <RadioButton id="idCustomer_CS" text="{i18n>CS_CustomerOwned}" selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"/>
-            </RadioButtonGroup> 
-            <Label id="idlblKAMome_CS" text="{i18n>CS_KAMomentary}" />
-            <Input id="idKAMome_CS" value="{oSpecialsjmodel>/kAMomentaryCB}" maxLength="40"/>
-            <Label id="idlblAmps_CS" text="{i18n>CS_Amps}" />
-            <Input id="idAmps_CS" value="{oSpecialsjmodel>/amps}" maxLength="40"/>
+                                    <core:Title id="idcoreTOther2_CS" />
+                                    <Label
+                                        id="idlblGround_CS"
+                                        text="{i18n>CS_ground}"
+                                    />
+                                    <Input
+                                        id="idground_CS"
+                                        value="{oSpecialsjmodel>/groundMatResistance}"
+                                        maxLength="30"
+                                    />
+                                    <Label
+                                        id="idlblMethod_CS"
+                                        text="{i18n>CS_method}"
+                                    />
+                                    <ComboBox
+                                        id="idmethod_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_METHOD'}] }"
+                                        selectedKey="{oSpecialsjmodel>/methodUsed}"
+                                    >
+                                        <core:Item
+                                            id="idMehtodUsedTOitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <!-- <Input id="idmethod_CS" value="{oSpecialsjmodel>/methodUsed}" maxLength="30"/> -->
+                                    <Label
+                                        id="idlbldate_CS"
+                                        text="{i18n>CS_date}"
+                                    />
+                                    <Input
+                                        id="iddate_CS"
+                                        value="{oSpecialsjmodel>/dateMergered}"
+                                        maxLength="10"
+                                    />
+                                    <Label
+                                        id="idlblservice_CS"
+                                        text="{i18n>CS_service}"
+                                    />
+                                    <Input
+                                        id="idservice_CS"
+                                        value="{oSpecialsjmodel>/typeofService}"
+                                        maxLength="60"
+                                    />
+                                    <Label
+                                        id="idlblTO_CS"
+                                        text="{i18n>CS_TO}"
+                                    />
+                                    <ComboBox
+                                        id="idTypeTO_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }"
+                                        selectedKey="{oSpecialsjmodel>/typeofTO}"
+                                    >
+                                        <core:Item
+                                            id="idTypeTOitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <Label
+                                        id="idlblrep_CS"
+                                        text="{i18n>CS_rep}"
+                                        required="true"
+                                    />
+                                    <ComboBox
+                                        id="idrep_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }"
+                                        selectedKey="{oSpecialsjmodel>/primaryServiceRep}"
+                                    >
+                                        <core:Item
+                                            id="idrepitem_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
 
-            <core:Title id="idcoreTCB3_CS" />   
-            <Label id="idlblType4_CS" text="{i18n>CS_Type4}" />
-            <Input id="idType4_CS" value="{oSpecialsjmodel>/typeCB}" maxLength="40"/>
-            <Label id="idlblFaultDuty_CS" text="{i18n>CS_FaultDuty}" />
-            <Input id="idFaultDuty_CS" value="{oSpecialsjmodel>/faultDuty}" maxLength="40"/>
-            <Label id="idlblBil2_CS" text="{i18n>CS_Bil2}" />
-            <Input id="idBil2_CS" value="{oSpecialsjmodel>/bilCB}" maxLength="40"/>
-            </form:content>
-            </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
+                                    <core:Title id="idcoreTOther3_CS" />
 
-      <x:ObjectPageSection id="idPageSection_CS" titleUppercase="false" title="{i18n>CS_other}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idCSSubSection_CS" titleUppercase="false">
-            <x:blocks>
-               <form:SimpleForm id="reqesform_CS" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-            <form:content>
-            <core:Title id="idcoreTOther1_CS" />
-            <Label id="idmeasure_CS" />
-            <Label id="idlblAB_CS" text="{i18n>CS_AB}" />
-            <Input id="idAB_CS" value="{oSpecialsjmodel>/ab}" maxLength="20"/>
-            <Label id="idlblBC_CS" text="{i18n>CS_BC}" />
-            <Input id="idBC_CS" value="{oSpecialsjmodel>/bc}" maxLength="20"/>
-            <Label id="idlblCA_CS" text="{i18n>CS_CA}" />
-            <Input id="idCA_CS" value="{oSpecialsjmodel>/ca}" maxLength="20"/>
-            <Label id="idlblAN_CS" text="{i18n>CS_AN}" />     
-            <Input id="idAN_CS" value="{oSpecialsjmodel>/an}" maxLength="20"/>
-            <Label id="idlblBN_CS" text="{i18n>CS_BN}" />     
-            <Input id="idBN_CS" value="{oSpecialsjmodel>/bn}" maxLength="20"/>
-            <Label id="idlbLCN_CS" text="{i18n>CS_CN}" />     
-            <Input id="idCN_CS" value="{oSpecialsjmodel>/cn}" maxLength="20"/>
+                                    <Label
+                                        id="idlblpsw_CS"
+                                        text="{i18n>CS_psw}"
+                                    />
+                                    <Text
+                                        id="idCNpsw_CS"
+                                        text="{oCustomerAttributesJModel>/psw}"
+                                    />
+                                    <Label
+                                        id="idlblComment_CS"
+                                        text="{i18n>CS_comment}"
+                                    />
+                                    <TextArea
+                                        id="idcomment_CS"
+                                        growing="true"
+                                        value="{oSpecialsjmodel>/comment}"
+                                        showExceededText="false"
+                                        rows="7"
+                                        maxLength="1300"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
 
-            <core:Title id="idcoreTOther2_CS" /> 
-            <Label id="idlblGround_CS" text="{i18n>CS_ground}" />     
-            <Input id="idground_CS" value="{oSpecialsjmodel>/groundMatResistance}" maxLength="30"/>
-            <Label id="idlblMethod_CS" text="{i18n>CS_method}" />     
-            <Input id="idmethod_CS" value="{oSpecialsjmodel>/methodUsed}" maxLength="30"/>
-            <Label id="idlbldate_CS" text="{i18n>CS_date}" />     
-            <Input id="iddate_CS" value="{oSpecialsjmodel>/dateMergered}" maxLength="10"/>
-            <Label id="idlblservice_CS" text="{i18n>CS_service}" />     
-            <Input id="idservice_CS" value="{oSpecialsjmodel>/typeofService}" maxLength="60"/>
-            <Label id="idlblTO_CS" text="{i18n>CS_TO}" /> 
-            <ComboBox id="idTypeTO_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }" selectedKey="{oSpecialsjmodel>/typeofTO}">
-              <core:Item id="idTypeTOitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox> 
-            <Label id="idlblrep_CS" text="{i18n>CS_rep}" required="true"/>  
-            <ComboBox id="idrep_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }" selectedKey="{oSpecialsjmodel>/primaryServiceRep}">
-              <core:Item id="idrepitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-            </ComboBox>    
+            <x:ObjectPageSection
+                id="idPageSectionFusesAtLBD_CS"
+                titleUppercase="false"
+                title="{i18n>CS_Fuses_At_LBD}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idFusesAtLBDSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <Table
+                                id="idTFusesAtLb_CS"
+                                alternateRowColors="true"
+                                showNoData="true"
+                                items="{oSpecialsjmodel>/fuses}"
+                            >
+                                <headerToolbar>
+                                    <Toolbar id="_IDGenToolbar_addrow_CS">
+                                        <content>
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer_Addrow_CS"
+                                            />
+                                            <Button
+                                                id="idbtn_addnewRow_Fuses"
+                                                type="Emphasized"
+                                                icon="sap-icon://add"
+                                                press="onAddnewFusesRow"
+                                            />
+                                        </content>
+                                    </Toolbar>
+                                </headerToolbar>
 
-            <core:Title id="idcoreTOther3_CS" />
-               
-            <Label id="idlblpsw_CS" text="{i18n>CS_psw}" />     
-            <Text id="idCNpsw_CS" text="{oCustomerAttributesJModel>/psw}"/>
-            <Label id="idlblComment_CS" text="{i18n>CS_comment}" />     
-            <TextArea id="idcomment_CS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" rows="7" maxLength="1300">
-            </TextArea>
-            
+                                <columns>
+                                    <Column id="id21CPSR_CO">
+                                        <Label
+                                            id="idlblsize_CS_CO"
+                                            text="Billing Entity"
+                                        />
+                                    </Column>
+                                    <Column id="id21CPSR">
+                                        <Label
+                                            id="idlblsize_CS"
+                                            text="{i18n>CS_Tsize}"
+                                        />
+                                    </Column>
+                                    <Column id="id31CPSR">
+                                        <Label
+                                            id="idlbltype3_CS"
+                                            text="{i18n>CS_Ttype}"
+                                        />
+                                    </Column>
+                                    <Column id="id41CPSR">
+                                        <Label
+                                            id="idlblcurve2_CS"
+                                            text="{i18n>CS_Tcurve}"
+                                        />
+                                    </Column>
+                                    <Column id="id51CPSR">
+                                        <Label
+                                            id="idlblvoltage2_CS"
+                                            text="{i18n>CS_Tvoltage}"
+                                        />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="cliFuses_CS">
+                                        <cells>
+                                            <Text
+                                                id="idFuse_CO"
+                                                text="{oSpecialsjmodel>connection_object}"
+                                            />
+                                            <Input
+                                                id="idTsize_CS"
+                                                value="{oSpecialsjmodel>fuseSize}"
+                                            />
+             <Select id="idTType_CS"
+  forceSelection="false"
+  selectedKey="{oSpecialsjmodel>fuseType}"
+  items="{
+            path :'dropDownJsonModel>/DropdownData', 
+            sorter: { path: 'device' }, 
+            filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] 
+          }"
+  change="onFuseTypeChange"
+>
+  <core:ListItem
+    id="idTypeitem_CS"
+    key="{dropDownJsonModel>value}"
+    text="{dropDownJsonModel>value}"
+  />
+</Select>
 
-            </form:content>
-            </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
-
-      <x:ObjectPageSection id="idPageSectionFusesAtLBD_CS" titleUppercase="false" title="{i18n>CS_Fuses_At_LBD}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idFusesAtLBDSubSection_CS" titleUppercase="false">
-            <x:blocks>
-               <Table id="idTFusesAtLb_CS" alternateRowColors="true" showNoData="true" 
-               items="{oSpecialsjmodel>/fuses}"
-               >
-              <columns >   
-              <Column id="id21CPSR_CO">
-                  <Label id="idlblsize_CS_CO" text="Billing Entity" />
-                </Column>             
-                <Column id="id21CPSR">
-                  <Label id="idlblsize_CS" text="{i18n>CS_Tsize}" />
-                </Column>
-                <Column id="id31CPSR">
-                  <Label id="idlbltype3_CS" text="{i18n>CS_Ttype}" />
-                </Column>
-                <Column id="id41CPSR">
-                  <Label id="idlblcurve2_CS" text="{i18n>CS_Tcurve}" />
-                </Column>
-                <Column id="id51CPSR">
-                  <Label id="idlblvoltage2_CS" text="{i18n>CS_Tvoltage}" />
-                </Column>
-              </columns>
-            <items>
-              <ColumnListItem id="cliFuses_CS">
-                <cells>                  
-                  <Text id="idFuse_CO" text="{oSpecialsjmodel>connection_object}"/>
-                  <Input id="idTsize_CS" value="{oSpecialsjmodel>fuseSize}"/>
-                  <ComboBox id="idTType_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] }" selectedKey="{oSpecialsjmodel>/fuseType}">
-                    <core:Item id="idTypeitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <ComboBox id="idTCurve_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE CURVE'}] }" selectedKey="{oSpecialsjmodel>/fuseCurve}">
-                    <core:Item id="idCurveitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <ComboBox id="idTVoltage_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE VOLTAGE'}] }" selectedKey="{oSpecialsjmodel>/fuseVoltage}">
-                    <core:Item id="idCVoltageitem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                </cells>
-                </ColumnListItem>
-                <!-- <ColumnListItem id="cliFuses1_CS">
+                                            <!-- <ComboBox
+                                                id="idTType_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] }"
+                                                selectedKey="{oSpecialsjmodel>/fuseType}"
+                                            >
+                                                <core:Item
+                                                    id="idTypeitem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox> -->
+                                            <ComboBox
+                                                id="idTCurve_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE CURVE'}] }"
+                                                selectedKey="{oSpecialsjmodel>fuseCurve}"
+                                            >
+                                                <core:Item
+                                                    id="idCurveitem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                            <ComboBox
+                                                id="idTVoltage_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE VOLTAGE'}] }"
+                                                selectedKey="{oSpecialsjmodel>fuseVoltage}"
+                                            >
+                                                <core:Item
+                                                    id="idCVoltageitem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <!-- <ColumnListItem id="cliFuses1_CS">
                 <cells>                  
                   <Input id="idTsize1_CS" value="{oSpecialsjmodel>/fuseSize}"/>
                   <ComboBox id="idTType1_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
@@ -288,89 +885,173 @@
                   </ComboBox>
                 </cells>
                 </ColumnListItem> -->
-            </items>
-            </Table>
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
+                                </items>
+                            </Table>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSectionTrans_CS" titleUppercase="false" title="{i18n>CS_Transformer}" visible="true">
-        <x:subSections>
-          <x:ObjectPageSubSection id="idTransSubSection_CS" titleUppercase="false">
-            <x:blocks>           
-              <Table id="tablTrans" alternateRowColors="true" showNoData="true">
-              <headerToolbar>
-                <Toolbar id="_IDGenToolbar1">
-                <RadioButtonGroup id="idOwnedGrp" columns="4" >          
-                  <RadioButton id="idDteOwned_CS" text="{i18n>CS_DTEOwned}" selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'DTE Owned' ? true : false}"/>
-                  <RadioButton id="idCustomerOwned_CS" text="{i18n>CS_CustomerOwned}" selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"/>
-                </RadioButtonGroup>  
-                </Toolbar>      
-            </headerToolbar>
-              <columns >                
-                <Column id="idColumnManufacturer_CS">
-                  <Label id="idlblManufacturer_CS" text="Manufacturer" />
-                </Column>
-                <Column id="idImped_CS">
-                  <Label id="idlblImped_CS" text="% Imped" />
-                </Column>
-                <Column id="idPriVolt1_CS">
-                  <Label id="idlblPriVolt_CS" text="Pri Volt" />
-                </Column>
-                <Column id="idSecVolt1_CS">
-                  <Label id="idlblSecVoltR_CS" text="Sec Volt" />
-                </Column>
+            <x:ObjectPageSection
+                id="idPageSectionTrans_CS"
+                titleUppercase="false"
+                title="{i18n>CS_Transformer}"
+                visible="true"
+            >
+                <x:subSections>
+                    <x:ObjectPageSubSection
+                        id="idTransSubSection_CS"
+                        titleUppercase="false"
+                    >
+                        <x:blocks>
+                            <Table
+                                id="tablTrans"
+                                alternateRowColors="true"
+                                showNoData="true"
+                            >
+                                <headerToolbar>
+                                    <Toolbar id="_IDGenToolbar1">
+                                        <RadioButtonGroup
+                                            id="idOwnedGrp"
+                                            columns="4"
+                                        >
+                                            <RadioButton
+                                                id="idDteOwned_CS"
+                                                text="{i18n>CS_DTEOwned}"
+                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'DTE Owned' ? true : false}"
+                                            />
+                                            <RadioButton
+                                                id="idCustomerOwned_CS"
+                                                text="{i18n>CS_CustomerOwned}"
+                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
+                                            />
+                                        </RadioButtonGroup>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column id="idColumnManufacturer_CS">
+                                        <Label
+                                            id="idlblManufacturer_CS"
+                                            text="Manufacturer"
+                                        />
+                                    </Column>
+                                    <Column id="idImped_CS">
+                                        <Label
+                                            id="idlblImped_CS"
+                                            text="% Imped"
+                                        />
+                                    </Column>
+                                    <Column id="idPriVolt1_CS">
+                                        <Label
+                                            id="idlblPriVolt_CS"
+                                            text="Pri Volt"
+                                        />
+                                    </Column>
+                                    <Column id="idSecVolt1_CS">
+                                        <Label
+                                            id="idlblSecVoltR_CS"
+                                            text="Sec Volt"
+                                        />
+                                    </Column>
 
-                <Column id="idTaps1_CS">
-                  <Label id="idlblTaps_CS" text="Taps" />
-                </Column>
+                                    <Column id="idTaps1_CS">
+                                        <Label
+                                            id="idlblTaps_CS"
+                                            text="Taps"
+                                        />
+                                    </Column>
 
-                <Column id="idKVA_CS">
-                  <Label id="idlblKVA_CS" text="KVA" />
-                </Column>
+                                    <Column id="idKVA_CS">
+                                        <Label
+                                            id="idlblKVA_CS"
+                                            text="KVA"
+                                        />
+                                    </Column>
 
-                <Column id="idType5_CS">
-                  <Label id="idlblType5_CS" text="Type" />
-                </Column>
+                                    <Column id="idType5_CS">
+                                        <Label
+                                            id="idlblType5_CS"
+                                            text="Type"
+                                        />
+                                    </Column>
 
-                <Column id="idSerial_CS">
-                  <Label id="idlblSerial_CS" text="Serial" />
-                </Column>
-              </columns>
-            <items>
-              <ColumnListItem id="idColListItem_CS">
-                <cells>                  
-                  <Input id="idManufacture2r_CS"/>
-                  <Input id="idImped2_CS"/>
-                  <ComboBox id="idPriVolt_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY VOLTAGE'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
-                      <core:Item id="idPriVoltItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <ComboBox id="idSecVolt_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SECONDARY VOLTAGE'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
-                      <core:Item id="idSecVoltItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
+                                    <Column id="idSerial_CS">
+                                        <Label
+                                            id="idlblSerial_CS"
+                                            text="Serial"
+                                        />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="idColListItem_CS">
+                                        <cells>
+                                            <Input id="idManufacture2r_CS" />
+                                            <Input id="idImped2_CS" />
+                                            <ComboBox
+                                                id="idPriVolt_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY VOLTAGE'}] }"
+                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                            >
+                                                <core:Item
+                                                    id="idPriVoltItem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                            <ComboBox
+                                                id="idSecVolt_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SECONDARY VOLTAGE'}] }"
+                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                            >
+                                                <core:Item
+                                                    id="idSecVoltItem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
 
-                  <ComboBox id="idTaps_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TAPS'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
-                      <core:Item id="idTapstItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <ComboBox id="idKva_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'KVA'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
-                      <core:Item id="idKvaItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <ComboBox id="idType3_CS" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TYPE'}] }" selectedKey="{oSpecialsjmodel>/srv_centre}">
-                      <core:Item id="idTypeItem_CS" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                  </ComboBox>
-                  <Input id="idSerial2_CS"/>
-                </cells>
-                </ColumnListItem>
-            </items>
-            </Table>
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
-
-
-    </x:sections>
-      
-  </x:ObjectPageLayout> 
+                                            <ComboBox
+                                                id="idTaps_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TAPS'}] }"
+                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                            >
+                                                <core:Item
+                                                    id="idTapstItem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                            <ComboBox
+                                                id="idKva_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'KVA'}] }"
+                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                            >
+                                                <core:Item
+                                                    id="idKvaItem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                            <ComboBox
+                                                id="idType3_CS"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TYPE'}] }"
+                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                            >
+                                                <core:Item
+                                                    id="idTypeItem_CS"
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </ComboBox>
+                                            <Input id="idSerial2_CS" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </x:blocks>
+                    </x:ObjectPageSubSection>
+                </x:subSections>
+            </x:ObjectPageSection>
+        </x:sections>
+    </x:ObjectPageLayout>
 </core:FragmentDefinition>

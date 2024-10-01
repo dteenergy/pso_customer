@@ -25,7 +25,7 @@
     },
     {
       "name": "$XSAPPNAME.pso_customer_specials_create",
-      "description": " PSO Edit Customer Specials Scope "
+      "description": " PSO Create Customer Specials Scope "
     },
     {
       "name": "$XSAPPNAME.pso_customer_specials_edit",

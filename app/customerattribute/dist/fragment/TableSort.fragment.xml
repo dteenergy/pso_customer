@@ -1,15 +1,15 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout">
-    <ViewSettingsDialog id="_IDGenViewSettingsDialog1" sortDescending="true" confirm="onTableSortConfirm">
+    <ViewSettingsDialog id="_IDGenViewSortDialog1" sortDescending="true" confirm="onTableSortConfirm">
         <sortItems>
-            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="{i18n>FragCustName}" key="cust_name"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="{i18n>FragMailingName}" key="mail_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="{i18n>Fcutname}" key="cust_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="{i18n>FMailingname}" key="mail_name"/>
             <ViewSettingsItem id="_IDGenViewSettingsBentity" text="{i18n>FBillingEntity}" key="conn_obj"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="{i18n>FragStreetAdd}" key="street_name"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="{i18n>FragStreetNo}" key="street_no"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="{i18n>FragCity}" key="city"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="{i18n>fragZipCode}" key="zip_code"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="{i18n>FStreetAdd}" key="street_name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="{i18n>FStreetNo}" key="street_no"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="{i18n>Fcity}" key="city"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="{i18n>FZipcod}" key="zip_code"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem7" text="{i18n>FNumberoflines}" key="no_of_lines"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem8" text="{i18n>Fsrvcenter}" key="srv_centre"/>
             <ViewSettingsItem id="_IDGenViewSettingsItem9" text="{i18n>Fcableno}" key="cable_no"/>

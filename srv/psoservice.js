@@ -28,7 +28,7 @@ module.exports = class PSOService extends cds.ApplicationService {
         this.on('updateSpecials', async (req) => {
             console.log("in update specials");
             req.data.context.record_status = "Draft";
-            const updateResult = await _oUpdateSpecials(req);
+            const updateResult = await _oUpdateSpecials(req.data.recordID, req.data.context);
             console.log("post success updateSpecials: " + updateResult);
             return "success updateSpecials....";
         });
@@ -63,7 +63,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 console.log("create failure : ");
                 return "fail createAndSubmitSpecials...."
             }
-            
+
         });
         this.on('onApproveRecord', async (req) => {
             const recordID = req.data.recordID;
@@ -129,62 +129,62 @@ module.exports = class PSOService extends cds.ApplicationService {
             //  roles.push(req.req.user.tokenInfo.getPayload().email);
             roles.push(req.req.authInfo.getEmail());
             console.log(roles);
-           // let user = {};
+            // let user = {};
             //req.req.authInfo.getLogonName() ..hd be same as user_name..need to check
             let userName = req.req.user.tokenInfo.getPayload().user_name, //U id if DTE SSO otherwise email
-            email = req.req.user.tokenInfo.getPayload().email,
-            hasLimitedDisplay = false,
-             hasCustomerCreateAccess = false,
-            hasCustomerDisplayAccess = false,
-             hasCustomerEditAccess = false,
-            hasSpecialsCreateAccess = false,
-            hasSpecialsDisplayAccess = false,
-            hasSpecialsEditAccess = false;
+                email = req.req.user.tokenInfo.getPayload().email,
+                hasLimitedDisplay = false,
+                hasCustomerCreateAccess = false,
+                hasCustomerDisplayAccess = false,
+                hasCustomerEditAccess = false,
+                hasSpecialsCreateAccess = false,
+                hasSpecialsDisplayAccess = false,
+                hasSpecialsEditAccess = false;
 
             for (var i = 0; i < roles.length; i++) {
                 let scope = roles[i];
                 switch (scope) {
                     case "pso_customer_details_create":
-                          hasCustomerCreateAccess = true;
+                        hasCustomerCreateAccess = true;
                         break;
                     case "pso_customer_details_edit":
-                          hasCustomerEditAccess = true;
+                        hasCustomerEditAccess = true;
                         break;
                     case "pso_customer_details_display":
-                         hasCustomerDisplayAccess = true;
+                        hasCustomerDisplayAccess = true;
                         break;
                     case "pso_customer_details_display_limited":
-                         hasLimitedDisplay = true;
+                        hasLimitedDisplay = true;
                         break;
                     case "pso_customer_specials_display":
                         /** Logged in user has limited display and cannot view/edit phone numbers */
-                         hasSpecialsDisplayAccess = true;
+                        hasSpecialsDisplayAccess = true;
                         break;
                     case "pso_customer_specials_edit":
-                         hasSpecialsEditAccess = true;
+                        hasSpecialsEditAccess = true;
                         break;
                     case "pso_customer_specials_create":
-                         hasSpecialsCreateAccess = true;
+                        hasSpecialsCreateAccess = true;
                         break;
                     default:
                     // code block
                 }
 
             }//end for loop
-           // console.log(user);
-          //  let result = { "value": id };
-            let userInfo ={
-                "userName"                 : userName,
-                "email"                    : email,
-                "hasLimitedDisplay"        : hasLimitedDisplay,
-                "hasCustomerCreateAccess"    : hasCustomerCreateAccess,
-                "hasCustomerDisplayAccess"   : hasCustomerDisplayAccess,
-                "hasCustomerEditAccess"      : hasCustomerEditAccess,
-                "hasSpecialsCreateAccess"  : hasSpecialsCreateAccess,
-                "hasSpecialsDisplayAccess" : hasSpecialsDisplayAccess,
-                "hasSpecialsEditAccess"    : hasSpecialsEditAccess
-              };
-              console.log(userInfo);
+            // console.log(user);
+            //  let result = { "value": id };
+            let userInfo = {
+                "userName": userName,
+                "email": email,
+                "hasLimitedDisplay": hasLimitedDisplay,
+                "hasCustomerCreateAccess": hasCustomerCreateAccess,
+                "hasCustomerDisplayAccess": hasCustomerDisplayAccess,
+                "hasCustomerEditAccess": hasCustomerEditAccess,
+                "hasSpecialsCreateAccess": hasSpecialsCreateAccess,
+                "hasSpecialsDisplayAccess": hasSpecialsDisplayAccess,
+                "hasSpecialsEditAccess": hasSpecialsEditAccess
+            };
+            console.log(userInfo);
             return userInfo;
 
         });
@@ -388,7 +388,10 @@ module.exports = class PSOService extends cds.ApplicationService {
                 typeofService: req.typeofService,
                 typeofTO: req.typeofTO,
                 pswDiagramNumber: req.pswDiagramNumber,
-                primaryServiceRep: req.primaryServiceRep
+                primaryServiceRep: req.primaryServiceRep,
+                customerName: req.customerName,
+                streetNumber: req.streetNumber,
+                streetName: req.streetName
 
             });
             console.log("post update specials private: " + oResult);
@@ -501,7 +504,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             console.log("#########:" + res);
             return res.id;
         }
-        
+
         async function updateSpecialsinISU(req) {
 
             const recordId = req.data.recordID;

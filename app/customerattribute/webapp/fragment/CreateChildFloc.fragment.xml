@@ -136,19 +136,20 @@
                     </layoutData>
                   </ComboBox>
                   <Label id="idlblOnSiteGen_CC" text="{i18n>onsitegen}" />
-                  <RadioButtonGroup id="idGeneration_CC" columns="5">
+                  <ComboBox id="idGeneration_CC" items="{path: 'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [
+                            {path: 'field', operator: 'EQ', value1: 'ZPSO_CD_GENERATION'}]}" >
+                      <core:Item id="_IDGenItemGeneration_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}"/>
+                  <layoutData>
+                      <l:GridData id="idGridData_CCGen" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </ComboBox>
+                  <!-- <RadioButtonGroup id="idGeneration_CC" columns="5">
                     <RadioButton id="Emergency_CC" tooltip="Emergency" text="Emergency" />
                     <RadioButton id="Partial_CC" tooltip="Partial" text="Partial" />
                     <RadioButton id="Fullgeneration_CC" tooltip="Full generation" text="Full generation" />
                     <RadioButton id="Noonsitegeneration_CC" tooltip="No on-site generation" text="No on-site generation" />
-                  </RadioButtonGroup>
-                  <!-- <RadioButtonGroup id="idGeneration_CC" columns="5" class="sapUiMediumMarginBottom">
-                    <RadioButton id="Emergency_CC" text="Emergency"  selected="{= ${oCustomerAttributesJModel>/on_site_emerg} === 'X' ? true : false}"/>
-                    <RadioButton id="Partial_CC" text="Partial" selected="{= ${oCustomerAttributesJModel>/on_site_part} === 'X' ? true : false}"/>
-                    <RadioButton id="Fullgeneration_CC" text="Full generation" selected="{= ${oCustomerAttributesJModel>/full_generation} === 'X' ? true : false}"/>
-                    <RadioButton id="Noonsitegeneration_CC" text="No on-site generation" selected="{= ${oCustomerAttributesJModel>/on_site_nosg} === 'X' ? true : false}"/>
                   </RadioButtonGroup> -->
-
+                  
                   <Label id="idlblTotalGen_CC" text="{i18n>totalgen}" /> 
                   <Input id="idGenration_CC" value="{oCustomerAttributesJModel>/generation}" maxLength="10">
                   <layoutData>

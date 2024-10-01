@@ -12,7 +12,7 @@ sap.ui.define([
                 this.localModel = this.getOwnerComponent().getModel("localModel");
                 this.localModel.setProperty('/tableItemsCount', `Items(0)`);
                 this.readApprByVH();
-                this.checkAuth();
+                // this.checkAuth();
             },
            
             checkAuth : function(){
@@ -77,6 +77,9 @@ sap.ui.define([
                 let oApprBy = { 'dataToDisplay': [] };
                 let oConnObj = { 'dataToDisplay': [] };
                 let oRecStats = { 'dataToDisplay': [] };
+                let oCustName = { 'dataToDisplay': [] };
+                let oStreetNumber = { 'dataToDisplay': [] };
+                let oStreetName = { 'dataToDisplay': [] };
                 data.requestContexts(0, Infinity).then(function (aContext) {
                     aContext.forEach(context => {
                         let data = context.getObject();
@@ -84,7 +87,7 @@ sap.ui.define([
                         aData.push(data);
 
                         let appryBy = context.getObject()['approvedBy'];
-                        if (!oApprBy.hasOwnProperty(appryBy)) {
+                        if (!oApprBy.hasOwnProperty(appryBy) && appryBy !== null) {
                             oApprBy[appryBy] = context.getObject()['approvedBy'];
                             oApprBy['dataToDisplay'].push({
                                 "approvedBy": appryBy
@@ -92,10 +95,34 @@ sap.ui.define([
                         }
 
                         let connObj = context.getObject()['connection_object'];
-                        if (!oConnObj.hasOwnProperty(connObj)) {
+                        if (!oConnObj.hasOwnProperty(connObj) && connObj !== null) {
                             oConnObj[connObj] = context.getObject()['connection_object'];
                             oConnObj['dataToDisplay'].push({
                                 "connection_object": connObj
+                            })
+                        }
+
+                        let customerName = context.getObject()['customerName'];
+                        if (!oCustName.hasOwnProperty(customerName) && customerName !== null) {
+                            oCustName[customerName] = context.getObject()['customerName'];
+                            oCustName['dataToDisplay'].push({
+                                "customerName": customerName
+                            })
+                        }
+
+                        let streetNumber = context.getObject()['streetNumber'];
+                        if (!oStreetNumber.hasOwnProperty(streetNumber) && streetNumber !== null) {
+                            oStreetNumber[streetNumber] = context.getObject()['streetNumber'];
+                            oStreetNumber['dataToDisplay'].push({
+                                "streetNumber": streetNumber
+                            })
+                        }
+
+                        let streetName = context.getObject()['streetName'];
+                        if (!oStreetName.hasOwnProperty(streetName) && streetName !== null) {
+                            oStreetName[streetName] = context.getObject()['streetName'];
+                            oStreetName['dataToDisplay'].push({
+                                "streetName": streetName
                             })
                         }
 
@@ -114,7 +141,10 @@ sap.ui.define([
                     if (!aFilters) {
                         this.localModel.setProperty('/approvedByVH', oApprBy.dataToDisplay);
                         this.localModel.setProperty('/connectionObjVH', oConnObj.dataToDisplay);
-                        this.localModel.setProperty('/recordStatsVH', oRecStats.dataToDisplay);
+                        this.localModel.setProperty('/recordStatsVH', oRecStats.dataToDisplay.sort());
+                        this.localModel.setProperty('/custNameVH', oCustName.dataToDisplay);
+                        this.localModel.setProperty('/streetNumberVH', oStreetNumber.dataToDisplay);
+                        this.localModel.setProperty('/streetNameVH', oStreetName.dataToDisplay);
                     }
                     else {
                         this.localModel.setProperty('/tableItemsCount', `Items(${aData.length})`);
@@ -141,6 +171,33 @@ sap.ui.define([
                     }
                 }
                 else if (field == 'connection_object') {
+                    let oVHTable = await this.conObjDialog.getTableAsync();
+                    if (oVHTable.bindRows) {
+                        oVHTable.getBinding('rows').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                    else if (oVHTable.bindItems) {
+                        oVHTable.getBinding('items').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                }
+                else if (field == 'customerName') {
+                    let oVHTable = await this.conObjDialog.getTableAsync();
+                    if (oVHTable.bindRows) {
+                        oVHTable.getBinding('rows').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                    else if (oVHTable.bindItems) {
+                        oVHTable.getBinding('items').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                }
+                else if (field == 'streetName') {
+                    let oVHTable = await this.conObjDialog.getTableAsync();
+                    if (oVHTable.bindRows) {
+                        oVHTable.getBinding('rows').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                    else if (oVHTable.bindItems) {
+                        oVHTable.getBinding('items').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
+                    }
+                }
+                else if (field == 'streetNumber') {
                     let oVHTable = await this.conObjDialog.getTableAsync();
                     if (oVHTable.bindRows) {
                         oVHTable.getBinding('rows').filter(new Filter(field, 'Contains', oEvent.getParameter('newValue')))
@@ -187,7 +244,14 @@ sap.ui.define([
                             if (oTable.bindRows) {
                                 oTable.removeAllExtension();
                                 oTable.attachRowSelectionChange(function (oEvent) {
-                                    this.onValueHelpOkPress();
+                                    // this.onValueHelpOkPress();
+                                    this.apprDialog.getButtons()[0].firePress({
+                                        mParameters : {
+                                            tokens : this.apprDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged : this.apprDialog._bInitTokensHaveChanged,
+                                            id : this.apprDialog.getId()
+                                        }
+                                    })
                                 }.bind(this));
                                 oTable.setSelectionMode('Single');
                                 oTable.bindAggregation("rows", {
@@ -275,7 +339,14 @@ sap.ui.define([
                             if (oTable.bindRows) {
                                 oTable.removeAllExtension();
                                 oTable.attachRowSelectionChange(function (oEvent) {
-                                    this.onValueHelpOkPress();
+                                    // this.onValueHelpOkPress();
+                                    this.conObjDialog.getButtons()[0].firePress({
+                                        mParameters : {
+                                            tokens : this.conObjDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged : this.conObjDialog._bInitTokensHaveChanged,
+                                            id : this.conObjDialog.getId()
+                                        }
+                                    })
                                 }.bind(this))
                                 oTable.setSelectionMode('Single');
                                 oTable.bindAggregation("rows", {
@@ -323,6 +394,241 @@ sap.ui.define([
                     this.conObjDialog.open();
                 }
             },
+            onValueHelpCustName : function(oEvent){
+                this._tokensForInput = oEvent.getSource().getId();
+
+                if(!this.custNameDialog){
+                    Fragment.load({
+                        name: "com.pso.changelog.fragments.custName",
+                        type: "XML",
+                        controller: this
+                    }).then(oDialog => {
+                        oDialog.setModel(this.localModel);
+                        this.custNameDialog = oDialog;
+                        this.getView().addDependent(this.custNameDialog);
+                        var that = this;
+                        this.custNameDialog.getFilterBar().setBasicSearch(new sap.m.SearchField({
+                            liveChange: [that.onBasicSearch, that],
+                            value: '{localModel>/basicSearchForCustName}',
+                            showSearchButton: true
+                        }))
+                        this.custNameDialog.getTableAsync().then(oTable => {
+                            oTable.setModel(that.localModel);
+                            if (oTable.bindRows) {
+                                oTable.removeAllExtension();
+                                oTable.attachRowSelectionChange(function (oEvent) {
+                                    // this.onValueHelpOkPress();
+                                    this.custNameDialog.getButtons()[0].firePress({
+                                        mParameters : {
+                                            tokens : this.custNameDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged : this.custNameDialog._bInitTokensHaveChanged,
+                                            id : this.custNameDialog.getId()
+                                        }
+                                    })
+                                    
+                                }.bind(this))
+                                oTable.setSelectionMode('Single');
+                                oTable.bindAggregation("rows", {
+                                    path: "/custNameVH",
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+                            }
+
+                            oTable.addColumn(new sap.ui.table.Column({
+                                label: "Customer Name",
+                                template: new sap.m.Text({
+                                    text: "{customerName}"
+                                })
+                            }))
+
+                            if (oTable.bindItems) {
+                                oTable.setMode('SingleSelect');
+                                oTable.bindAggregation("items", {
+                                    path: "/custNameVH",
+                                    template: new sap.m.ColumnListItem({
+                                        cells: [new sap.m.Label({ text: "{customerName}" })]
+                                    }),
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+
+                                oTable.addColumn(new sap.m.Column({
+                                    header: new sap.m.Label({ text: "Customer Name" })
+                                }))
+                            }
+                        })
+                        oDialog.update();
+                        sap.ui.getCore().byId('idVhCustNameDialog-tokenizerGrid').setVisible(false)
+                        this.custNameDialog.open()
+                    })
+                }
+                else{
+                    this.custNameDialog.open();
+                }
+            },
+            onValueHelpStreet : function(oEvent){
+                this._tokensForInput = oEvent.getSource().getId();
+
+                if(!this.oStreetNbrDialog){
+                    Fragment.load({
+                        name: "com.pso.changelog.fragments.street",
+                        type: "XML",
+                        controller: this
+                    }).then(oDialog => {
+                        oDialog.setModel(this.localModel);
+                        this.oStreetNbrDialog = oDialog;
+                        this.getView().addDependent(this.oStreetNbrDialog);
+                        var that = this;
+                        this.oStreetNbrDialog.getFilterBar().setBasicSearch(new sap.m.SearchField({
+                            liveChange: [that.onBasicSearch, that],
+                            value: '{localModel>/basicSearchForStreetNumber}',
+                            showSearchButton: true
+                        }))
+                        this.oStreetNbrDialog.getTableAsync().then(oTable => {
+                            oTable.setModel(that.localModel);
+                            if (oTable.bindRows) {
+                                oTable.removeAllExtension();
+                                oTable.attachRowSelectionChange(function (oEvent) {
+                                    // this.onValueHelpOkPress();
+                                    this.oStreetNbrDialog.getButtons()[0].firePress({
+                                        mParameters : {
+                                            tokens : this.oStreetNbrDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged : this.oStreetNbrDialog._bInitTokensHaveChanged,
+                                            id : this.oStreetNbrDialog.getId()
+                                        }
+                                    })
+                                }.bind(this))
+                                oTable.setSelectionMode('Single');
+                                oTable.bindAggregation("rows", {
+                                    path: "/streetNumberVH",
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+                            }
+
+                            oTable.addColumn(new sap.ui.table.Column({
+                                label: "Street Number",
+                                template: new sap.m.Text({
+                                    text: "{streetNumber}"
+                                })
+                            }))
+
+                            if (oTable.bindItems) {
+                                oTable.setMode('SingleSelect');
+                                oTable.bindAggregation("items", {
+                                    path: "/streetNumberVH",
+                                    template: new sap.m.ColumnListItem({
+                                        cells: [new sap.m.Label({ text: "{streetNumber}" })]
+                                    }),
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+
+                                oTable.addColumn(new sap.m.Column({
+                                    header: new sap.m.Label({ text: "Street Number" })
+                                }))
+                            }
+                        })
+                        oDialog.update();
+                        sap.ui.getCore().byId('idVhStreetDialog-tokenizerGrid').setVisible(false)
+                        this.oStreetNbrDialog.open()
+                    })
+                }
+                else{
+                    this.oStreetNbrDialog.open();
+                }
+            },
+            onValueHelpStreetAddr : function(oEvent){
+                this._tokensForInput = oEvent.getSource().getId();
+
+                if(!this.oStreetAddrDialog){
+                    Fragment.load({
+                        name: "com.pso.changelog.fragments.streetAddress",
+                        type: "XML",
+                        controller: this
+                    }).then(oDialog => {
+                        oDialog.setModel(this.localModel);
+                        this.oStreetAddrDialog = oDialog;
+                        this.getView().addDependent(this.oStreetAddrDialog);
+                        var that = this;
+                        this.oStreetAddrDialog.getFilterBar().setBasicSearch(new sap.m.SearchField({
+                            liveChange: [that.onBasicSearch, that],
+                            value: '{localModel>/basicSearchForStreetName}',
+                            showSearchButton: true
+                        }))
+                        this.oStreetAddrDialog.getTableAsync().then(oTable => {
+                            oTable.setModel(that.localModel);
+                            if (oTable.bindRows) {
+                                oTable.removeAllExtension();
+                                oTable.attachRowSelectionChange(function (oEvent) {
+                                    // this.onValueHelpOkPress();
+                                    this.oStreetAddrDialog.getButtons()[0].firePress({
+                                        mParameters : {
+                                            tokens : this.oStreetAddrDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged : this.oStreetAddrDialog._bInitTokensHaveChanged,
+                                            id : this.oStreetAddrDialog.getId()
+                                        }
+                                    })
+                                }.bind(this))
+                                oTable.setSelectionMode('Single');
+                                oTable.bindAggregation("rows", {
+                                    path: "/streetNameVH",
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+                            }
+
+                            oTable.addColumn(new sap.ui.table.Column({
+                                label: "Street Name",
+                                template: new sap.m.Text({
+                                    text: "{streetName}"
+                                })
+                            }))
+
+                            if (oTable.bindItems) {
+                                oTable.setMode('SingleSelect');
+                                oTable.bindAggregation("items", {
+                                    path: "/streetNameVH",
+                                    template: new sap.m.ColumnListItem({
+                                        cells: [new sap.m.Label({ text: "{streetName}" })]
+                                    }),
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+
+                                oTable.addColumn(new sap.m.Column({
+                                    header: new sap.m.Label({ text: "Street Name" })
+                                }))
+                            }
+                        })
+                        oDialog.update();
+                        sap.ui.getCore().byId('idVhStreetAddrDialog-tokenizerGrid').setVisible(false)
+                        this.oStreetAddrDialog.open()
+                    })
+                }
+                else{
+                    this.oStreetAddrDialog.open();
+                }
+            },
             onValueHelpCancelPress: function (oEvent) {
                 this._tokensForInput = undefined;
                 oEvent.getSource().close();
@@ -339,8 +645,17 @@ sap.ui.define([
                         if (this._tokensForInput.includes('idConnObj')) {
                             oDialog = this.conObjDialog;
                         }
-                        else {
+                        else if(this._tokensForInput.includes('idApprBy')){
                             oDialog = this.apprDialog;
+                        }
+                        else if(this._tokensForInput.includes('idCustName')){
+                            oDialog = this.custNameDialog;
+                        }
+                        else if(this._tokensForInput.includes('idStreet')){
+                            oDialog = this.oStreetNbrDialog
+                        }
+                        else if(this._tokensForInput.includes('idStreetAddr')){
+                            oDialog = this.oStreetAddrDialog;
                         }
                         this.byId(this._tokensForInput).setTokens(oDialog._getTokenizer().getTokens());
                         oDialog.close();
@@ -404,7 +719,7 @@ sap.ui.define([
                 this.readApprByVH(aFilters);
                 this.byId('idTable').setShowOverlay(false);
             },
-            onTokenUpdate: function (oEvent) {
+            onTokenUpdate: function (oEvent) { 
                 let tokenLen;
                 if (oEvent.getParameter('type') == 'removed') {
                     tokenLen = oEvent.getSource().getTokens().length - 1;
@@ -425,6 +740,33 @@ sap.ui.define([
                             let aIndices = this.conObjDialog.getTable().getSelectedIndices().sort();
                             this.conObjDialog.getTable().removeSelectionInterval(aIndices[0], aIndices[aIndices.length - 1]);
                             this.conObjDialog.getTable()._updateSelection();
+                        }
+                    }
+                    
+                    if (oEvent.getSource().getParent().getName() == 'customerName') {
+                        if (this.custNameDialog) {
+                            this.custNameDialog._getTokenizer().removeAllTokens();
+                            let aIndices = this.custNameDialog.getTable().getSelectedIndices().sort();
+                            this.custNameDialog.getTable().removeSelectionInterval(aIndices[0], aIndices[aIndices.length - 1]);
+                            this.custNameDialog.getTable()._updateSelection();
+                        }
+                    }
+
+                    if (oEvent.getSource().getParent().getName() == 'streetNumber') {
+                        if (this.oStreetNbrDialog) {
+                            this.oStreetNbrDialog._getTokenizer().removeAllTokens();
+                            let aIndices = this.oStreetNbrDialog.getTable().getSelectedIndices().sort();
+                            this.oStreetNbrDialog.getTable().removeSelectionInterval(aIndices[0], aIndices[aIndices.length - 1]);
+                            this.oStreetNbrDialog.getTable()._updateSelection();
+                        }
+                    }
+
+                    if (oEvent.getSource().getParent().getName() == 'streetNumber') {
+                        if (this.oStreetAddrDialog) {
+                            this.oStreetAddrDialog._getTokenizer().removeAllTokens();
+                            let aIndices = this.oStreetAddrDialog.getTable().getSelectedIndices().sort();
+                            this.oStreetAddrDialog.getTable().removeSelectionInterval(aIndices[0], aIndices[aIndices.length - 1]);
+                            this.oStreetAddrDialog.getTable()._updateSelection();
                         }
                     }
 

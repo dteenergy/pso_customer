@@ -9,7 +9,7 @@
 	xmlns:vhc="sap.ui.mdc.valuehelp.content"
 	xmlns:vhfb="sap.ui.mdc.filterbar.vh">
 
-	<ValueHelpDialog title="Customer Name" id="idVhCustNameDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="connection_object" afterOpen="onAfterDialogOpen" contentWidth="40px">
+	<ValueHelpDialog title="Customer Name" id="idVhCustNameDialog" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" key="customerName" afterOpen="onAfterDialogOpen" contentWidth="40px">
 	<filterBar>
 	<fb:FilterBar advancedMode="true" showGoOnFB="false">
 	</fb:FilterBar>

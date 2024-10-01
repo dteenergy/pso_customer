@@ -138,6 +138,8 @@ sap.ui.define([
                 //     this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
                 // }
 
+                
+
             },
 
             onSpecialsExist: function (specialsFlag) {
@@ -194,18 +196,32 @@ sap.ui.define([
                     this.getView().byId("idDCPLIND_CC2").setSelectedIndex(2)
                 }
 
+                //for Generation Radio button
+                // if (oRecord.on_site_emerg === "X") {
+                //     this.getView().byId("idGeneration_CC").setSelectedKey(0)
+                // }
+                // if (oRecord.on_site_part ==="X") {
+                //     this.getView().byId("idGeneration_CC").setSelectedIndex(1)
+                // }
+                // if (oRecord.full_generation ==="X") {
+                //     this.getView().byId("idGeneration_CC").setSelectedIndex(2)
+                // }
+                // if (oRecord.on_site_nosg ==="X") {
+                //     this.getView().byId("idGeneration_CC").setSelectedIndex(3)
+                // }
                 if (oRecord.on_site_emerg === "X") {
-                    this.getView().byId("idGeneration_CC").setSelectedIndex(0)
+                    this.getView().byId("idGeneration_CC").setSelectedKey("EMERGENCY")
                 }
-                if (oRecord.on_site_par) {
-                    this.getView().byId("idGeneration_CC").setSelectedIndex(1)
+                if (oRecord.on_site_part==="X") {
+                    this.getView().byId("idGeneration_CC").setSelectedKey("PARTIAL")
                 }
-                if (oRecord.full_generation) {
-                    this.getView().byId("idGeneration_CC").setSelectedIndex(2)
+                if (oRecord.full_generation ==="X") {
+                    this.getView().byId("idGeneration_CC").setSelectedKey("FULL GENERATION")
                 }
-                if (oRecord.on_site_nosg) {
-                    this.getView().byId("idGeneration_CC").setSelectedIndex(3)
+                if (oRecord.on_site_nosg ==="X") {
+                    this.getView().byId("idGeneration_CC").setSelectedKey("NO ON-SITE GENERATION")
                 }
+
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
                 this.getView().byId("idpanel").setVisible(true);
@@ -461,6 +477,19 @@ sap.ui.define([
             },
 
             DocumentumDisabled: function (oData) {
+                var oRecord = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
+                if (oRecord.on_site_emerg === "X") {
+                    this.getView().byId("idGeneration_DC").setText("EMERGENCY")
+                }
+                if (oRecord.on_site_part==="X") {
+                    this.getView().byId("idGeneration_DC").setText("PARTIAL")
+                }
+                if (oRecord.full_generation ==="X") {
+                    this.getView().byId("idGeneration_DC").setText("FULL GENERATION")
+                }
+                if (oRecord.on_site_nosg ==="X") {
+                    this.getView().byId("idGeneration_DC").setText("NO ON-SITE GENERATION")
+                }
                 // if (oData.circuit === "") {
                 //     this.getView().byId("idCircuitlink").setEnabled(false);
                 // } else {
@@ -604,17 +633,29 @@ sap.ui.define([
                 } else {
                     oNA2 = "X";
                 }
+                //Generation Radio buttons
+                // var oSelectedKeyGen = this.getView().byId("idGeneration_CC").getSelectedIndex();
+                // var oEmergency = "", oPartial = "", oFullGen = "", oNoOnsiteGen = "";
 
-                var oSelectedKeyGen = this.getView().byId("idGeneration_CC").getSelectedIndex();
+                // if (oSelectedKeyGen === 0) {
+                //     oEmergency = "X";
+                // } else if (oSelectedKeyGen === 1) {
+                //     oPartial = "X";
+                // } else if (oSelectedKeyGen === 2) {
+                //     oFullGen = "X";
+                // } else {
+                //     oNoOnsiteGen = "X";
+                // }
+                var oSelectedKeyGen = this.getView().byId("idGeneration_CC").getSelectedKey();
                 var oEmergency = "", oPartial = "", oFullGen = "", oNoOnsiteGen = "";
 
-                if (oSelectedKeyGen === 0) {
+                if (oSelectedKeyGen === "EMERGENCY") {
                     oEmergency = "X";
-                } else if (oSelectedKeyGen === 1) {
+                } else if (oSelectedKeyGen === "PARTIAL") {
                     oPartial = "X";
-                } else if (oSelectedKeyGen === 2) {
+                } else if (oSelectedKeyGen === "FULL GENERATION") {
                     oFullGen = "X";
-                } else {
+                } else if(oSelectedKeyGen === "NO ON-SITE GENERATION"){
                     oNoOnsiteGen = "X";
                 }
                 var oNooflines = this.getView().byId("idNoOfline_CC").getSelectedKey();
@@ -847,7 +888,9 @@ sap.ui.define([
                     }
                     else { //specials does not exist - create special button visible
                         console.log("No Specials exist for this child connection object");
-                        const connection_object = that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
+                        const oCustomerAttributesJModelData= that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
+                        const connection_object = oCustomerAttributesJModelData.conn_obj;
+                        //const connection_object = that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
                         //create special should come
                         oSpecialsjmodel.setData({
                             "connection_object": connection_object,
@@ -915,15 +958,10 @@ sap.ui.define([
                             "typeofTO": "",
                             "pswDiagramNumber": "",
                             "primaryServiceRep": "",
+                            "customerName": oCustomerAttributesJModelData.cust_name,
+                            "streetNumber": oCustomerAttributesJModelData.street_no,
+                            "streetName": oCustomerAttributesJModelData.street_name,
                             "fuses": [{
-                                "fuseSize"  : "",
-                                "fuseType" : "",
-                                "fuseCurve" : "",
-                                "fuseVoltage" : "",
-                                "fuseSeqNo": "",
-                                "connection_object"   : connection_object
-                            },
-                            {
                                 "fuseSize"  : "",
                                 "fuseType" : "",
                                 "fuseCurve" : "",

@@ -12,7 +12,7 @@
                 <f:DynamicPageHeader pinnable="false" backgroundDesign="Solid">
                     <fb:FilterBar id="idFilterBar" class="sapUiTinyMargin" showFilterConfiguration="true" deltaVariantMode="true" search="onFilterBarSearch" useToolbar="false" showClearOnFB="true" clear="onFilterBarClear" persistencyKey="POSpecials" afterVariantLoad=".onAfterVariantLoad">
                         <fb:filterGroupItems>
-                            <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Connection Object" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="connection_object" groupName="__$INTERNAL$" name="connection_object" label="Billing Entity" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idConnObj" valueHelpRequest="onValueHelpConnObj" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
@@ -24,24 +24,24 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem visible="{localModel>/filterVisible/apprvBy}" id="record_status" groupName="__$INTERNAL$" name="record_status" label="Record Status" visibleInFilterBar="true">
                                 <fb:control>
-                                    <Select items="{localModel>/recordStatsVH}">
+                                    <Select items="{localModel>/recordStatsVH}" selectedKey="Approved">
                                         <items>
                                             <core:Item key="{localModel>key}" text="{localModel>text}"></core:Item>
                                         </items>
                                     </Select>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="custName" groupName="__$INTERNAL$" name="custName" label="Customer Name" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="customerName" groupName="__$INTERNAL$" name="customerName" label="Customer Name" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idCustName" valueHelpRequest="onValueHelpCustName" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="street" groupName="__$INTERNAL$" name="street" label="Street" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="streetNumber" groupName="__$INTERNAL$" name="streetNumber" label="Street Number" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idStreet" valueHelpRequest="onValueHelpStreet" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="streetAddr" groupName="__$INTERNAL$" name="streetAddr" label="Street Address" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="streetName" groupName="__$INTERNAL$" name="streetName" label="Street Name" visibleInFilterBar="true">
                                 <fb:control>
                                     <MultiInput id="idStreetAddr" valueHelpRequest="onValueHelpStreetAddr" tokenUpdate="onTokenUpdate"></MultiInput>
                                 </fb:control>
@@ -54,7 +54,7 @@
                 <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="5" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}">
                     <columns>
                         <Column>
-                            <Label text="Connection Object"></Label>
+                            <Label text="Billing Entity"></Label>
                         </Column>
                         <Column>
                             <Label text="Created By"></Label>
@@ -74,6 +74,15 @@
                         <Column>
                             <Label text="Approver Comment"></Label>
                         </Column>
+                        <Column>
+                            <Label text="Customer Name"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Street Number"></Label>
+                        </Column>
+                        <Column>
+                            <Label text="Street Name"></Label>
+                        </Column>
                     </columns>
                     <noData>
                         <IllustratedMessage id="im" illustrationType="sapIllus-FilterTable" illustrationSize="Dialog">
@@ -89,6 +98,9 @@
                                 <Text text="{localModel>approvedOn}"></Text>
                                 <Text text="{localModel>record_status}"></Text>
                                 <Text text="{localModel>approverComment}"></Text>
+                                <Text text="{localModel>customerName}"></Text>
+                                <Text text="{localModel>streetNumber}"></Text>
+                                <Text text="{localModel>streetName}"></Text>
                             </cells>
                         </ColumnListItem>
                     </items>
