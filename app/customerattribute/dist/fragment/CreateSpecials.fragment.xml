@@ -242,25 +242,9 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idLBDSubSection_CS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="rquestformLBD_CS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3"
-                                columnsL="3"
-                                labelSpanXL="3"
-                                labelSpanL="4"
-                                labelSpanM="12"
-                                labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTLBD1_CS" />
-                                    <Label id="idRadiobutton_CS" />
-                                    <RadioButtonGroup
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
+                        <RadioButtonGroup
                                         id="idRadio1_CS"
                                         columns="5"
                                     >
@@ -280,13 +264,31 @@
                                             selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
                                         />
                                     </RadioButtonGroup>
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="rquestformLBD_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTLBD1_CS" />
+                                    <!-- <Label id="idRadiobutton_CS" /> -->
+                                    
                                     <Label
                                         id="idlblMFG_CS"
                                         text="{i18n>CS_Manufacturer}"
                                     />
                                     <ComboBox
                                         id="idManufacturer_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MANUFACTURER'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDMAN'}] }"
                                         selectedKey="{oSpecialsjmodel>/manufacturer}"
                                     >
                                         <core:Item
@@ -301,7 +303,7 @@
                                     />
                                     <ComboBox
                                         id="idModel_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD MODEL'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDMOD'}] }"
                                         selectedKey="{oSpecialsjmodel>/model}"
                                     >
                                         <core:Item
@@ -316,7 +318,7 @@
                                     />
                                     <ComboBox
                                         id="idCC_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD CONTINOUS CURRENT'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDCC'}] }"
                                         selectedKey="{oSpecialsjmodel>/continuousCurrent}"
                                     >
                                         <core:Item
@@ -351,7 +353,7 @@
                                     />
                                     <ComboBox
                                         id="idType2_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD TYPE'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDTYP'}] }"
                                         selectedKey="{oSpecialsjmodel>/typeLBD}"
                                     >
                                         <core:Item
@@ -386,7 +388,7 @@
                                     />
                                     <ComboBox
                                         id="idSV_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'LBD SERVICE VOLTAGE'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDSERV'}] }"
                                         selectedKey="{oSpecialsjmodel>/serviceVoltage}"
                                     >
                                         <core:Item
@@ -420,25 +422,9 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idCBSubSection_CS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="reqesformCB_CS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3"
-                                columnsL="3"
-                                labelSpanXL="3"
-                                labelSpanL="4"
-                                labelSpanM="12"
-                                labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTCB1_CS" />
-                                    <Label id="idlblRadioCB_CS" />
-                                    <RadioButtonGroup
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
+                        <RadioButtonGroup
                                         id="goup6CPSR_CS"
                                         columns="5"
                                         class="sapUiTinyMarginTopBottom"
@@ -464,6 +450,40 @@
                                             selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesformCB_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTCB1_CS" />
+                                    <!-- <Label id="idlblRadioCB_CS" /> -->
+                                    <Label id="idCB1_CS"/>
+                                    <RadioButtonGroup
+                                        id="grop5CPSR_CS"
+                                        columns="5"
+                                    >
+                                        <RadioButton
+                                            id="idDecoOwned_CS"
+                                            text="{i18n>CS_DTEOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idCustomer_CS"
+                                            text="{i18n>CS_CustomerOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                                    
                                     <Label
                                         id="idlblCBM_CS"
                                         text="{i18n>CS_CBM}"
@@ -484,23 +504,7 @@
                                     />
 
                                     <core:Title id="idcoreTCB2_CS" />
-                                    <Label id="idCB1_CS" />
-                                    <RadioButtonGroup
-                                        id="grop5CPSR_CS"
-                                        columns="5"
-                                        class="sapUiTinyMarginTopBottom"
-                                    >
-                                        <RadioButton
-                                            id="idDecoOwned_CS"
-                                            text="{i18n>CS_DTEOwned}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idCustomer_CS"
-                                            text="{i18n>CS_CustomerOwned}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
-                                        />
-                                    </RadioButtonGroup>
+                                    
                                     <Label
                                         id="idlblKAMome_CS"
                                         text="{i18n>CS_KAMomentary}"
@@ -519,8 +523,6 @@
                                         value="{oSpecialsjmodel>/amps}"
                                         maxLength="40"
                                     />
-
-                                    <core:Title id="idcoreTCB3_CS" />
                                     <Label
                                         id="idlblType4_CS"
                                         text="{i18n>CS_Type4}"
@@ -530,6 +532,9 @@
                                         value="{oSpecialsjmodel>/typeCB}"
                                         maxLength="40"
                                     />
+
+                                    <core:Title id="idcoreTCB3_CS" />
+                                    
                                     <Label
                                         id="idlblFaultDuty_CS"
                                         text="{i18n>CS_FaultDuty}"
@@ -641,6 +646,7 @@
                                     <Label
                                         id="idlblGround_CS"
                                         text="{i18n>CS_ground}"
+                                        tooltip="Ground Mat Resistance"
                                     />
                                     <Input
                                         id="idground_CS"
@@ -667,11 +673,17 @@
                                         id="idlbldate_CS"
                                         text="{i18n>CS_date}"
                                     />
-                                    <Input
+                                    <DatePicker
+                                        id="iddate_CS"
+                                        value="{oSpecialsjmodel>/dateMergered}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
+                                    <!-- <Input
                                         id="iddate_CS"
                                         value="{oSpecialsjmodel>/dateMergered}"
                                         maxLength="10"
-                                    />
+                                    /> -->
                                     <Label
                                         id="idlblservice_CS"
                                         text="{i18n>CS_service}"
@@ -687,7 +699,7 @@
                                     />
                                     <ComboBox
                                         id="idTypeTO_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_THROWTYPE'}] }"
                                         selectedKey="{oSpecialsjmodel>/typeofTO}"
                                     >
                                         <core:Item
@@ -703,7 +715,7 @@
                                     />
                                     <ComboBox
                                         id="idrep_CS"
-                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PSR'}] }"
                                         selectedKey="{oSpecialsjmodel>/primaryServiceRep}"
                                     >
                                         <core:Item
@@ -732,7 +744,7 @@
                                         growing="true"
                                         value="{oSpecialsjmodel>/comment}"
                                         showExceededText="false"
-                                        rows="7"
+                                        rows="4"
                                         maxLength="1300"
                                     />
                                 </form:content>
@@ -771,12 +783,19 @@
                                                 type="Emphasized"
                                                 icon="sap-icon://add"
                                                 press="onAddnewFusesRow"
+                                                visible="false"
                                             />
                                         </content>
                                     </Toolbar>
                                 </headerToolbar>
 
                                 <columns>
+                                <Column id="idSequenceno_CO">
+                                        <Label
+                                            id="idlSequenceno_CS_CO"
+                                            text="Sequence No"
+                                        />
+                                    </Column>
                                     <Column id="id21CPSR_CO">
                                         <Label
                                             id="idlblsize_CS_CO"
@@ -811,9 +830,13 @@
                                 <items>
                                     <ColumnListItem id="cliFuses_CS">
                                         <cells>
+                                        <Text
+                                                id="idSeqNo_CO"
+                                                text="{oSpecialsjmodel>fuseSeqNo}"
+                                            />
                                             <Text
                                                 id="idFuse_CO"
-                                                text="{oSpecialsjmodel>connection_object}"
+                                                text="{oSpecialsjmodel>psospecials_connection_object}"
                                             />
                                             <Input
                                                 id="idTsize_CS"
@@ -849,7 +872,7 @@
                                             </ComboBox> -->
                                             <ComboBox
                                                 id="idTCurve_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE CURVE'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_FUSCURVE'}] }"
                                                 selectedKey="{oSpecialsjmodel>fuseCurve}"
                                             >
                                                 <core:Item
@@ -860,7 +883,7 @@
                                             </ComboBox>
                                             <ComboBox
                                                 id="idTVoltage_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE VOLTAGE'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_FUSVOL'}] }"
                                                 selectedKey="{oSpecialsjmodel>fuseVoltage}"
                                             >
                                                 <core:Item
@@ -896,22 +919,13 @@
                 id="idPageSectionTrans_CS"
                 titleUppercase="false"
                 title="{i18n>CS_Transformer}"
-                visible="true"
-            >
+                visible="true" >
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idTransSubSection_CS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <Table
-                                id="tablTrans"
-                                alternateRowColors="true"
-                                showNoData="true"
-                            >
-                                <headerToolbar>
-                                    <Toolbar id="_IDGenToolbar1">
-                                        <RadioButtonGroup
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
+                        <RadioButtonGroup
                                             id="idOwnedGrp"
                                             columns="4"
                                         >
@@ -926,7 +940,16 @@
                                                 selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
                                             />
                                         </RadioButtonGroup>
-                                    </Toolbar>
+                        </x:actions>
+                        <x:blocks>
+                            <Table
+                                id="tablTrans"
+                                alternateRowColors="true"
+                                showNoData="true"
+                            >
+                                <headerToolbar>
+                                    <!-- <Toolbar id="_IDGenToolbar1">
+                                    </Toolbar> -->
                                 </headerToolbar>
                                 <columns>
                                     <Column id="idColumnManufacturer_CS">
@@ -989,7 +1012,7 @@
                                             <Input id="idImped2_CS" />
                                             <ComboBox
                                                 id="idPriVolt_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY VOLTAGE'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANPVOL'}] }"
                                                 selectedKey="{oSpecialsjmodel>/srv_centre}"
                                             >
                                                 <core:Item
@@ -1000,7 +1023,7 @@
                                             </ComboBox>
                                             <ComboBox
                                                 id="idSecVolt_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SECONDARY VOLTAGE'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANSVOL'}] }"
                                                 selectedKey="{oSpecialsjmodel>/srv_centre}"
                                             >
                                                 <core:Item
@@ -1012,7 +1035,7 @@
 
                                             <ComboBox
                                                 id="idTaps_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TAPS'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANTAPS'}] }"
                                                 selectedKey="{oSpecialsjmodel>/srv_centre}"
                                             >
                                                 <core:Item
@@ -1023,7 +1046,7 @@
                                             </ComboBox>
                                             <ComboBox
                                                 id="idKva_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'KVA'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANKVA'}] }"
                                                 selectedKey="{oSpecialsjmodel>/srv_centre}"
                                             >
                                                 <core:Item
@@ -1034,7 +1057,7 @@
                                             </ComboBox>
                                             <ComboBox
                                                 id="idType3_CS"
-                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'TYPE'}] }"
+                                                items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANTYP'}] }"
                                                 selectedKey="{oSpecialsjmodel>/srv_centre}"
                                             >
                                                 <core:Item

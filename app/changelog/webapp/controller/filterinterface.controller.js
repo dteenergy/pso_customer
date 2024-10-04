@@ -76,7 +76,7 @@ sap.ui.define([
                 let aData = [];
                 let oApprBy = { 'dataToDisplay': [] };
                 let oConnObj = { 'dataToDisplay': [] };
-                let oRecStats = { 'dataToDisplay': [] };
+                let oRecStats = { 'dataToDisplay': [{key: 'All', text: 'All'}] };
                 let oCustName = { 'dataToDisplay': [] };
                 let oStreetNumber = { 'dataToDisplay': [] };
                 let oStreetName = { 'dataToDisplay': [] };
@@ -683,14 +683,16 @@ sap.ui.define([
                         filter.removeAllTokens();
                     }
                     else if(filter.getMetadata().getName().toLowerCase().includes('select')){
-                        filter.setSelectedKey('approved');
+                        filter.setSelectedKey('Approved');
                     }
                 });
 
-                this.byId('idFilterBar').fireSearch({
-                    firedFromFilterBar : true,
-                    selectionSet : oEvent.getParameters().selectionSet
-                })
+                this.localModel.setProperty('/PSOSpecials', []);
+                this.localModel.refresh(true);
+                // this.byId('idFilterBar').fireSearch({
+                //     firedFromFilterBar : true,
+                //     selectionSet : oEvent.getParameters().selectionSet
+                // })
             },
             onFilterBarSearch: function (oEvent) {
                 // if (this.byId('idConnObj').getTokens().length == 0) {
@@ -702,15 +704,19 @@ sap.ui.define([
                 oEvent.getParameter('selectionSet').forEach(filterItem => {
                     if (!filterItem.getMetadata().getName().toLowerCase().includes('select')) {
                         filterItem.getTokens().forEach(token => {
-                            aFilters.push(
+                            
+                                aFilters.push(
                                 new Filter(filterItem.getParent().getName(), 'EQ', token.getKey())
                             )
+                        
                         })
                     }
                     else {
+                        if(filterItem.getSelectedItem().getKey() != 'All'){
                         aFilters.push(
                             new Filter(filterItem.getParent().getName(), 'EQ', filterItem.getSelectedItem().getKey())
                         )
+                    }
                     }
 
                 });

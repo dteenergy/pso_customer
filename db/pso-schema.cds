@@ -10,7 +10,7 @@ entity Fuses : cuid , managed {
     fuseType : String;
     fuseCurve : String;
     fuseVoltage : String;
-    fuseSeqNo: String;    
+    fuseSeqNo: Int16;    
     psospecials : Association to PSOSpecials;  
  }
 

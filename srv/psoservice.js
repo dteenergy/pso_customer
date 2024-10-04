@@ -5,26 +5,168 @@ const xsenv = require('@sap/xsenv');
 const { PSOSpecials } = cds.entities;
 module.exports = class PSOService extends cds.ApplicationService {
     init() {
-        this.on('getSpecialsRecord', async (req) => {
-            let connection_object = req.data.connection_object;
-            console.log(connection_object);
-            let res = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
-            console.log(res.length);
-            if (res.length === 0) {
-                return null;
+
+        async function _fetchRecordFromHANA(connection_object) {
+            const record_HANA = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
+            console.log(record_HANA.length);
+            if (record_HANA.length === 0) {
+                //no specials exists in HANA, fetch from ISU
+                const migratedData = await _fetchRecordFromISU(connection_object);
+                if (migratedData !== null && migratedData !== undefined && migratedData !== "") {
+                    //Insert Specials record from ISU to HANA
+                    const migratedDataModified = await getUpdatedrecord(migratedData);
+                    console.log(migratedDataModified);
+                    const affectedRows = await _createPSORecord(migratedDataModified);
+                    if (affectedRows > 0) {
+                        const result = await _fetchRecordFromHANA(connection_object);
+                        console.log(result);
+                        return result;
+                    }
+                    else return null;
+                }
+                else return null; // no data present in ISU/HANA            
             }
             else {
-                return res[0];
+                return record_HANA[0];
             }
+        }
+
+        async function _fetchRecordFromISU(connection_object) {
+            let path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')";
+            console.log("i am in ISU GET: " + path);
+            try {
+                const isu = await cds.connect.to('ISU');
+                const migratedData = await isu.send({
+                    method: 'GET',
+                    path: path
+                });
+                console.log(migratedData);
+                if (migratedData !== null && migratedData !== undefined && migratedData !== "") {
+                    return migratedData;
+                }
+                else return null;
+            }
+            catch (e) {
+                console.log(e);
+            }
+
+        }
+        this.on('getSpecialsRecord', async (req) => {
+            console.log(req.data.connection_object);
+            const result = await _fetchRecordFromHANA(req.data.connection_object);
+            return result;
         });
+
+        async function getUpdatedrecord(result) {
+
+            var oDTEOwnedLBD = "DTE Owned";
+            if (result.detto === "X") {
+                oDTEOwnedLBD = "DTE Owned";
+            } else if (result.custo === "X") {
+                oDTEOwnedLBD = "Customer Owned";
+            } else if (result.none === "X") {
+                oDTEOwnedLBD = "None";
+            }
+            var oAir = "Air";
+            if (result.air === "X") {
+                oAir = "Air";
+            } else if (result.oil === "X") {
+                oAir = "Oil";
+            } else if (result.vac === "X") {
+                oAir = "Vac";
+            } else if (result.sf6 === "X") {
+                oAir = "SF6";
+            }
+            var oDTEoOwnedCB = "DTE Owned";
+            if (result.cb_detto === "X") {
+                oDTEoOwnedCB = "DTE Owned";
+            } else if (result.cb_custo === "X") {
+                oDTEoOwnedCB = "Customer Owned";
+            }
+            const migratedPayload = {
+                connection_object: result.conn_obj,
+                work_desc: result.work_desc,
+                meter_number: result.Meter1,
+                record_status: "Approved",
+
+                //Customer Record(CR)
+                pSNumber: result.ps_no,
+                //completionDate: result.com_date,
+                fedFrom: result.fed,
+                cableDescription: result.cable_desc,
+                cableFootage: result.cable_foot,
+                ductType: result.duct_type,
+                cts: result.CTs,
+                pts: result.PTs,
+                k: result.K,
+                m: result.M,
+                fusesAt: result.fuse_at,
+                size: result.size,
+                typeCR: result.type,
+                curve: result.Curve,
+                voltage: result.voltage,
+                //Load Break Disconnect(LBD)
+                ownedByLBD: oDTEOwnedLBD,    //Radiobutton- detto,custo,none
+                manufacturer: result.manuf,
+                model: result.model,
+                continuousCurrent: result.cont_curr,
+                loadIntRating: result.lir,
+                kAMomentaryLBD: result.KAM,
+                typeLBD: result.LB_type,
+                faultClosing: result.fault_closing,
+                bilLBD: result.lb_bil,
+                serviceVoltage: result.serv_volt,
+                CycWithstand60: result.lb_60_cyc,
+                //Circuit Breaker(CB)
+                fuelTypeCB: oAir,    //Radiobutton fields air, oil, vac, sf6
+                ownedByCB: oDTEoOwnedCB,   //Radiobutton fields cb_detto, cb_custo
+                circuitBreakerMake: result.circ_break,
+                serialNo: result.serial_no,
+                kAMomentaryCB: result.kamom,
+                amps: result.amp,
+                typeCB: result.cb_type,
+                faultDuty: result.fault_duty,
+                bilCB: result.cb_bil,
+                //Transformer
+                ownedByTransformer: "",    //Radiobutton
+
+                //new fields
+                meter_number2: result.Meter2,
+                ab: result.AB,
+                bc: result.BC,
+                ca: result.CA,
+                an: result.AN,
+                bn: result.BN,
+                cn: result.CN,
+                groundMatResistance: result.grmatres,
+                methodUsed: result.method_used,
+                //dateMergered: result.Date_megg,
+                comment: "",
+                typeofService: result.Type_serv,
+                typeofTO: result.type_TO,
+                pswDiagramNumber: result.psw,
+                primaryServiceRep: result.psr,
+                customerName: "", //result.customerName,
+                streetNumber: "", //result.streetNumber,
+                streetName: "" //result.streetName
+            }
+            return migratedPayload;
+        }
+
         this.on('createSpecials', async (req) => {
             console.log("in create specials");
             req.data.context.record_status = "Draft";
             console.log(req.data.context);
-            const insertResult = await INSERT.into(PSOSpecials).entries(req.data.context);
-            console.log("post success createSpecials: " + insertResult.results[0].affectedRows);
-            return insertResult.results[0].affectedRows; //return UUID; ->need UUID in return
+            const affectedRows = await _createPSORecord(req.data.context);
+            return affectedRows;
         });
+        async function _createPSORecord(record) {
+            console.log("in _createPSORecord");
+            const insertResult = await INSERT.into(PSOSpecials).entries(record);
+            console.log("Insert Record Successful: " + record.connection_object);
+            return insertResult.results[0].affectedRows;
+        }
+
         this.on('updateSpecials', async (req) => {
             console.log("in update specials");
             req.data.context.record_status = "Draft";
@@ -69,8 +211,11 @@ module.exports = class PSOService extends cds.ApplicationService {
             const recordID = req.data.recordID;
             const comment = req.data.comment;
             const record_status = "Approved";
+            const approvedBy = req.req.user.id;
+            const Cdate = new Date();
+            const approvedOn = Cdate.toLocaleDateString('en-US');
             console.log(req.data);
-            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approverComment: comment });
+            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
             console.log("success onApproveRecord");
             console.log(updateResult);
             //update ISU POST/Update call
@@ -82,33 +227,36 @@ module.exports = class PSOService extends cds.ApplicationService {
             return wfType;
         });
         this.on('onRejectRecord', async (req) => {
-            // const recordID = req.data.recordID;
-            // const comment = req.data.comment;
-            // const record_status = "Rejected";
-            // console.log("Rejected WF for "+ req.data.recordID);
-            // const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approverComment: comment });
-
-            // console.log("success");
-            // console.log(updateResult);
-            // let comment1 = "wf rejected";
-            // let wfType = { "comment": comment1 };
-            // return wfType;
-
-            const comment = req.data.comment;
             const recordID = req.data.recordID;
-            let approvedBy = req.data.approvedBy;
+            const comment = req.data.comment;
             const record_status = "Rejected";
-
-            approvedBy = "mickey"; //to make it runtime ...mickey
-            console.log(comment);
-            console.log(recordID);
-            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approverComment: comment });
+            const approvedBy = req.req.user.id;
+            const Cdate = new Date();
+            const approvedOn = Cdate.toLocaleDateString('en-US');
+            console.log("Rejected WF for " + req.data.recordID);
+            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
 
             console.log("success");
             console.log(updateResult);
-            let comment1 = "wf comment";
+            let comment1 = "wf rejected";
             let wfType = { "comment": comment1 };
             return wfType;
+
+            // const comment = req.data.comment;
+            // const recordID = req.data.recordID;
+            // let approvedBy = req.data.approvedBy;
+            // const record_status = "Rejected";
+
+            // approvedBy = "mickey"; //to make it runtime ...mickey
+            // console.log(comment);
+            // console.log(recordID);
+            // const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approverComment: comment });
+
+            // console.log("success");
+            // console.log(updateResult);
+            // let comment1 = "wf comment";
+            // let wfType = { "comment": comment1 };
+            // return wfType;
         });
         this.on('onVerifyRecordStatus', async (req) => {
             const workflowID = req.data.workflowID;
@@ -170,9 +318,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                     // code block
                 }
 
-            }//end for loop
-            // console.log(user);
-            //  let result = { "value": id };
+            }
             let userInfo = {
                 "userName": userName,
                 "email": email,
@@ -246,82 +392,8 @@ module.exports = class PSOService extends cds.ApplicationService {
             let result = { "value": id };
             return result;
         });
-        // async function _oUpdateSpecials(recordID, req) {
-        //   //  const recordID = req.data.recordID;
-        //     let oResult = await UPDATE.entity(PSOSpecials, recordID).set({
-        //         work_desc: req.data.context.work_desc,
-        //         meter_number: req.data.context.meter_number,
-        //         record_status: req.data.context.record_status,
-        //         workflow_id: req.data.context.workflow_id,
 
-        //         connection_object: req.data.context.connection_object,
-        //         approvedBy: req.data.context.approvedBy,
-        //         approvedOn: req.data.context.approvedOn,
-        //         approverComment: req.data.context.approverComment,
-        //         //Customer Record(CR)
-        //         pSNumber: req.data.context.pSNumber,
-        //         completionDate: req.data.context.completionDate,
-        //         fedFrom: req.data.context.fedFrom,
-        //         cableDescription: req.data.context.cableDescription,
-        //         cableFootage: req.data.context.cableFootage,
-        //         ductType: req.data.context.ductType,
-        //         cts: req.data.context.cts,
-        //         pts: req.data.context.pts,
-        //         k: req.data.context.k,
-        //         m: req.data.context.m,
-        //         fusesAt: req.data.context.fusesAt,
-        //         size: req.data.context.size,
-        //         typeCR: req.data.context.typeCR,
-        //         curve: req.data.context.curve,
-        //         voltage: req.data.context.voltage,
-        //         //Load Break Disconnect(LBD)
-        //         ownedByLBD: req.data.context.ownedByLBD,    //Radiobutton
-        //         manufacturer: req.data.context.manufacturer,
-        //         model: req.data.context.model,
-        //         continuousCurrent: req.data.context.continuousCurrent,
-        //         loadIntRating: req.data.context.loadIntRating,
-        //         kAMomentaryLBD: req.data.context.kAMomentaryLBD,
-        //         typeLBD: req.data.context.typeLBD,
-        //         faultClosing: req.data.context.faultClosing,
-        //         bilLBD: req.data.context.bilLBD,
-        //         serviceVoltage: req.data.context.serviceVoltage,
-        //         CycWithstand60: req.data.context.CycWithstand60,
-        //         //Circuit Breaker(CB)
-        //         fuelTypeCB: req.data.context.fuelTypeCB,    //Radiobutton
-        //         ownedByCB: req.data.context.ownedByCB,   //Radiobutton
-        //         circuitBreakerMake: req.data.context.circuitBreakerMake,
-        //         serialNo: req.data.context.serialNo,
-        //         kAMomentaryCB: req.data.context.kAMomentaryCB,
-        //         amps: req.data.context.amps,
-        //         typeCB: req.data.context.typeCB,
-        //         faultDuty: req.data.context.faultDuty,
-        //         bilCB: req.data.context.bilCB,
-        //         //Transformer
-        //         ownedByTransformer: req.data.context.ownedByTransformer,    //Radiobutton
-
-        //         //new fields
-        //         meter_number2: req.data.context.meter_number2,
-        //         ab: req.data.context.ab,
-        //         bc: req.data.context.bc,
-        //         ca: req.data.context.ca,
-        //         an: req.data.context.an,
-        //         bn: req.data.context.bn,
-        //         cn: req.data.context.cn,
-        //         groundMatResistance: req.data.context.groundMatResistance,
-        //         methodUsed: req.data.context.methodUsed,
-        //         dateMergered: req.data.context.dateMergered,
-        //         comment: req.data.context.comment,
-        //         typeofService: req.data.context.typeofService,
-        //         typeofTO: req.data.context.typeofTO,
-        //         pswDiagramNumber: req.data.context.pswDiagramNumber,
-        //         primaryServiceRep: req.data.context.primaryServiceRep
-
-        //     });
-        //     console.log("post update specials private: " + oResult);
-        //     return "success updateSpecialsprivate....";
-        // };
         async function _oUpdateSpecials(recordID, req) {
-            //  const recordID = req.data.recordID;
             let oResult = await UPDATE.entity(PSOSpecials, recordID).set({
                 work_desc: req.work_desc,
                 meter_number: req.meter_number,
@@ -413,9 +485,23 @@ module.exports = class PSOService extends cds.ApplicationService {
         };
         async function triggerWorkflowPSOSpecials(recordID, req) {
             console.log(req);
-            let comp_date = req.completionDate + "";
+            let comp_date;
+            if (req.completionDate === null || req.completionDate === undefined) {
+                comp_date = '';
+            }
+            else {
+                comp_date = req.completionDate;
+            }
+
+            let oDateMergered;
+            if (req.dateMergered === null || req.dateMergered === undefined) {
+                oDateMergered = '';
+            }
+            else {
+                oDateMergered = req.dateMergered;
+            }
+
             console.log("comp date is: " + comp_date);
-            // let recordID = req.data.recordID;
             let wfPayload =
             {
                 "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
@@ -478,7 +564,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "cn": req.cn,
                     "groundMatResistance": req.groundMatResistance,
                     "methodUsed": req.methodUsed,
-                    "dateMergered": req.dateMergered,
+                    "dateMergered": oDateMergered,
                     "typeofService": req.typeofService,
                     "typeofTO": req.typeofTO,
                     "primaryServiceRep": req.primaryServiceRep,
@@ -514,10 +600,6 @@ module.exports = class PSOService extends cds.ApplicationService {
 
             console.log(queryResponse);
             const isuRecord = queryResponse[0];
-
-
-            //    const recordID = req.data.recordID;
-            //    const isuRecord = await SELECT.from(PSOSpecials).where({ ID: recordID });
             console.log(isuRecord);
             var oDTEOwnedLBD = "", oCustomerOwnedLBD = "", oNoneLBD = "";
             if (isuRecord.ownedByLBD === "DTE Owned") {
@@ -550,6 +632,15 @@ module.exports = class PSOService extends cds.ApplicationService {
                 // oCompletionDate = modifiedDate1.replace(/\//g, ""); //removing "/"
                 oCompletionDate = modifiedDate1.replace(/\/20/, '/');
             }
+
+            var oDateMeggered = '';
+            if (isuRecord.dateMergered !== '' && isuRecord.dateMergered !== null && isuRecord.dateMergered !== undefined) {
+                var oCDNewdateDM = new Date(isuRecord.dateMergered);
+                var modifiedDateDM = oCDNewdateDM.toLocaleDateString('en-US');
+                // oDateMeggered = modifiedDate1.replace(/\//g, ""); //removing "/"
+                oDateMeggered = modifiedDateDM.replace(/\/20/, '/');
+            }
+
             var oCreatedAt = '';
             if (isuRecord.createdAt !== '' && isuRecord.createdAt !== null && isuRecord.createdAt !== undefined) {
 
@@ -628,7 +719,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 "CN": isuRecord.cn,
                 "grmatres": isuRecord.groundMatResistance,
                 "method_used": isuRecord.methodUsed,
-                "Date_megg": isuRecord.dateMergered,
+                "Date_megg": oDateMeggered,
                 "Type_serv": isuRecord.typeofService,
                 "type_TO": isuRecord.typeofTO,
                 "psr": isuRecord.primaryServiceRep,
@@ -705,9 +796,6 @@ module.exports = class PSOService extends cds.ApplicationService {
             }
 
             console.log(result);
-            // let id = result.ID + "";
-            // console.log(id);
-            // let result1 = { "value": id };
             return result;
         };
         return super.init();

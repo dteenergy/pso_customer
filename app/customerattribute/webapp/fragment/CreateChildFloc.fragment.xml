@@ -109,7 +109,7 @@
                 <form:content>
                   <core:Title id="_IDTitleReqFormH1_CC" text=""/>
                   <Label id="idlblNoOfLines_CC" text="{i18n>numberoflines}" />
-                  <ComboBox id="idNoOfline_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'NUMBER OF LINES'}] }" selectedKey="{oCustomerAttributesJModel>/no_of_lines}">
+                  <ComboBox id="idNoOfline_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_NOOFLINES'}] }" selectedKey="{oCustomerAttributesJModel>/no_of_lines}">
                     <core:Item id="_IDNolineItem1_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC10" span="XL5 L5 M12 S12" />
@@ -122,14 +122,14 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblSrvCecenter_CC" text="{i18n>servicecenter}" />
-                  <ComboBox id="idSrvCenter_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_center}">
+                  <ComboBox id="idSrvCenter_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_SERVICENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_center}">
                     <core:Item id="idSCItem_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC17" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </ComboBox>
                   <Label id="idlblPrimerySrvRep_CC" text="{i18n>primerysrvrep}" />
-                  <ComboBox id="idPSR_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }" selectedKey="{oCustomerAttributesJModel>/psr}">
+                  <ComboBox id="idPSR_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PSR'}] }" selectedKey="{oCustomerAttributesJModel>/psr}">
                     <core:Item id="idPSRItem_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC18" span="XL5 L5 M12 S12" />
@@ -262,7 +262,7 @@
                     </Input>
 
                   <Label id="idlblThType_CC" text="{i18n>throwovertyp}" />
-                  <ComboBox id="idThrowoverTyp_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }"  selectedKey="{oCustomerAttributesJModel>/throw_type}">
+                  <ComboBox id="idThrowoverTyp_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_THROWTYPE'}] }"  selectedKey="{oCustomerAttributesJModel>/throw_type}">
                     <core:Item id="idThrowoverTypItem_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC21" span="XL5 L5 M12 S12" />
@@ -270,21 +270,21 @@
                     
                   </ComboBox>
                   <Label id="idlblProEqp1_CC" text="{i18n>protectiveeqp1}" />
-                  <ComboBox id="idProEqp1_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #1'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip1}">
+                  <ComboBox id="idProEqp1_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PROEQUIP1'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip1}">
                       <core:Item id="idProEqp1Item_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC19" span="XL5 L5 M12 S12" />
                     </layoutData>
                     </ComboBox>
                   <Label id="idlblProEqp2_CC" text="{i18n>protectiveeqp2}" />
-                  <ComboBox id="idProEqp2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #2'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip2}">
+                  <ComboBox id="idProEqp2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PROEQUIP2'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip2}">
                     <core:Item id="idProEqp2Item_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC20" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </ComboBox>
                   <Label id="idlblSrvType_CC" text="{i18n>servicetype}" />
-                  <ComboBox id="idServiceType_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE TYPE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_type}">
+                  <ComboBox id="idServiceType_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_SERVICETYPE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_type}">
                     <core:Item id="idServiceTypeItem_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData_CC22" span="XL5 L5 M12 S12" />
@@ -304,7 +304,7 @@
                   </Input>
                   
                   <Label id="idlblComments_CC" text="Comments"/>
-                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" rows="8" maxLength="1300">
+                  <TextArea id="idComents_CC" growing="true" value="{oCustomerAttributesJModel>/comments}" showExceededText="false" rows="4" maxLength="1300">
                   <layoutData>
                       <l:GridData id="idGridData_DC24" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -357,28 +357,28 @@
                     </Input>
 
                   <Label id="idlblThType2_CC" text="{i18n>throwovertyp}" />
-                  <ComboBox id="idThrowoverTyp2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }"  selectedKey="{oCustomerAttributesJModel>/throw_type2}">
+                  <ComboBox id="idThrowoverTyp2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_THROWTYPE'}] }"  selectedKey="{oCustomerAttributesJModel>/throw_type2}">
                     <core:Item id="idThrowoverTypItem2_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData2_CC21" span="XL5 L5 M12 S12" />
                     </layoutData> 
                   </ComboBox>
                   <Label id="idlblProEqp1_CC2" text="{i18n>protectiveeqp1}" />
-                  <ComboBox id="idProEqp1_CC2" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #1'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip1_2}">
+                  <ComboBox id="idProEqp1_CC2" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PROEQUIP1'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip1_2}">
                       <core:Item id="idProEqp1Item2_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData2_CC19" span="XL5 L5 M12 S12" />
                     </layoutData>
                     </ComboBox>
                   <Label id="idlblProEqp2_CC2" text="{i18n>protectiveeqp2}" />
-                  <ComboBox id="idProEqp2_CC2" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #2'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip2_2}">
+                  <ComboBox id="idProEqp2_CC2" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PROEQUIP2'}] }" selectedKey="{oCustomerAttributesJModel>/prot_equip2_2}">
                     <core:Item id="idProEqp2Item_CC2" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData2_CC20" span="XL5 L5 M12 S12" />
                     </layoutData>
                   </ComboBox>
                    <Label id="idlblSrvType2_CC" text="{i18n>servicetype}" />
-                  <ComboBox id="idServiceType2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE TYPE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_type2}">
+                  <ComboBox id="idServiceType2_CC" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CD_SERVICETYPE'}] }" selectedKey="{oCustomerAttributesJModel>/srv_type2}">
                     <core:Item id="idServiceTypeItem2_CC" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
                     <layoutData>
                       <l:GridData id="idGridData2_CC22" span="XL5 L5 M12 S12" />
@@ -397,7 +397,7 @@
                     </layoutData>
                   </Input>
                   <Label id="idlblComments2_CC" text="Comments"/>
-                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false"  rows="8" maxLength="1300">
+                  <TextArea id="idComents2_CC" growing="true" value="{oCustomerAttributesJModel>/comments2}" showExceededText="false"  rows="4" maxLength="1300">
                   <layoutData>
                       <l:GridData id="idGridData2_DC25" span="XL5 L5 M12 S12" />
                     </layoutData>

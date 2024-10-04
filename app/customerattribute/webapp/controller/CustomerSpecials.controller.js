@@ -2,8 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
+    "com/pso/customerattribute/utils/Formatter",
 ],
-    function (Controller, Fragment, MessageBox) {
+    function (Controller, Fragment, MessageBox, Formatter) {
         "use strict";
         return Controller.extend("com.pso.customerattribute.controller.CustomerSpecials", {
             onInit: function () {
@@ -79,7 +80,7 @@ sap.ui.define([
                // this.getView().byId("idpanelCreateSpecials").setVisible(true);
                 this.setVisibleCreateSpecialPanel(true);
                 this.getView().byId("_IDButtonSaveDraft").setVisible(true);
-                this.getView().byId("_IDButtonSaveSubmit").setVisible(true);
+                this.getView().byId("_IDButtonSaveSubmit").setVisible(false);
 
                 this.getView().byId("idpanelDisplaySpecials").setVisible(false);                
                 this.getView().byId("_IDEditSpecials").setVisible(false);
@@ -88,14 +89,27 @@ sap.ui.define([
               //********************************Display Specials********************************/
           
               onDisplaySpecials:function(){
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+
                 this.setVisibleCreateSpecialPanel(false);
+                this.getView().byId("idpanelDisplaySpecials").setVisible(true); 
                // this.getView().byId("idpanelCreateSpecials").setVisible(false);
                 this.getView().byId("_IDButtonSaveDraft").setVisible(false);
-                this.getView().byId("_IDButtonSaveSubmit").setVisible(false);
 
-                this.getView().byId("idpanelDisplaySpecials").setVisible(true);               
-                this.getView().byId("_IDEditSpecials").setVisible(true);
-            //     this.getView().byId("_IDDisplaySpecials").setVisible(false);
+                if (oUserScopeJModelData.hasSpecialsEditAccess) {
+                    console.log(this.record_status);
+                    if(this.record_status ==="Draft"){
+                        this.getView().byId("_IDButtonSaveSubmit").setVisible(true);
+                    }else{
+                        this.getView().byId("_IDButtonSaveSubmit").setVisible(false);
+                    }                                           
+                    this.getView().byId("_IDEditSpecials").setVisible(true);
+                }
+                else{
+                    this.getView().byId("_IDButtonSaveSubmit").setVisible(false);
+                    this.getView().byId("_IDEditSpecials").setVisible(false);
+                }
+                //     this.getView().byId("_IDDisplaySpecials").setVisible(false);
              },
 
             onAfterRendering: function () {
@@ -116,6 +130,26 @@ sap.ui.define([
                 if (recordID === undefined || recordID === null || recordID === "" || record_status === "Approved") {
                     //create
                     var oOperation = omodel.bindContext("/createSpecials(...)");
+                 oSpecialsCreateContext.record_status = 'Draft';
+                    // let svcUrl = this.getOwnerComponent().getModel().sServiceUrl;
+                    // try {
+                    //     const response = await fetch(svcUrl+'/PSOSpecials', {
+                    //       method: 'POST',
+                    //       headers: {
+                    //         'Content-Type': 'application/json'
+                    //       },
+                    //       body: JSON.stringify(oSpecialsCreateContext)
+                    //     });
+                     
+                    //     if (!response.ok) {
+                    //       throw new Error(`HTTP error! status: ${response.status}`);
+                    //     }
+                     
+                    //     const data = await response.json();
+                    //     return data;
+                    //   } catch (error) {
+                    //     console.error('Error:', error.message);
+                    //   }
                 } else {
                     //update
                     var oOperation = omodel.bindContext("/updateSpecials(...)");
@@ -306,8 +340,8 @@ sap.ui.define([
                     "primaryServiceRep": oPSR,
                     "customerName": oSpecialsjmodelData.customerName,
                     "streetNumber": oSpecialsjmodelData.streetNumber,
-                    "streetName": oSpecialsjmodelData.streetName
-                    //"fuses":oSpecialsjmodelData.fuses                    
+                    "streetName": oSpecialsjmodelData.streetName,
+                 //   "fuses":oSpecialsjmodelData.fuses                    
                 };
                 console.log(context);
                 return context;
@@ -319,29 +353,39 @@ sap.ui.define([
             onMeterMatch:function(evt){
             var oAttributes =  this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 var oMeter = evt.getSource().getValue();
-                if(oAttributes.meter_number ===oMeter || oAttributes.meter_number2 ===oMeter){
-                    MessageBox.information("?????????????????????");
+                if(oAttributes.meter1 !==oMeter && oAttributes.meter2 !==oMeter){
+                    MessageBox.warning("Meter Number " + oMeter + " entered is not installed at site");
                 }
             },
             //******************************* */
             onAddnewFusesRow:function(oEvt){
                 var oSpecialsjmodel = this.getView().getModel("oSpecialsjmodel");
                 var aData = oSpecialsjmodel.getProperty("/fuses") || []; // Get current items
-    
+                const connection_object=oSpecialsjmodel.getData().connection_object;
+                const recordID = oSpecialsjmodel.getData().ID;
+                if(aData.length === 0){
+                    this.sequenceCounter = 1;
+                }else{
+                    this.sequenceCounter = aData.length;
+                }
+                    
                 // Create a new item with empty values
                 var newItem = {
-                    connection_object:"4000444719",
+                    psospecials_connection_object:connection_object,
+                    //psospecials_ID:recordID,
                     fuseSize: "",   // For the Input field
                     fuseType: "",  // For the ComboBox
                     fuseVoltage:"",// For the ComboBox
-                    fuseSeqNo:""// For the ComboBox
+                    fuseSeqNo: this.sequenceCounter++
                 };
     
                 // Add the new item to the existing items
                 aData.push(newItem);
     
                 // Update the model with the new items array
+                //check table model for fuses data .. mickey.
                 oSpecialsjmodel.setProperty("/fuses", aData);
+
             },
             onFuseTypeChange: function(oEvent){
                 // console.log(oEvent);

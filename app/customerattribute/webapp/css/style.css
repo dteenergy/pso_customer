@@ -61,3 +61,15 @@
     box-sizing: border-box;
     --_sap_m_Label_ReservedSpace: 0%;
 }
+
+@media only screen and (min-width: 750px) {
+    .sapUxAPObjectPageSubSectionHeader1 {
+        margin-top: -32px;
+    }
+    }
+    
+    @media only screen and (max-width: 750px) {
+        .sapUxAPObjectPageSubSectionHeader1 {
+            margin-right: 90px;
+        }
+        }

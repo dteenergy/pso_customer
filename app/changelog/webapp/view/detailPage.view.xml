@@ -36,15 +36,16 @@
                                 <m:Text text="{createdAt}"></m:Text>
                                 <m:Label text="Created By"></m:Label>
                                 <m:Text text="{createdBy}"></m:Text>
-                                <m:Label text="Modified Date"></m:Label>
-                                <m:Text text="{modifiedAt}"></m:Text>
-                                <core:Title/>
-                                <m:Label text="Modified By"></m:Label>
-                                <m:Text text="{modifiedBy}"></m:Text>
                                 <m:Label text="Approved By"></m:Label>
-                                <m:Text text="{approvedBy}"></m:Text>
+                                <m:Text text="{modifiedBy}"></m:Text>
+                                <!-- <m:Label text="Modified Date"></m:Label>
+                                <m:Text text="{modifiedAt}"></m:Text> -->
+                                <core:Title/>
+                                <!-- <m:Label text="Modified By"></m:Label>
+                                <m:Text text="{modifiedBy}"></m:Text> -->
+                                
                                 <m:Label text="Approved On"></m:Label>
-                                <m:Text text="{approvedOn}"></m:Text>
+                                <m:Text text="{modifiedAt}"></m:Text>
                             </form:SimpleForm>
                             <!-- <form:SimpleForm layout="ColumnLayout">
                                 <m:Label text="Workflow ID"></m:Label>
@@ -86,9 +87,9 @@
                 </m:OverflowToolbar>
                 </heading> -->
                 <subSections>
-                    <ObjectPageSubSection title="Load Break Disconnect" titleUppercase="false">
+                    <ObjectPageSubSection title="Load Break Disconnect" titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
                     <actions>
-                    <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information">
+                    <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information" editable="false">
 			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
 			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
 			<m:RadioButton id="RB3" text="None" />
@@ -185,7 +186,7 @@
                                 <m:Text text="{CycWithstand60}"></m:Text>
                                 <m:Label text="Circuit Breaker Make"></m:Label>
                                 <m:Text text="{circuitBreakerMake}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="Serial No"></m:Label>
                                 <m:Text text="{serialNo}"></m:Text>
                                 <m:Label text="kA Momentary CB"></m:Label>
@@ -199,7 +200,7 @@
                                 <m:Text text="{faultDuty}"></m:Text>
                                 <m:Label text="Bill CB"></m:Label>
                                 <m:Text text="{bilCB}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="Cable Description"></m:Label>
                                 <m:Text text="{cableDescription}"></m:Text>
                                 <m:Label text="Cable Footage"></m:Label>
@@ -213,7 +214,7 @@
                                 <m:Text text="{pts}"></m:Text>
                                 <m:Label text="Fuses At"></m:Label>
                                 <m:Text text="{fusesAt}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="Size"></m:Label>
                                 <m:Text text="{size}"></m:Text>
                                 <m:Label text="Type CR"></m:Label>
@@ -289,7 +290,7 @@
                                 <m:Text text="{manufacturer}"></m:Text>
                                 <m:Label text="Model"></m:Label>
                                 <m:Text text="{model}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="Continuous Current"></m:Label>
                                 <m:Text text="{continuousCurrent}"></m:Text>
                                 <m:Label text="Load Int Rating"></m:Label>
@@ -303,7 +304,7 @@
                                 <m:Text text="{faultClosing}"></m:Text>
                                 <m:Label text="Bill BD"></m:Label>
                                 <m:Text text="{bilLBD}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="Service Voltage"></m:Label>
                                 <m:Text text="{serviceVoltage}"></m:Text>
                                 <m:Label text="Cyc With Stand60"></m:Label>
@@ -317,7 +318,7 @@
                                 <m:Text text="{kAMomentaryCB}"></m:Text>
                                 <m:Label text="Amps"></m:Label>
                                 <m:Text text="{amps}"></m:Text>
-                                <core:Title ></core:Title>
+                                <!-- <core:Title ></core:Title> -->
                                 <m:Label text="CB Type"></m:Label>
                                 <m:Text text="{typeCB}"></m:Text>
                                 <m:Label text="Fault Duty"></m:Label>

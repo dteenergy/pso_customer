@@ -90,7 +90,7 @@ type fuses {
     fuseType : String;
     fuseCurve : String;
     fuseVoltage : String;
-    fuseSeqNo: String;
+    fuseSeqNo: Int16;
     connection_object   : String;
 }
   type userInfo {

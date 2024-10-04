@@ -81,7 +81,7 @@ sap.ui.define([
                 // }
 
                 if (oUserScopeJModelData.hasSpecialsCreateAccess) {
-                    this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+              //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
                 }
                 if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
@@ -107,7 +107,7 @@ sap.ui.define([
                     }
                     this.getView().byId("idDemolished_site_CC").setVisible(false);
                     this.getView().byId("_IDButtonEditRecord").setVisible(false);
-                    this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+                 //   this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
                     //this.getView().byId("idButtonView").setVisible(false);
                     this.getView().byId("idButtonOpentext").setVisible(false);
                     this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
@@ -148,14 +148,14 @@ sap.ui.define([
               
                 if (specialsFlag) { //specials exist, show display specials button
 
-                    this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+                 //   this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
                     if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                         this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
                     }
                 }
                 else {//specials does not exist, show create specials button
                     if (oUserScopeJModelData.hasSpecialsCreateAccess) {
-                        this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+                  //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
                     }
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(false);
                 }
@@ -966,7 +966,7 @@ sap.ui.define([
                                 "fuseType" : "",
                                 "fuseCurve" : "",
                                 "fuseVoltage" : "",
-                                "fuseSeqNo": "",
+                                "fuseSeqNo": 0,
                                 "connection_object"   : connection_object
                             }]
 

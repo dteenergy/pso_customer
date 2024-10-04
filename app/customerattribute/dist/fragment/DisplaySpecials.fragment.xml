@@ -174,19 +174,8 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idLBDSubSection_DS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="rquestformLBD_DS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTLBD1_DS" />
-                                    <Label id="idRadiobutton_DS" />
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
                                     <RadioButtonGroup
                                         id="idRadio1_DS"
                                         columns="5"
@@ -207,7 +196,20 @@
                                             text="{i18n>CS_None}"
                                             selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
                                         />
-                                    </RadioButtonGroup>
+                                    </RadioButtonGroup>                
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="rquestformLBD_DS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTLBD1_DS" />
+                                    <!-- <Label id="idRadiobutton_DS" /> -->
+                                    
                                     <Label
                                         id="idlblMFG_DS"
                                         text="{i18n>CS_Manufacturer}"
@@ -280,20 +282,9 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idCBSubSection_DS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="reqesformCB_DS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTCB1_DS" />
-                                    <Label id="idlblRadioCB_DS" />
-                                    <RadioButtonGroup
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
+                        <RadioButtonGroup
                                         id="goup6CPSR_DS"
                                         columns="5"
                                         enabled="false"
@@ -319,20 +310,19 @@
                                             selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
-                                    <Label
-                                        id="idlblCBM_DS"
-                                        text="{i18n>CS_CBM}"
-                                    />
-                                    <Text id="idCBM_DS" text="{oSpecialsjmodel>/circuitBreakerMake}"/>
-                                    <Label
-                                        id="idlblSNo_DS"
-                                        text="{i18n>CS_Serialno}"
-                                    />
-                                    <Text id="idSerialNo_DS" text="{oSpecialsjmodel>/serialNo}"/>
-
-
-                                    <core:Title id="idcoreTCB2_DS" />
-                                    <Label id="idCB1_DS" text="{i18n>CS_owned_CB}"/>
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesformCB_DS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTCB1_DS" />
+                                    <!-- <Label id="idlblRadioCB_DS" /> -->
+                                    <Label id="idCB1_DS" />
 
                                     <RadioButtonGroup
                                         id="grop5CPSR_DS"
@@ -350,6 +340,21 @@
                                             selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
                                         />
                                     </RadioButtonGroup>
+                                    
+                                    <Label
+                                        id="idlblCBM_DS"
+                                        text="{i18n>CS_CBM}"
+                                    />
+                                    <Text id="idCBM_DS" text="{oSpecialsjmodel>/circuitBreakerMake}"/>
+                                    <Label
+                                        id="idlblSNo_DS"
+                                        text="{i18n>CS_Serialno}"
+                                    />
+                                    <Text id="idSerialNo_DS" text="{oSpecialsjmodel>/serialNo}"/>
+
+
+                                    <core:Title id="idcoreTCB2_DS" />
+                                    
                                     <Label
                                         id="idlblKAMome_DS"
                                         text="{i18n>CS_KAMomenetary}"
@@ -361,14 +366,14 @@
                                         text="{i18n>CS_Amps}"
                                     />
                                     <Text id="idAmps_DS" text="{oSpecialsjmodel>/amps}"/>
-
-
-                                    <core:Title id="idcoreTCB3_DS" />
                                     <Label
                                         id="idlblType4_DS"
                                         text="{i18n>CS_Type4}"
                                     />
                                     <Text id="idType4_DS" text="{oSpecialsjmodel>/typeCB}"/>
+
+                                    <core:Title id="idcoreTCB3_DS" />
+                                    
                                     <Label
                                         id="idlblFaultDuty_DS"
                                         text="{i18n>CS_FaultDuty}"
@@ -408,7 +413,7 @@
             <Text id="idBN_DS" text="{oSpecialsjmodel>/bn}"/>
             <Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
             <Text id="idCN_DS" text="{oSpecialsjmodel>/cn}"/>
-            <Label id="idlblGround_DS" text="{i18n>CS_ground}" />     
+            <Label id="idlblGround_DS" text="{i18n>CS_ground}" tooltip="Ground Mat Resistance"/>     
             <Text id="idground_DS" text="{oSpecialsjmodel>/groundMatResistance}"/>
             <Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
             <Text id="idmethod_DS" text="{oSpecialsjmodel>/methodUsed}"/>
@@ -427,26 +432,26 @@
             <Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
             <Text id="idcreatedby_DS" text="{oSpecialsjmodel>/createdBy}"/>
             <Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
-            <Text id="idcreatedon_DS" text="{oSpecialsjmodel>/createdAt}"/>
+            <Text id="idcreatedon_DS" text="{path:'oSpecialsjmodel>/createdAt', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
             <!-- <Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
             <Text id="idmodifiedby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
             <Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
             <Text id="idmodifiedon_DS" text="{oSpecialsjmodel>/modifiedAt}"/>    -->
             <Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
-            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/modifiedBy}"/>
+            <Text id="idapproveby_DS" text="{oSpecialsjmodel>/approvedBy}"/>
             <Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
-            <Text id="idapprovedate_DS" text="{oSpecialsjmodel>/modifiedAt}"/>
+            <Text id="idapprovedate_DS" text="{path:'oSpecialsjmodel>/approvedOn', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
             <core:Title id="idcoreTOther3_DS" />  
             
             <Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />     
-            <TextArea id="idApproverCmnts_DS" growing="true" value="{oSpecialsjmodel>/approverComment}" showExceededText="false" editable="false" rows="6" maxLength="1300">
+            <TextArea id="idApproverCmnts_DS" growing="true" value="{oSpecialsjmodel>/approverComment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
                 <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
             </TextArea>  
             
             <Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
-            <TextArea id="idcomment_DS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" editable="false" rows="6" maxLength="1300">
+            <TextArea id="idcomment_DS" growing="true" value="{oSpecialsjmodel>/comment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
                 <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
@@ -529,17 +534,9 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idTransSubSection_DS"
-                        titleUppercase="false"
-                    >
-                        <x:blocks>
-                            <Table
-                                id="tablTrans_DS"
-                                alternateRowColors="true"
-                                showNoData="true"
-                            >
-                                <headerToolbar>
-                                    <Toolbar id="_IDGenToolbar1_DS">
-                                        <RadioButtonGroup
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <x:actions>
+                        <RadioButtonGroup
                                             id="idOwnedGrp_DS"
                                             columns="4"
                                             enabled="false"
@@ -555,7 +552,17 @@
                                                 selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
                                             />
                                         </RadioButtonGroup>
-                                    </Toolbar>
+                        </x:actions>
+                        <x:blocks>
+                            <Table
+                                id="tablTrans_DS"
+                                alternateRowColors="true"
+                                showNoData="true"
+                            >
+                                <headerToolbar>
+                                    <!-- <Toolbar id="_IDGenToolbar1_DS">
+                                        
+                                    </Toolbar> -->
                                 </headerToolbar>
                                 <columns>
                                     <Column id="idColumnManufacturer_DS">

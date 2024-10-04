@@ -191,7 +191,7 @@
                                         <ComboBox
                                             id="idPrimarySRep"
                                             items="{path: 'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [
-                                                {path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}]}"
+                                                {path: 'field', operator: 'EQ', value1: 'ZPSO_CD_PSR'}]}"
                                         >
                                             <core:Item
                                                 id="_IDGenItem1"
