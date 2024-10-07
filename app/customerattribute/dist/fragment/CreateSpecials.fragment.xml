@@ -425,6 +425,39 @@
                         titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
                         <x:actions>
                         <RadioButtonGroup
+                                        id="grop5CPSR_CS"
+                                        columns="5"
+                                    >
+                                        <RadioButton
+                                            id="idDecoOwned_CS"
+                                            text="{i18n>CS_DTEOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idCustomer_CS"
+                                            text="{i18n>CS_CustomerOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesformCB_CS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3"
+                                columnsL="3"
+                                labelSpanXL="3"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTCB1_CS" />
+                                    <!-- <Label id="idlblRadioCB_CS" /> -->
+                                    <Label id="idCB1_CS"/>
+                                    <RadioButtonGroup
                                         id="goup6CPSR_CS"
                                         columns="5"
                                         class="sapUiTinyMarginTopBottom"
@@ -450,39 +483,7 @@
                                             selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
-                        </x:actions>
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="reqesformCB_CS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3"
-                                columnsL="3"
-                                labelSpanXL="3"
-                                labelSpanL="4"
-                                labelSpanM="12"
-                                labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTCB1_CS" />
-                                    <!-- <Label id="idlblRadioCB_CS" /> -->
-                                    <Label id="idCB1_CS"/>
-                                    <RadioButtonGroup
-                                        id="grop5CPSR_CS"
-                                        columns="5"
-                                    >
-                                        <RadioButton
-                                            id="idDecoOwned_CS"
-                                            text="{i18n>CS_DTEOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idCustomer_CS"
-                                            text="{i18n>CS_CustomerOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
-                                        />
-                                    </RadioButtonGroup>
+                                    
                                     
                                     <Label
                                         id="idlblCBM_CS"

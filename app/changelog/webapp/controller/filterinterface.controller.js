@@ -1,9 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-    "sap/ui/model/Filter"
+    "sap/ui/model/Filter",
+    'sap/ui/export/Spreadsheet',
+    'sap/ui/export/library',
+    'sap/ui/model/Sorter'
 ],
-    function (Controller, Fragment, Filter) {
+    function (Controller, Fragment, Filter,Spreadsheet,library,Sorter) {
         "use strict";
 
         return Controller.extend("com.pso.changelog.controller.filterinterface", {
@@ -14,7 +17,7 @@ sap.ui.define([
                 this.readApprByVH();
                 // this.checkAuth();
             },
-           
+            EdmType : library.EdmType,
             checkAuth : function(){
                 let oContext = this.getOwnerComponent().getModel().bindContext('/userDetails(...)');
                 var that = this;
@@ -71,8 +74,11 @@ sap.ui.define([
 
                 }
             },
-            readApprByVH: function (aFilters) {
+            readApprByVH: function (aFilters,aSort) {
                 let data = this.model.bindList('/PSOSpecials', undefined, undefined, aFilters);
+                if(aSort){
+                    data.sort(aSort);
+                }
                 let aData = [];
                 let oApprBy = { 'dataToDisplay': [] };
                 let oConnObj = { 'dataToDisplay': [] };
@@ -83,7 +89,8 @@ sap.ui.define([
                 data.requestContexts(0, Infinity).then(function (aContext) {
                     aContext.forEach(context => {
                         let data = context.getObject();
-                        data.createdAt = new Date(data.createdAt).toLocaleString()
+                        data.createdAt  = data.createdAt != null ? new Date(data.createdAt).toLocaleString() : data.createdAt;
+                        data.approvedOn = data.approvedOn != null ? new Date(data.approvedOn).toLocaleString() : data.approvedOn;
                         aData.push(data);
 
                         let appryBy = context.getObject()['approvedBy'];
@@ -150,6 +157,11 @@ sap.ui.define([
                         this.localModel.setProperty('/tableItemsCount', `Items(${aData.length})`);
                         this.localModel.setProperty('/PSOSpecials', aData);
                         this.byId('idTable').setBusy(false);
+                        if(aData.length > 0) {
+                            this.byId('idExcel').setEnabled(true);
+                            this.byId('idSort').setEnabled(true);
+                        }
+                        
                     }
 
                     // this.byId('idTable').bindAggregation("items", {
@@ -678,6 +690,8 @@ sap.ui.define([
                 })
             },
             onFilterBarClear : function(oEvent){
+                this.byId('idExcel').setEnabled(false);
+                this.byId('idSort').setEnabled(false);
                 oEvent.mParameters.selectionSet.forEach(filter=>{
                     if(filter.getMetadata().getName().toLowerCase().includes('multiinput')){
                         filter.removeAllTokens();
@@ -722,7 +736,8 @@ sap.ui.define([
                 });
 
                 // this.byId('idTable').getBinding('items').filter(aFilters);
-                this.readApprByVH(aFilters);
+                this.aFilters = aFilters;
+                this.readApprByVH(aFilters,[]);
                 this.byId('idTable').setShowOverlay(false);
             },
             onTokenUpdate: function (oEvent) { 
@@ -777,6 +792,68 @@ sap.ui.define([
                     }
 
                 }
+            },
+            onExcelDownload : function(oEvent){
+                let aColumns = this.byId('idTable').getColumns();
+                let aCells = this.byId('idTable').getItems()[0].getCells();
+                this.createColumnConfig(aColumns,aCells);  
+            },
+            createColumnConfig : function(aColumns,aCells){
+                let aCols = [];
+
+                aColumns.forEach((column,index)=>{
+                    aCols.push({
+                        label : column.getHeader().getText(),
+                        property : aCells[index].getBindingInfo('text').parts[0].path,
+                        width : 25
+                    })
+                });
+
+                var oSettings = {
+                    workbook: {
+                        columns: aCols,
+                        hierarchyLevel: 'Level',
+                        context : {
+                            sheetName : 'PSOSpecials'
+                        }
+                    },
+                    dataSource: this.localModel.getData().PSOSpecials,
+                    fileName: 'PSOSpecials.xlsx',
+                    worker: false // We need to disable worker because we are using a MockServer as OData Service
+                };
+    
+                var oSheet = new Spreadsheet(oSettings);
+                oSheet.build().finally(function() {
+                    oSheet.destroy();
+                });
+                // debugger;
+                
+                
+            },
+            onTableSortConfirm : function(oEvent){
+                this.byId('idTable').setBusy(true);
+                let isDesc = oEvent.getParameter('sortDescending');
+                let sortProp = oEvent.getParameter('sortItem').getKey();
+                this.readApprByVH(this.aFilters,[new Sorter(sortProp,isDesc)]);
+                // this.onFilterBarSearch(undefined,[new Sorter(sortProp,isDesc)]);
+                debugger;
+            },
+            onSort : function(oEvent){
+                if(!this.sortDialog){
+                    Fragment.load({
+                        name: "com.pso.changelog.fragments.TableSort",
+                        type: "XML",
+                        controller: this
+                    }).then(oDialog=>{
+                        this.sortDialog = oDialog;
+                        this.getView().addDependent(this.sortDialog);
+                        this.sortDialog.open();
+                    })
+                }
+                else{
+                    this.sortDialog.open();
+                }
+                
             }
         });
     });

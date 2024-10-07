@@ -51,7 +51,15 @@
                 </f:DynamicPageHeader>
             </f:header>
             <f:content>
-                <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="5" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}">
+                <Table id="idTable" items="{localModel>/PSOSpecials}" growingScrollToLoad="true" growing="true" growingThreshold="5" mode="SingleSelectMaster" selectionChange="onRowSelect" rememberSelections="false" headerText="{localModel>/tableItemsCount}" autoPopinMode="true">
+                   <headerToolbar>              
+                   <OverflowToolbar>
+                   <Label text="{localModel>/tableItemsCount}" design="Bold"/>
+                   <ToolbarSpacer/>
+                   <Button id="idSort" enabled="false" press="onSort" icon="sap-icon://sort"/>
+                   <Button id="idExcel" enabled="false" press="onExcelDownload" icon="sap-icon://excel-attachment"/>
+                   </OverflowToolbar>
+                </headerToolbar>                
                     <columns>
                         <Column>
                             <Label text="Billing Entity"></Label>

@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <ViewSettingsDialog id="_IDGenViewSortDialog1" sortDescending="true" confirm="onTableSortConfirm">
+        <sortItems>
+            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="Billing Entity" key="connection_object"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="Created By" key="createdBy"/>
+            <ViewSettingsItem id="_IDGenViewSettingsBentity" text="Created On" key="createdAt"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="Approved By" key="approvedBy"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="Approved On" key="approvedOn"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="Record Status" key="record_status"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="Approver Comment" key="approverComment"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem7" text="Customer Name" key="customerName"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem8" text="Street Number" key="streetNumber"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem9" text="Street Name" key="streetName"/>
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

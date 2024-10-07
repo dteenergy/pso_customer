@@ -91,7 +91,7 @@ module.exports = class PSOService extends cds.ApplicationService {
 
                 //Customer Record(CR)
                 pSNumber: result.ps_no,
-                //completionDate: result.com_date,
+                completionDate: result.com_date,
                 fedFrom: result.fed,
                 cableDescription: result.cable_desc,
                 cableFootage: result.cable_foot,

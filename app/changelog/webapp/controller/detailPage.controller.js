@@ -10,7 +10,7 @@ function (Controller) {
         },
         _initialize : function(oEvent){
             this.byId('ObjectPageLayout').bindElement({
-                path : location.hash.split('#')[1],
+                path : '/PSOSpecials'+location.hash.split('PSOSpecials')[1] ,
                 parameters: {
                     expand: "fuses"
                   }

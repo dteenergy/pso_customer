@@ -249,7 +249,7 @@ sap.ui.define([
             //     return date;
             // },
             getCreateContext: function () {
-                //const connection_object = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
+                const oCustomerAttributesJModelData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
                 var ownedByLbd=this.getView().byId("idRadio1_CS").getSelectedButton().getText();
                 var ownedByCB=this.getView().byId("grop5CPSR_CS").getSelectedButton().getText();
@@ -266,6 +266,9 @@ sap.ui.define([
                 var oPSR = this.getView().byId("idrep_CS").getSelectedKey();
                 var oComments = this.getView().byId("idcomment_CS").getValue();
                 var oPSW = this.getView().byId("idCNpsw_CS").getText();
+                var oCustName = oCustomerAttributesJModelData.cust_name;
+                var oStreetName = oCustomerAttributesJModelData.street_name;
+                var oStreetNo =  oCustomerAttributesJModelData.street_no
 
 
                 if (oSpecialsjmodelData.connection_object === "" || oSpecialsjmodelData.connection_object === null || oSpecialsjmodelData.connection_object === undefined) { //retain field value from previous screen
@@ -338,9 +341,9 @@ sap.ui.define([
                     "typeofTO": oTypeofTo,
                     "pswDiagramNumber": oPSW,
                     "primaryServiceRep": oPSR,
-                    "customerName": oSpecialsjmodelData.customerName,
-                    "streetNumber": oSpecialsjmodelData.streetNumber,
-                    "streetName": oSpecialsjmodelData.streetName,
+                    "customerName": oCustName,
+                    "streetNumber": oStreetNo,
+                    "streetName": oStreetName,
                  //   "fuses":oSpecialsjmodelData.fuses                    
                 };
                 console.log(context);

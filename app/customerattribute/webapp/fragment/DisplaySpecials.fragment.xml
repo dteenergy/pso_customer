@@ -285,6 +285,35 @@
                         titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
                         <x:actions>
                         <RadioButtonGroup
+                                        id="grop5CPSR_DS"
+                                        columns="5"
+                                        enabled="false"
+                                    >
+                                        <RadioButton
+                                            id="idDecoOwned_DS"
+                                            text="{i18n>CS_DTEOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
+                                        />
+                                        <RadioButton
+                                            id="idCustomer_DS"
+                                            text="{i18n>CS_CustomerOwned_CB}"
+                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
+                                        />
+                                    </RadioButtonGroup>
+                        </x:actions>
+                        <x:blocks>
+                            <form:SimpleForm
+                                id="reqesformCB_DS"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                singleContainerFullSize="false"
+                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                            >
+                                <form:content>
+                                    <core:Title id="idcoreTCB1_DS" />
+                                    <!-- <Label id="idlblRadioCB_DS" /> -->
+                                    <Label id="idCB1_DS" />
+                                    <RadioButtonGroup
                                         id="goup6CPSR_DS"
                                         columns="5"
                                         enabled="false"
@@ -310,36 +339,8 @@
                                             selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
-                        </x:actions>
-                        <x:blocks>
-                            <form:SimpleForm
-                                id="reqesformCB_DS"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                singleContainerFullSize="false"
-                                columnsXL="3" columnsL="3" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12"
-                            >
-                                <form:content>
-                                    <core:Title id="idcoreTCB1_DS" />
-                                    <!-- <Label id="idlblRadioCB_DS" /> -->
-                                    <Label id="idCB1_DS" />
 
-                                    <RadioButtonGroup
-                                        id="grop5CPSR_DS"
-                                        columns="5"
-                                        enabled="false"
-                                    >
-                                        <RadioButton
-                                            id="idDecoOwned_DS"
-                                            text="{i18n>CS_DTEOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idCustomer_DS"
-                                            text="{i18n>CS_CustomerOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
-                                        />
-                                    </RadioButtonGroup>
+                                    
                                     
                                     <Label
                                         id="idlblCBM_DS"
