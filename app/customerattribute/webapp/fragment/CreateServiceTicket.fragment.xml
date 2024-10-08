@@ -39,7 +39,7 @@
                         text="{oCustomerAttributesJModel>/cust_name}"
                     />
 
-                    <Label
+                    <!-- <Label
                         id="idlblStreetAdd_ST"
                         text="{i18n>streeetadd}"
                     />
@@ -64,7 +64,7 @@
                     <Text
                         id="idZipCode_ST"
                         text="{oCustomerAttributesJModel>/zip_code}"
-                    />
+                    /> -->
 
                     <Label
                         id="idlblSrvCecenter_ST"

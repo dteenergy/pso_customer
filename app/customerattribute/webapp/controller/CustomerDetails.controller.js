@@ -1141,19 +1141,19 @@ sap.ui.define([
                     "Name": name,
                     "ServiceIssueCategoryID": "SC_2",
                     "IncidentServiceIssueCategoryID": "IC_5",
-                    "ProcessorPartyID": this.oUserId, //user id
+                    //"ProcessorPartyID": this.oUserId, //user id
                     "InstallationPointID": oConnectionObject,//connection object id
                     "PartyID": oTicketData.c4cpartyid, //new ISU odata field //c4cpartyid
                     "RoleCode": "10",
-                    "Z_PSO_City_KUT": oTicketData.city,
+                    //"Z_PSO_City_KUT": oTicketData.city,
                     "Z_PSO_DCPLIND_KUT": dcplind_flag,
                     "Z_PSO_ServiceCenter_KUT": oTicketData.srv_center,
                     "Z_PSO_Substation_KUT": oSubstation,
                     "Z_PSO_Circuit_Trans_KUT": oCircuitTrans,
                     "Z_PSO_PSCableNo_KUT": oTicketData.cable_no,
-                    "Z_PSO_StreetAddress_KUT": oTicketData.street_name,
+                    //"Z_PSO_StreetAddress_KUT": oTicketData.street_name,
                     "Z_PSO_CustomerName_KUT": oTicketData.cust_name,
-                    "Z_PSO_ZIP_KUT": oTicketData.zip_code
+                    //"Z_PSO_ZIP_KUT": oTicketData.zip_code
                     //"ServiceRequestUserLifeCycleStatusCode": "1"
                 };
                 //
@@ -1243,8 +1243,9 @@ sap.ui.define([
                     console.log("success: = ticket created");
                 }.bind(this), function (err) {
                     that.oBusyIndicator.close();
+                    //err.message.split(":")[1]
                     console.log("failure: = " + err.message);
-                    sap.m.MessageBox.show("Service Ticket not created", {
+                    sap.m.MessageBox.show("POO creation failed", {
                         icon: sap.m.MessageBox.Icon.ERROR,
                         title: "Error",
                         actions: [sap.m.MessageBox.Action.OK]

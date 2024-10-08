@@ -94,53 +94,71 @@ sap.ui.define([
                         aData.push(data);
 
                         let appryBy = context.getObject()['approvedBy'];
-                        if (!oApprBy.hasOwnProperty(appryBy) && appryBy !== null) {
-                            oApprBy[appryBy] = context.getObject()['approvedBy'];
-                            oApprBy['dataToDisplay'].push({
-                                "approvedBy": appryBy
-                            })
+                        if(appryBy != null){
+                            if (!oApprBy.hasOwnProperty(appryBy)) {
+                                oApprBy[appryBy] = context.getObject()['approvedBy'];
+                                oApprBy['dataToDisplay'].push({
+                                    "approvedBy": appryBy
+                                })
+                            }
                         }
+                        
 
                         let connObj = context.getObject()['connection_object'];
-                        if (!oConnObj.hasOwnProperty(connObj) && connObj !== null) {
-                            oConnObj[connObj] = context.getObject()['connection_object'];
-                            oConnObj['dataToDisplay'].push({
-                                "connection_object": connObj
-                            })
+                        if(connObj != null){
+                            if (!oConnObj.hasOwnProperty(connObj)) {
+                                oConnObj[connObj] = context.getObject()['connection_object'];
+                                oConnObj['dataToDisplay'].push({
+                                    "connection_object": connObj
+                                })
+                            }
                         }
+                        
 
                         let customerName = context.getObject()['customerName'];
-                        if (!oCustName.hasOwnProperty(customerName) && customerName !== null) {
-                            oCustName[customerName] = context.getObject()['customerName'];
-                            oCustName['dataToDisplay'].push({
-                                "customerName": customerName
-                            })
+                        if(customerName != null){
+                            if (!oCustName.hasOwnProperty(customerName)) {
+                                oCustName[customerName] = context.getObject()['customerName'];
+                                oCustName['dataToDisplay'].push({
+                                    "customerName": customerName
+                                })
+                            }
                         }
+                        
 
                         let streetNumber = context.getObject()['streetNumber'];
-                        if (!oStreetNumber.hasOwnProperty(streetNumber) && streetNumber !== null) {
-                            oStreetNumber[streetNumber] = context.getObject()['streetNumber'];
-                            oStreetNumber['dataToDisplay'].push({
-                                "streetNumber": streetNumber
-                            })
+                        if(streetNumber != null){
+                            if (!oStreetNumber.hasOwnProperty(streetNumber)) {
+                                oStreetNumber[streetNumber] = context.getObject()['streetNumber'];
+                                oStreetNumber['dataToDisplay'].push({
+                                    "streetNumber": streetNumber
+                                })
+                            }
                         }
+                        
 
                         let streetName = context.getObject()['streetName'];
-                        if (!oStreetName.hasOwnProperty(streetName) && streetName !== null) {
-                            oStreetName[streetName] = context.getObject()['streetName'];
-                            oStreetName['dataToDisplay'].push({
-                                "streetName": streetName
-                            })
+                        if(streetName != null){
+                            if (!oStreetName.hasOwnProperty(streetName)) {
+                                oStreetName[streetName] = context.getObject()['streetName'];
+                                oStreetName['dataToDisplay'].push({
+                                    "streetName": streetName
+                                })
+                            }
                         }
+                        
 
                         let record_status = context.getObject()['record_status'];
-                        if (!oRecStats.hasOwnProperty(record_status.toLowerCase()) && record_status !== null) {
-                            oRecStats[record_status.toLowerCase()] = context.getObject()['record_status'].toLowerCase();
-                            oRecStats['dataToDisplay'].push({
-                                "key": record_status,
-                                "text": record_status.replace(/^./, record_status[0].toUpperCase())
-                            })
+                        if(record_status != null){
+                            if (!oRecStats.hasOwnProperty(record_status.toLowerCase())) {
+                                oRecStats[record_status.toLowerCase()] = context.getObject()['record_status'].toLowerCase();
+                                oRecStats['dataToDisplay'].push({
+                                    "key": record_status,
+                                    "text": record_status.replace(/^./, record_status[0].toUpperCase())
+                                })
+                            }
                         }
+                        
 
 
                     });
