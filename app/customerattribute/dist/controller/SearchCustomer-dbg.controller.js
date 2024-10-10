@@ -224,27 +224,27 @@ sap.ui.define([
                             var noData = false;
                             if (oData.results.length > 0) {
                                 //   if (!that.hasRecordCreateAccess) {
-                                if (!oUserScopeJModelData.hasCustomerCreateAccess) {
-                                    console.log("in odata has NO create access");
-                                    var arr = [];
-                                    for (var i = 0; i < oData.results.length; i++) {
-                                        if (oData.results[i].superior_flag === "") {
-                                            arr.push(oData.results[i]);
-                                        }
-                                    }
-                                    if (arr.length > 0) {
-                                        that.oView.byId("idNoofRec").setText(arr.length);
-                                        oSearchCustomerJModel.setProperty("/CustomersData", arr);
-                                    }
-                                    else {
-                                        noData = true;
-                                    }
+                                // if (!oUserScopeJModelData.hasCustomerCreateAccess) {
+                                //     console.log("in odata has NO create access");
+                                //     var arr = [];
+                                //     for (var i = 0; i < oData.results.length; i++) {
+                                //         if (oData.results[i].superior_flag === "") {
+                                //             arr.push(oData.results[i]);
+                                //         }
+                                //     }
+                                //     if (arr.length > 0) {
+                                //         that.oView.byId("idNoofRec").setText(arr.length);
+                                //         oSearchCustomerJModel.setProperty("/CustomersData", arr);
+                                //     }
+                                //     else {
+                                //         noData = true;
+                                //     }
 
-                                }
-                                else {
+                                // }
+                                // else {
                                     that.oView.byId("idNoofRec").setText(oData.results.length);
                                     oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
-                                }
+                                //}
                             } else {
                                 noData = true;
                                 // oSearchCustomerJModel.setData([]);
@@ -277,6 +277,7 @@ sap.ui.define([
 
             //****************************Navigating to View2 page***************************/
             handleSelectionChange: function (oEvt) {
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 var oContext = oEvt.getSource().getBindingContext("oSearchCustomerJModel").getProperty();
                 var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
                 oCustomerAttributesJModel.setData(oContext);
@@ -288,10 +289,21 @@ sap.ui.define([
                         actions: [sap.m.MessageBox.Action.OK]
                     });
                 } else {
-                    oRouter.navTo("CustomerDetails", {
-                        scope: "cd_create"
-                    });
+                    if (!oUserScopeJModelData.hasCustomerCreateAccess && oContext.superior_flag ==="X") {
+                        sap.m.MessageBox.show("Navigation to superior floc is restricted!", {
+                            icon: sap.m.MessageBox.Icon.ERROR,
+                            title: "Error",
+                            actions: [sap.m.MessageBox.Action.OK]
+                        });
+                    }else{
+                        oRouter.navTo("CustomerDetails", {
+                            scope: "cd_create"
+                        });
+                    }
+                   
                 }
+
+                
             },
             //********************************End*********************************/
 

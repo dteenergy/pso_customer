@@ -18,26 +18,26 @@ sap.ui.define([
             _loadFragmentPerScope: function (currentScope) {
                 this.initializBusyIndicator(); //Initializing busy indicator
                 var recordID = this.getOwnerComponent().getModel("oSpecialsjmodel").getData().ID;
-                if (recordID === undefined || recordID === "" || recordID === null) {
-                    this.newPSORecord = true;
-                } else {
-                    this.newPSORecord = false;
-                }
+                // if (recordID === undefined || recordID === "" || recordID === null) {
+                //     this.newPSORecord = true;
+                // } else {
+                //     this.newPSORecord = false;
+                // }
                 var record_status = this.getOwnerComponent().getModel("oSpecialsjmodel").getData().record_status;
                 this.record_status = record_status;
 
                 //  var oScope = currentScope;
                 //  if (currentScope === "cd_create") {
-                if (this.newPSORecord) {
+            //    if (this.newPSORecord) {
                     // this.getView().byId("idpanelCreateSpecials").setVisible(true);
                     // this.getView().byId("idpanelDisplaySpecials").setVisible(false);
                     // this.getView().byId("_IDButtonSaveDraft").setVisible(true);
                     // this.getView().byId("_IDButtonSaveSubmit").setVisible(true);
                     // this.getView().byId("_IDEditSpecials").setVisible(false);
-                    this.onEditSpecials();
-                    this.getView().byId("idSpecialsStatusMessage").setText("Initial Version");
+            //        this.onEditSpecials();
+            //        this.getView().byId("idSpecialsStatusMessage").setText("Initial Version");
                     //   this.getView().byId("_IDDisplaySpecials").setVisible(false);
-                } else {
+            //    } else {
                     // this.getView().byId("idpanelCreateSpecials").setVisible(false);
                     // this.getView().byId("idpanelDisplaySpecials").setVisible(true);
                     // this.getView().byId("_IDButtonSaveDraft").setVisible(false);
@@ -59,7 +59,7 @@ sap.ui.define([
                             this.getView().byId("idSpecialsStatusMessage").setText("Record is in draft version.");
                         }
                     }
-                }
+            //    }
             },
             //**********************Initializing Busy Indicator******************/
             initializBusyIndicator: function () {
