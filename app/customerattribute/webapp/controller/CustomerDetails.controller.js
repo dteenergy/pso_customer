@@ -19,76 +19,14 @@ sap.ui.define([
             onBeforeRendering: function () {
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 console.log(oUserScopeJModelData);
-                // this.hasLimitedDisplay = false;
-                // this.hasRecordCreateAccess = false;
-                // this.hasRecordDisplayAccess = false;
-                // this.hasRecordEditAccess = false;
-                // this.hasSpecialsCreateAccess = false;
-                // this.hasSpecialsDisplayAccess = false;
-                // this.hasSpecialsEditAccess = false;
-                // for (var i = 0; i < oUserScopeJModelData.length; i++) {
-                //     /** Logged in user has limited display and cannot view/edit phone numbers */
-
-                //     let scope = oUserScopeJModelData[i];
-                //     switch (scope) {
-
-                //         case "pso_customer_details_create":
-                //             this.hasRecordCreateAccess = true;
-                //             break;
-                //         case "pso_customer_details_edit":
-                //             this.hasRecordEditAccess = true;
-                //             break;
-                //         case "pso_customer_details_display":
-                //             this.hasRecordDisplayAccess = true;
-                //             break;
-                //         case "pso_customer_details_display_limited":
-                //             this.hasLimitedDisplay = true;
-                //             break;
-                //         case "pso_customer_specials_display":
-                //             this.hasSpecialsDisplayAccess = true;
-                //             break;
-                //         case "pso_customer_specials_edit":
-                //             this.hasSpecialsEditAccess = true;
-                //             break;
-                //         case "pso_customer_specials_create":
-                //             this.hasSpecialsCreateAccess = true;
-                //             break;
-
-                //         default:
-                //         // code block
-                //     }
-
-                // }//end for loop
-
-                // if (oUserScopeJModelData.hasLimitedDisplay) { //hide phone numbers
-                //     //this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
-                //     //this.getView().byId("idPageSecEmerContact_CC").setVisible(false);
-                // }
-                // else {
-
-                //     //this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
-                //     //this.getView().byId("idPageSecEmerContact_CC").setVisible(true);
-                // }
-                // if (oUserScopeJModelData.hasRecordCreateAccess) {
-                    //create button visible
-                    // this.getView().byId("_IDButtonCreateRecord").setVisible(true);
-               // }
-                // if (oUserScopeJModelData.hasRecordDisplayAccess) {
-
-                // }
-                // if (oUserScopeJModelData.hasRecordEditAccess) {
-                //     // this.getView().byId("_IDButtonEditRecord").setVisible(true);
-                // }
-
-                if (oUserScopeJModelData.hasSpecialsCreateAccess) {
-              //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
-                }
+             
+            //     if (oUserScopeJModelData.hasSpecialsCreateAccess) {
+            //   //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+            //     }
                 if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
                 }
-                // if (oUserScopeJModelData.hasSpecialsEditAccess) {
-
-                // }
+                
             },
 
             _loadFragmentPerScope: function (currentScope) {
@@ -107,17 +45,12 @@ sap.ui.define([
                     }
                     this.getView().byId("idDemolished_site_CC").setVisible(false);
                     this.getView().byId("_IDButtonEditRecord").setVisible(false);
-                 //   this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
-                    //this.getView().byId("idButtonView").setVisible(false);
                     this.getView().byId("idButtonOpentext").setVisible(false);
                     this.getView().byId("idButtonCreateServiceTicket").setVisible(false);
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(false);
                 } else if (superior_flag == "") { // display child
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
-                    // if (this.hasRecordCreateAccess) {
-                    //     this.getView().byId("_IDButtonCreateRecord").setVisible(true);
-                    // }
                     if (oUserScopeJModelData.hasCustomerCreateAccess) {
                         this.getView().byId("idButtonCreateServiceTicket").setVisible(true);
                     }
@@ -126,18 +59,11 @@ sap.ui.define([
                         this.getView().byId("idDemolished_site_CC").setVisible(true);
                     }
                     this.getView().byId("_IDButtonCreateRecord").setVisible(false);
-                    //   this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
-
-
+               
                     this.getView().byId("idButtonOpentext").setVisible(true);
                     this.getCustomerAttribute();
                 }
-                //else if (currentScope == "cd_display_limited" && superior_flag == "") {
-                //     this.getView().byId("idpanel").setVisible(false);
-                //     this.getView().byId("idpanel2").setVisible(true);
-                //     this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
-                // }
-
+                
                 
 
             },
@@ -1141,7 +1067,7 @@ sap.ui.define([
                     "Name": name,
                     "ServiceIssueCategoryID": "SC_2",
                     "IncidentServiceIssueCategoryID": "IC_5",
-                    //"ProcessorPartyID": this.oUserId, //user id
+                    "ProcessorPartyID": this.oUserId, //user id
                     "InstallationPointID": oConnectionObject,//connection object id
                     "PartyID": oTicketData.c4cpartyid, //new ISU odata field //c4cpartyid
                     "RoleCode": "10",

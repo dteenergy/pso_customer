@@ -472,6 +472,7 @@
                 titleUppercase="false"
                 title="{i18n>CS_Fuses_At_LBD}"
                 visible="true"
+              
             >
                 <x:subSections>
                     <x:ObjectPageSubSection
@@ -483,8 +484,21 @@
                                 id="idTFusesAtLb_DS"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                items="{oSpecialsjmodel>/fuses}"
                             >
                                 <columns>
+                                <Column id="idSequenceno_DS">
+                                        <Label
+                                            id="idlSequenceno_DS_CO"
+                                            text="Sequence No"
+                                        />
+                                    </Column>
+                                    <Column id="id21CPSR_DS_CO">
+                                        <Label
+                                            id="idlblsize_DS_CO"
+                                            text="Billing Entity"
+                                        />
+                                    </Column>
                                     <Column id="idTsize1_DS">
                                         <Label
                                             id="idlblsize_DS"
@@ -513,10 +527,12 @@
                                 <items>
                                     <ColumnListItem id="cll6CPSR_DS">
                                         <cells>
-                                            <Text id="idTsize_DS" />
-                                            <Text id="idTType_DS" />
-                                            <Text id="idTCurve_DS" />
-                                            <Text id="idTVoltage_DS" />
+                                        <Text id="idSeqNo_DS" text="{oSpecialsjmodel>fuseSeqNo}"/>
+                                            <Text id="idFuse_DS" text="{oSpecialsjmodel>psospecials_connection_object}"/>
+                                            <Text id="idTsize_DS" text="{oSpecialsjmodel>fuseSize}"/>
+                                            <Text id="idTType_DS" text="{oSpecialsjmodel>fuseType}"/>
+                                            <Text id="idTCurve_DS" text="{oSpecialsjmodel>fuseCurve}"/>
+                                            <Text id="idTVoltage_DS" text="{oSpecialsjmodel>fuseVoltage}"/>
                                         </cells>
                                     </ColumnListItem>
                                 </items>

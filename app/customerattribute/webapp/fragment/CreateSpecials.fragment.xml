@@ -377,11 +377,22 @@
                                         id="idlblBil_CS"
                                         text="{i18n>CS_Bil}"
                                     />
-                                    <Input
+                                    <ComboBox
+                                        id="idBil_CS"
+                                        items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDBIL'}] }"
+                                        selectedKey="{oSpecialsjmodel>/manufacturer}"
+                                    >
+                                        <core:Item
+                                            id="iditemdBil_CS"
+                                            key="{dropDownJsonModel>value}"
+                                            text="{dropDownJsonModel>value}"
+                                        />
+                                    </ComboBox>
+                                    <!-- <Input
                                         id="idBil_CS"
                                         value="{oSpecialsjmodel>/bilLBD}"
                                         maxLength="5"
-                                    />
+                                    /> -->
                                     <Label
                                         id="idlblSV_CS"
                                         text="{i18n>CS_ServiceVoltage}"
@@ -784,7 +795,7 @@
                                                 type="Emphasized"
                                                 icon="sap-icon://add"
                                                 press="onAddnewFusesRow"
-                                                visible="false"
+                                                visible="true"
                                             />
                                         </content>
                                     </Toolbar>

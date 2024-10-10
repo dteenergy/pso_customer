@@ -82,16 +82,18 @@ service PSOService {
     customerName: String;
     streetNumber: String;
     streetName: String;
-    fuses: fuses;
+    fuses: array of fuses;
   }
 
 type fuses {
- fuseSize  : String;
+    fuseSize  : String;
     fuseType : String;
     fuseCurve : String;
     fuseVoltage : String;
     fuseSeqNo: Int16;
-    connection_object   : String;
+    psospecials_ID:UUID;
+    psospecials_connection_object   : String;
+
 }
   type userInfo {
     userName                 : String;
@@ -129,14 +131,14 @@ type fuses {
   function userDetails()                                                           returns userInfo;
   function fetchDestinationURL(destName : String)                                  returns String;
   function getSpecialsRecord(connection_object : String)                           returns String;
-  function triggerWorkflowPSOSpecials(recordID : UUID, context : SpecialsContext)  returns String;
+//  function triggerWorkflowPSOSpecials(recordID : UUID, context : SpecialsContext)  returns String;
   action   onApproveRecord(recordID : UUID, comment : String, approvedBy : String) returns wfType;
   action   onRejectRecord(recordID : UUID, comment : String, approvedBy : String)  returns wfType;
-  action   createSpecials(context : SpecialsContext);
+ // action   createSpecials(context : SpecialsContext);
   action   submitSpecials(recordID : UUID, context : SpecialsContext);
-  action   updateSpecials(recordID : UUID, context : SpecialsContext);
-  action   initiateWFandUpdateDB(recordID : UUID, context : SpecialsContext);
-  action   createAndSubmitSpecials(context : SpecialsContext);
+ // action   updateSpecials(recordID : UUID, context : SpecialsContext);
+ // action   initiateWFandUpdateDB(recordID : UUID, context : SpecialsContext);
+//  action   createAndSubmitSpecials(context : SpecialsContext);
   //entity   ServiceRequestCollection as projection on c4c.ServiceRequestCollection;
   action   createServiceTicket(context : C4CPayload)                               returns result;
   function onVerifyRecordStatus(workflowID : UUID)                                 returns Boolean;

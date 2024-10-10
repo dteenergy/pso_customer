@@ -1141,7 +1141,7 @@ sap.ui.define([
                     "Name": name,
                     "ServiceIssueCategoryID": "SC_2",
                     "IncidentServiceIssueCategoryID": "IC_5",
-                    //"ProcessorPartyID": this.oUserId, //user id
+                    "ProcessorPartyID": this.oUserId, //user id
                     "InstallationPointID": oConnectionObject,//connection object id
                     "PartyID": oTicketData.c4cpartyid, //new ISU odata field //c4cpartyid
                     "RoleCode": "10",
