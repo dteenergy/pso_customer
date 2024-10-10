@@ -544,8 +544,7 @@ try{
                     "bilLBD": req.bilLBD,
                     "serviceVoltage": req.serviceVoltage,
                     "_60CycWithstand": req.CycWithstand60,
-                    "fusesTable": req.fuses,
-
+                    "fusesTable": [],
                     "fuelTypeCB": req.fuelTypeCB,
                     "ownedByCB": req.ownedByCB,
                     "circuitBreakerMake": req.circuitBreakerMake,

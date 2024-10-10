@@ -63,6 +63,12 @@ sap.ui.define([
                     this.getView().byId("idButtonOpentext").setVisible(true);
                     this.getCustomerAttribute();
                 }
+
+                if(oUserScopeJModelData.hasLimitedDisplay){
+                    this.getView().byId("idEmerPhone_DC").setVisible(false);
+                }else{
+                    this.getView().byId("idEmerPhone_DC").setVisible(true);
+                }
                 
                 
 
