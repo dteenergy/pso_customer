@@ -426,7 +426,7 @@
             <Text id="idservice_DS" text="{oSpecialsjmodel>/typeofService}"/>
             <Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
             <Text id="idCNTO_DS" text="{oSpecialsjmodel>/typeofTO}"/>
-            <Label id="idlblrep_DS" text="{i18n>CS_rep}" />     
+            <Label id="idlblrep_DS" text="{i18n>CS_rep}" required="true"/>     
             <Text id="idCNrep_DS" text="{oSpecialsjmodel>/primaryServiceRep}"/>
             <Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
             <Text id="idCNpsw_DS" text="{oCustomerAttributesJModel>/psw}"/>

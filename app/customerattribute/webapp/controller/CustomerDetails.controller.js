@@ -1029,44 +1029,43 @@ sap.ui.define([
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 let name = "POO - " + oTicketData.cust_name;
                 let dcplind_flag = "", oCircuitTrans = "", oSubstation = "";
-
-                oSubstation = oTicketData.sub_station;
-                if (oTicketData.dc === "X") {
-                    dcplind_flag = "101";
-                    oCircuitTrans = oTicketData.circuit;
-                } else if (oTicketData.pl === "X") {
-                    dcplind_flag = "111";
-                    oCircuitTrans = oTicketData.circuit;
-                } else if (oTicketData.na === "X") {
-                    dcplind_flag = "112";
-                    oCircuitTrans = oTicketData.indus_cust;
-                }
-
-                // if(this.oSelectedSetA){
-                //     oSubstation = oTicketData.sub_station;
-                //     if (oTicketData.dc === "X") {
-                //         dcplind_flag = "101";
-                //         oCircuitTrans = oTicketData.circuit;
-                //     } else if (oTicketData.pl === "X") {
-                //         dcplind_flag = "111";
-                //         oCircuitTrans = oTicketData.circuit;
-                //     } else if (oTicketData.na === "X") {
-                //         dcplind_flag = "112";
-                //         oCircuitTrans = oTicketData.indus_cust;
-                //     }
-                // }else if(this.oSelectedSetB){
-                //     oSubstation = oTicketData.sub_station2;
-                //     if (oTicketData.dc2 === "X") {
-                //         dcplind_flag = "101";
-                //         oCircuitTrans = oTicketData.circuit2;
-                //     } else if (oTicketData.pl2 === "X") {
-                //         dcplind_flag = "111";
-                //         oCircuitTrans = oTicketData.circuit2;
-                //     } else if (oTicketData.na2 === "X") {
-                //         dcplind_flag = "112";
-                //         oCircuitTrans = oTicketData.indus_cust2;
-                //     }
+                    oSubstation = oTicketData.sub_station;
+                // if (oTicketData.dc === "X") {
+                //     dcplind_flag = "101";
+                //     oCircuitTrans = oTicketData.circuit;
+                // } else if (oTicketData.pl === "X") {
+                //     dcplind_flag = "111";
+                //     oCircuitTrans = oTicketData.circuit;
+                // } else if (oTicketData.na === "X") {
+                //     dcplind_flag = "112";
+                //     oCircuitTrans = oTicketData.indus_cust;
                 // }
+
+                if(this.oSelectedSetA){
+                    oSubstation = oTicketData.sub_station;
+                    if (oTicketData.dc === "X") {
+                        dcplind_flag = "101";
+                        oCircuitTrans = oTicketData.circuit;
+                    } else if (oTicketData.pl === "X") {
+                        dcplind_flag = "111";
+                        oCircuitTrans = oTicketData.circuit;
+                    } else if (oTicketData.na === "X") {
+                        dcplind_flag = "112";
+                        oCircuitTrans = oTicketData.indus_cust;
+                    }
+                }else if(this.oSelectedSetB){
+                    oSubstation = oTicketData.sub_station2;
+                    if (oTicketData.dc2 === "X") {
+                        dcplind_flag = "101";
+                        oCircuitTrans = oTicketData.circuit2;
+                    } else if (oTicketData.pl2 === "X") {
+                        dcplind_flag = "111";
+                        oCircuitTrans = oTicketData.circuit2;
+                    } else if (oTicketData.na2 === "X") {
+                        dcplind_flag = "112";
+                        oCircuitTrans = oTicketData.indus_cust2;
+                    }
+                }
 
                 let c4cPayload = {
                     "ProcessingTypeCode": "ZUSR",
@@ -1093,19 +1092,21 @@ sap.ui.define([
             },
             createServiceTicket: async function (oEvent) {
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
-                //this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
-                //this.oSelectedSetB = this.getView().byId("idSetB").getSelected(); 
-                var isCircuit = this.getView().byId("idCircuit_ST").getText();
-                var isTrans = this.getView().byId("idTrans_ST").getText();
-                // var isCircuit="", isTrans="";
-                // if(this.oSelectedSetA){
-                //     isCircuit = this.getView().byId("idCircuit_ST").getText();
-                    // isTrans = this.getView().byId("idTrans_ST").getText();
-                // }else if(this.oSelectedSetB){
-                //     isCircuit = this.getView().byId("idCircuit_ST1").getText();
-                //     isTrans = this.getView().byId("idTrans_ST1").getText();
-                // }
-                if(oTicketData.na === "X"){
+                this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
+                this.oSelectedSetB = this.getView().byId("idSetB").getSelected(); 
+                //var isCircuit = this.getView().byId("idCircuit_ST").getText();
+                //var isTrans = this.getView().byId("idTrans_ST").getText();
+                var isCircuit="", isTrans="" , oIND="";
+                if(this.oSelectedSetA){
+                    oIND = oTicketData.na;
+                    isCircuit = this.getView().byId("idCircuit_ST").getText();
+                    isTrans = this.getView().byId("idTrans_ST").getText();
+                }else if(this.oSelectedSetB){
+                    oIND = oTicketData.na2;
+                    isCircuit = this.getView().byId("idCircuit_ST1").getText();
+                    isTrans = this.getView().byId("idTrans_ST1").getText();
+                }
+                if(oIND === "X"){
                     if (isTrans === "" || isTrans === null || isTrans === undefined) {
                         sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Trans_msg"), {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -1177,7 +1178,7 @@ sap.ui.define([
                     that.oBusyIndicator.close();
                     //err.message.split(":")[1]
                     console.log("failure: = " + err.message);
-                    sap.m.MessageBox.show("POO creation failed", {
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("PO_creation_failed"), {
                         icon: sap.m.MessageBox.Icon.ERROR,
                         title: "Error",
                         actions: [sap.m.MessageBox.Action.OK]

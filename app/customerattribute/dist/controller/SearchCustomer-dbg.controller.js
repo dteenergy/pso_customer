@@ -290,7 +290,7 @@ sap.ui.define([
                     });
                 } else {
                     if (!oUserScopeJModelData.hasCustomerCreateAccess && oContext.superior_flag ==="X") {
-                        sap.m.MessageBox.show("Navigation to superior floc is restricted!", {
+                        sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("superior_restricted"), {
                             icon: sap.m.MessageBox.Icon.ERROR,
                             title: "Error",
                             actions: [sap.m.MessageBox.Action.OK]
@@ -632,6 +632,14 @@ sap.ui.define([
                     label: oClumn_Config.getText("FOnSiteGeneration"),
                     type: sap.ui.export.EdmType.String,
                     property: "generation",
+                    width: 20,
+                    wrap: true
+                });
+
+                oRecords.push({
+                    label: oClumn_Config.getText("FTotal_Gen"),
+                    type: sap.ui.export.EdmType.String,
+                    property: "total_gen",
                     width: 20,
                     wrap: true
                 });

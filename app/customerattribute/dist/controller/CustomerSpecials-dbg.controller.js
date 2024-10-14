@@ -147,10 +147,15 @@ sap.ui.define([
                         that.oBusyIndicator.close();
                         MessageBox.success("PSO Specials Record for connection object " + connection_object + " saved successfully!!!",
                             {
-                                actions: [MessageBox.Action.OK],
+                                actions: ["Submit for Approval",MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,
                                 onClose: function (sAction) {
-                                    window.history.go(-2);
+                                    if(sAction ==="Submit for Approval"){
+                                        that.onSubmitSpecials();
+                                    }else{
+                                        window.history.go(-2);
+                                    }
+                                    
                                 },
                                 dependentOn: that.getView()
                             });
@@ -185,10 +190,15 @@ sap.ui.define([
 
                         MessageBox.success("PSO Specials Record for connection object " + connection_object + " saved successfully!!!",
                             {
-                                actions: [MessageBox.Action.OK],
+                                actions: ["Submit for Approval", MessageBox.Action.OK],
                                 emphasizedAction: MessageBox.Action.OK,
                                 onClose: function (sAction) {
-                                    window.history.go(-2);
+                                    if(sAction ==="Submit for Approval"){
+                                        that.onSubmitSpecials();
+                                    }else{
+                                        window.history.go(-2);
+                                    }
+                                    
                                 },
                                 dependentOn: that.getView()
                             });
@@ -206,11 +216,14 @@ sap.ui.define([
                 /* Mandatory field validation */
                 var oPSR = that.getView().byId("idrep_CS").getSelectedKey();
                 if (oPSR === "") {
-                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("document_note_mandatory"), {
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("PSR_Mandat"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
                         title: this.getView().getModel("i18n").getProperty("error"),
                         actions: [sap.m.MessageBox.Action.OK]
                     });
+                    jQuery.sap.delayedCall(500, this, function() {
+                        this.getView().byId("idCNrep_DS").focus();
+                      });
                     return;
                 }
                

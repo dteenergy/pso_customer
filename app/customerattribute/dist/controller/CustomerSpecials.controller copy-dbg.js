@@ -245,12 +245,12 @@ sap.ui.define([
                 var that = this;
                 var oPSR = that.getView().byId("idrep_CS").getSelectedKey();
                 if (oPSR === "") {
-                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("document_note_mandatory"), {
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("PSR_Mandat"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
                         title: this.getView().getModel("i18n").getProperty("error"),
                         actions: [sap.m.MessageBox.Action.OK]
                     });
-                    return;
+                    
                 }
                 that.oBusyIndicator.open();
                 var that = this;

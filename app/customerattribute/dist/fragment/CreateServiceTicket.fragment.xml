@@ -231,7 +231,7 @@
                         </layoutData>
                     </Text>
                     <Label id="idlblTrans_ST1" text="{i18n>trans}" />
-                    <Text id="idTrans_ST1" text="{oCustomerAttributesJModel>/indus_cust2}" visible="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}">
+                    <Text id="idTrans_ST1" text="{oCustomerAttributesJModel>/indus_cust2}" visible="{= ${oCustomerAttributesJModel>/na2} === 'X' ? true : false}">
                         <layoutData>
                         <l:GridData id="idGridData_ST14" span="XL5 L5 M12 S12" />
                         </layoutData>

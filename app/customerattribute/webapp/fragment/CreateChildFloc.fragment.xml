@@ -236,7 +236,7 @@
                     </layoutData>
                   </Input> 
                   <Label id="idlblCircuit_CC" text="{i18n>circuit}" />
-                  <Input id="idCircuit_CC" showValueHelp="true" valueHelpRequest="onHelpCircuit" maxLength="20" value="{oCustomerAttributesJModel>/circuit}">
+                  <Input id="idCircuit_CC" showValueHelp="true" valueHelpRequest="onHelpCircuit" maxLength="20" value="{oCustomerAttributesJModel>/circuit}" enabled="{= ${oCustomerAttributesJModel>/na} === 'X' ? false : true}">
                   <layoutData>
                       <l:GridData id="idGridData_CC14" span="XL5 L5 M12 S12" />
                     </layoutData>
@@ -330,7 +330,7 @@
                     </layoutData>
                   </Input>  
                   <Label id="idlblCircuit2_CC" text="{i18n>circuit}" />
-                  <Input id="idCircuit2_CC" showValueHelp="true" valueHelpRequest="onHelpCircuit2" maxLength="20" value="{oCustomerAttributesJModel>/circuit2}">
+                  <Input id="idCircuit2_CC" showValueHelp="true" valueHelpRequest="onHelpCircuit2" maxLength="20" value="{oCustomerAttributesJModel>/circuit2}" enabled="{= ${oCustomerAttributesJModel>/na2} === 'X' ? false : true}">
                   <layoutData>
                       <l:GridData id="idGridData2_CC14" span="XL5 L5 M12 S12" />
                     </layoutData>
