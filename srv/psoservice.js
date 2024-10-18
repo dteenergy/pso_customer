@@ -5,25 +5,98 @@ const xsenv = require('@sap/xsenv');
 const { PSOSpecials } = cds.entities;
 module.exports = class PSOService extends cds.ApplicationService {
     init() {
-        async function _fetchRecordFromHANA(connection_object) {
-            //   const record_HANA = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
-            const record_HANA = await SELECT.from(PSOSpecials, a => { a`.*`, a.fuses(b => { b`.*` }) }).where({ connection_object: connection_object }).orderBy('createdAt desc');
-            console.log(record_HANA);
-            if (record_HANA.length === 0) {
-                //no specials exists in HANA, fetch from ISU
-                const migratedData = await _fetchRecordFromISU(connection_object);
+        this.on('userDetails', async (req) => {
+            const roles = Object.keys(req.req.user.roles);
+            //roles.push(req.req.authInfo.getEmail());
+            console.log(roles);
+            if (roles.length < 2) {
+                console.error("NO PSO Roles assigned!");
+                return false;
+            }
+            let userName = req.req.user.tokenInfo.getPayload().user_name, //U id if DTE SSO otherwise email
+                email = req.req.user.tokenInfo.getPayload().email,
+                hasSearchAccess = false,
+                hasLimitedDisplay = false,
+                hasCustomerCreateAccess = false,
+                hasCustomerDisplayAccess = false,
+                hasCustomerEditAccess = false,
+                hasSpecialsCreateAccess = false,
+                hasSpecialsDisplayAccess = false,
+                hasSpecialsEditAccess = false;
 
+            for (var i = 0; i < roles.length; i++) {
+                let scope = roles[i];
+                switch (scope) {
+                    case "pso_search_customer":
+                        hasSearchAccess = true;
+                        break;
+                    case "pso_customer_details_create":
+                        hasCustomerCreateAccess = true;
+                        break;
+                    case "pso_customer_details_edit":
+                        hasCustomerEditAccess = true;
+                        break;
+                    case "pso_customer_details_display":
+                        hasCustomerDisplayAccess = true;
+                        break;
+                    case "pso_customer_details_display_limited":
+                        hasLimitedDisplay = true;
+                        break;
+                    case "pso_customer_specials_display":
+                        /** Logged in user has limited display and cannot view/edit phone numbers */
+                        hasSpecialsDisplayAccess = true;
+                        break;
+                    case "pso_customer_specials_edit":
+                        hasSpecialsEditAccess = true;
+                        break;
+                    case "pso_customer_specials_create":
+                        hasSpecialsCreateAccess = true;
+                        break;
+                    default:
+                    // code block
+                }
+
+            }
+            let userInfo = {
+                "userName": userName,
+                "email": email,
+                "hasSearchAccess": hasSearchAccess,
+                "hasLimitedDisplay": hasLimitedDisplay,
+                "hasCustomerCreateAccess": hasCustomerCreateAccess,
+                "hasCustomerDisplayAccess": hasCustomerDisplayAccess,
+                "hasCustomerEditAccess": hasCustomerEditAccess,
+                "hasSpecialsCreateAccess": hasSpecialsCreateAccess,
+                "hasSpecialsDisplayAccess": hasSpecialsDisplayAccess,
+                "hasSpecialsEditAccess": hasSpecialsEditAccess
+            };
+            //    console.log(userInfo);
+            return userInfo;
+
+        });
+        this.on('getSpecialsRecord', async (req) => {
+            console.log("getSpecialsRecord for : " + req.data.connection_object);
+            const result = await _fetchRecordFromHANA(req.data.connection_object);
+            return result;
+        });
+        async function _fetchRecordFromHANA(connection_object) {
+            const record_HANA = await SELECT.from(PSOSpecials, a => { a`.*`, a.fuses(b => { b`.*` }), a.transformers(b => { b`.*` }) }).where({ connection_object: connection_object }).orderBy('createdAt desc');
+            if (record_HANA.length === 0) {
+                const migratedData = await _fetchRecordFromISU(connection_object);
                 if (migratedData !== null && migratedData !== undefined && migratedData !== "") {
                     const migratedDataModified = await getUpdatedrecord(migratedData);
                     console.log(migratedDataModified);
                     //    const affectedRows = await _createPSORecord(migratedDataModified);
-                    const insertResult = await INSERT.into(PSOSpecials).entries(migratedDataModified);
-                    if (insertResult.results[0].affectedRows > 0) {
-                        const result = await _fetchRecordFromHANA(connection_object);
-                        console.log(result);
-                        return result;
+                    try {
+                        const insertResult = await INSERT.into(PSOSpecials).entries(migratedDataModified);
+                        if (insertResult.results[0].affectedRows > 0) {
+                            const result = await _fetchRecordFromHANA(connection_object);
+                            console.log(result);
+                            return result;
+                        }
+                        else return null;
+                    } catch (oError) {
+                        console.error(oError);
                     }
-                    else return null;
                 }
                 else return null; // no data present in ISU/HANA            
             }
@@ -33,9 +106,9 @@ module.exports = class PSOService extends cds.ApplicationService {
         }
 
         async function _fetchRecordFromISU(connection_object) {
-         //   let path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')?$expand=psrtofusenav";
-            let path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')";
-         
+            let path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')?$expand=psrtofusenav,psrtotransnav";
+            //  let path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')";
+
             console.log("i am in ISU GET: " + path);
             try {
                 const isu = await cds.connect.to('ISU');
@@ -50,18 +123,17 @@ module.exports = class PSOService extends cds.ApplicationService {
                 else return null;
             }
             catch (e) {
-                console.log(e);
+                // console.log(e);
+                console.error("Run into ISU Get Specials error for " + connection_object);
+                console.error("Error " + e.reason.status + " : " + e.reason.code + " : " + e.reason.message);
+                //let result = { "value": "Error" };
+                return "error";
             }
 
         }
-        this.on('getSpecialsRecord', async (req) => {
-            console.log(req.data.connection_object);
-            const result = await _fetchRecordFromHANA(req.data.connection_object);
-            return result;
-        });
 
         async function getUpdatedrecord(result) {
-            
+
             let record_status = "Approved";
             if (result.mig_details !== null && result.mig_details !== undefined && result.mig_details !== "") {
                 // approved migrated data available in ISU 
@@ -95,6 +167,46 @@ module.exports = class PSOService extends cds.ApplicationService {
             } else if (result.cb_custo === "X") {
                 oDTEoOwnedCB = "Customer Owned";
             }
+            let fuses = [];
+            for (let i = 0; i < result.psrtofusenav.length; i++) {
+                let fuse = {
+                    "fuseSize": result.psrtofusenav[i].Size,
+                    "fuseType": result.psrtofusenav[i].type,
+                    "fuseCurve": result.psrtofusenav[i].curve,
+                    "fuseVoltage": result.psrtofusenav[i].vol,
+                    "fuseSeqNo": result.psrtofusenav[i].Zseqno,
+                    //"psospecials_ID": result.psrtofusenav[i].psospecials_ID,
+                    "psospecials_connection_object": result.conn_obj
+                }
+                fuses.push(fuse);
+            }
+            let oDTEoOwnedTrans = "DTE Owned";
+            let transformers = [];
+            for (let i = 0; i < result.psrtotransnav.length; i++) {
+                let trans = {
+                    "psospecials_connection_object": result.conn_obj,
+                    //"psospecials_ID": recordID,  
+                    "transSeqNo": result.psrtotransnav[i].seqno,
+                    "manufacturer": result.psrtotransnav[i].man,
+                    "imped": result.psrtotransnav[i].imp,
+                    "secVolt": result.psrtotransnav[i].sec_vol,
+                    "taps": result.psrtotransnav[i].taps,
+                    "primVolt": result.psrtotransnav[i].pri_vol,
+                    "kva": result.psrtotransnav[i].kva,
+                    "serial": result.psrtotransnav[i].serial,
+                    "type": result.psrtotransnav[i].type
+                }
+                transformers.push(trans);
+                if (i === 0) {
+
+                    if (result.psrtotransnav[0].dteo === "X") {
+                        oDTEoOwnedTrans = "DTE Owned";
+                    } else if (result.psrtotransnav[0].cuso === "X") {
+                        oDTEoOwnedTrans = "Customer Owned";
+                    }
+                }
+            }
+
             const migratedPayload = {
                 connection_object: result.conn_obj,
                 work_desc: result.work_desc,
@@ -140,7 +252,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 faultDuty: result.fault_duty,
                 bilCB: result.cb_bil,
                 //Transformer
-                ownedByTransformer: "",    //Radiobutton
+                ownedByTransformer: oDTEoOwnedTrans,    //Radiobutton
 
                 //new fields
                 meter_number2: result.Meter2,
@@ -160,183 +272,13 @@ module.exports = class PSOService extends cds.ApplicationService {
                 primaryServiceRep: result.psr,
                 customerName: "", //result.customerName,
                 streetNumber: "", //result.streetNumber,
-                streetName: "" //result.streetName
+                streetName: "",  //result.streetName,
+                fuses: fuses,
+                transformers: transformers
+
             }
             return migratedPayload;
         }
-
-        // this.on('createSpecials', async (req) => {
-        //     console.log("in create specials");
-        //     req.data.context.record_status = "Draft";
-        //     console.log(req.data.context);
-        //     const affectedRows = await _createPSORecord(req.data.context);
-        //     return affectedRows;
-        // });
-        // async function _createPSORecord(record) {
-        //     console.log("in _createPSORecord");
-        //     const insertResult = await INSERT.into(PSOSpecials).entries(record);
-        //     console.log("Insert Record Successful: " + record.connection_object);
-        //     return insertResult.results[0].affectedRows;
-        // }
-
-        // this.on('updateSpecials', async (req) => {
-        //     console.log("in update specials");
-        //     req.data.context.record_status = "Draft";
-        //     const updateResult = await _oUpdateSpecials(req.data.recordID, req.data.context);
-        //     console.log("post success updateSpecials: " + updateResult);
-        //     return "success updateSpecials....";
-        // });
-        this.on('submitSpecials', async (req) => {
-            console.log("in submit specials");
-            let oResult = await initiateWFandUpdateDB(req.data.recordID, req.data.context);
-            console.log("submit specials success : " + oResult);
-            return "success submitSpecials....";
-        });
-        // this.on('createAndSubmitSpecials', async (req) => {
-        //     const connection_object = req.data.context.connection_object;
-        //     req.data.context.record_status = "Draft"
-        //     const insertResult = await INSERT.into(PSOSpecials).entries(req.data.context);
-        //     console.log("new record created: ");
-        //     console.log(insertResult);
-        //     if (insertResult && insertResult.results && insertResult.results.length > 0) {
-        //         const res = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
-        //         console.log(res.length);
-        //         if (res.length > 0) {
-        //             const oResult = await initiateWFandUpdateDB(res[0].ID, res[0]);
-        //             console.log("trigger and update success : " + oResult);
-        //             return "success createAndSubmitSpecials....";
-        //         }
-        //         else {
-        //             console.log("trigger and update  failure : ");
-        //             return "fail createAndSubmitSpecials...."
-        //         }
-        //     }
-        //     else {
-        //         console.log("create failure : ");
-        //         return "fail createAndSubmitSpecials...."
-        //     }
-
-        // });
-        this.on('onApproveRecord', async (req) => {
-            const recordID = req.data.recordID;
-            const comment = req.data.comment;
-            const record_status = "Approved";
-            const approvedBy = req.req.user.id;
-            const Cdate = new Date();
-            const approvedOn = Cdate.toLocaleDateString('en-US');
-            console.log(req.data);
-            
-try{
-
-//update ISU
-            const isuPOSTResult = await updateSpecialsinISU(req);
-            console.log("success isuPOSTResult" + isuPOSTResult);
-//update HANA
-
-            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
-            console.log("success onApproveRecord");
-            console.log(updateResult);
-
-          
-            let comment1 = "wf comment";
-            let wfType = { "comment": comment1 };
-            return wfType;
-        }
-        catch(oError){
-        console.log(oError);
-        let comment1 = "Update Failed";
-                    let wfType = { "comment": comment1 };
-                    return wfType;
-        }
-        });
-        this.on('onRejectRecord', async (req) => {
-            const recordID = req.data.recordID;
-            const comment = req.data.comment;
-            const record_status = "Rejected";
-            const approvedBy = req.req.user.id;
-            const Cdate = new Date();
-            const approvedOn = Cdate.toLocaleDateString('en-US');
-            console.log("Rejected WF for " + req.data.recordID);
-            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
-
-            console.log("success");
-            console.log(updateResult);
-            let comment1 = "wf rejected";
-            let wfType = { "comment": comment1 };
-            return wfType;
-        });
-        this.on('onVerifyRecordStatus', async (req) => {
-            const workflowID = req.data.workflowID;
-            let res = await SELECT.from(PSOSpecials).where({ workflow_id: workflowID }).columns('record_status');
-            console.log(res);
-            if (res && res.length > 0) {
-                const record_status = res[0].record_status;
-                if (record_status === "Approved" || record_status === "Rejected") {
-                    return true;
-                } else return false;
-            }
-            return false;
-        });
-
-        this.on('userDetails', async (req) => {
-            const roles = Object.keys(req.req.user.roles);
-            roles.push(req.req.authInfo.getEmail());
-            console.log(roles);
-            let userName = req.req.user.tokenInfo.getPayload().user_name, //U id if DTE SSO otherwise email
-                email = req.req.user.tokenInfo.getPayload().email,
-                hasLimitedDisplay = false,
-                hasCustomerCreateAccess = false,
-                hasCustomerDisplayAccess = false,
-                hasCustomerEditAccess = false,
-                hasSpecialsCreateAccess = false,
-                hasSpecialsDisplayAccess = false,
-                hasSpecialsEditAccess = false;
-
-            for (var i = 0; i < roles.length; i++) {
-                let scope = roles[i];
-                switch (scope) {
-                    case "pso_customer_details_create":
-                        hasCustomerCreateAccess = true;
-                        break;
-                    case "pso_customer_details_edit":
-                        hasCustomerEditAccess = true;
-                        break;
-                    case "pso_customer_details_display":
-                        hasCustomerDisplayAccess = true;
-                        break;
-                    case "pso_customer_details_display_limited":
-                        hasLimitedDisplay = true;
-                        break;
-                    case "pso_customer_specials_display":
-                        /** Logged in user has limited display and cannot view/edit phone numbers */
-                        hasSpecialsDisplayAccess = true;
-                        break;
-                    case "pso_customer_specials_edit":
-                        hasSpecialsEditAccess = true;
-                        break;
-                    case "pso_customer_specials_create":
-                        hasSpecialsCreateAccess = true;
-                        break;
-                    default:
-                    // code block
-                }
-
-            }
-            let userInfo = {
-                "userName": userName,
-                "email": email,
-                "hasLimitedDisplay": hasLimitedDisplay,
-                "hasCustomerCreateAccess": hasCustomerCreateAccess,
-                "hasCustomerDisplayAccess": hasCustomerDisplayAccess,
-                "hasCustomerEditAccess": hasCustomerEditAccess,
-                "hasSpecialsCreateAccess": hasSpecialsCreateAccess,
-                "hasSpecialsDisplayAccess": hasSpecialsDisplayAccess,
-                "hasSpecialsEditAccess": hasSpecialsEditAccess
-            };
-            console.log(userInfo);
-            return userInfo;
-
-        });
         this.on('fetchDestinationURL', async (req) => {
             const destName = req.data.destName;
             const url = "/destination-configuration/v1/subaccountDestinations/" + destName;
@@ -384,112 +326,51 @@ try{
             const c4c = await cds.connect.to('C4C');
             const path = "/ServiceRequestCollection";
             console.log("i am in C4C Trigger");
-            const res = await c4c.send({
-                method: 'POST',
-                path: path,
-                data: c4cPayload
-            });
-            console.log(res);
-            let id = res.ID + "";
-            console.log(id);
-            let result = { "value": id };
-            return result;
+            try {
+                const res = await c4c.send({
+                    method: 'POST',
+                    path: path,
+                    data: c4cPayload
+                });
+                //  console.log(res);
+                let id = res.ID + "";
+                console.log("POO Created with id = " + id);
+                let result = { "value": id };
+                return result;
+            }
+            catch (e) {
+                console.error("Run into POO Creation error.....");
+                console.error("Error " + e.reason.status + " : " + e.reason.code + " : " + e.reason.message);
+                let result = { "value": "Error" };
+                return result;
+            }
         });
 
-        // async function _oUpdateSpecials(recordID, req) {
-        //     let oResult = await UPDATE.entity(PSOSpecials, recordID).set({
-        //         work_desc: req.work_desc,
-        //         meter_number: req.meter_number,
-        //         record_status: req.record_status,
-        //         workflow_id: req.workflow_id,
+        this.on('submitSpecials', async (req) => {
+            console.log("in submit specials");
 
-        //         connection_object: req.connection_object,
-        //         approvedBy: req.approvedBy,
-        //         approvedOn: req.approvedOn,
-        //         approverComment: req.approverComment,
-        //         //Customer Record(CR)
-        //         pSNumber: req.pSNumber,
-        //         completionDate: req.completionDate,
-        //         fedFrom: req.fedFrom,
-        //         cableDescription: req.cableDescription,
-        //         cableFootage: req.cableFootage,
-        //         ductType: req.ductType,
-        //         cts: req.cts,
-        //         pts: req.pts,
-        //         k: req.k,
-        //         m: req.m,
-        //         fusesAt: req.fusesAt,
-        //         size: req.size,
-        //         typeCR: req.typeCR,
-        //         curve: req.curve,
-        //         voltage: req.voltage,
-        //         //Load Break Disconnect(LBD)
-        //         ownedByLBD: req.ownedByLBD,    //Radiobutton
-        //         manufacturer: req.manufacturer,
-        //         model: req.model,
-        //         continuousCurrent: req.continuousCurrent,
-        //         loadIntRating: req.loadIntRating,
-        //         kAMomentaryLBD: req.kAMomentaryLBD,
-        //         typeLBD: req.typeLBD,
-        //         faultClosing: req.faultClosing,
-        //         bilLBD: req.bilLBD,
-        //         serviceVoltage: req.serviceVoltage,
-        //         CycWithstand60: req.CycWithstand60,
-        //         //Circuit Breaker(CB)
-        //         fuelTypeCB: req.fuelTypeCB,    //Radiobutton
-        //         ownedByCB: req.ownedByCB,   //Radiobutton
-        //         circuitBreakerMake: req.circuitBreakerMake,
-        //         serialNo: req.serialNo,
-        //         kAMomentaryCB: req.kAMomentaryCB,
-        //         amps: req.amps,
-        //         typeCB: req.typeCB,
-        //         faultDuty: req.faultDuty,
-        //         bilCB: req.bilCB,
-        //         //Transformer
-        //         ownedByTransformer: req.ownedByTransformer,    //Radiobutton
+            const connection_object = req.data.connection_object;
+            const record_HANA = await SELECT.from(PSOSpecials, a => { a`.*`, a.fuses(b => { b`.*` }), a.transformers(b => { b`.*` }) }).where({ connection_object: connection_object }).orderBy('createdAt desc');
+            if (record_HANA.length > 0) {
+                const record = record_HANA[0];
+                const workflow_id = await triggerWorkflowPSOSpecials(record);
 
-        //         //new fields
-        //         meter_number2: req.meter_number2,
-        //         ab: req.ab,
-        //         bc: req.bc,
-        //         ca: req.ca,
-        //         an: req.an,
-        //         bn: req.bn,
-        //         cn: req.cn,
-        //         groundMatResistance: req.groundMatResistance,
-        //         methodUsed: req.methodUsed,
-        //         dateMergered: req.dateMergered,
-        //         comment: req.comment,
-        //         typeofService: req.typeofService,
-        //         typeofTO: req.typeofTO,
-        //         pswDiagramNumber: req.pswDiagramNumber,
-        //         primaryServiceRep: req.primaryServiceRep,
-        //         customerName: req.customerName,
-        //         streetNumber: req.streetNumber,
-        //         streetName: req.streetName
+                if (workflow_id && workflow_id !== "error") {
+                    const record_status = "Submitted";
+                    const updateResult = await UPDATE.entity(PSOSpecials, record.ID).set({ record_status: record_status, workflow_id: workflow_id });
+                    console.log(updateResult);
+                    console.log("submit specials success" + updateResult);
+                    //  console.log("submit specials success : " + oResult);
+                    return "success";
+                }
+                else {
+                    // return "error";
+                    return req.error({ code: "400", messsage: 'Error' });
 
-        //     });
-        //     console.log("post update specials private: " + oResult);
-        //     return "success updateSpecialsprivate....";
-        // };
-        async function initiateWFandUpdateDB(recordID, req) {
-
-            console.log(req);
-            const workflow_id = await triggerWorkflowPSOSpecials(recordID, req);
-            if (workflow_id) {
-                const record_status = "Submitted";
-              //  req.workflow_id = wfId;
-                //  }
-                //    console.log(req);
-                //  const updateResult = await _oUpdateSpecials(recordID, req);
-                const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, workflow_id: workflow_id });
-
-                console.log(updateResult);
+                }
             }
-            console.log("success initiateWFandUpdateDB");
-            return "success initiateWFandUpdateDB";
-        };
-        async function triggerWorkflowPSOSpecials(recordID, req) {
+        });
+        async function triggerWorkflowPSOSpecials(req) {
             console.log(req);
             let comp_date;
             if (req.completionDate === null || req.completionDate === undefined) {
@@ -508,11 +389,37 @@ try{
             }
 
             console.log("comp date is: " + comp_date);
+            let fuses = [];
+            for (let i = 0; i < req.fuses.length; i++) {
+                var fuse = {
+                    "SeqNo": req.fuses[i].fuseSeqNo,
+                    "Size": req.fuses[i].fuseSize,
+                    "Type": req.fuses[i].fuseType,
+                    "Curve": req.fuses[i].fuseCurve,
+                    "Voltage": req.fuses[i].fuseVoltage,
+                }
+                fuses.push(fuse);
+            }
+            let transformers = [];
+            for (let i = 0; i < req.transformers.length; i++) {
+                var transformer = {
+                    "transSeqNo": req.transformers[i].transSeqNo,
+                    "manufacturer": req.transformers[i].manufacturer,
+                    "imped": req.transformers[i].imped,
+                    "primVolt": req.transformers[i].primVolt,
+                    "secVolt": req.transformers[i].secVolt,
+                    "taps": req.transformers[i].taps,
+                    "kva": req.transformers[i].kva,
+                    "type": req.transformers[i].type,
+                    "serial": req.transformers[i].serial
+                }
+                transformers.push(transformer);
+            }
             let wfPayload =
             {
                 "definitionId": "us20.fiori-dev-dte.psoapproval.pSOApproval",
                 "context": {
-                    "recordID": recordID,
+                    "recordID": req.ID,
                     "connectionObject": req.connection_object,
                     "pSNumber": req.pSNumber,
                     "completionDate": comp_date,
@@ -544,7 +451,10 @@ try{
                     "bilLBD": req.bilLBD,
                     "serviceVoltage": req.serviceVoltage,
                     "_60CycWithstand": req.CycWithstand60,
-                    "fusesTable": [],
+                    // "table": fuses,
+
+                    fusesTable: fuses,
+                    transTable: transformers,
                     "fuelTypeCB": req.fuelTypeCB,
                     "ownedByCB": req.ownedByCB,
                     "circuitBreakerMake": req.circuitBreakerMake,
@@ -556,8 +466,7 @@ try{
                     "bilCB": req.bilCB,
 
                     "ownedByTransformer": req.ownedByTransformer,
-                    "transformerTable": [
-                    ],
+
                     //Other Attributes
                     "ab": req.ab,
                     "bc": req.bc,
@@ -573,6 +482,7 @@ try{
                     "primaryServiceRep": req.primaryServiceRep,
                     "pswDiagramNumber": req.pswDiagramNumber,
                     "comment": req.comment
+
                     //"created_det": oCreatedAt, //req.createdAt,
                     //"created_by": req.createdBy,
                     //"modified_det": oModifiedAt,//req.modifiedAt,
@@ -585,23 +495,95 @@ try{
             const bp = await cds.connect.to('connectbpa');
             console.log(bp);
             console.log("i am in WF Trigger");
-            const res = await bp.send({
-                method: 'POST',
-                path: resourceUrl,
-                data: wfPayload
-            });
-            console.log("#########:" + res);
-            return res.id;
-        }
+            try {
+                const res = await bp.send({
+                    method: 'POST',
+                    path: resourceUrl,
+                    data: wfPayload
+                });
+                console.log("#########:" + res);
+                return res.id;
+            }
+            catch (e) {
+                console.error("Run into Workflow Trigger error.....");
+                console.error("Error " + e.reason.status + " : " + e.reason.code + " : " + e.reason.message);
+                //    console.error(e);
+                return "error";
+            }
 
+        }
+        this.on('onApproveRecord', async (req) => {
+            const recordID = req.data.recordID;
+            let comment = req.data.comment;
+            let record_status = "Approved";
+            const approvedBy = req.req.user.id;
+            const Cdate = new Date();
+            const approvedOn = Cdate.toLocaleDateString('en-US');
+            let value = ""
+            try {
+                //update ISU
+                const isuPOSTResult = await updateSpecialsinISU(req);
+                console.log("ISU POST Result = " + isuPOSTResult);
+                //update HANA
+                if (isuPOSTResult === "success") {
+                    const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
+                    console.log("DB Update successful " + updateResult);
+                    value = "ISU update Successful";
+                } else {
+                    record_status = "Draft";
+                    comment = comment + "*** ISU update Failed, resend for approval."
+                    const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
+                    value = "ISU update Failed";
+                    console.error("ISU update Failed");
+                    //    let comment1 = "Update on Approve Failed";
+                }
+
+                let result = { "value": value };
+                return result;
+            }
+            catch (oError) {
+                console.error(oError);
+                value = "DB update Failed";
+                let result = { "value": value };
+                return result;
+            }
+        });
+        this.on('onRejectRecord', async (req) => {
+            const recordID = req.data.recordID;
+            const comment = req.data.comment;
+            const record_status = "Rejected";
+            const approvedBy = req.req.user.id;
+            const Cdate = new Date();
+            const approvedOn = Cdate.toLocaleDateString('en-US');
+            console.log("Rejected WF for " + req.data.recordID);
+            const updateResult = await UPDATE.entity(PSOSpecials, recordID).set({ record_status: record_status, approvedBy: approvedBy, approvedOn: approvedOn, approverComment: comment });
+
+            console.log("success");
+            console.log(updateResult);
+            let value = "Workflow successfully rejected";
+            let result = { "value": value };
+            return result;
+        });
+        this.on('onVerifyRecordStatus', async (req) => {
+            const workflowID = req.data.workflowID;
+            let res = await SELECT.from(PSOSpecials).where({ workflow_id: workflowID }).columns('record_status');
+            console.log(res);
+            if (res && res.length > 0) {
+                const record_status = res[0].record_status;
+                if (record_status === "Approved" || record_status === "Rejected") {
+                    return true;
+                } else return false;
+            }
+            return false;
+        });
         async function updateSpecialsinISU(req) {
 
             const recordId = req.data.recordID;
             let relatedRecord = await SELECT.from(PSOSpecials, recordId).columns('connection_object');
             const connection_object = relatedRecord.connection_object;
-          //  let queryResponse = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
-            const queryResponse = await SELECT.from(PSOSpecials, a => { a`.*`, a.fuses(b => { b`.*` }) }).where({ connection_object: connection_object }).orderBy('createdAt desc');
-        
+            //  let queryResponse = await SELECT.from(PSOSpecials).where({ connection_object: connection_object }).orderBy('createdAt desc');
+            const queryResponse = await SELECT.from(PSOSpecials, a => { a`.*`, a.fuses(b => { b`.*` }), a.transformers(b => { b`.*` }) }).where({ connection_object: connection_object }).orderBy('createdAt desc');
+
             console.log(queryResponse);
             const isuRecord = queryResponse[0];
             console.log(isuRecord);
@@ -629,6 +611,7 @@ try{
             } else if (isuRecord.ownedByCB === "Customer Owned") {
                 oCustomerOwnedCB = "X";
             }
+
             var oCompletionDate = '';
             if (isuRecord.completionDate !== '' && isuRecord.completionDate !== null && isuRecord.completionDate !== undefined) {
                 var oCDNewdate = new Date(isuRecord.completionDate);
@@ -636,7 +619,6 @@ try{
                 // oCompletionDate = modifiedDate1.replace(/\//g, ""); //removing "/"
                 oCompletionDate = modifiedDate1.replace(/\/20/, '/');
             }
-
             var oDateMeggered = '';
             if (isuRecord.dateMergered !== '' && isuRecord.dateMergered !== null && isuRecord.dateMergered !== undefined) {
                 var oCDNewdateDM = new Date(isuRecord.dateMergered);
@@ -665,18 +647,47 @@ try{
             let fuses = [];
             for (let i = 0; i < isuRecord.fuses.length; i++) {
                 var fuse = {
-                    "Ztplnr" : "",
                     "Zseqno": isuRecord.fuses[i].fuseSeqNo,
+                    "Ztplnr": isuRecord.connection_object,
                     "Size": isuRecord.fuses[i].fuseSize,
                     "type": isuRecord.fuses[i].fuseType,
                     "curve": isuRecord.fuses[i].fuseCurve,
-                    "vol": isuRecord.fuses[i].fuseVoltage, 
-                    "start_date"  : "20241001",
-                    "end_date"  : "99991231",
-                    "Comments" :  " Testing comments",
-                    "Comments2" : " Testing comments 2"
+                    "vol": isuRecord.fuses[i].fuseVoltage,
+                    "start_date": "",
+                    "end_date": "",
+                    "Comments": "",
+                    "Comments2": ""
                 }
                 fuses.push(fuse);
+            }
+
+            //transformers payload
+            let DTEOwnedTrans = "", CustOwnedTrans = ""
+            if (isuRecord.ownedByTransformer === "DTE Owned") {
+                DTEOwnedTrans = "X";
+            } else if (isuRecord.ownedByTransformer === "Customer Owned") {
+                CustOwnedTrans = "X";
+            }
+            let transformers = [];
+            for (let i = 0; i < isuRecord.transformers.length; i++) {
+                var transformer = {
+
+                    "seqno": isuRecord.transformers[i].transSeqNo,
+                    "dteo": DTEOwnedTrans,
+                    "cuso": CustOwnedTrans,
+                    "man": isuRecord.transformers[i].manufacturer,
+                    "imp": isuRecord.transformers[i].imped,
+                    "pri_vol": isuRecord.transformers[i].primVolt,
+                    "sec_vol": isuRecord.transformers[i].secVolt,
+                    "taps": isuRecord.transformers[i].taps,
+                    "kva": isuRecord.transformers[i].kva,
+                    "type": isuRecord.transformers[i].type,
+                    "serial": isuRecord.transformers[i].serial,
+                    "comments": isuRecord.comment,
+                    "start_date": "",
+                    "end_date": ""
+                }
+                transformers.push(transformer);
             }
 
             let oSpecialsISUPayload =
@@ -763,69 +774,41 @@ try{
                 //"approverComment": isuRecord[0].approverComment,//Field not available in ISU
                 //"record_status": isuRecord[0].record_status	//Field not available in ISU
                 //"workflow_id": isuRecord[0].workflow_id 	//Field not available in ISU
-                //,"psrtofusenav":fuses
+                , "psrtofusenav": fuses,
+                "psrtotransnav": transformers
 
 
             };
 
-            console.log(oSpecialsISUPayload);
+
             const isu = await cds.connect.to('ISU');
-            /////////////////////////////////new code/////////////////
-            let isuUpdateFlag = true;
-            let result = '';
+            const path = "/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet";
             if (queryResponse.length === 1) {
-                //create record in ISU  
-                isuUpdateFlag = false;
-                oSpecialsISUPayload.upd_flag = "X";
-                console.log(oSpecialsISUPayload);
-               // const path = "/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet";
-               const path = "/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet";
-                
-               
-               //   const path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet?$expand=psrtofusenav,psrtotransnav"
-
-                console.log("i am in ISU create");
-                try {
-                    const res = await isu.send({
-                        method: 'POST',
-                        path: path,
-                        data: oSpecialsISUPayload
-                    });
-                    console.log(res);
-                    result = res;
-                } catch (e) {
-                    console.log(e);
-                }
+                oSpecialsISUPayload.upd_flag = ""; //create specials in ISU
             }
-            else if (queryResponse.length > 1) {
-                //update record in ISU
-                isuUpdateFlag = true;
-                const connection_object = isuRecord.connection_object;
-                // delete oSpecialsISUPayload.conn_obj;
-                //   oSpecialsISUPayload.upd_flag = "X";
-                console.log(oSpecialsISUPayload);
-                const path = "/sap/opu/odata/sap/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet(conn_obj='" + connection_object + "')";
-
-                //const path = "/sap/opu/odata/SAP/ZPSO_CHLD_CO_CRE_UPD_SRV/Primary_service_recordSet?$expand=psrtofusenav,psrtotransnav"
-                console.log(path);
-                console.log("i am in ISU update");
-                try {
-                    const res = await isu.send({
-                        method: 'PUT',
-                        path: path,
-                        data: oSpecialsISUPayload
-                    });
-                    console.log(res);
-                    result = res;
-                } catch (e) {
-                    console.log(e);
-
-                }
+            else {
+                oSpecialsISUPayload.upd_flag = "X";//update specials in ISU
+            }
+            console.log(oSpecialsISUPayload);
+            console.log("i am in ISU POST");
+            try {
+                const res = await isu.send({
+                    method: 'POST',
+                    path: path,
+                    data: oSpecialsISUPayload
+                });
+            } catch (e) {
+                console.error("Run into ISU POST error.....");
+                console.error("Error " + e.reason.status + " : " + e.reason.code + " : " + e.reason.message);
+                //   console.error(e);
+                return "error";
             }
 
-            console.log(result);
-            return result;
+            console.log("ISU POST Success");
+            //  console.log(result);
+            return "success";
         };
         return super.init();
     }
 }
+

@@ -214,7 +214,7 @@
                                         id="idlblMFG_DS"
                                         text="{i18n>CS_Manufacturer}"
                                     />
-                                    <Text id="idManufacturer_DS" text="{oSpecialsjmodel>/manufacturer}"/>
+                                    <Text id="idManufacturer_DS" text="{oSpecialsjmodel>/manufacturer}"/> 
                                     <Label
                                         id="idlblModel_DS"
                                         text="{i18n>CS_Model}"
@@ -493,12 +493,12 @@
                                             text="Sequence No"
                                         />
                                     </Column>
-                                    <Column id="id21CPSR_DS_CO">
+                                    <!-- <Column id="id21CPSR_DS_CO">
                                         <Label
                                             id="idlblsize_DS_CO"
                                             text="Billing Entity"
                                         />
-                                    </Column>
+                                    </Column> -->
                                     <Column id="idTsize1_DS">
                                         <Label
                                             id="idlblsize_DS"
@@ -528,11 +528,11 @@
                                     <ColumnListItem id="cll6CPSR_DS">
                                         <cells>
                                         <Text id="idSeqNo_DS" text="{oSpecialsjmodel>fuseSeqNo}"/>
-                                            <Text id="idFuse_DS" text="{oSpecialsjmodel>psospecials_connection_object}"/>
-                                            <Text id="idTsize_DS" text="{oSpecialsjmodel>fuseSize}"/>
-                                            <Text id="idTType_DS" text="{oSpecialsjmodel>fuseType}"/>
-                                            <Text id="idTCurve_DS" text="{oSpecialsjmodel>fuseCurve}"/>
-                                            <Text id="idTVoltage_DS" text="{oSpecialsjmodel>fuseVoltage}"/>
+                                            <!-- <Text  text="{oSpecialsjmodel>psospecials_connection_object}"/> -->
+                                            <Text  text="{oSpecialsjmodel>fuseSize}"/>
+                                            <Text  text="{oSpecialsjmodel>fuseType}"/>
+                                            <Text  text="{oSpecialsjmodel>fuseCurve}"/>
+                                            <Text  text="{oSpecialsjmodel>fuseVoltage}"/>
                                         </cells>
                                     </ColumnListItem>
                                 </items>
@@ -575,6 +575,7 @@
                                 id="tablTrans_DS"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                items="{oSpecialsjmodel>/transformers}"
                             >
                                 <headerToolbar>
                                     <!-- <Toolbar id="_IDGenToolbar1_DS">
@@ -582,6 +583,12 @@
                                     </Toolbar> -->
                                 </headerToolbar>
                                 <columns>
+                                <Column id="idSequencenoTrans_DS">
+                                        <Label
+                                            id="idlSequencenotrans_DS_CO"
+                                            text="Sequence No"
+                                        />
+                                    </Column>
                                     <Column id="idColumnManufacturer_DS">
                                         <Label
                                             id="idlblManufacturer_DS"
@@ -638,14 +645,15 @@
                                 <items>
                                     <ColumnListItem id="idColListItem_DS">
                                         <cells>
-                                            <Text id="idManufacturer2_DS" />
-                                            <Text id="idImped2_DS" />
-                                            <Text id="idPriVolt_DS" />
-                                            <Text id="idSecVolt_DS" />
-                                            <Text id="idTaps_DS" />
-                                            <Text id="idKva_DS" />
-                                            <Text id="idType3_DS" />
-                                            <Text id="idSerial2_DS" />
+                                            <Text  text="{oSpecialsjmodel>transSeqNo}"/>
+                                            <Text  text="{oSpecialsjmodel>manufacturer}"/>
+                                            <Text text="{oSpecialsjmodel>imped}" />
+                                            <Text text="{oSpecialsjmodel>primVolt}" />
+                                            <Text text="{oSpecialsjmodel>secVolt}" />
+                                            <Text text="{oSpecialsjmodel>taps}" />
+                                            <Text text="{oSpecialsjmodel>kva}" />
+                                            <Text text="{oSpecialsjmodel>type}" />
+                                            <Text text="{oSpecialsjmodel>serial}" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>

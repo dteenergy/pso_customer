@@ -19,48 +19,30 @@ sap.ui.define([
 
             },
             getUserDetails: async function () {
-              //  var that = this;
-              //  let userScope = null;
                 let oUserScopeJModel = this.getOwnerComponent().getModel("oUserScopeJModel");
-                //   oUserScopeJModel.setData(userScope);
                 oUserScopeJModel.setData("");
 
                 let omodel = this.getOwnerComponent().getModel();
                 let oOperation = omodel.bindContext("/userDetails(...)");
+                try{
+                    await oOperation.execute().then(function (res) {
+                        let oResults = oOperation.getBoundContext().getObject();
+                        console.log(oResults);                    
+                        if (oResults) {
+                            oUserScopeJModel.setData(oResults);
+                        } else {
+                            //msg -> assign proper roles
+                        }
+                    }.bind(this), function (err) {
+                       let message = err.message + "\nPSO Roles not found! Contact support admin!";
+                        sap.m.MessageBox.error(err.message);
+                        console.error(err.message);
 
-                await oOperation.execute().then(function (res) {
-                    let oResults = oOperation.getBoundContext().getObject();
-                    console.log(oResults);
-                    //userScope = oResults.value;
-                    // if(oResults && oResults.value){
-                    //     oUserScopeJModel.setData(oResults.value);
-                    //     //new code
-                    //     for (var i = 0; i < oResults.value.length; i++) {
-                    //         if(oResults.value[i].includes("pso_customer_details_create")){
-                    //             that.hasRecordCreateAccess = true;
-                    //             console.log("has create access")
-                    //             break;
-                    //         }                                
-                    //     }
-                    // }
-                    // else {
-                    //     //role definition incomplete message
-                    // }
-                    if (oResults) {
-                        oUserScopeJModel.setData(oResults);
-                    } else {
-                        //msg -> assign proper roles
-                    }
-                }.bind(this), function (err) {
-                    //        oBusyDialog3.close();
-                    //MessageBox.error(err.message);
-                    console.log(err.message);
-                }.bind(this))
-                // return userScope;
-                //this.userScope = userScope;
-                //console.log(this.userScope);
-                // var oUserScopeJModel = this.getOwnerComponent().getModel("oUserScopeJModel");
-                // oUserScopeJModel.setData(this.userScope);
+                    }.bind(this))
+                }
+            catch (oError){
+                console.error(oError);
+            }
             },
 
 
@@ -161,6 +143,17 @@ sap.ui.define([
 
             //*************************Fatching Customer Records****************************/  
             fetchItems: function () {
+
+                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
+                if (!oUserScopeJModelData.hasSearchAccess) {                 
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("no_search_access"), {
+                        icon: sap.m.MessageBox.Icon.ERROR,
+                        title: "Error",
+                        actions: [sap.m.MessageBox.Action.OK]
+                    });
+                    return;
+                }    
+
                 var that = this;
                 var oSearchCustomerJModel = this.getView().getModel("oSearchCustomerJModel");
                 var sCustName = this.getView().byId("idcustomer").getValue();
@@ -188,7 +181,7 @@ sap.ui.define([
                         title: "Error",
                         actions: [sap.m.MessageBox.Action.OK]
                     });
-                    return false
+                    return false;
                 }
 
                 var aFilters = [];
@@ -211,13 +204,10 @@ sap.ui.define([
                 this.oBusyIndicator.open();
                 //mickey
 
-                let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
-                console.log(oUserScopeJModelData);
                 
                 try {//rohit/ram
 
                     this.getOwnerComponent().getModel("ISUService").read("/Customer_searchSet", {
-                        //    this.oDataModel.read("Customer_searchSet", {
                         filters: [aFilters],
                         success: function (oData) {
                             that.oBusyIndicator.close()

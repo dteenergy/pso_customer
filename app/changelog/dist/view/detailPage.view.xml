@@ -1,4 +1,6 @@
-<mvc:View xmlns:tnt="sap.tnt" xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form"
+<mvc:View xmlns:tnt="sap.tnt"
+    xmlns:cards="sap.f.cards"
+    xmlns:form="sap.ui.layout.form"
     xmlns:f="sap.f" controllerName="com.pso.changelog.controller.detailPage"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:core="sap.ui.core"
@@ -20,32 +22,46 @@
                                 <core:Title/>
                                 <m:Label text="Billing Entity"></m:Label>
                                 <m:Text text="{connection_object}"></m:Text>
-                                <!-- <m:Label text="Workflow ID"></m:Label>
-                                <m:Text text="{workflow_id}"></m:Text> -->
-                                <!-- <m:Label text="Work Flow Description"></m:Label>
-                                <m:Text text="{work_desc}"></m:Text> -->
-                                <!-- <core:Title ></core:Title> -->
+                                <m:Label text="PS Number"></m:Label>
+                                <m:Text text="{pSNumber}"></m:Text>
+                                <m:Label text="Completion Date"></m:Label>
+                                <m:Text text="{completionDate}"></m:Text>
+                                <m:Label text="FED From"></m:Label>
+                                <m:Label text="Work Description"></m:Label>
+                                <m:Text text="{work_desc}"></m:Text>
+
                                 <m:Label text="Meter Number"></m:Label>
                                 <m:Text text="{meter_number}"></m:Text>
-                                <!-- <m:Label text="Record Status"></m:Label>
-                                <m:Text text="{record_status}"></m:Text> -->
-                                <m:Label text="Approver Comment"></m:Label>
-                                <m:Text text="{approverComment}"></m:Text>
-                                <core:Title/>
-                                <m:Label text="Created At"></m:Label>
-                                <m:Text text="{createdAt}"></m:Text>
-                                <m:Label text="Created By"></m:Label>
-                                <m:Text text="{createdBy}"></m:Text>
-                                <m:Label text="Approved By"></m:Label>
-                                <m:Text text="{modifiedBy}"></m:Text>
-                                <!-- <m:Label text="Modified Date"></m:Label>
-                                <m:Text text="{modifiedAt}"></m:Text> -->
-                                <core:Title/>
-                                <!-- <m:Label text="Modified By"></m:Label>
-                                <m:Text text="{modifiedBy}"></m:Text> -->
-                                
-                                <m:Label text="Approved On"></m:Label>
-                                <m:Text text="{modifiedAt}"></m:Text>
+                                <m:Label text="FED From"></m:Label>
+                                <m:Text text="{fedFrom}"></m:Text>
+
+                                <core:Title ></core:Title>
+                                <m:Label text="Cable Description"></m:Label>
+                                <m:Text text="{cableDescription}"></m:Text>
+                                <m:Label text="Cable Footage"></m:Label>
+                                <m:Text text="{cableFootage}"></m:Text>
+                                <m:Label text="CTS"></m:Label>
+                                <m:Text text="{cts}"></m:Text>
+                                <m:Label text="PTS"></m:Label>
+                                <m:Text text="{pts}"></m:Text>
+                                <m:Label text="K"></m:Label>
+                                <m:Text text="{k}"></m:Text>
+                                <m:Label text="M"></m:Label>
+                                <m:Text text="{m}"></m:Text>
+
+                                <core:Title ></core:Title>
+                                <m:Label text="Duct Type"></m:Label>
+                                <m:Text text="{ductType}"></m:Text>
+                                <m:Label text="Fuses At"></m:Label>
+                                <m:Text text="{fusesAt}"></m:Text>
+                                <m:Label text="Size"></m:Label>
+                                <m:Text text="{size}"></m:Text>
+                                <m:Label text="Type"></m:Label>
+                                <m:Text text="{typeCR}"></m:Text>
+                                <m:Label text="Curve"></m:Label>
+                                <m:Text text="{curve}"></m:Text>
+                                <m:Label text="Voltage"></m:Label>
+                                <m:Text text="{voltage}"></m:Text>
                             </form:SimpleForm>
                             <!-- <form:SimpleForm layout="ColumnLayout">
                                 <m:Label text="Workflow ID"></m:Label>
@@ -88,49 +104,51 @@
                 </heading> -->
                 <subSections>
                     <ObjectPageSubSection title="Load Break Disconnect" titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
-                    <actions>
-                    <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information" editable="false">
-			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
-			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
-			<m:RadioButton id="RB3" text="None" />
-		</m:RadioButtonGroup>
-                    </actions>
+                        <actions>
+                            <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information" editable="false">
+                                <m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
+                                <m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
+                                <m:RadioButton id="RB3" text="None" />
+                            </m:RadioButtonGroup>
+                        </actions>
                         <blocks>
                             <m:VBox>
-                            <!-- <m:HBox justifyContent="Center">
+                                <!-- <m:HBox justifyContent="Center">
                             <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information">
 			<m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
 			<m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
 			<m:RadioButton id="RB3" text="None" />
 		</m:RadioButtonGroup>
                             </m:HBox> -->
-                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
-                                <core:Title/>
+                                <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
+                                    <core:Title/>
 
-                                <m:Label text="PS Number"></m:Label>
-                                <m:Text text="{pSNumber}"></m:Text>
-                                <m:Label text="Completion Date"></m:Label>
-                                <m:Text text="{completionDate}"></m:Text>
-                                <m:Label text="FED From"></m:Label>
-                                <m:Text text="{fedFrom}"></m:Text>
-                                <core:Title/>
-                                <m:Label text="Continuous Current"></m:Label>
-                                <m:Text text="{continuousCurrent}"></m:Text>
-                                <m:Label text="Load Int Rating"></m:Label>
-                                <m:Text text="{loadIntRating}"></m:Text>
-                                <m:Label text="kA Momentary LBD"></m:Label>
-                                <m:Text text="{kAMomentaryLBD}"></m:Text>
-                                <core:Title/>
-                                <m:Label text="LBD Type"></m:Label>
-                                <m:Text text="{typeLBD}"></m:Text>
-                                <m:Label text="Fault Closing"></m:Label>
-                                <m:Text text="{faultClosing}"></m:Text>
-                                <m:Label text="Bill BD"></m:Label>
-                                <m:Text text="{bilLBD}"></m:Text>
-                                <!-- <core:Title/> -->
+                                    <m:Label text="Manufacturer"></m:Label>
+                                    <m:Text text="{manufacturer}"></m:Text>
+                                    <m:Label text="Model"></m:Label>
+                                    <m:Text text="{model}"></m:Text>
+                                    <m:Label text="Continuous Current"></m:Label>
+                                    <m:Text text="{continuousCurrent}"></m:Text>
+                                    <core:Title ></core:Title>
+                                    <m:Label text="Load Int Rating"></m:Label>
+                                    <m:Text text="{loadIntRating}"></m:Text>
+                                    <m:Label text="kA Momentary LBD"></m:Label>
+                                    <m:Text text="{kAMomentaryLBD}"></m:Text>
+
+                                    <m:Label text="LBD Type"></m:Label>
+                                    <m:Text text="{typeLBD}"></m:Text>
+                                    <m:Label text="Fault Closing"></m:Label>
+                                    <m:Text text="{faultClosing}"></m:Text>
+                                    <core:Title ></core:Title>
+                                    <m:Label text="BIL"></m:Label>
+                                    <m:Text text="{bilLBD}"></m:Text>
+                                    <m:Label text="Service Voltage"></m:Label>
+                                    <m:Text text="{serviceVoltage}"></m:Text>
+                                    <m:Label text="60 Cyc Withstand"></m:Label>
+                                    <m:Text text="{CycWithstand60}"></m:Text>
 
 
-                            </form:SimpleForm>
+                                </form:SimpleForm>
                             </m:VBox>
                             <!-- <form:SimpleForm layout="ColumnLayout">
                                 <m:Label text="Created At"></m:Label>
@@ -179,48 +197,81 @@
                     <ObjectPageSubSection titleUppercase="false">
                         <blocks>
                             <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
-                                <core:Title ></core:Title>
-                                <m:Label text="Service Voltage"></m:Label>
-                                <m:Text text="{serviceVoltage}"></m:Text>
-                                <m:Label text="Cyc With Stand60"></m:Label>
-                                <m:Text text="{CycWithstand60}"></m:Text>
-                                <m:Label text="Circuit Breaker Make"></m:Label>
-                                <m:Text text="{circuitBreakerMake}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Serial No"></m:Label>
-                                <m:Text text="{serialNo}"></m:Text>
-                                <m:Label text="kA Momentary CB"></m:Label>
-                                <m:Text text="{kAMomentaryCB}"></m:Text>
-                                <m:Label text="Amps"></m:Label>
-                                <m:Text text="{amps}"></m:Text>
-                                <core:Title ></core:Title>
-                                <m:Label text="CB Type"></m:Label>
-                                <m:Text text="{typeCB}"></m:Text>
-                                <m:Label text="Fault Duty"></m:Label>
-                                <m:Text text="{faultDuty}"></m:Text>
-                                <m:Label text="Bill CB"></m:Label>
-                                <m:Text text="{bilCB}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Cable Description"></m:Label>
-                                <m:Text text="{cableDescription}"></m:Text>
-                                <m:Label text="Cable Footage"></m:Label>
-                                <m:Text text="{cableFootage}"></m:Text>
-                                <m:Label text="Duct Type"></m:Label>
-                                <m:Text text="{ductType}"></m:Text>
-                                <core:Title ></core:Title>
-                                <m:Label text="CTS"></m:Label>
-                                <m:Text text="{cts}"></m:Text>
-                                <m:Label text="PTS"></m:Label>
-                                <m:Text text="{pts}"></m:Text>
-                                <m:Label text="Fuses At"></m:Label>
-                                <m:Text text="{fusesAt}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Size"></m:Label>
-                                <m:Text text="{size}"></m:Text>
-                                <m:Label text="Type CR"></m:Label>
-                                <m:Text text="{typeCR}"></m:Text>
-                                <m:Label text="Curve"></m:Label>
-                                <m:Text text="{curve}"></m:Text>
+                                 <core:Title id="idcoreTCB1_DS" />
+                                    <!-- <m:Label id="idlblRadioCB_DS" /> -->
+                                    <m:Label id="idCB1_DS" />
+                                    <m:RadioButtonGroup
+                                        id="goup6CPSR_DS"
+                                        columns="5"
+                                        enabled="false"
+                                    >
+                                        <m:RadioButton
+                                            id="idAir_DS"
+                                            text="{i18n>CS_Air}"
+                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectAIR'}"
+                                        />
+                                        <m:RadioButton
+                                            id="idOil_DS"
+                                            text="{i18n>CS_Oil}"
+                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectOIL'}"
+                                        />
+                                        <m:RadioButton
+                                            id="idVac_DS"
+                                            text="{i18n>CS_Vac}"
+                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectVAC'}"
+                                        />
+                                        <m:RadioButton
+                                            id="idsf6_DS"
+                                            text="{i18n>CS_Sf6}"
+                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectSF6'}"
+                                        />
+                                    </m:RadioButtonGroup>
+
+                                    
+                                    
+                                    <m:Label
+                                        id="idlblCBM_DS"
+                                        text="{i18n>CS_CBM}"
+                                    />
+                                    <m:Text id="idCBM_DS" text="{circuitBreakerMake}"/>
+                                    <m:Label
+                                        id="idlblSNo_DS"
+                                        text="{i18n>CS_Serialno}"
+                                    />
+                                    <m:Text id="idSerialNo_DS" text="{serialNo}"/>
+
+
+                                    <core:Title id="idcoreTCB2_DS" />
+                                    
+                                    <m:Label
+                                        id="idlblKAMome_DS"
+                                        text="{i18n>CS_KAMomenetary}"
+                                    />
+                                    <m:Text id="idKAMome_DS" text="{kAMomentaryCB}"/>
+
+                                    <m:Label
+                                        id="idlblAmps_DS"
+                                        text="{i18n>CS_Amps}"
+                                    />
+                                    <m:Text id="idAmps_DS" text="{amps}"/>
+                                    <m:Label
+                                        id="idlblType4_DS"
+                                        text="{i18n>CS_Type4}"
+                                    />
+                                    <m:Text id="idType4_DS" text="{typeCB}"/>
+
+                                    <core:Title id="idcoreTCB3_DS" />
+                                    
+                                    <m:Label
+                                        id="idlblFaultDuty_DS"
+                                        text="{i18n>CS_FaultDuty}"
+                                    />
+                                    <m:Text id="idFaultDuty_DS" text="{faultDuty}"/>
+                                    <m:Label
+                                        id="idlblBil2_DS"
+                                        text="{i18n>CS_Bil2}"
+                                    />
+                                    <m:Text id="idBil2_DS" text="{bilCB}"/>
                             </form:SimpleForm>
 
 
@@ -283,48 +334,63 @@
                         <blocks>
                             <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
 
-                                <core:Title ></core:Title>
-                                <m:Label text="Voltage"></m:Label>
-                                <m:Text text="{voltage}"></m:Text>
-                                <m:Label text="Manufacturer"></m:Label>
-                                <m:Text text="{manufacturer}"></m:Text>
-                                <m:Label text="Model"></m:Label>
-                                <m:Text text="{model}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Continuous Current"></m:Label>
-                                <m:Text text="{continuousCurrent}"></m:Text>
-                                <m:Label text="Load Int Rating"></m:Label>
-                                <m:Text text="{loadIntRating}"></m:Text>
-                                <m:Label text="kA Momentary LBD"></m:Label>
-                                <m:Text text="{kAMomentaryLBD}"></m:Text>
-                                <core:Title ></core:Title>
-                                <m:Label text="LBD Type"></m:Label>
-                                <m:Text text="{typeLBD}"></m:Text>
-                                <m:Label text="Fault Closing"></m:Label>
-                                <m:Text text="{faultClosing}"></m:Text>
-                                <m:Label text="Bill BD"></m:Label>
-                                <m:Text text="{bilLBD}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="Service Voltage"></m:Label>
-                                <m:Text text="{serviceVoltage}"></m:Text>
-                                <m:Label text="Cyc With Stand60"></m:Label>
-                                <m:Text text="{CycWithstand60}"></m:Text>
-                                <m:Label text="Circuit Breaker Make"></m:Label>
-                                <m:Text text="{circuitBreakerMake}"></m:Text>
-                                <core:Title ></core:Title>
-                                <m:Label text="Serial No"></m:Label>
-                                <m:Text text="{serialNo}"></m:Text>
-                                <m:Label text="kA Momentary CB"></m:Label>
-                                <m:Text text="{kAMomentaryCB}"></m:Text>
-                                <m:Label text="Amps"></m:Label>
-                                <m:Text text="{amps}"></m:Text>
-                                <!-- <core:Title ></core:Title> -->
-                                <m:Label text="CB Type"></m:Label>
-                                <m:Text text="{typeCB}"></m:Text>
-                                <m:Label text="Fault Duty"></m:Label>
-                                <m:Text text="{faultDuty}"></m:Text>
-                                <m:Label text="Bill CB"></m:Label>
-                                <m:Text text="{bilCB}"></m:Text>
+                                <core:Title id="idcoreTOther1_DS" />
+            <m:Label id="idlblAB_DS" text="{i18n>CS_AB}" />
+            <m:Text id="idAB_DS" text="{ab}"/>
+            <m:Label id="idlblBC_DS" text="{i18n>CS_BC}" />
+            <m:Text id="idBC_DS" text="{bc}"/>
+            <m:Label id="idlblCA_DS" text="{i18n>CS_CA}" />
+            <m:Text id="idCA_DS" text="{ca}"/>
+            <m:Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
+            <m:Text id="idAN_DS" text="{an}"/>
+            <m:Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
+            <m:Text id="idBN_DS" text="{bn}"/>
+            <m:Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
+            <m:Text id="idCN_DS" text="{cn}"/>
+            <m:Label id="idlblGround_DS" text="{i18n>CS_ground}" tooltip="Ground Mat Resistance"/>     
+            <m:Text id="idground_DS" text="{groundMatResistance}"/>
+            <m:Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
+            <m:Text id="idmethod_DS" text="{methodUsed}"/>
+            <m:Label id="idlbldate_DS" text="{i18n>CS_date}" />     
+            <m:Text id="iddate_DS" text="{dateMergered}"/>
+            
+            <core:Title id="idcoreTOther2_DS" />
+            <m:Label id="idlblservice_DS" text="{i18n>CS_service}" />     
+            <m:Text id="idservice_DS" text="{typeofService}"/>
+            <m:Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
+            <m:Text id="idCNTO_DS" text="{typeofTO}"/>
+            <m:Label id="idlblrep_DS" text="{i18n>CS_rep}" required="true"/>     
+            <m:Text id="idCNrep_DS" text="{primaryServiceRep}"/>
+            <m:Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
+            <m:Text id="idCNpsw_DS" text="{oCustomerAttributesJModel>/psw}"/>
+            <m:Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
+            <m:Text id="idcreatedby_DS" text="{createdBy}"/>
+            <m:Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
+            <m:Text id="idcreatedon_DS" text="{path:'createdAt', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
+            <!-- <m:Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
+            <m:Text id="idmodifiedby_DS" text="{modifiedBy}"/>
+            <m:Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
+            <m:Text id="idmodifiedon_DS" text="{modifiedAt}"/>    -->
+            <m:Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
+            <m:Text id="idapproveby_DS" text="{approvedBy}"/>
+            <m:Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
+            <m:Text id="idapprovedate_DS" text="{path:'approvedOn', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
+            <core:Title id="idcoreTOther3_DS" />  
+            
+            <m:Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />     
+            <m:TextArea id="idApproverCmnts_DS" growing="true" value="{approverComment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
+                <!-- <layoutData>
+                    <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
+                </layoutData> -->
+            </m:TextArea>  
+            
+            <m:Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
+            <m:TextArea id="idcomment_DS" growing="true" value="{comment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
+                <!-- <layoutData>
+                    <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
+                </layoutData> -->
+            </m:TextArea>
+                                
                             </form:SimpleForm>
 
                             <!-- <form:SimpleForm layout="ColumnLayout">
@@ -396,8 +462,12 @@
                 <subSections>
                     <ObjectPageSubSection titleUppercase="false">
                         <blocks>
-                            <m:Table items="{/fuses}" growingScrollToLoad="true" growing="true" growingThreshold="5">
+                            <m:Table items="{localModel>/fuses}" growingScrollToLoad="true" growing="true" growingThreshold="5">
                                 <m:columns>
+                                <m:Column>
+                                        <m:Label text="Sequence">
+                                        </m:Label>
+                                    </m:Column>
                                     <m:Column>
                                         <m:Label text="Size">
                                         </m:Label>
@@ -418,10 +488,81 @@
                                 <m:items>
                                     <m:ColumnListItem>
                                         <m:cells>
-                                            <m:Text text="{fuseSize}"/>
-                                            <m:Text text="{fuseType}"/>
-                                            <m:Text text="{fuseCurve}"/>
-                                            <m:Text text="{fuseVoltage}"/>
+                                            <m:Text text="{localModel>fuseSeqNo}"/>
+                                            <m:Text text="{localModel>fuseSize}"/>
+                                            <m:Text text="{localModel>fuseType}"/>
+                                            <m:Text text="{localModel>fuseCurve}"/>
+                                            <m:Text text="{localModel>fuseVoltage}"/>
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Transformer">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        <actions>
+                            <m:RadioButtonGroup id="rbg2" columns="5" valueState="Information" editable="false">
+                                <m:RadioButton id="RB4" text="DTE Owned" class="sapUiSmallMarginEnd"/>
+                                <m:RadioButton id="RB5" text="Customer Owned" class="sapUiSmallMarginEnd" />
+                            </m:RadioButtonGroup>
+                        </actions>
+                        <blocks>
+                            <m:Table items="{localModel>/transformers}" growingScrollToLoad="true" growing="true" growingThreshold="5">
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Sequence No">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Manufacturer">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="% Imped">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Pri Volt">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Sec Volt">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Taps">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="KVA">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Type">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Serial">
+                                        </m:Label>
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{localModel>transSeqNo}"/>
+                                            <m:Text text="{localModel>manufacturer}"/>
+                                            <m:Text text="{localModel>imped}"/>
+                                            <m:Text text="{localModel>primVolt}"/>
+                                            <m:Text text="{localModel>secVolt}"/>
+                                            <m:Text text="{localModel>taps}"/>
+                                            <m:Text text="{localModel>kva}"/>
+                                            <m:Text text="{localModel>type}"/>
+                                            <m:Text text="{localModel>serial}"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>

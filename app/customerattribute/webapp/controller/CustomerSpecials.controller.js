@@ -228,13 +228,14 @@ sap.ui.define([
                 }
                
                 const connection_object = this.getOwnerComponent().getModel("oSpecialsjmodel").getData().connection_object;
-                var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
-                var oSpecialsContext = this.getCreateContext_Submit();
+                //var oSpecialsjmodelData = this.getOwnerComponent().getModel("oSpecialsjmodel").getData();
+               // var oSpecialsContext = this.getCreateContext_Submit();
                 that.oBusyIndicator.open();
                 var omodel = this.getOwnerComponent().getModel();
                 var oOperation = omodel.bindContext("/submitSpecials(...)");
-                oOperation.setParameter("recordID", oSpecialsjmodelData.ID);               
-                oOperation.setParameter("context", oSpecialsContext);
+                oOperation.setParameter("connection_object", connection_object);
+            //    oOperation.setParameter("recordID", oSpecialsjmodelData.ID);               
+            //    oOperation.setParameter("context", oSpecialsContext);
                 await oOperation.execute().then(function (res) {
                     that.oBusyIndicator.close();
                     var oResults = oOperation.getBoundContext().getObject();
@@ -291,8 +292,8 @@ sap.ui.define([
                     "meter_number": oSpecialsjmodelData.meter_number,
                     "meter_number2": oSpecialsjmodelData.meter_number2,
                     "record_status": oSpecialsjmodelData.record_status,
-                    "workflow_id": oSpecialsjmodelData.workflow_id,
-
+                    //"workflow_id": "",
+                    "workflow_id": oSpecialsjmodelData.workflow_id, 
                     //Customer Record(CR)
                     "pSNumber": oSpecialsjmodelData.pSNumber,
                     "completionDate": oSpecialsjmodelData.completionDate,
@@ -354,7 +355,8 @@ sap.ui.define([
                     "customerName": oCustName,
                     "streetNumber": oStreetNo,
                     "streetName": oStreetName,
-                    "fuses": oSpecialsjmodelData.fuses
+                    "fuses": oSpecialsjmodelData.fuses,
+                    "transformers":oSpecialsjmodelData.transformers
                 };
                 console.log(context);
                 return context;
@@ -389,16 +391,36 @@ sap.ui.define([
                 let fuses = [];
                 for (let i = 0; i < oSpecialsjmodelData.fuses.length; i++) {
                     var fuse = {
+                        "fuseSize": oSpecialsjmodelData.fuses[i].fuseSize,
                         "fuseType": oSpecialsjmodelData.fuses[i].fuseType,
                         "fuseCurve": oSpecialsjmodelData.fuses[i].fuseCurve,
                         "fuseVoltage": oSpecialsjmodelData.fuses[i].fuseVoltage,
                         "fuseSeqNo": oSpecialsjmodelData.fuses[i].fuseSeqNo,
                         "psospecials_ID": oSpecialsjmodelData.fuses[i].psospecials_ID,
-                        "psospecials_connection_object": oSpecialsjmodelData.fuses[i].psospecials_connection_object,
-                        "fuseSize": oSpecialsjmodelData.fuses[i].fuseSize
+                        "psospecials_connection_object": oSpecialsjmodelData.fuses[i].psospecials_connection_object
                     }
                     fuses.push(fuse);
                 }
+
+                var transformers =[];
+                    for(var i = 0; i < oSpecialsjmodelData.transformers.length; i++){
+                        var trans = {
+                        "psospecials_connection_object": oSpecialsjmodelData.transformers[i].psospecials_connection_object,
+                        "psospecials_ID": oSpecialsjmodelData.transformers[i].psospecials_ID,  
+                        "transSeqNo" : oSpecialsjmodelData.transformers[i].transSeqNo,
+                        "manufacturer": oSpecialsjmodelData.transformers[i].manufacturer, 
+                        "imped" : oSpecialsjmodelData.transformers[i].imped, 
+                        "secVolt": oSpecialsjmodelData.transformers[i].secVolt,
+                        "taps": oSpecialsjmodelData.transformers[i].taps,
+                        "primVolt": oSpecialsjmodelData.transformers[i].primVolt,
+                        "kva": oSpecialsjmodelData.transformers[i].kva,
+                        "serial": oSpecialsjmodelData.transformers[i].serial,
+                        "type":oSpecialsjmodelData.transformers[i].type
+                        }
+                        transformers.push(trans);
+                    }
+                    
+
                 var context = {
 
                     "connection_object": oSpecialsjmodelData.connection_object,
@@ -406,6 +428,7 @@ sap.ui.define([
                     "meter_number": oSpecialsjmodelData.meter_number,
                     "meter_number2": oSpecialsjmodelData.meter_number2,
                     "record_status": oSpecialsjmodelData.record_status,
+                    //"workflow_id": "",
                     "workflow_id": oSpecialsjmodelData.workflow_id,
 
                     //Customer Record(CR)
@@ -469,7 +492,8 @@ sap.ui.define([
                     "customerName": oCustName,
                     "streetNumber": oStreetNo,
                     "streetName": oStreetName,
-                    "fuses": fuses
+                    "fuses": fuses,
+                    "transformers":transformers
                 };
                 console.log(context);
                 return context;
@@ -491,12 +515,14 @@ sap.ui.define([
                 var aData = oSpecialsjmodel.getProperty("/fuses") || []; // Get current items
                 const connection_object = oSpecialsjmodel.getData().connection_object;
                 const recordID = oSpecialsjmodel.getData().ID;
+                this.sequenceCounter = 0;
                 if (aData.length === 0) {
                     this.sequenceCounter = 1;
                 } else {
                     this.sequenceCounter = aData.length;
+                    this.sequenceCounter = this.sequenceCounter+1;
                 }
-
+                
                 // Create a new item with empty values
                 var newItem = {
                     psospecials_connection_object: connection_object,
@@ -504,11 +530,43 @@ sap.ui.define([
                     fuseSize: "",   // For the Input field
                     fuseType: "",  // For the ComboBox
                     fuseVoltage: "",// For the ComboBox
-                    fuseSeqNo: this.sequenceCounter++
+                    fuseCurve: "",
+                    fuseSeqNo: String(this.sequenceCounter).padStart(4, '0')
                 };              
                 aData.push(newItem);
                 oSpecialsjmodel.setProperty("/fuses", aData);
             },
+
+            onAddnewTransRow:function(){
+                var oSpecialsjmodel = this.getView().getModel("oSpecialsjmodel");
+                var aData = oSpecialsjmodel.getProperty("/transformers") || []; // Get current items
+                const connection_object = oSpecialsjmodel.getData().connection_object;
+                const recordID = oSpecialsjmodel.getData().ID;
+                this.TransSequenceCounter = 0;
+                if (aData.length === 0) {
+                    this.TransSequenceCounter = 1;
+                } else {
+                    this.TransSequenceCounter = aData.length;
+                    this.TransSequenceCounter = this.TransSequenceCounter+1;
+                }
+                
+                // Create a new item with empty values
+                var newItem = {
+                    psospecials_connection_object: connection_object,
+                    psospecials_ID: recordID, //this is the Specials UUID 
+                    transSeqNo : String(this.TransSequenceCounter).padStart(4, '0'),
+                    manufacturer: "",   
+                    imped : "",  
+                    primVolt: "",
+                    secVolt: "",
+                    taps: "",
+                    kva: "",
+                    type: "",
+                    serial: "",
+                };              
+                aData.push(newItem);
+                oSpecialsjmodel.setProperty("/transformers", aData);
+            }
            
         
 

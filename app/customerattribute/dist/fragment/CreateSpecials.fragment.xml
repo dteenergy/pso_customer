@@ -242,28 +242,30 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idLBDSubSection_CS"
-                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        titleUppercase="false"
+                        class="sapUxAPObjectPageSubSectionHeader1"
+                    >
                         <x:actions>
-                        <RadioButtonGroup
-                                        id="idRadio1_CS"
-                                        columns="5"
-                                    >
-                                        <RadioButton
-                                            id="iddeCoOwned_CS"
-                                            text="{i18n>CS_DTEOwned}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'DTE Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idCustomerOwned2_CS"
-                                            text="{i18n>CS_CustomerOwned}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'Customer Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idNone_CS"
-                                            text="{i18n>CS_None}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
-                                        />
-                                    </RadioButtonGroup>
+                            <RadioButtonGroup
+                                id="idRadio1_CS"
+                                columns="5"
+                            >
+                                <RadioButton
+                                    id="iddeCoOwned_CS"
+                                    text="{i18n>CS_DTEOwned}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'DTE Owned' ? true : false}"
+                                />
+                                <RadioButton
+                                    id="idCustomerOwned2_CS"
+                                    text="{i18n>CS_CustomerOwned}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'Customer Owned' ? true : false}"
+                                />
+                                <RadioButton
+                                    id="idNone_CS"
+                                    text="{i18n>CS_None}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByLBD} === 'None' ? true : false}"
+                                />
+                            </RadioButtonGroup>
                         </x:actions>
                         <x:blocks>
                             <form:SimpleForm
@@ -281,7 +283,7 @@
                                 <form:content>
                                     <core:Title id="idcoreTLBD1_CS" />
                                     <!-- <Label id="idRadiobutton_CS" /> -->
-                                    
+
                                     <Label
                                         id="idlblMFG_CS"
                                         text="{i18n>CS_Manufacturer}"
@@ -380,7 +382,7 @@
                                     <ComboBox
                                         id="idBil_CS"
                                         items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_LBDBIL'}] }"
-                                        selectedKey="{oSpecialsjmodel>/manufacturer}"
+                                        selectedKey="{oSpecialsjmodel>/bilLBD}"
                                     >
                                         <core:Item
                                             id="iditemdBil_CS"
@@ -433,23 +435,25 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idCBSubSection_CS"
-                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        titleUppercase="false"
+                        class="sapUxAPObjectPageSubSectionHeader1"
+                    >
                         <x:actions>
-                        <RadioButtonGroup
-                                        id="grop5CPSR_CS"
-                                        columns="5"
-                                    >
-                                        <RadioButton
-                                            id="idDecoOwned_CS"
-                                            text="{i18n>CS_DTEOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
-                                        />
-                                        <RadioButton
-                                            id="idCustomer_CS"
-                                            text="{i18n>CS_CustomerOwned_CB}"
-                                            selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
-                                        />
-                                    </RadioButtonGroup>
+                            <RadioButtonGroup
+                                id="grop5CPSR_CS"
+                                columns="5"
+                            >
+                                <RadioButton
+                                    id="idDecoOwned_CS"
+                                    text="{i18n>CS_DTEOwned_CB}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByCB} === 'DTE Owned' ? true : false}"
+                                />
+                                <RadioButton
+                                    id="idCustomer_CS"
+                                    text="{i18n>CS_CustomerOwned_CB}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByCB} === 'Customer Owned' ? true : false}"
+                                />
+                            </RadioButtonGroup>
                         </x:actions>
                         <x:blocks>
                             <form:SimpleForm
@@ -467,7 +471,7 @@
                                 <form:content>
                                     <core:Title id="idcoreTCB1_CS" />
                                     <!-- <Label id="idlblRadioCB_CS" /> -->
-                                    <Label id="idCB1_CS"/>
+                                    <Label id="idCB1_CS" />
                                     <RadioButtonGroup
                                         id="goup6CPSR_CS"
                                         columns="5"
@@ -494,8 +498,7 @@
                                             selected="{= ${oSpecialsjmodel>/fuelTypeCB} === 'SF6' ? true : false}"
                                         />
                                     </RadioButtonGroup>
-                                    
-                                    
+
                                     <Label
                                         id="idlblCBM_CS"
                                         text="{i18n>CS_CBM}"
@@ -516,7 +519,7 @@
                                     />
 
                                     <core:Title id="idcoreTCB2_CS" />
-                                    
+
                                     <Label
                                         id="idlblKAMome_CS"
                                         text="{i18n>CS_KAMomentary}"
@@ -546,7 +549,7 @@
                                     />
 
                                     <core:Title id="idcoreTCB3_CS" />
-                                    
+
                                     <Label
                                         id="idlblFaultDuty_CS"
                                         text="{i18n>CS_FaultDuty}"
@@ -770,13 +773,21 @@
                 id="idPageSectionFusesAtLBD_CS"
                 titleUppercase="false"
                 title="{i18n>CS_Fuses_At_LBD}"
-                visible="true"
+                visible="true" 
             >
-                <x:subSections>
+                <x:subSections >
                     <x:ObjectPageSubSection
                         id="idFusesAtLBDSubSection_CS"
-                        titleUppercase="false"
+                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1"
                     >
+                    <x:actions>
+                    <Button
+                            id="idbtn_addnewRow_Fuses"
+                            type="Emphasized"
+                            icon="sap-icon://add"
+                            press="onAddnewFusesRow"
+                            visible="true"/>
+                    </x:actions>
                         <x:blocks>
                             <Table
                                 id="idTFusesAtLb_CS"
@@ -784,36 +795,30 @@
                                 showNoData="true"
                                 items="{oSpecialsjmodel>/fuses}"
                             >
-                                <headerToolbar>
+                                <!-- <headerToolbar>
                                     <Toolbar id="_IDGenToolbar_addrow_CS">
                                         <content>
                                             <ToolbarSpacer
                                                 id="_IDGenToolbarSpacer_Addrow_CS"
                                             />
-                                            <Button
-                                                id="idbtn_addnewRow_Fuses"
-                                                type="Emphasized"
-                                                icon="sap-icon://add"
-                                                press="onAddnewFusesRow"
-                                                visible="true"
-                                            />
+                                            
                                         </content>
                                     </Toolbar>
-                                </headerToolbar>
+                                </headerToolbar> -->
 
                                 <columns>
-                                <Column id="idSequenceno_CO">
+                                    <Column id="idSequenceno_CO">
                                         <Label
                                             id="idlSequenceno_CS_CO"
                                             text="Sequence No"
                                         />
                                     </Column>
-                                    <Column id="id21CPSR_CO">
+                                    <!-- <Column id="id21CPSR_CO">
                                         <Label
                                             id="idlblsize_CS_CO"
                                             text="Billing Entity"
                                         />
-                                    </Column>
+                                    </Column> -->
                                     <Column id="id21CPSR">
                                         <Label
                                             id="idlblsize_CS"
@@ -840,36 +845,32 @@
                                     </Column>
                                 </columns>
                                 <items>
-                                    <ColumnListItem id="cliFuses_CS">
+                                    <ColumnListItem >
                                         <cells>
-                                        <Text
-                                                id="idSeqNo_CO"
+                                            <Text
                                                 text="{oSpecialsjmodel>fuseSeqNo}"
                                             />
-                                            <Text
-                                                id="idFuse_CO"
+                                            <!-- <Text
                                                 text="{oSpecialsjmodel>psospecials_connection_object}"
-                                            />
+                                            /> -->
                                             <Input
-                                                id="idTsize_CS"
                                                 value="{oSpecialsjmodel>fuseSize}"
                                             />
-             <Select id="idTType_CS"
-  forceSelection="false"
-  selectedKey="{oSpecialsjmodel>fuseType}"
-  items="{
-            path :'dropDownJsonModel>/DropdownData', 
-            sorter: { path: 'device' }, 
-            filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] 
-          }"
-  change="onFuseTypeChange"
->
-  <core:ListItem
-    id="idTypeitem_CS"
-    key="{dropDownJsonModel>value}"
-    text="{dropDownJsonModel>value}"
-  />
-</Select>
+                                            <Select
+                                                forceSelection="false"
+                                                selectedKey="{oSpecialsjmodel>fuseType}"
+                                                items="{
+                                                    path :'dropDownJsonModel>/DropdownData', 
+                                                    sorter: { path: 'device' }, 
+                                                    filters: [{path: 'desc', operator: 'EQ', value1: 'FUSE TYPE'}] 
+                                                }"
+                                                change="onFuseTypeChange"
+                                            >
+                                                <core:ListItem
+                                                    key="{dropDownJsonModel>value}"
+                                                    text="{dropDownJsonModel>value}"
+                                                />
+                                            </Select>
 
                                             <!-- <ComboBox
                                                 id="idTType_CS"
@@ -883,23 +884,19 @@
                                                 />
                                             </ComboBox> -->
                                             <ComboBox
-                                                id="idTCurve_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_FUSCURVE'}] }"
                                                 selectedKey="{oSpecialsjmodel>fuseCurve}"
                                             >
                                                 <core:Item
-                                                    id="idCurveitem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
                                             <ComboBox
-                                                id="idTVoltage_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_FUSVOL'}] }"
                                                 selectedKey="{oSpecialsjmodel>fuseVoltage}"
                                             >
                                                 <core:Item
-                                                    id="idCVoltageitem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
@@ -931,39 +928,63 @@
                 id="idPageSectionTrans_CS"
                 titleUppercase="false"
                 title="{i18n>CS_Transformer}"
-                visible="true" >
+                visible="true"
+            >
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idTransSubSection_CS"
-                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        titleUppercase="false"
+                        class="sapUxAPObjectPageSubSectionHeader1"
+                    >
                         <x:actions>
-                        <RadioButtonGroup
-                                            id="idOwnedGrp"
-                                            columns="4"
-                                        >
-                                            <RadioButton
-                                                id="idDteOwned_CS"
-                                                text="{i18n>CS_DTEOwned}"
-                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'DTE Owned' ? true : false}"
-                                            />
-                                            <RadioButton
-                                                id="idCustomerOwned_CS"
-                                                text="{i18n>CS_CustomerOwned}"
-                                                selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
-                                            />
-                                        </RadioButtonGroup>
+                        <HBox id="_IDGenHBox_CS">
+                            <RadioButtonGroup
+                                id="idOwnedGrp"
+                                columns="4"
+                            >
+                                <RadioButton
+                                    id="idDteOwned_CS"
+                                    text="{i18n>CS_DTEOwned}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'DTE Owned' ? true : false}"
+                                />
+                                <RadioButton
+                                    id="idCustomerOwned_CS"
+                                    text="{i18n>CS_CustomerOwned}"
+                                    selected="{= ${oSpecialsjmodel>/ownedByTransformer} === 'Customer Owned' ? true : false}"
+                                />
+                            </RadioButtonGroup>
+                            <Button
+                                    id="idbtn_addnewRow_Trans"
+                                    type="Emphasized"
+                                    icon="sap-icon://add"
+                                    press="onAddnewTransRow"
+                                    visible="true"/>
+                                    </HBox>
                         </x:actions>
                         <x:blocks>
                             <Table
                                 id="tablTrans"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                items="{oSpecialsjmodel>/transformers}"
                             >
-                                <headerToolbar>
-                                    <!-- <Toolbar id="_IDGenToolbar1">
-                                    </Toolbar> -->
-                                </headerToolbar>
+                                <!-- <headerToolbar>
+                                    <Toolbar id="_IDGenToolbar_addrowRTrans_CS">
+                                        <content>
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer_AddrowTran_CS"
+                                            />
+                                            
+                                        </content>
+                                    </Toolbar>
+                                </headerToolbar> -->
                                 <columns>
+                                <Column id="idSequencenoTrans_CO">
+                                        <Label
+                                            id="idlSequencenoTrans_CS_CO"
+                                            text="Sequence No"
+                                        />
+                                    </Column>
                                     <Column id="idColumnManufacturer_CS">
                                         <Label
                                             id="idlblManufacturer_CS"
@@ -1018,67 +1039,60 @@
                                     </Column>
                                 </columns>
                                 <items>
-                                    <ColumnListItem id="idColListItem_CS">
+                                    <ColumnListItem>
                                         <cells>
-                                            <Input id="idManufacture2r_CS" />
-                                            <Input id="idImped2_CS" />
+                                        <Text
+                                                text="{oSpecialsjmodel>transSeqNo}"
+                                            />
+                                            <Input value="{oSpecialsjmodel>manufacturer}" />
+                                            <Input value="{oSpecialsjmodel>imped}" />
                                             <ComboBox
-                                                id="idPriVolt_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANPVOL'}] }"
-                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                                selectedKey="{oSpecialsjmodel>primVolt}"
                                             >
                                                 <core:Item
-                                                    id="idPriVoltItem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
                                             <ComboBox
-                                                id="idSecVolt_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANSVOL'}] }"
-                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                                selectedKey="{oSpecialsjmodel>secVolt}"
                                             >
                                                 <core:Item
-                                                    id="idSecVoltItem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
 
                                             <ComboBox
-                                                id="idTaps_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANTAPS'}] }"
-                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                                selectedKey="{oSpecialsjmodel>taps}"
                                             >
                                                 <core:Item
-                                                    id="idTapstItem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
                                             <ComboBox
-                                                id="idKva_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANKVA'}] }"
-                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                                selectedKey="{oSpecialsjmodel>kva}"
                                             >
                                                 <core:Item
-                                                    id="idKvaItem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
                                             <ComboBox
-                                                id="idType3_CS"
                                                 items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'field', operator: 'EQ', value1: 'ZPSO_CR_TRANTYP'}] }"
-                                                selectedKey="{oSpecialsjmodel>/srv_centre}"
+                                                selectedKey="{oSpecialsjmodel>type}"
                                             >
                                                 <core:Item
-                                                    id="idTypeItem_CS"
                                                     key="{dropDownJsonModel>value}"
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
-                                            <Input id="idSerial2_CS" />
+                                            <Input value="{oSpecialsjmodel>serial}" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>

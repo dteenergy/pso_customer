@@ -6,7 +6,7 @@ sap.ui.define([
     'sap/ui/export/library',
     'sap/ui/model/Sorter'
 ],
-    function (Controller, Fragment, Filter,Spreadsheet,library,Sorter) {
+    function (Controller, Fragment, Filter, Spreadsheet, library, Sorter) {
         "use strict";
 
         return Controller.extend("com.pso.changelog.controller.filterinterface", {
@@ -17,22 +17,22 @@ sap.ui.define([
                 this.readApprByVH();
                 // this.checkAuth();
             },
-            EdmType : library.EdmType,
-            checkAuth : function(){
+            EdmType: library.EdmType,
+            checkAuth: function () {
                 let oContext = this.getOwnerComponent().getModel().bindContext('/userDetails(...)');
                 var that = this;
-                oContext.execute().then((context)=>{
+                oContext.execute().then((context) => {
                     let data = oContext.getBoundContext().getObject();
-                    if(data.hasCustomerDisplayAccess  & data.hasSpecialsDisplayAccess){
-                        that.localModel.setProperty('/filterVisible',{
-                            'apprvBy' : false,
-                            'recrdStats' : false
+                    if (data.hasCustomerDisplayAccess & data.hasSpecialsDisplayAccess) {
+                        that.localModel.setProperty('/filterVisible', {
+                            'apprvBy': false,
+                            'recrdStats': false
                         })
                     }
-                    else{
-                        that.localModel.setProperty('/filterVisible',{
-                            'apprvBy' : true,
-                            'recrdStats' : true
+                    else {
+                        that.localModel.setProperty('/filterVisible', {
+                            'apprvBy': true,
+                            'recrdStats': true
                         })
                     }
                 })
@@ -74,27 +74,27 @@ sap.ui.define([
 
                 }
             },
-            readApprByVH: function (aFilters,aSort) {
+            readApprByVH: function (aFilters, aSort) {
                 let data = this.model.bindList('/PSOSpecials', undefined, undefined, aFilters);
-                if(aSort){
+                if (aSort) {
                     data.sort(aSort);
                 }
                 let aData = [];
                 let oApprBy = { 'dataToDisplay': [] };
                 let oConnObj = { 'dataToDisplay': [] };
-                let oRecStats = { 'dataToDisplay': [{key: 'All', text: 'All'}] };
+                let oRecStats = { 'dataToDisplay': [{ key: 'All', text: 'All' }] };
                 let oCustName = { 'dataToDisplay': [] };
                 let oStreetNumber = { 'dataToDisplay': [] };
                 let oStreetName = { 'dataToDisplay': [] };
                 data.requestContexts(0, Infinity).then(function (aContext) {
                     aContext.forEach(context => {
                         let data = context.getObject();
-                        data.createdAt  = data.createdAt != null ? new Date(data.createdAt).toLocaleString() : data.createdAt;
+                        data.createdAt = data.createdAt != null ? new Date(data.createdAt).toLocaleString() : data.createdAt;
                         data.approvedOn = data.approvedOn != null ? new Date(data.approvedOn).toLocaleString() : data.approvedOn;
                         aData.push(data);
 
                         let appryBy = context.getObject()['approvedBy'];
-                        if(appryBy != null){
+                        if (appryBy != null && appryBy != "") {
                             if (!oApprBy.hasOwnProperty(appryBy)) {
                                 oApprBy[appryBy] = context.getObject()['approvedBy'];
                                 oApprBy['dataToDisplay'].push({
@@ -102,10 +102,10 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
                         let connObj = context.getObject()['connection_object'];
-                        if(connObj != null){
+                        if (connObj != null && connObj != "") {
                             if (!oConnObj.hasOwnProperty(connObj)) {
                                 oConnObj[connObj] = context.getObject()['connection_object'];
                                 oConnObj['dataToDisplay'].push({
@@ -113,10 +113,10 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
                         let customerName = context.getObject()['customerName'];
-                        if(customerName != null){
+                        if (customerName != null && customerName != "") {
                             if (!oCustName.hasOwnProperty(customerName)) {
                                 oCustName[customerName] = context.getObject()['customerName'];
                                 oCustName['dataToDisplay'].push({
@@ -124,10 +124,10 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
                         let streetNumber = context.getObject()['streetNumber'];
-                        if(streetNumber != null){
+                        if (streetNumber != null && streetNumber != "") {
                             if (!oStreetNumber.hasOwnProperty(streetNumber)) {
                                 oStreetNumber[streetNumber] = context.getObject()['streetNumber'];
                                 oStreetNumber['dataToDisplay'].push({
@@ -135,10 +135,10 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
                         let streetName = context.getObject()['streetName'];
-                        if(streetName != null){
+                        if (streetName != null && streetName != "") {
                             if (!oStreetName.hasOwnProperty(streetName)) {
                                 oStreetName[streetName] = context.getObject()['streetName'];
                                 oStreetName['dataToDisplay'].push({
@@ -146,10 +146,10 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
                         let record_status = context.getObject()['record_status'];
-                        if(record_status != null){
+                        if (record_status != null && record_status != "") {
                             if (!oRecStats.hasOwnProperty(record_status.toLowerCase())) {
                                 oRecStats[record_status.toLowerCase()] = context.getObject()['record_status'].toLowerCase();
                                 oRecStats['dataToDisplay'].push({
@@ -158,7 +158,7 @@ sap.ui.define([
                                 })
                             }
                         }
-                        
+
 
 
                     });
@@ -175,11 +175,11 @@ sap.ui.define([
                         this.localModel.setProperty('/tableItemsCount', `Items(${aData.length})`);
                         this.localModel.setProperty('/PSOSpecials', aData);
                         this.byId('idTable').setBusy(false);
-                        if(aData.length > 0) {
+                        if (aData.length > 0) {
                             this.byId('idExcel').setEnabled(true);
                             this.byId('idSort').setEnabled(true);
                         }
-                        
+
                     }
 
                     // this.byId('idTable').bindAggregation("items", {
@@ -276,10 +276,10 @@ sap.ui.define([
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     // this.onValueHelpOkPress();
                                     this.apprDialog.getButtons()[0].firePress({
-                                        mParameters : {
-                                            tokens : this.apprDialog._getTokenizer().getTokens(),
-                                            _tokensHaveChanged : this.apprDialog._bInitTokensHaveChanged,
-                                            id : this.apprDialog.getId()
+                                        mParameters: {
+                                            tokens: this.apprDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged: this.apprDialog._bInitTokensHaveChanged,
+                                            id: this.apprDialog.getId()
                                         }
                                     })
                                 }.bind(this));
@@ -371,10 +371,10 @@ sap.ui.define([
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     // this.onValueHelpOkPress();
                                     this.conObjDialog.getButtons()[0].firePress({
-                                        mParameters : {
-                                            tokens : this.conObjDialog._getTokenizer().getTokens(),
-                                            _tokensHaveChanged : this.conObjDialog._bInitTokensHaveChanged,
-                                            id : this.conObjDialog.getId()
+                                        mParameters: {
+                                            tokens: this.conObjDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged: this.conObjDialog._bInitTokensHaveChanged,
+                                            id: this.conObjDialog.getId()
                                         }
                                     })
                                 }.bind(this))
@@ -424,10 +424,10 @@ sap.ui.define([
                     this.conObjDialog.open();
                 }
             },
-            onValueHelpCustName : function(oEvent){
+            onValueHelpCustName: function (oEvent) {
                 this._tokensForInput = oEvent.getSource().getId();
 
-                if(!this.custNameDialog){
+                if (!this.custNameDialog) {
                     Fragment.load({
                         name: "com.pso.changelog.fragments.custName",
                         type: "XML",
@@ -449,13 +449,13 @@ sap.ui.define([
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     // this.onValueHelpOkPress();
                                     this.custNameDialog.getButtons()[0].firePress({
-                                        mParameters : {
-                                            tokens : this.custNameDialog._getTokenizer().getTokens(),
-                                            _tokensHaveChanged : this.custNameDialog._bInitTokensHaveChanged,
-                                            id : this.custNameDialog.getId()
+                                        mParameters: {
+                                            tokens: this.custNameDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged: this.custNameDialog._bInitTokensHaveChanged,
+                                            id: this.custNameDialog.getId()
                                         }
                                     })
-                                    
+
                                 }.bind(this))
                                 oTable.setSelectionMode('Single');
                                 oTable.bindAggregation("rows", {
@@ -499,14 +499,14 @@ sap.ui.define([
                         this.custNameDialog.open()
                     })
                 }
-                else{
+                else {
                     this.custNameDialog.open();
                 }
             },
-            onValueHelpStreet : function(oEvent){
+            onValueHelpStreet: function (oEvent) {
                 this._tokensForInput = oEvent.getSource().getId();
 
-                if(!this.oStreetNbrDialog){
+                if (!this.oStreetNbrDialog) {
                     Fragment.load({
                         name: "com.pso.changelog.fragments.street",
                         type: "XML",
@@ -528,10 +528,10 @@ sap.ui.define([
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     // this.onValueHelpOkPress();
                                     this.oStreetNbrDialog.getButtons()[0].firePress({
-                                        mParameters : {
-                                            tokens : this.oStreetNbrDialog._getTokenizer().getTokens(),
-                                            _tokensHaveChanged : this.oStreetNbrDialog._bInitTokensHaveChanged,
-                                            id : this.oStreetNbrDialog.getId()
+                                        mParameters: {
+                                            tokens: this.oStreetNbrDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged: this.oStreetNbrDialog._bInitTokensHaveChanged,
+                                            id: this.oStreetNbrDialog.getId()
                                         }
                                     })
                                 }.bind(this))
@@ -577,14 +577,14 @@ sap.ui.define([
                         this.oStreetNbrDialog.open()
                     })
                 }
-                else{
+                else {
                     this.oStreetNbrDialog.open();
                 }
             },
-            onValueHelpStreetAddr : function(oEvent){
+            onValueHelpStreetAddr: function (oEvent) {
                 this._tokensForInput = oEvent.getSource().getId();
 
-                if(!this.oStreetAddrDialog){
+                if (!this.oStreetAddrDialog) {
                     Fragment.load({
                         name: "com.pso.changelog.fragments.streetAddress",
                         type: "XML",
@@ -606,10 +606,10 @@ sap.ui.define([
                                 oTable.attachRowSelectionChange(function (oEvent) {
                                     // this.onValueHelpOkPress();
                                     this.oStreetAddrDialog.getButtons()[0].firePress({
-                                        mParameters : {
-                                            tokens : this.oStreetAddrDialog._getTokenizer().getTokens(),
-                                            _tokensHaveChanged : this.oStreetAddrDialog._bInitTokensHaveChanged,
-                                            id : this.oStreetAddrDialog.getId()
+                                        mParameters: {
+                                            tokens: this.oStreetAddrDialog._getTokenizer().getTokens(),
+                                            _tokensHaveChanged: this.oStreetAddrDialog._bInitTokensHaveChanged,
+                                            id: this.oStreetAddrDialog.getId()
                                         }
                                     })
                                 }.bind(this))
@@ -655,7 +655,7 @@ sap.ui.define([
                         this.oStreetAddrDialog.open()
                     })
                 }
-                else{
+                else {
                     this.oStreetAddrDialog.open();
                 }
             },
@@ -675,16 +675,16 @@ sap.ui.define([
                         if (this._tokensForInput.includes('idConnObj')) {
                             oDialog = this.conObjDialog;
                         }
-                        else if(this._tokensForInput.includes('idApprBy')){
+                        else if (this._tokensForInput.includes('idApprBy')) {
                             oDialog = this.apprDialog;
                         }
-                        else if(this._tokensForInput.includes('idCustName')){
+                        else if (this._tokensForInput.includes('idCustName')) {
                             oDialog = this.custNameDialog;
                         }
-                        else if(this._tokensForInput.includes('idStreet')){
+                        else if (this._tokensForInput.includes('idStreet')) {
                             oDialog = this.oStreetNbrDialog
                         }
-                        else if(this._tokensForInput.includes('idStreetAddr')){
+                        else if (this._tokensForInput.includes('idStreetAddr')) {
                             oDialog = this.oStreetAddrDialog;
                         }
                         this.byId(this._tokensForInput).setTokens(oDialog._getTokenizer().getTokens());
@@ -707,14 +707,14 @@ sap.ui.define([
                     connection_object: oEvent.getParameters().listItem.getBindingContext('localModel').getObject().connection_object
                 })
             },
-            onFilterBarClear : function(oEvent){
+            onFilterBarClear: function (oEvent) {
                 this.byId('idExcel').setEnabled(false);
                 this.byId('idSort').setEnabled(false);
-                oEvent.mParameters.selectionSet.forEach(filter=>{
-                    if(filter.getMetadata().getName().toLowerCase().includes('multiinput')){
+                oEvent.mParameters.selectionSet.forEach(filter => {
+                    if (filter.getMetadata().getName().toLowerCase().includes('multiinput')) {
                         filter.removeAllTokens();
                     }
-                    else if(filter.getMetadata().getName().toLowerCase().includes('select')){
+                    else if (filter.getMetadata().getName().toLowerCase().includes('select')) {
                         filter.setSelectedKey('Approved');
                     }
                 });
@@ -736,29 +736,29 @@ sap.ui.define([
                 oEvent.getParameter('selectionSet').forEach(filterItem => {
                     if (!filterItem.getMetadata().getName().toLowerCase().includes('select')) {
                         filterItem.getTokens().forEach(token => {
-                            
-                                aFilters.push(
+
+                            aFilters.push(
                                 new Filter(filterItem.getParent().getName(), 'EQ', token.getKey())
                             )
-                        
+
                         })
                     }
                     else {
-                        if(filterItem.getSelectedItem().getKey() != 'All'){
-                        aFilters.push(
-                            new Filter(filterItem.getParent().getName(), 'EQ', filterItem.getSelectedItem().getKey())
-                        )
-                    }
+                        if (filterItem.getSelectedItem().getKey() != 'All') {
+                            aFilters.push(
+                                new Filter(filterItem.getParent().getName(), 'EQ', filterItem.getSelectedItem().getKey())
+                            )
+                        }
                     }
 
                 });
 
                 // this.byId('idTable').getBinding('items').filter(aFilters);
                 this.aFilters = aFilters;
-                this.readApprByVH(aFilters,[]);
+                this.readApprByVH(aFilters, []);
                 this.byId('idTable').setShowOverlay(false);
             },
-            onTokenUpdate: function (oEvent) { 
+            onTokenUpdate: function (oEvent) {
                 let tokenLen;
                 if (oEvent.getParameter('type') == 'removed') {
                     tokenLen = oEvent.getSource().getTokens().length - 1;
@@ -781,7 +781,7 @@ sap.ui.define([
                             this.conObjDialog.getTable()._updateSelection();
                         }
                     }
-                    
+
                     if (oEvent.getSource().getParent().getName() == 'customerName') {
                         if (this.custNameDialog) {
                             this.custNameDialog._getTokenizer().removeAllTokens();
@@ -811,19 +811,19 @@ sap.ui.define([
 
                 }
             },
-            onExcelDownload : function(oEvent){
+            onExcelDownload: function (oEvent) {
                 let aColumns = this.byId('idTable').getColumns();
                 let aCells = this.byId('idTable').getItems()[0].getCells();
-                this.createColumnConfig(aColumns,aCells);  
+                this.createColumnConfig(aColumns, aCells);
             },
-            createColumnConfig : function(aColumns,aCells){
+            createColumnConfig: function (aColumns, aCells) {
                 let aCols = [];
 
-                aColumns.forEach((column,index)=>{
+                aColumns.forEach((column, index) => {
                     aCols.push({
-                        label : column.getHeader().getText(),
-                        property : aCells[index].getBindingInfo('text').parts[0].path,
-                        width : 25
+                        label: column.getHeader().getText(),
+                        property: aCells[index].getBindingInfo('text').parts[0].path,
+                        width: 25
                     })
                 });
 
@@ -831,47 +831,81 @@ sap.ui.define([
                     workbook: {
                         columns: aCols,
                         hierarchyLevel: 'Level',
-                        context : {
-                            sheetName : 'PSOSpecials'
+                        context: {
+                            sheetName: 'PSOSpecials'
                         }
                     },
                     dataSource: this.localModel.getData().PSOSpecials,
                     fileName: 'PSOSpecials.xlsx',
                     worker: false // We need to disable worker because we are using a MockServer as OData Service
                 };
-    
+
                 var oSheet = new Spreadsheet(oSettings);
-                oSheet.build().finally(function() {
+                oSheet.build().finally(function () {
                     oSheet.destroy();
                 });
                 // debugger;
-                
-                
+
+
             },
-            onTableSortConfirm : function(oEvent){
+            onTableSortConfirm: function (oEvent) {
                 this.byId('idTable').setBusy(true);
                 let isDesc = oEvent.getParameter('sortDescending');
                 let sortProp = oEvent.getParameter('sortItem').getKey();
-                this.readApprByVH(this.aFilters,[new Sorter(sortProp,isDesc)]);
+                this.readApprByVH(this.aFilters, [new Sorter(sortProp, isDesc)]);
                 // this.onFilterBarSearch(undefined,[new Sorter(sortProp,isDesc)]);
-                debugger;
             },
-            onSort : function(oEvent){
-                if(!this.sortDialog){
+            onSort: function (oEvent) {
+                if (!this.sortDialog) {
                     Fragment.load({
                         name: "com.pso.changelog.fragments.TableSort",
                         type: "XML",
                         controller: this
-                    }).then(oDialog=>{
+                    }).then(oDialog => {
                         this.sortDialog = oDialog;
                         this.getView().addDependent(this.sortDialog);
                         this.sortDialog.open();
                     })
                 }
-                else{
+                else {
                     this.sortDialog.open();
                 }
-                
+
+            },
+            onSearFieldInTable: function (oEvent) {
+                let query = oEvent.getParameter('query');
+                let aFilters = [];
+                let aCells = [];
+                if (this.byId('idTable').getItems().length > 0) {
+                    aCells = this.byId('idTable').getItems()[0].getCells();
+                }
+
+
+                aCells.forEach((property) => {
+                    let path = property.getBindingInfo('text').parts[0].path
+                    if (path != 'approvedOn' && path !== 'createdAt') {
+                        let aCheck = aFilters.filter(item => { return aFilters[0].getPath() == path })
+                        if (aCheck == 0) {
+                            aFilters.push(
+                                new Filter(
+                                    {
+                                        path: path,
+                                        operator: 'Contains',
+                                        value1: query,
+                                        and : false
+                                    }
+                                )
+                            )
+                        }
+
+                    }
+                });
+
+                this.readApprByVH([new Filter({
+                    filters : aFilters,
+                    and : false
+                }),...this.aFilters], []);
+
             }
         });
     });
