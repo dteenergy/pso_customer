@@ -30,8 +30,10 @@
                                 <m:Label text="Work Description"></m:Label>
                                 <m:Text text="{work_desc}"></m:Text>
 
-                                <m:Label text="Meter Number"></m:Label>
+                                <m:Label text="Meter Number 1"></m:Label>
                                 <m:Text text="{meter_number}"></m:Text>
+                                <m:Label id="idlblMeterNo2_DS" text="{i18n>CS_MeterNo2}" />
+                                <m:Text id="idMeterNo2_DS" text="{meter_number2}" />
                                 <m:Label text="FED From"></m:Label>
                                 <m:Text text="{fedFrom}"></m:Text>
 
@@ -40,9 +42,9 @@
                                 <m:Text text="{cableDescription}"></m:Text>
                                 <m:Label text="Cable Footage"></m:Label>
                                 <m:Text text="{cableFootage}"></m:Text>
-                                <m:Label text="CTS"></m:Label>
+                                <m:Label text="CT's"></m:Label>
                                 <m:Text text="{cts}"></m:Text>
-                                <m:Label text="PTS"></m:Label>
+                                <m:Label text="PT's"></m:Label>
                                 <m:Text text="{pts}"></m:Text>
                                 <m:Label text="K"></m:Label>
                                 <m:Text text="{k}"></m:Text>
@@ -132,10 +134,10 @@
                                     <core:Title ></core:Title>
                                     <m:Label text="Load Int Rating"></m:Label>
                                     <m:Text text="{loadIntRating}"></m:Text>
-                                    <m:Label text="kA Momentary LBD"></m:Label>
+                                    <m:Label text="KA Momentary"></m:Label>
                                     <m:Text text="{kAMomentaryLBD}"></m:Text>
 
-                                    <m:Label text="LBD Type"></m:Label>
+                                    <m:Label text="Type"></m:Label>
                                     <m:Text text="{typeLBD}"></m:Text>
                                     <m:Label text="Fault Closing"></m:Label>
                                     <m:Text text="{faultClosing}"></m:Text>
@@ -195,83 +197,48 @@
             <ObjectPageSection titleUppercase="false" title="Circuit Breaker">
                 <subSections>
                     <ObjectPageSubSection titleUppercase="false">
+                    <actions>
+                            <m:RadioButtonGroup id="rbg7" columns="5" valueState="Information" editable="false">
+                                <m:RadioButton  text="DTE Owned" class="sapUiSmallMarginEnd" selected="true" />
+                                <m:RadioButton  text="Customer Owned" class="sapUiSmallMarginEnd" />
+                            </m:RadioButtonGroup>
+                        </actions>
                         <blocks>
                             <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
-                                 <core:Title id="idcoreTCB1_DS" />
-                                    <!-- <m:Label id="idlblRadioCB_DS" /> -->
-                                    <m:Label id="idCB1_DS" />
-                                    <m:RadioButtonGroup
-                                        id="goup6CPSR_DS"
-                                        columns="5"
-                                        enabled="false"
-                                    >
-                                        <m:RadioButton
-                                            id="idAir_DS"
-                                            text="{i18n>CS_Air}"
-                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectAIR'}"
-                                        />
-                                        <m:RadioButton
-                                            id="idOil_DS"
-                                            text="{i18n>CS_Oil}"
-                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectOIL'}"
-                                        />
-                                        <m:RadioButton
-                                            id="idVac_DS"
-                                            text="{i18n>CS_Vac}"
-                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectVAC'}"
-                                        />
-                                        <m:RadioButton
-                                            id="idsf6_DS"
-                                            text="{i18n>CS_Sf6}"
-                                            selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectSF6'}"
-                                        />
-                                    </m:RadioButtonGroup>
-
-                                    
-                                    
-                                    <m:Label
-                                        id="idlblCBM_DS"
-                                        text="{i18n>CS_CBM}"
-                                    />
-                                    <m:Text id="idCBM_DS" text="{circuitBreakerMake}"/>
-                                    <m:Label
-                                        id="idlblSNo_DS"
-                                        text="{i18n>CS_Serialno}"
-                                    />
-                                    <m:Text id="idSerialNo_DS" text="{serialNo}"/>
+                                <core:Title id="idcoreTCB1_DS" />
+                                <!-- <m:Label id="idlblRadioCB_DS" /> -->
+                                <m:Label id="idCB1_DS" />
+                                <m:RadioButtonGroup id="goup6CPSR_DS" columns="5" enabled="false">
+                                    <m:RadioButton id="idAir_DS" text="{i18n>CS_Air}" selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectAIR'}" />
+                                    <m:RadioButton id="idOil_DS" text="{i18n>CS_Oil}" selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectOIL'}" />
+                                    <m:RadioButton id="idVac_DS" text="{i18n>CS_Vac}" selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectVAC'}" />
+                                    <m:RadioButton id="idsf6_DS" text="{i18n>CS_Sf6}" selected="{path:'fuelTypeCB', targetType: 'any', formatter : '.selectSF6'}" />
+                                </m:RadioButtonGroup>
 
 
-                                    <core:Title id="idcoreTCB2_DS" />
-                                    
-                                    <m:Label
-                                        id="idlblKAMome_DS"
-                                        text="{i18n>CS_KAMomenetary}"
-                                    />
-                                    <m:Text id="idKAMome_DS" text="{kAMomentaryCB}"/>
 
-                                    <m:Label
-                                        id="idlblAmps_DS"
-                                        text="{i18n>CS_Amps}"
-                                    />
-                                    <m:Text id="idAmps_DS" text="{amps}"/>
-                                    <m:Label
-                                        id="idlblType4_DS"
-                                        text="{i18n>CS_Type4}"
-                                    />
-                                    <m:Text id="idType4_DS" text="{typeCB}"/>
+                                <m:Label id="idlblCBM_DS" text="{i18n>CS_CBM}" />
+                                <m:Text id="idCBM_DS" text="{circuitBreakerMake}"/>
+                                <m:Label id="idlblSNo_DS" text="{i18n>CS_Serialno}" />
+                                <m:Text id="idSerialNo_DS" text="{serialNo}"/>
 
-                                    <core:Title id="idcoreTCB3_DS" />
-                                    
-                                    <m:Label
-                                        id="idlblFaultDuty_DS"
-                                        text="{i18n>CS_FaultDuty}"
-                                    />
-                                    <m:Text id="idFaultDuty_DS" text="{faultDuty}"/>
-                                    <m:Label
-                                        id="idlblBil2_DS"
-                                        text="{i18n>CS_Bil2}"
-                                    />
-                                    <m:Text id="idBil2_DS" text="{bilCB}"/>
+
+                                <core:Title id="idcoreTCB2_DS" />
+
+                                <m:Label id="idlblKAMome_DS" text="{i18n>CS_KAMomenetary}" />
+                                <m:Text id="idKAMome_DS" text="{kAMomentaryCB}"/>
+
+                                <m:Label id="idlblAmps_DS" text="{i18n>CS_Amps}" />
+                                <m:Text id="idAmps_DS" text="{amps}"/>
+                                <m:Label id="idlblType4_DS" text="{i18n>CS_Type4}" />
+                                <m:Text id="idType4_DS" text="{typeCB}"/>
+
+                                <core:Title id="idcoreTCB3_DS" />
+
+                                <m:Label id="idlblFaultDuty_DS" text="{i18n>CS_FaultDuty}" />
+                                <m:Text id="idFaultDuty_DS" text="{faultDuty}"/>
+                                <m:Label id="idlblBil2_DS" text="{i18n>CS_Bil2}" />
+                                <m:Text id="idBil2_DS" text="{bilCB}"/>
                             </form:SimpleForm>
 
 
@@ -335,62 +302,62 @@
                             <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="3" columnsL="3" labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12">
 
                                 <core:Title id="idcoreTOther1_DS" />
-            <m:Label id="idlblAB_DS" text="{i18n>CS_AB}" />
-            <m:Text id="idAB_DS" text="{ab}"/>
-            <m:Label id="idlblBC_DS" text="{i18n>CS_BC}" />
-            <m:Text id="idBC_DS" text="{bc}"/>
-            <m:Label id="idlblCA_DS" text="{i18n>CS_CA}" />
-            <m:Text id="idCA_DS" text="{ca}"/>
-            <m:Label id="idlblAN_DS" text="{i18n>CS_AN}" />     
-            <m:Text id="idAN_DS" text="{an}"/>
-            <m:Label id="idlblBN_DS" text="{i18n>CS_BN}" />     
-            <m:Text id="idBN_DS" text="{bn}"/>
-            <m:Label id="idlbLCN_DS" text="{i18n>CS_CN}" />     
-            <m:Text id="idCN_DS" text="{cn}"/>
-            <m:Label id="idlblGround_DS" text="{i18n>CS_ground}" tooltip="Ground Mat Resistance"/>     
-            <m:Text id="idground_DS" text="{groundMatResistance}"/>
-            <m:Label id="idlblMethod_DS" text="{i18n>CS_method}" />     
-            <m:Text id="idmethod_DS" text="{methodUsed}"/>
-            <m:Label id="idlbldate_DS" text="{i18n>CS_date}" />     
-            <m:Text id="iddate_DS" text="{dateMergered}"/>
-            
-            <core:Title id="idcoreTOther2_DS" />
-            <m:Label id="idlblservice_DS" text="{i18n>CS_service}" />     
-            <m:Text id="idservice_DS" text="{typeofService}"/>
-            <m:Label id="idlblTO_DS" text="{i18n>CS_TO}" />     
-            <m:Text id="idCNTO_DS" text="{typeofTO}"/>
-            <m:Label id="idlblrep_DS" text="{i18n>CS_rep}" required="true"/>     
-            <m:Text id="idCNrep_DS" text="{primaryServiceRep}"/>
-            <m:Label id="idlblpsw_DS" text="{i18n>CS_psw}" />     
-            <m:Text id="idCNpsw_DS" text="{oCustomerAttributesJModel>/psw}"/>
-            <m:Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />     
-            <m:Text id="idcreatedby_DS" text="{createdBy}"/>
-            <m:Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />     
-            <m:Text id="idcreatedon_DS" text="{path:'createdAt', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
-            <!-- <m:Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
+                                <m:Label id="idlblAB_DS" text="{i18n>CS_AB}" />
+                                <m:Text id="idAB_DS" text="{ab}"/>
+                                <m:Label id="idlblBC_DS" text="{i18n>CS_BC}" />
+                                <m:Text id="idBC_DS" text="{bc}"/>
+                                <m:Label id="idlblCA_DS" text="{i18n>CS_CA}" />
+                                <m:Text id="idCA_DS" text="{ca}"/>
+                                <m:Label id="idlblAN_DS" text="{i18n>CS_AN}" />
+                                <m:Text id="idAN_DS" text="{an}"/>
+                                <m:Label id="idlblBN_DS" text="{i18n>CS_BN}" />
+                                <m:Text id="idBN_DS" text="{bn}"/>
+                                <m:Label id="idlbLCN_DS" text="{i18n>CS_CN}" />
+                                <m:Text id="idCN_DS" text="{cn}"/>
+                                <m:Label id="idlblGround_DS" text="{i18n>CS_ground}" tooltip="Ground Mat Resistance"/>
+                                <m:Text id="idground_DS" text="{groundMatResistance}"/>
+                                <m:Label id="idlblMethod_DS" text="{i18n>CS_method}" />
+                                <m:Text id="idmethod_DS" text="{methodUsed}"/>
+                                <m:Label id="idlbldate_DS" text="{i18n>CS_date}" />
+                                <m:Text id="iddate_DS" text="{dateMergered}"/>
+
+                                <core:Title id="idcoreTOther2_DS" />
+                                <m:Label id="idlblservice_DS" text="{i18n>CS_service}" />
+                                <m:Text id="idservice_DS" text="{typeofService}"/>
+                                <m:Label id="idlblTO_DS" text="{i18n>CS_TO}" />
+                                <m:Text id="idCNTO_DS" text="{typeofTO}"/>
+                                <m:Label id="idlblrep_DS" text="{i18n>CS_rep}" required="true"/>
+                                <m:Text id="idCNrep_DS" text="{primaryServiceRep}"/>
+                                <m:Label id="idlblpsw_DS" text="{i18n>CS_psw}" />
+                                <m:Text id="idCNpsw_DS" text="{oCustomerAttributesJModel>/psw}"/>
+                                <m:Label id="idlblcreatedby_DS" text="{i18n>CS_createdby}" />
+                                <m:Text id="idcreatedby_DS" text="{createdBy}"/>
+                                <m:Label id="idlblcreatedon_DS" text="{i18n>CS_createdon}" />
+                                <m:Text id="idcreatedon_DS" text="{path:'createdAt', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
+                                <!-- <m:Label id="idlblmodifiedby_DS" text="{i18n>CS_modifiedby}" />     
             <m:Text id="idmodifiedby_DS" text="{modifiedBy}"/>
             <m:Label id="idlblmodifiedon_DS" text="{i18n>CS_modifiedon}" />     
             <m:Text id="idmodifiedon_DS" text="{modifiedAt}"/>    -->
-            <m:Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />     
-            <m:Text id="idapproveby_DS" text="{approvedBy}"/>
-            <m:Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />     
-            <m:Text id="idapprovedate_DS" text="{path:'approvedOn', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
-            <core:Title id="idcoreTOther3_DS" />  
-            
-            <m:Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />     
-            <m:TextArea id="idApproverCmnts_DS" growing="true" value="{approverComment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
-                <!-- <layoutData>
+                                <m:Label id="idlblapproveby_DS" text="{i18n>CS_approveby}" />
+                                <m:Text id="idapproveby_DS" text="{approvedBy}"/>
+                                <m:Label id="idlblapprovedate_DS" text="{i18n>CS_approveon}" />
+                                <m:Text id="idapprovedate_DS" text="{path:'approvedOn', formatter:'com.pso.customerattribute.utils.Formatter.formatDate'}"/>
+                                <core:Title id="idcoreTOther3_DS" />
+
+                                <m:Label id="idlblApproverCmnts_DS" text="{i18n>CS_APRcomment}" />
+                                <m:TextArea id="idApproverCmnts_DS" growing="true" value="{approverComment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
+                                    <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
-            </m:TextArea>  
-            
-            <m:Label id="idlblComment_DS" text="{i18n>CS_comment}" />     
-            <m:TextArea id="idcomment_DS" growing="true" value="{comment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
-                <!-- <layoutData>
+                                </m:TextArea>
+
+                                <m:Label id="idlblComment_DS" text="{i18n>CS_comment}" />
+                                <m:TextArea id="idcomment_DS" growing="true" value="{comment}" showExceededText="false" editable="false" rows="4" maxLength="1300">
+                                    <!-- <layoutData>
                     <l:GridData id="idGridData2_DS11" span="XL5 L5 M12 S12" />
                 </layoutData> -->
-            </m:TextArea>
-                                
+                                </m:TextArea>
+
                             </form:SimpleForm>
 
                             <!-- <form:SimpleForm layout="ColumnLayout">
@@ -464,8 +431,8 @@
                         <blocks>
                             <m:Table items="{localModel>/fuses}" growingScrollToLoad="true" growing="true" growingThreshold="5">
                                 <m:columns>
-                                <m:Column>
-                                        <m:Label text="Sequence">
+                                    <m:Column>
+                                        <m:Label text="Sequence No">
                                         </m:Label>
                                     </m:Column>
                                     <m:Column>

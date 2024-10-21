@@ -123,12 +123,14 @@ sap.ui.define([
                     //this.oDataModel.read("DropdownSet", {
                     success: function (oData) {
                         that.oBusyIndicator.close()
+                        console.log(oData);
                         if (oData.results.length > 0) {
                             dropDownJsonModel.setProperty("/DropdownData", oData.results)
                         }
                     },
                     error: function (error) {
                         that.oBusyIndicator.close();
+                        console.log(error);
                         sap.m.MessageBox.show(
                             error.message, {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -211,6 +213,7 @@ sap.ui.define([
                         filters: [aFilters],
                         success: function (oData) {
                             that.oBusyIndicator.close()
+                            console.log(oData);
                             var noData = false;
                             if (oData.results.length > 0) {
                                 //   if (!that.hasRecordCreateAccess) {
@@ -248,8 +251,10 @@ sap.ui.define([
                         },
                         error: function (error) {
                             that.oBusyIndicator.close();
+                            console.log(error);
+                            var message = error.message + " " + error.responseText + "\n Please contact to administrator!"
                             sap.m.MessageBox.show(
-                                error.statusText, {
+                                message, {
                                 icon: sap.m.MessageBox.Icon.ERROR,
                                 title: "Error",
                                 actions: [sap.m.MessageBox.Action.OK]
@@ -487,15 +492,14 @@ sap.ui.define([
                     oClumn_Config = this.getColumnConfig(oReource);
                     oObject = {
                         workbook: {
-                            columns: oClumn_Config
+                            columns: oClumn_Config,
+                            context: {
+                                sheetName: 'Customer_Records'
+                            }
                         },
                         dataSource: oRecords,
                         fileName: oText + ".xlsx",
-                        worker: true,
-                        sheetName: "Customer Records",
-                        metaSheetName: "Customer Records",
-                        title: "Customer Records",
-                        application: "Records"
+                        worker: true
                     };
                     oSpradeSheet = new Spreadsheet(oObject);
                     oSpradeSheet.build().finally(function () {
@@ -668,24 +672,24 @@ sap.ui.define([
             //********************************End*********************************/
 
             //********************Capitialize first later of each word *******************/
-            onCapitalizeFirtsLater: function (oEvent) {
-                var oInput = oEvent.getSource();
-                var sValue = oInput.getValue();
-                // Capitalize the first letter of each word
-                var sCapitalizedValue = this.capitalizeFirstLetterOfEachWord(sValue);
-                // Set the formatted value back to the input field
-                oInput.setValue(sCapitalizedValue);
-            },
-            //Captalize first word capital and rest of small.
-            capitalizeFirstLetterOfEachWord: function (str) {
-                return str
-                    .split(' ')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                    .join(' ');
-                // return str.replace(/\b\w/g, function (char) {
-                //     return char.toUpperCase();
-                // });
-            }
+            // onCapitalizeFirtsLater: function (oEvent) {
+            //     var oInput = oEvent.getSource();
+            //     var sValue = oInput.getValue();
+            //     // Capitalize the first letter of each word
+            //     var sCapitalizedValue = this.capitalizeFirstLetterOfEachWord(sValue);
+            //     // Set the formatted value back to the input field
+            //     oInput.setValue(sCapitalizedValue);
+            // },
+            // //Captalize first word capital and rest of small.
+            // capitalizeFirstLetterOfEachWord: function (str) {
+            //     return str
+            //         .split(' ')
+            //         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            //         .join(' ');
+            //     // return str.replace(/\b\w/g, function (char) {
+            //     //     return char.toUpperCase();
+            //     // });
+            // }
             //********************************End*********************************/
 
 

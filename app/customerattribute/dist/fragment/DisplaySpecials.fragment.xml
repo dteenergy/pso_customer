@@ -490,7 +490,19 @@
                                 <Column id="idSequenceno_DS">
                                         <Label
                                             id="idlSequenceno_DS_CO"
-                                            text="Sequence No"
+                                            text="Seq No"
+                                        />
+                                    </Column>
+                                    <Column id="idFusesSDate_DS">
+                                        <Label
+                                            id="idlblSDate_DS"
+                                            text="{i18n>CS_SDate}"
+                                        />
+                                    </Column>
+                                    <Column id="idfusesEdate_DS">
+                                        <Label
+                                            id="idlEDate_DS"
+                                            text="{i18n>CS_endDate}"
                                         />
                                     </Column>
                                     <!-- <Column id="id21CPSR_DS_CO">
@@ -523,16 +535,20 @@
                                             text="{i18n>CS_Tvoltage}"
                                         />
                                     </Column>
+                                    
                                 </columns>
                                 <items>
                                     <ColumnListItem id="cll6CPSR_DS">
                                         <cells>
                                         <Text id="idSeqNo_DS" text="{oSpecialsjmodel>fuseSeqNo}"/>
+                                        <Text  text="{oSpecialsjmodel>fusesStartDate}"/>
+                                            <Text  text="{oSpecialsjmodel>fusesEndDate}"/>
                                             <!-- <Text  text="{oSpecialsjmodel>psospecials_connection_object}"/> -->
                                             <Text  text="{oSpecialsjmodel>fuseSize}"/>
                                             <Text  text="{oSpecialsjmodel>fuseType}"/>
                                             <Text  text="{oSpecialsjmodel>fuseCurve}"/>
                                             <Text  text="{oSpecialsjmodel>fuseVoltage}"/>
+                                            
                                         </cells>
                                     </ColumnListItem>
                                 </items>
@@ -557,7 +573,7 @@
                                             id="idOwnedGrp_DS"
                                             columns="4"
                                             enabled="false"
-                                        >
+                                        > 
                                             <RadioButton
                                                 id="idDteOwned_DS"
                                                 text="DTE Owned"
@@ -586,7 +602,19 @@
                                 <Column id="idSequencenoTrans_DS">
                                         <Label
                                             id="idlSequencenotrans_DS_CO"
-                                            text="Sequence No"
+                                            text="Seq No"
+                                        />
+                                    </Column>
+                                    <Column id="idTransSDate_DS">
+                                        <Label
+                                            id="idlblTransSDate_DS"
+                                            text="{i18n>CS_SDate}"
+                                        />
+                                    </Column>
+                                    <Column id="idTransEdate_DS">
+                                        <Label
+                                            id="idlTransEDate_DS"
+                                            text="{i18n>CS_endDate}"
                                         />
                                     </Column>
                                     <Column id="idColumnManufacturer_DS">
@@ -641,11 +669,14 @@
                                             text="Serial"
                                         />
                                     </Column>
+                                    
                                 </columns>
                                 <items>
                                     <ColumnListItem id="idColListItem_DS">
                                         <cells>
                                             <Text  text="{oSpecialsjmodel>transSeqNo}"/>
+                                            <Text text="{oSpecialsjmodel>transStartDate}" />
+                                            <Text text="{oSpecialsjmodel>transEndDate}" />
                                             <Text  text="{oSpecialsjmodel>manufacturer}"/>
                                             <Text text="{oSpecialsjmodel>imped}" />
                                             <Text text="{oSpecialsjmodel>primVolt}" />
@@ -654,6 +685,7 @@
                                             <Text text="{oSpecialsjmodel>kva}" />
                                             <Text text="{oSpecialsjmodel>type}" />
                                             <Text text="{oSpecialsjmodel>serial}" />
+                                            
                                         </cells>
                                     </ColumnListItem>
                                 </items>

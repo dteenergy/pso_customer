@@ -873,7 +873,13 @@ sap.ui.define([
 
             },
             onSearFieldInTable: function (oEvent) {
-                let query = oEvent.getParameter('query');
+                let query;
+                if(oEvent.getParameter('query')){
+                    query = oEvent.getParameter('query')
+                }
+                else{
+                    query = oEvent.getParameter('newValue')
+                }
                 let aFilters = [];
                 let aCells = [];
                 if (this.byId('idTable').getItems().length > 0) {

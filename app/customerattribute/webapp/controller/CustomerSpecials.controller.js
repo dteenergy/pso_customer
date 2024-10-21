@@ -397,6 +397,8 @@ sap.ui.define([
                         "fuseVoltage": oSpecialsjmodelData.fuses[i].fuseVoltage,
                         "fuseSeqNo": oSpecialsjmodelData.fuses[i].fuseSeqNo,
                         "psospecials_ID": oSpecialsjmodelData.fuses[i].psospecials_ID,
+                        "fusesStartDate" :oSpecialsjmodelData.fuses[i].fusesStartDate,
+                        "fusesEndDate" :oSpecialsjmodelData.fuses[i].fusesEndDate,
                         "psospecials_connection_object": oSpecialsjmodelData.fuses[i].psospecials_connection_object
                     }
                     fuses.push(fuse);
@@ -415,7 +417,9 @@ sap.ui.define([
                         "primVolt": oSpecialsjmodelData.transformers[i].primVolt,
                         "kva": oSpecialsjmodelData.transformers[i].kva,
                         "serial": oSpecialsjmodelData.transformers[i].serial,
-                        "type":oSpecialsjmodelData.transformers[i].type
+                        "type":oSpecialsjmodelData.transformers[i].type,
+                        "transStartDate": oSpecialsjmodelData.transformers[i].transStartDate,
+                        "transEndDate":oSpecialsjmodelData.transformers[i].transEndDate
                         }
                         transformers.push(trans);
                     }
@@ -531,6 +535,8 @@ sap.ui.define([
                     fuseType: "",  // For the ComboBox
                     fuseVoltage: "",// For the ComboBox
                     fuseCurve: "",
+                    fusesStartDate:"",
+                    fusesEndDate : "12/31/99",
                     fuseSeqNo: String(this.sequenceCounter).padStart(4, '0')
                 };              
                 aData.push(newItem);
@@ -563,6 +569,8 @@ sap.ui.define([
                     kva: "",
                     type: "",
                     serial: "",
+                    transStartDate: "",
+                    transEndDate : "12/31/99"
                 };              
                 aData.push(newItem);
                 oSpecialsjmodel.setProperty("/transformers", aData);

@@ -10,7 +10,9 @@ entity Fuses : cuid , managed {
     fuseType : String;
     fuseCurve : String;
     fuseVoltage : String;
-    fuseSeqNo: String;    
+    fuseSeqNo: String;
+    fusesStartDate : String;
+    fusesEndDate : String;    
     psospecials : Association to PSOSpecials;  
  }
  entity Transformers : cuid , managed {
@@ -22,7 +24,9 @@ entity Fuses : cuid , managed {
     taps         : String;
     kva          : String;
     type         : String;
-    serial       : String;     
+    serial       : String;
+    transStartDate: String;
+    transEndDate : String;     
     psospecials : Association to PSOSpecials;  
  }
 

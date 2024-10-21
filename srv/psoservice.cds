@@ -134,8 +134,8 @@ service PSOService {
   function fetchDestinationURL(destName : String)                                  returns String;
   function getSpecialsRecord(connection_object : String)                           returns String;
   function onVerifyRecordStatus(workflowID : UUID)                                 returns Boolean;
-  action   onApproveRecord(recordID : UUID, comment : String, approvedBy : String) returns result;
-  action   onRejectRecord(recordID : UUID, comment : String, approvedBy : String)  returns result;
+  action   onApproveRecord(recordID : UUID, comment : String) returns result;
+  action   onRejectRecord(recordID : UUID, comment : String)  returns result;
   action   createServiceTicket(context : C4CPayload)                               returns result;
   action   submitSpecials(connection_object : String); 
   

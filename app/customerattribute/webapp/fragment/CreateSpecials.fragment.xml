@@ -807,10 +807,22 @@
                                 </headerToolbar> -->
 
                                 <columns>
-                                    <Column id="idSequenceno_CO">
+                                    <Column id="idSequenceno_CO" width="6em">
                                         <Label
                                             id="idlSequenceno_CS_CO"
-                                            text="Sequence No"
+                                            text="Seq No"
+                                        />
+                                    </Column>
+                                    <Column id="idFusesSDate">
+                                        <Label
+                                            id="idlblSDate_CS"
+                                            text="{i18n>CS_SDate}"
+                                        />
+                                    </Column>
+                                    <Column id="idfusesEdate">
+                                        <Label
+                                            id="idlEDate_CS"
+                                            text="{i18n>CS_endDate}"
                                         />
                                     </Column>
                                     <!-- <Column id="id21CPSR_CO">
@@ -843,6 +855,7 @@
                                             text="{i18n>CS_Tvoltage}"
                                         />
                                     </Column>
+                                    
                                 </columns>
                                 <items>
                                     <ColumnListItem >
@@ -850,6 +863,16 @@
                                             <Text
                                                 text="{oSpecialsjmodel>fuseSeqNo}"
                                             />
+                                            <DatePicker
+                                        value="{oSpecialsjmodel>fusesStartDate}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
+                                    <DatePicker
+                                        value="{oSpecialsjmodel>fusesEndDate}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
                                             <!-- <Text
                                                 text="{oSpecialsjmodel>psospecials_connection_object}"
                                             /> -->
@@ -901,6 +924,7 @@
                                                     text="{dropDownJsonModel>value}"
                                                 />
                                             </ComboBox>
+                                            
                                         </cells>
                                     </ColumnListItem>
                                     <!-- <ColumnListItem id="cliFuses1_CS">
@@ -979,10 +1003,22 @@
                                     </Toolbar>
                                 </headerToolbar> -->
                                 <columns>
-                                <Column id="idSequencenoTrans_CO">
+                                <Column id="idSequencenoTrans_CO" width="6em">
                                         <Label
                                             id="idlSequencenoTrans_CS_CO"
-                                            text="Sequence No"
+                                            text="Seq No"
+                                        />
+                                    </Column>
+                                    <Column id="idTransSDate">
+                                        <Label
+                                            id="idlblTransSDate_CS"
+                                            text="{i18n>CS_SDate}"
+                                        />
+                                    </Column>
+                                    <Column id="idTransEdate">
+                                        <Label
+                                            id="idlTransEDate_CS"
+                                            text="{i18n>CS_endDate}"
                                         />
                                     </Column>
                                     <Column id="idColumnManufacturer_CS">
@@ -1037,6 +1073,7 @@
                                             text="Serial"
                                         />
                                     </Column>
+                                    
                                 </columns>
                                 <items>
                                     <ColumnListItem>
@@ -1044,6 +1081,16 @@
                                         <Text
                                                 text="{oSpecialsjmodel>transSeqNo}"
                                             />
+                                            <DatePicker
+                                        value="{oSpecialsjmodel>transStartDate}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
+                                    <DatePicker
+                                        value="{oSpecialsjmodel>transEndDate}"
+                                        valueFormat="MM/dd/yy"
+                                        displayFormat="MM/dd/yy"
+                                    />
                                             <Input value="{oSpecialsjmodel>manufacturer}" />
                                             <Input value="{oSpecialsjmodel>imped}" />
                                             <ComboBox
@@ -1093,6 +1140,7 @@
                                                 />
                                             </ComboBox>
                                             <Input value="{oSpecialsjmodel>serial}" />
+                                            
                                         </cells>
                                     </ColumnListItem>
                                 </items>

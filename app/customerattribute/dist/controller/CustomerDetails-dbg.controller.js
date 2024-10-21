@@ -175,7 +175,7 @@ sap.ui.define([
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/substation_dropdownSet";
                 var oSubstationJModel = this.getView().getModel("oSubstationJModel");
                 oSubstationJModel.loadData(sPath, null, false, "GET", false, false, null);
-
+                
                 var _valueHelpSubstationDialog = new sap.m.SelectDialog({
 
                     title: "Substation", contentHeight: "50%", titleAlignment: "Center",
@@ -393,10 +393,12 @@ sap.ui.define([
                 var oCustomerAttributesJModel = this.getOwnerComponent().getModel("oCustomerAttributesJModel");
                 this.getOwnerComponent().getModel("ISUService").read("/Customer_attributeSet(conn_obj='" + oConnectionObject + "')", {
                     success: function (oData) {
+                        console.log(oData);
                         oCustomerAttributesJModel.setData(oData);
                         that.DocumentumDisabled(oData);
                     },
                     error: function (error) {
+                        console.log(error);
                         sap.m.MessageBox.show(
                             error.message, {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -669,7 +671,8 @@ sap.ui.define([
                 } else {
                     oAttributs.created_by = userid;
                 }
-
+                console.log(oAttributs);
+                console.log(this.oEditFlag);
 
                 if (this.oEditFlag == "X") {
                     that.oBusyIndicator.open();
@@ -701,6 +704,7 @@ sap.ui.define([
                                 dialog.open();
                             } else {
                                 that.oBusyIndicator.close();
+                                console.log(oResponse);
                                 sap.m.MessageBox.show(oResponse.statusText, {
                                     icon: sap.m.MessageBox.Icon.ERROR,
                                     title: this.getView().getModel("i18n").getProperty("error"),
@@ -713,6 +717,7 @@ sap.ui.define([
 
                         error: function (error) {
                             that.oBusyIndicator.close();
+                            console.log(error);
                             var oError = JSON.parse(error.responseText);
                             var oMessage = oError.error.message.value;
                             sap.m.MessageBox.show(
@@ -767,6 +772,7 @@ sap.ui.define([
 
                         error: function (error) {
                             that.oBusyIndicator.close();
+                            console.log(error);
                             var oError = JSON.parse(error.responseText);
                             var oMessage = oError.error.message.value
                             sap.m.MessageBox.show(

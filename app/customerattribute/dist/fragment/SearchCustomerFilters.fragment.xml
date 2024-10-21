@@ -83,7 +83,6 @@
                                             id="idStreetAdd"
                                             showValueHelp="false"
                                             maxLength="60"
-                                            liveChange="onCapitalizeFirtsLater"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>
@@ -100,7 +99,6 @@
                                             id="idCity"
                                             showValueHelp="false"
                                             maxLength="40"
-                                            liveChange="onCapitalizeFirtsLater"
                                         />
                                     </fb:control>
                                 </fb:FilterGroupItem>

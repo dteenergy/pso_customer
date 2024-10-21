@@ -175,6 +175,8 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "fuseCurve": result.psrtofusenav[i].curve,
                     "fuseVoltage": result.psrtofusenav[i].vol,
                     "fuseSeqNo": result.psrtofusenav[i].Zseqno,
+                    "fusesStartDate": result.psrtofusenav[i].start_date,
+                    "fusesEndDate": result.psrtofusenav[i].end_date,                  
                     //"psospecials_ID": result.psrtofusenav[i].psospecials_ID,
                     "psospecials_connection_object": result.conn_obj
                 }
@@ -194,7 +196,9 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "primVolt": result.psrtotransnav[i].pri_vol,
                     "kva": result.psrtotransnav[i].kva,
                     "serial": result.psrtotransnav[i].serial,
-                    "type": result.psrtotransnav[i].type
+                    "type": result.psrtotransnav[i].type,
+                    "transStartDate": result.psrtotransnav[i].start_date,
+                    "transEndDate": result.psrtotransnav[i].end_date
                 }
                 transformers.push(trans);
                 if (i === 0) {
@@ -388,20 +392,82 @@ module.exports = class PSOService extends cds.ApplicationService {
                 oDateMergered = req.dateMergered;
             }
 
+            let oFusesStartDate;
+            if (req.fusesStartDate === null || req.fusesStartDate === undefined) {
+                oFusesStartDate = '';
+            }
+            else {
+                oFusesStartDate = req.fusesStartDate;
+            }
+
+            let fusesEndDate;
+            if (req.fusesEndDate === null || req.fusesEndDate === undefined) {
+                fusesEndDate = '';
+            }
+            else {
+                fusesEndDate = req.fusesEndDate;
+            }
+
+            let transStartDate;
+            if (req.transStartDate === null || req.transStartDate === undefined) {
+                transStartDate = '';
+            }
+            else {
+                transStartDate = req.transStartDate;
+            }
+
+            let transEndDate;
+            if (req.transEndDate === null || req.transEndDate === undefined) {
+                transEndDate = '';
+            }
+            else {
+                transEndDate = req.transEndDate;
+            }
+
+
+
             console.log("comp date is: " + comp_date);
             let fuses = [];
             for (let i = 0; i < req.fuses.length; i++) {
+                let oFusesStartDate;
+                if (req.fuses[i].fusesStartDate === null || req.fuses[i].fusesStartDate === undefined) {
+                    oFusesStartDate = '';
+                }else{
+                    oFusesStartDate = req.fuses[i].fusesStartDate;
+                }
+                let oFusesEndDate;
+                if (req.fuses[i].fusesEndDate === null || req.fuses[i].fusesEndDate === undefined) {
+                    oFusesEndDate = '';
+                }else{
+                    oFusesEndDate = req.fuses[i].fusesStartDate;
+                }
                 var fuse = {
                     "SeqNo": req.fuses[i].fuseSeqNo,
                     "Size": req.fuses[i].fuseSize,
                     "Type": req.fuses[i].fuseType,
                     "Curve": req.fuses[i].fuseCurve,
                     "Voltage": req.fuses[i].fuseVoltage,
+                    "fusesStartDate": oFusesStartDate,
+                    "fusesEndDate": oFusesEndDate
                 }
                 fuses.push(fuse);
             }
             let transformers = [];
             for (let i = 0; i < req.transformers.length; i++) {
+                let oTransStartDate;
+                if (req.transformers[i].transStartDate === null || req.transformers[i].transStartDate === undefined) {
+                    oTransStartDate = '';
+                }else{
+                    oTransStartDate = req.transformers[i].transStartDate;
+                }
+
+                let oTransEndDate;
+                if (req.transformers[i].transEndDate === null || req.transformers[i].transEndDate === undefined) {
+                    oTransEndDate = '';
+                }else{
+                    oTransEndDate = req.transformers[i].transEndDate;
+                }
+
                 var transformer = {
                     "transSeqNo": req.transformers[i].transSeqNo,
                     "manufacturer": req.transformers[i].manufacturer,
@@ -411,7 +477,9 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "taps": req.transformers[i].taps,
                     "kva": req.transformers[i].kva,
                     "type": req.transformers[i].type,
-                    "serial": req.transformers[i].serial
+                    "serial": req.transformers[i].serial,
+                    "transStartDate": oTransStartDate,
+                    "transEndDate": oTransEndDate
                 }
                 transformers.push(transformer);
             }
@@ -653,8 +721,8 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "type": isuRecord.fuses[i].fuseType,
                     "curve": isuRecord.fuses[i].fuseCurve,
                     "vol": isuRecord.fuses[i].fuseVoltage,
-                    "start_date": "",
-                    "end_date": "",
+                    "start_date": isuRecord.fuses[i].fusesStartDate,
+                    "end_date": isuRecord.fuses[i].fusesEndDate,
                     "Comments": "",
                     "Comments2": ""
                 }
@@ -683,9 +751,9 @@ module.exports = class PSOService extends cds.ApplicationService {
                     "kva": isuRecord.transformers[i].kva,
                     "type": isuRecord.transformers[i].type,
                     "serial": isuRecord.transformers[i].serial,
-                    "comments": isuRecord.comment,
-                    "start_date": "",
-                    "end_date": ""
+                    "start_date": isuRecord.transformers[i].transStartDate,
+                    "end_date": isuRecord.transformers[i].transEndDate,
+                    "comments": isuRecord.comment
                 }
                 transformers.push(transformer);
             }

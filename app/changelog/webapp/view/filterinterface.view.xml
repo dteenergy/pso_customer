@@ -56,7 +56,7 @@
                    <OverflowToolbar>
                    <Label text="{localModel>/tableItemsCount}" design="Bold"/>
                    <ToolbarSpacer/>
-                   <SearchField id="idSearchField" width="15rem" search="onSearFieldInTable"/>
+                   <SearchField id="idSearchField" width="15rem" search="onSearFieldInTable" liveChange="onSearFieldInTable"/>
                    <Button id="idSort" enabled="false" press="onSort" icon="sap-icon://sort"/>
                    <Button id="idExcel" enabled="false" press="onExcelDownload" icon="sap-icon://excel-attachment"/>
                    </OverflowToolbar>
