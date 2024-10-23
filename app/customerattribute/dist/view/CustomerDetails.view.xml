@@ -33,7 +33,7 @@
                 <Button
                     id="idButtonCreateServiceTicket"
                     type="Accept"
-                    text="POO"
+                    text="POP"
                     icon="sap-icon://create"
                     press="onCreateServiceTicket" 
                     visible="false"                   

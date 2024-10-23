@@ -36,7 +36,7 @@
   },
   "cds": {
     "requires": {
-      "auth":"xsuaa",
+      "auth": "xsuaa",
       "db": "hana",
       "connectivity": true,
       "connectbpa": {
@@ -53,12 +53,13 @@
       },
       "ISU": {
         "kind": "odata-v2",
-        "csrf": true, 
+        "csrf": true,
         "csrfInBatch": true,
         "credentials": {
           "destination": "ISU"
         }
-      }
+      },
+      "application-logging": true
     }
   }
 }

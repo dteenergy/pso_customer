@@ -797,15 +797,15 @@ module.exports = class PSOService extends cds.ApplicationService {
                 "lb_60_cyc": isuRecord.CycWithstand60,
 
                 //Circuit Breaker
-                "air": oAir, //Air Radio button
-                "oil": oOil,//Oil Radio button
-                "vac": oVac,//Vac Radio button
-                "sf6": oSF6, //Sf6 Radio button
+                "air": oAir, 
+                "oil": oOil,
+                "vac": oVac,
+                "sf6": oSF6, 
                 "circ_break": isuRecord.circuitBreakerMake,
                 "serial_no": isuRecord.serialNo,
-                "cb_detto": oDTEoOwnedCB,// DTE Owned CB Radio button
-                "cb_custo": oCustomerOwnedCB,// Customer Owned CB Radio button
-                "kamom": "",//KA momentary for CB
+                "cb_detto": oDTEoOwnedCB,
+                "cb_custo": oCustomerOwnedCB,
+                "kamom": isuRecord.kAMomentaryCB,
                 "amp": isuRecord.amps,
                 "cb_type": isuRecord.typeCB,
                 "fault_duty": isuRecord.faultDuty,
@@ -826,9 +826,9 @@ module.exports = class PSOService extends cds.ApplicationService {
                 "psr": isuRecord.primaryServiceRep,
                 "psw": isuRecord.pswDiagramNumber,
                 //"comments": isuRecord.comments, 
-                "created_det": oCreatedAt, //isuRecord.createdAt,
+                "created_det": oCreatedAt, 
                 "created_by": isuRecord.createdBy,
-                "modified_det": oModifiedAt,//isuRecord.modifiedAt,
+                "modified_det": oModifiedAt,
                 "modified_by": isuRecord.modifiedBy,
 
                 //Extra Attributes

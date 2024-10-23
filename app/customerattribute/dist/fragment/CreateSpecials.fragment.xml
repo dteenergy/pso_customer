@@ -807,7 +807,7 @@
                                 </headerToolbar> -->
 
                                 <columns>
-                                    <Column id="idSequenceno_CO" width="6em">
+                                    <Column id="idSequenceno_CO" width="5em">
                                         <Label
                                             id="idlSequenceno_CS_CO"
                                             text="Seq No"
@@ -1003,19 +1003,19 @@
                                     </Toolbar>
                                 </headerToolbar> -->
                                 <columns>
-                                <Column id="idSequencenoTrans_CO" width="6em">
+                                <Column id="idSequencenoTrans_CO" width="5em">
                                         <Label
                                             id="idlSequencenoTrans_CS_CO"
                                             text="Seq No"
                                         />
                                     </Column>
-                                    <Column id="idTransSDate">
+                                    <Column id="idTransSDate" width="9rem">
                                         <Label
                                             id="idlblTransSDate_CS"
                                             text="{i18n>CS_SDate}"
                                         />
                                     </Column>
-                                    <Column id="idTransEdate">
+                                    <Column id="idTransEdate" width="9rem">
                                         <Label
                                             id="idlTransEDate_CS"
                                             text="{i18n>CS_endDate}"

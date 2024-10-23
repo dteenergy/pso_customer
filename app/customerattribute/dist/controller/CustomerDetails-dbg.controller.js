@@ -1033,7 +1033,7 @@ sap.ui.define([
             getCreateContext: function () {
                 let oConnectionObject = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.conn_obj;
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
-                let name = "POO - " + oTicketData.cust_name;
+                let name = "POP - " + oTicketData.cust_name;
                 let dcplind_flag = "", oCircuitTrans = "", oSubstation = "";
                     oSubstation = oTicketData.sub_station;
                 // if (oTicketData.dc === "X") {

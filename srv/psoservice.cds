@@ -1,13 +1,12 @@
 using {com.pso.specials as db} from '../db/pso-schema';
-//using {c4c} from './external/c4c';
+
 
 service PSOService {
 
-  entity PSOSpecials as projection on db.PSOSpecials;
-  entity Fuses       as projection on db.Fuses;
- entity Transformers       as projection on db.Transformers;
+  entity PSOSpecials  as projection on db.PSOSpecials;
+  entity Fuses        as projection on db.Fuses;
+  entity Transformers as projection on db.Transformers;
 
- 
 
   type result {
     value : String;
@@ -100,7 +99,7 @@ service PSOService {
   type userInfo {
     userName                 : String;
     email                    : String;
-    hasSearchAccess: Boolean;
+    hasSearchAccess          : Boolean;
     hasLimitedDisplay        : Boolean;
     hasCustomerCreateAccess  : Boolean;
     hasCustomerDisplayAccess : Boolean;
@@ -130,13 +129,13 @@ service PSOService {
     Z_PSO_ZIP_KUT                  : String;
   }
 
-  function userDetails()                                                           returns userInfo;
-  function fetchDestinationURL(destName : String)                                  returns String;
-  function getSpecialsRecord(connection_object : String)                           returns String;
-  function onVerifyRecordStatus(workflowID : UUID)                                 returns Boolean;
+  function userDetails()                                      returns userInfo;
+  function fetchDestinationURL(destName : String)             returns String;
+  function getSpecialsRecord(connection_object : String)      returns String;
+  function onVerifyRecordStatus(workflowID : UUID)            returns Boolean;
   action   onApproveRecord(recordID : UUID, comment : String) returns result;
   action   onRejectRecord(recordID : UUID, comment : String)  returns result;
-  action   createServiceTicket(context : C4CPayload)                               returns result;
-  action   submitSpecials(connection_object : String); 
-  
+  action   createServiceTicket(context : C4CPayload)          returns result;
+  action   submitSpecials(connection_object : String);
+
 };
