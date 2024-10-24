@@ -35,7 +35,7 @@
                     </layoutData>
                   </Input>
                 <Label id="idlblStreetAdd_CC" text="{i18n>streeetadd}" required="true"/>
-                <Input id="idStreetAdd_CC"  value="{oCustomerAttributesJModel>/street_name}" liveChange="onCapitalizeFirtsLater" maxLength="60">
+                <Input id="idStreetAdd_CC"  value="{oCustomerAttributesJModel>/street_name}"  maxLength="60">
                 <layoutData>
                       <l:GridData id="idGridData_CC3" span="XL5 L5 M12 S12" />
                     </layoutData>

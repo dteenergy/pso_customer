@@ -15,7 +15,7 @@
         growing="true"
         growingThreshold="15"
         alternateRowColors="true"
-    >
+    > 
         <headerToolbar>
             <Toolbar id="_IDGenToolbar_SC">
                 <content>
@@ -103,7 +103,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText2"
                     text="{i18n>Fcutname}"
                 />
@@ -116,7 +116,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText4"
                     text="{i18n>FStreetAdd}"
                 />
@@ -129,7 +129,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText12"
                     text="{i18n>Fprimeryrvrep}"
                 />
@@ -142,7 +142,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText14"
                     text="{i18n>Fsustatoin}"
                 />
@@ -155,7 +155,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText9"
                     text="{i18n>Fsrvcenter}"
                 />
@@ -168,7 +168,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText10"
                     text="{i18n>Fcableno}"
                 />
@@ -181,7 +181,7 @@
                 demandPopin="true"
                 hAlign="Begin"
             >
-                <Text
+                <Label
                     id="_IDGenText11"
                     text="{i18n>Fpswidigram}"
                 />

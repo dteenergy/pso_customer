@@ -1215,24 +1215,24 @@ sap.ui.define([
             },
 
             //********************Capitialize first later of each word *******************/
-            onCapitalizeFirtsLater: function (oEvent) {
-                var oInput = oEvent.getSource();
-                var sValue = oInput.getValue();
-                // Capitalize the first letter of each word
-                var sCapitalizedValue = this.capitalizeFirstLetterOfEachWord(sValue);
-                // Set the formatted value back to the input field
-                oInput.setValue(sCapitalizedValue);
-            },
+            // onCapitalizeFirtsLater: function (oEvent) {
+            //     var oInput = oEvent.getSource();
+            //     var sValue = oInput.getValue();
+            //     // Capitalize the first letter of each word
+            //     var sCapitalizedValue = this.capitalizeFirstLetterOfEachWord(sValue);
+            //     // Set the formatted value back to the input field
+            //     oInput.setValue(sCapitalizedValue);
+            // },
             //Captalize first word capital and rest of small.
-            capitalizeFirstLetterOfEachWord: function (str) {
-                return str
-                    .split(' ')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                    .join(' ');
-                // return str.replace(/\b\w/g, function (char) {
-                //     return char.toUpperCase();
-                // });
-            },
+            // capitalizeFirstLetterOfEachWord: function (str) {
+            //     return str
+            //         .split(' ')
+            //         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            //         .join(' ');
+            //     // return str.replace(/\b\w/g, function (char) {
+            //     //     return char.toUpperCase();
+            //     // });
+            // },
 
             //********Radio button SetA and SetB selection */
             oSelectA: function (oEvet) {

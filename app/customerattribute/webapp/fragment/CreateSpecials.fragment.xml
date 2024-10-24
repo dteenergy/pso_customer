@@ -436,7 +436,6 @@
                     <x:ObjectPageSubSection
                         id="idCBSubSection_CS"
                         titleUppercase="false"
-                        class="sapUxAPObjectPageSubSectionHeader1"
                     >
                         <x:actions>
                             <RadioButtonGroup
@@ -475,7 +474,6 @@
                                     <RadioButtonGroup
                                         id="goup6CPSR_CS"
                                         columns="5"
-                                        class="sapUiTinyMarginTopBottom"
                                     >
                                         <RadioButton
                                             id="idAir_CS"

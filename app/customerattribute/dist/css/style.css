@@ -8,15 +8,15 @@
 }
 
 /*table header font color*/
-.sapMColumnHeaderContent{
+/* .sapMColumnHeaderContent{
     color: white !important;
     font-size: 0.8rem !important;
     font-weight: bold !important;
-}
-
-/* .sapMListTbl .sapMColumnHeader .sapMLabel {
-    color :white
 } */
+
+.sapMListTbl .sapMColumnHeader .sapMLabel {
+    color :white
+}
 
 .sapMIBar.sapMFooter-CTX {
     background-color: #cbced2 !important;
