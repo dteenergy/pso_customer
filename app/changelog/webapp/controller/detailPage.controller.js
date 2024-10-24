@@ -19,15 +19,71 @@ function (Controller,Filter) {
             }
         },
         selectSF6 : function(val){
-            if(val == 'Air'){
+            if(val == 'SF6'){
                 return true;
             }
             else{
                 return false;
             }
         },
+        LBDRBDO : function(val){
+            if(val == 'DTE Owned'){
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+        LBDRBCO : function(val){
+        if(val == 'Customer Owned'){
+               return true;
+            }
+            else{
+               return false
+            }
+        },
+        LBDRBNONE : function(val){
+            if(val == 'None'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
+        CBRBDO : function(val){
+            if(val == 'DTE Owned'){
+                return true
+            }
+            else{
+                return false;
+            }
+        },
+        CBRBCO : function(val){
+            if(val == 'Customer Owned'){
+                return true
+            }
+            else{
+                return false;
+            }
+        },
+        transformerRBDO : function(val){
+            if(val == 'DTE Owned'){
+                return true;
+            }
+            else if(val == 'Customer Owned'){
+                return false
+            }
+        },
+        transformerRBCO : function(val){
+            if(val == 'DTE Owned'){
+                return false;
+            }
+            else if(val == 'Customer Owned'){
+                return true;
+            }
+        },
         selectVAC : function(val){
-            if(val == 'Air'){
+            if(val == 'Vac'){
                 return true;
             }
             else{
@@ -35,7 +91,7 @@ function (Controller,Filter) {
             }
         },
         selectOIL : function(val){
-            if(val == 'Air'){
+            if(val == 'Oil'){
                 return true;
             }
             else{

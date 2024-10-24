@@ -184,6 +184,7 @@ module.exports = class PSOService extends cds.ApplicationService {
             }
             let oDTEoOwnedTrans = "DTE Owned";
             let transformers = [];
+            let transComment ="";
             for (let i = 0; i < result.psrtotransnav.length; i++) {
                 let trans = {
                     "psospecials_connection_object": result.conn_obj,
@@ -208,6 +209,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                     } else if (result.psrtotransnav[0].cuso === "X") {
                         oDTEoOwnedTrans = "Customer Owned";
                     }
+                    transComment = result.psrtotransnav[0].comments;
                 }
             }
 
@@ -269,7 +271,7 @@ module.exports = class PSOService extends cds.ApplicationService {
                 groundMatResistance: result.grmatres,
                 methodUsed: result.method_used,
                 //dateMergered: result.Date_megg,
-                comment: "",
+                comment: transComment,
                 typeofService: result.Type_serv,
                 typeofTO: result.type_TO,
                 pswDiagramNumber: result.psw,
@@ -338,12 +340,12 @@ module.exports = class PSOService extends cds.ApplicationService {
                 });
                 //  console.log(res);
                 let id = res.ID + "";
-                console.log("POO Created with id = " + id);
+                console.log("POP Created with id = " + id);
                 let result = { "value": id };
                 return result;
             }
             catch (e) {
-                console.error("Run into POO Creation error.....");
+                console.error("POP Creation failed!");
                 console.error("Error " + e.reason.status + " : " + e.reason.code + " : " + e.reason.message);
                 let result = { "value": "Error" };
                 return result;

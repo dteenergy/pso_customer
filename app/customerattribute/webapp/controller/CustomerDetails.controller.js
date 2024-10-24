@@ -19,14 +19,14 @@ sap.ui.define([
             onBeforeRendering: function () {
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 console.log(oUserScopeJModelData);
-             
-            //     if (oUserScopeJModelData.hasSpecialsCreateAccess) {
-            //   //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
-            //     }
+
+                //     if (oUserScopeJModelData.hasSpecialsCreateAccess) {
+                //   //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+                //     }
                 if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
                 }
-                
+
             },
 
             _loadFragmentPerScope: function (currentScope) {
@@ -34,7 +34,7 @@ sap.ui.define([
                 this.initializBusyIndicator(); //Initializing busy indicator
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 console.log(oUserScopeJModelData);
-              
+
                 var superior_flag = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.superior_flag;
                 if (superior_flag == "X") { //create child
                     this.getView().byId("_IDButtonCreateRecord").setText("Create Record");
@@ -59,35 +59,35 @@ sap.ui.define([
                         this.getView().byId("idDemolished_site_CC").setVisible(true);
                     }
                     this.getView().byId("_IDButtonCreateRecord").setVisible(false);
-               
+
                     this.getView().byId("idButtonOpentext").setVisible(true);
                     this.getCustomerAttribute();
                 }
 
-                if(oUserScopeJModelData.hasLimitedDisplay){
+                if (oUserScopeJModelData.hasLimitedDisplay) {
                     this.getView().byId("idEmerPhone_DC").setVisible(false);
-                }else{
+                } else {
                     this.getView().byId("idEmerPhone_DC").setVisible(true);
                 }
-                
-                
+
+
 
             },
 
             onSpecialsExist: function (specialsFlag) {
                 let oUserScopeJModelData = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 console.log(oUserScopeJModelData);
-              
+
                 if (specialsFlag) { //specials exist, show display specials button
 
-                 //   this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+                    //   this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
                     if (oUserScopeJModelData.hasSpecialsDisplayAccess) {
                         this.getView().byId("_IDGenButtonDisplaySp").setVisible(true);
                     }
                 }
                 else {//specials does not exist, show create specials button
                     if (oUserScopeJModelData.hasSpecialsCreateAccess) {
-                  //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+                        //      this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
                     }
                     this.getView().byId("_IDGenButtonDisplaySp").setVisible(false);
                 }
@@ -144,13 +144,13 @@ sap.ui.define([
                 if (oRecord.on_site_emerg === "X") {
                     this.getView().byId("idGeneration_CC").setSelectedKey("EMERGENCY")
                 }
-                if (oRecord.on_site_part==="X") {
+                if (oRecord.on_site_part === "X") {
                     this.getView().byId("idGeneration_CC").setSelectedKey("PARTIAL")
                 }
-                if (oRecord.full_generation ==="X") {
+                if (oRecord.full_generation === "X") {
                     this.getView().byId("idGeneration_CC").setSelectedKey("FULL GENERATION")
                 }
-                if (oRecord.on_site_nosg ==="X") {
+                if (oRecord.on_site_nosg === "X") {
                     this.getView().byId("idGeneration_CC").setSelectedKey("NO ON-SITE GENERATION")
                 }
 
@@ -175,7 +175,7 @@ sap.ui.define([
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/substation_dropdownSet";
                 var oSubstationJModel = this.getView().getModel("oSubstationJModel");
                 oSubstationJModel.loadData(sPath, null, false, "GET", false, false, null);
-                
+
                 var _valueHelpSubstationDialog = new sap.m.SelectDialog({
 
                     title: "Substation", contentHeight: "50%", titleAlignment: "Center",
@@ -272,10 +272,10 @@ sap.ui.define([
                 this.oDCPLIND = this.getView().byId("idDCPLIND_CC").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel = this.getView().getModel("oCircuitJModel");
-                    this.oBusyIndicator.open();
-                    oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
-                    this.oBusyIndicator.close();
-                    // Create filters
+                this.oBusyIndicator.open();
+                oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
+                this.oBusyIndicator.close();
+                // Create filters
                 var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, oSubstation);
                 var oFilterDCPLIND = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND);
                 // Combine filters
@@ -336,9 +336,9 @@ sap.ui.define([
                 this.oDCPLIND2 = this.getView().byId("idDCPLIND_CC2").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel("ISUService").sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel2 = this.getView().getModel("oCircuitJModel2");
-                    this.oBusyIndicator.open();    
-                    oCircuitJModel2.loadData(sPath, null, false, "GET", false, false, null);
-                    this.oBusyIndicator.close();
+                this.oBusyIndicator.open();
+                oCircuitJModel2.loadData(sPath, null, false, "GET", false, false, null);
+                this.oBusyIndicator.close();
                 // Create filters
                 var oFilterSubstation2 = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, oSubstation2);
                 var oFilterDCPLIND2 = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND2);
@@ -415,13 +415,13 @@ sap.ui.define([
                 if (oRecord.on_site_emerg === "X") {
                     this.getView().byId("idGeneration_DC").setText("EMERGENCY")
                 }
-                if (oRecord.on_site_part==="X") {
+                if (oRecord.on_site_part === "X") {
                     this.getView().byId("idGeneration_DC").setText("PARTIAL")
                 }
-                if (oRecord.full_generation ==="X") {
+                if (oRecord.full_generation === "X") {
                     this.getView().byId("idGeneration_DC").setText("FULL GENERATION")
                 }
-                if (oRecord.on_site_nosg ==="X") {
+                if (oRecord.on_site_nosg === "X") {
                     this.getView().byId("idGeneration_DC").setText("NO ON-SITE GENERATION")
                 }
                 // if (oData.circuit === "") {
@@ -548,7 +548,7 @@ sap.ui.define([
                 if (oUserScope.userName !== "" || oUserScope.userName !== undefined || oUserScope.userName !== null) {
                     userid = oUserScope.userName;
                 }
-                
+
                 var oSelectedKey = this.getView().byId("idDCPLIND_CC").getSelectedIndex();
                 var oDC = "", oPL = "", oNA = "";
                 if (oSelectedKey === 0) {
@@ -589,7 +589,7 @@ sap.ui.define([
                     oPartial = "X";
                 } else if (oSelectedKeyGen === "FULL GENERATION") {
                     oFullGen = "X";
-                } else if(oSelectedKeyGen === "NO ON-SITE GENERATION"){
+                } else if (oSelectedKeyGen === "NO ON-SITE GENERATION") {
                     oNoOnsiteGen = "X";
                 }
                 var oNooflines = this.getView().byId("idNoOfline_CC").getSelectedKey();
@@ -823,97 +823,101 @@ sap.ui.define([
 
                         // display special should come
                         that.onSpecialsExist(true);
+                        console.log("success: getSpecialsRecord ");
                     }
-                    else { //specials does not exist - create special button visible
-                        console.log("No Specials exist for this child connection object");
-                        const oCustomerAttributesJModelData= that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
-                        const connection_object = oCustomerAttributesJModelData.conn_obj;
-                        //const connection_object = that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
-                        //create special should come
-                        oSpecialsjmodel.setData({
-                            "connection_object": connection_object,
-                            "work_desc": "",
-                            "meter_number": "",
-                            "record_status": "",
-                            "workflow_id": null,
-                            //Customer Record(CR)
-                            "pSNumber": "",
-                            "completionDate": "",
-                            "fedFrom": "",
-                            "cableDescription": "",
-                            "cableFootage": "",
-                            "ductType": "",
-                            "cts": "",
-                            "pts": "",
-                            "k": "",
-                            "m": "",
-                            "fusesAt": "",
-                            "size": "",
-                            "typeCR": "",
-                            "curve": "",
-                            "voltage": "",
-
-                            //Load Break Disconnect(LBD)
-                            "manufacturer": "",
-                            "model": "",
-                            "continuousCurrent": "",
-                            "loadIntRating": "",
-                            "kAMomentaryLBD": "",
-                            "typeLBD": "",
-                            "faultClosing": "",
-                            "bilLBD": "",
-                            "serviceVoltage": "",
-                            "CycWithstand60": "",
-
-                            //Circuit Breaker(CB)
-                            "circuitBreakerMake": "",
-                            "serialNo": "",
-                            "kAMomentaryCB": "",
-                            "amps": "",
-                            "typeCB": "",
-                            "faultDuty": "",
-                            "bilCB": "",
-                            //new field
-                            //Transformer
-                            "ownedByTransformer": "DTE Owned",    //Radiobutton
-
-                            //new fields
-                            "fuelTypeCB": "Air",
-                            "ownedByLBD": "DTE Owned",
-                            "ownedByCB": "DTE Owned",
-                            "meter_number2": "",
-                            "ab": "",
-                            "bc": "",
-                            "ca": "",
-                            "an": "",
-                            "bn": "",
-                            "cn": "",
-                            "groundMatResistance": "",
-                            "methodUsed": "",
-                            "dateMergered": "",
-                            "comment": "",
-                            "typeofService": "",
-                            "typeofTO": "",
-                            "pswDiagramNumber": "",
-                            "primaryServiceRep": "",
-                            "customerName": oCustomerAttributesJModelData.cust_name,
-                            "streetNumber": oCustomerAttributesJModelData.street_no,
-                            "streetName": oCustomerAttributesJModelData.street_name,
-                            "fuses": [{
-                                "fuseSize"  : "",
-                                "fuseType" : "",
-                                "fuseCurve" : "",
-                                "fuseVoltage" : "",
-                                "fuseSeqNo": 0,
-                                "connection_object"   : connection_object
-                            }]
-
-
-                        });
-                        that.onSpecialsExist(false);
+                    else {
+                        //error msg pop up
                     }
+                    // else { //specials does not exist - create special button visible
+                    //     console.log("No Specials exist for this child connection object");
+                    //     const oCustomerAttributesJModelData= that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
+                    //     const connection_object = oCustomerAttributesJModelData.conn_obj;
+                    //     //const connection_object = that.getOwnerComponent().getModel("oCustomerAttributesJModel").getData().conn_obj;
+                    //     //create special should come
+                    //     oSpecialsjmodel.setData({
+                    //         "connection_object": connection_object,
+                    //         "work_desc": "",
+                    //         "meter_number": "",
+                    //         "record_status": "",
+                    //         "workflow_id": null,
+                    //         //Customer Record(CR)
+                    //         "pSNumber": "",
+                    //         "completionDate": "",
+                    //         "fedFrom": "",
+                    //         "cableDescription": "",
+                    //         "cableFootage": "",
+                    //         "ductType": "",
+                    //         "cts": "",
+                    //         "pts": "",
+                    //         "k": "",
+                    //         "m": "",
+                    //         "fusesAt": "",
+                    //         "size": "",
+                    //         "typeCR": "",
+                    //         "curve": "",
+                    //         "voltage": "",
 
-                    console.log("success: = ");
+                    //         //Load Break Disconnect(LBD)
+                    //         "manufacturer": "",
+                    //         "model": "",
+                    //         "continuousCurrent": "",
+                    //         "loadIntRating": "",
+                    //         "kAMomentaryLBD": "",
+                    //         "typeLBD": "",
+                    //         "faultClosing": "",
+                    //         "bilLBD": "",
+                    //         "serviceVoltage": "",
+                    //         "CycWithstand60": "",
+
+                    //         //Circuit Breaker(CB)
+                    //         "circuitBreakerMake": "",
+                    //         "serialNo": "",
+                    //         "kAMomentaryCB": "",
+                    //         "amps": "",
+                    //         "typeCB": "",
+                    //         "faultDuty": "",
+                    //         "bilCB": "",
+                    //         //new field
+                    //         //Transformer
+                    //         "ownedByTransformer": "DTE Owned",    //Radiobutton
+
+                    //         //new fields
+                    //         "fuelTypeCB": "Air",
+                    //         "ownedByLBD": "DTE Owned",
+                    //         "ownedByCB": "DTE Owned",
+                    //         "meter_number2": "",
+                    //         "ab": "",
+                    //         "bc": "",
+                    //         "ca": "",
+                    //         "an": "",
+                    //         "bn": "",
+                    //         "cn": "",
+                    //         "groundMatResistance": "",
+                    //         "methodUsed": "",
+                    //         "dateMergered": "",
+                    //         "comment": "",
+                    //         "typeofService": "",
+                    //         "typeofTO": "",
+                    //         "pswDiagramNumber": "",
+                    //         "primaryServiceRep": "",
+                    //         "customerName": oCustomerAttributesJModelData.cust_name,
+                    //         "streetNumber": oCustomerAttributesJModelData.street_no,
+                    //         "streetName": oCustomerAttributesJModelData.street_name,
+                    //         "fuses": [{
+                    //             "fuseSize"  : "",
+                    //             "fuseType" : "",
+                    //             "fuseCurve" : "",
+                    //             "fuseVoltage" : "",
+                    //             "fuseSeqNo": 0,
+                    //             "connection_object"   : connection_object
+                    //         }]
+
+
+                    //     });
+                    //     that.onSpecialsExist(false);
+                    // }
+
+
                 }.bind(this), function (err) {
                     //        oBusyDialog3.close();
                     console.log("failure: = " + err.message);
@@ -1035,7 +1039,7 @@ sap.ui.define([
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 let name = "POP - " + oTicketData.cust_name;
                 let dcplind_flag = "", oCircuitTrans = "", oSubstation = "";
-                    oSubstation = oTicketData.sub_station;
+                oSubstation = oTicketData.sub_station;
                 // if (oTicketData.dc === "X") {
                 //     dcplind_flag = "101";
                 //     oCircuitTrans = oTicketData.circuit;
@@ -1047,7 +1051,7 @@ sap.ui.define([
                 //     oCircuitTrans = oTicketData.indus_cust;
                 // }
 
-                if(this.oSelectedSetA){
+                if (this.oSelectedSetA) {
                     oSubstation = oTicketData.sub_station;
                     if (oTicketData.dc === "X") {
                         dcplind_flag = "101";
@@ -1059,7 +1063,7 @@ sap.ui.define([
                         dcplind_flag = "112";
                         oCircuitTrans = oTicketData.indus_cust;
                     }
-                }else if(this.oSelectedSetB){
+                } else if (this.oSelectedSetB) {
                     oSubstation = oTicketData.sub_station2;
                     if (oTicketData.dc2 === "X") {
                         dcplind_flag = "101";
@@ -1099,20 +1103,20 @@ sap.ui.define([
             createServiceTicket: async function (oEvent) {
                 let oTicketData = this.getOwnerComponent().getModel("oCustomerAttributesJModel").getData();
                 this.oSelectedSetA = this.getView().byId("idSetA").getSelected();
-                this.oSelectedSetB = this.getView().byId("idSetB").getSelected(); 
+                this.oSelectedSetB = this.getView().byId("idSetB").getSelected();
                 //var isCircuit = this.getView().byId("idCircuit_ST").getText();
                 //var isTrans = this.getView().byId("idTrans_ST").getText();
-                var isCircuit="", isTrans="" , oIND="";
-                if(this.oSelectedSetA){
+                var isCircuit = "", isTrans = "", oIND = "";
+                if (this.oSelectedSetA) {
                     oIND = oTicketData.na;
                     isCircuit = this.getView().byId("idCircuit_ST").getText();
                     isTrans = this.getView().byId("idTrans_ST").getText();
-                }else if(this.oSelectedSetB){
+                } else if (this.oSelectedSetB) {
                     oIND = oTicketData.na2;
                     isCircuit = this.getView().byId("idCircuit_ST1").getText();
                     isTrans = this.getView().byId("idTrans_ST1").getText();
                 }
-                if(oIND === "X"){
+                if (oIND === "X") {
                     if (isTrans === "" || isTrans === null || isTrans === undefined) {
                         sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Trans_msg"), {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -1122,7 +1126,7 @@ sap.ui.define([
                         this.onCloseDialog();
                         return false;
                     }
-                }else{
+                } else {
                     if (isCircuit === "" || isCircuit === null || isCircuit === undefined) {
                         sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("Circuit_msg"), {
                             icon: sap.m.MessageBox.Icon.ERROR,
@@ -1134,17 +1138,17 @@ sap.ui.define([
                     }
                 }
 
-                
+
 
                 var oUserScope = this.getOwnerComponent().getModel("oUserScopeJModel").getData();
                 if (oUserScope.userName === "" || oUserScope.userName === undefined || oUserScope.userName === null) {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("user_auth_msg"), {
-                            icon: sap.m.MessageBox.Icon.ERROR,
-                            title: "Error",
-                            actions: [sap.m.MessageBox.Action.OK]
-                        });
-                        return false;
-                }else{
+                        icon: sap.m.MessageBox.Icon.ERROR,
+                        title: "Error",
+                        actions: [sap.m.MessageBox.Action.OK]
+                    });
+                    return false;
+                } else {
                     this.oUserId = oUserScope.userName;
                 }
 
@@ -1161,21 +1165,38 @@ sap.ui.define([
                     if (oResults && oResults.value) { //specials exist - display special button visible
                         that.oBusyIndicator.close();
                         console.log(oResults.value);
+                        if (oResults.value === "Error") {
+                            let msg = "POP Creation failed!";
 
-                        //  MessageFormat.format("This message is for {0} in {1}", "foo", "bar");
-                        let msg = "Service Ticket " + oResults.value + " created successfully in C4C. \nPlease save this number for future reference.";
-                        //  let msg = "Service Ticket {0} created successfully in C4C. \nPlease save this number for future reference.";
+                            sap.m.MessageBox.error(msg, {
+                                icon: sap.m.MessageBox.Icon.ERROR,
+                                title: "Error",
+                                actions: [sap.m.MessageBox.Action.OK],
+                                emphasizedAction: MessageBox.Action.OK,
+                                onClose: function (sAction) {
+                                    that.onCloseDialog();
+                                },
+                                dependentOn: that.getView()
+                            });
+                        }
+                        else {
 
-                        sap.m.MessageBox.show(msg, {
-                            icon: sap.m.MessageBox.Icon.INFORMATION,
-                            title: "Success",
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: MessageBox.Action.OK,
-                            onClose: function (sAction) {
-                                that.onCloseDialog();
-                            },
-                            dependentOn: that.getView()
-                        });
+
+                            //  MessageFormat.format("This message is for {0} in {1}", "foo", "bar");
+                            let msg = "Service Ticket " + oResults.value + " created successfully in C4C. \nPlease save this number for future reference.";
+                            //  let msg = "Service Ticket {0} created successfully in C4C. \nPlease save this number for future reference.";
+
+                            sap.m.MessageBox.show(msg, {
+                                icon: sap.m.MessageBox.Icon.INFORMATION,
+                                title: "Success",
+                                actions: [sap.m.MessageBox.Action.OK],
+                                emphasizedAction: MessageBox.Action.OK,
+                                onClose: function (sAction) {
+                                    that.onCloseDialog();
+                                },
+                                dependentOn: that.getView()
+                            });
+                        }
 
                     }
                     this.onCloseDialog();

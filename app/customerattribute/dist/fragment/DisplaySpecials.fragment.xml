@@ -282,7 +282,7 @@
                 <x:subSections>
                     <x:ObjectPageSubSection
                         id="idCBSubSection_DS"
-                        titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
+                        titleUppercase="false">
                         <x:actions>
                         <RadioButtonGroup
                                         id="grop5CPSR_DS"
@@ -484,22 +484,23 @@
                                 id="idTFusesAtLb_DS"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                growing="true"
                                 items="{oSpecialsjmodel>/fuses}"
                             >
                                 <columns>
-                                <Column id="idSequenceno_DS">
+                                <Column id="idSequenceno_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlSequenceno_DS_CO"
                                             text="Seq No"
                                         />
                                     </Column>
-                                    <Column id="idFusesSDate_DS">
+                                    <Column id="idFusesSDate_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSDate_DS"
                                             text="{i18n>CS_SDate}"
                                         />
                                     </Column>
-                                    <Column id="idfusesEdate_DS">
+                                    <Column id="idfusesEdate_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlEDate_DS"
                                             text="{i18n>CS_endDate}"
@@ -511,25 +512,25 @@
                                             text="Billing Entity"
                                         />
                                     </Column> -->
-                                    <Column id="idTsize1_DS">
+                                    <Column id="idTsize1_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblsize_DS"
                                             text="{i18n>CS_Tsize}"
                                         />
                                     </Column>
-                                    <Column id="idtType_DS">
+                                    <Column id="idtType_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlbltype3_DS"
                                             text="{i18n>CS_Ttype}"
                                         />
                                     </Column>
-                                    <Column id="idTcurve_DS">
+                                    <Column id="idTcurve_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblcurve2_DS"
                                             text="{i18n>CS_Tcurve}"
                                         />
                                     </Column>
-                                    <Column id="idTvoltage_DS">
+                                    <Column id="idTvoltage_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblvoltage2_DS"
                                             text="{i18n>CS_Tvoltage}"
@@ -591,6 +592,7 @@
                                 id="tablTrans_DS"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                growing="true"
                                 items="{oSpecialsjmodel>/transformers}"
                             >
                                 <headerToolbar>
@@ -605,65 +607,65 @@
                                             text="Seq No"
                                         />
                                     </Column>
-                                    <Column id="idTransSDate_DS">
+                                    <Column id="idTransSDate_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblTransSDate_DS"
                                             text="{i18n>CS_SDate}"
                                         />
                                     </Column>
-                                    <Column id="idTransEdate_DS">
+                                    <Column id="idTransEdate_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlTransEDate_DS"
                                             text="{i18n>CS_endDate}"
                                         />
                                     </Column>
-                                    <Column id="idColumnManufacturer_DS">
+                                    <Column id="idColumnManufacturer_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblManufacturer_DS"
                                             text="Manufacturer"
                                         />
                                     </Column>
-                                    <Column id="idImped_DS">
+                                    <Column id="idImped_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblImped_DS"
                                             text="% Imped"
                                         />
                                     </Column>
-                                    <Column id="idPriVolt1_DS">
+                                    <Column id="idPriVolt1_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblPriVolt_DS"
                                             text="Pri Volt"
                                         />
                                     </Column>
-                                    <Column id="idSecVolt1_DS">
+                                    <Column id="idSecVolt1_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSecVoltR_DS"
                                             text="Sec Volt"
                                         />
                                     </Column>
 
-                                    <Column id="idTaps1_DS">
+                                    <Column id="idTaps1_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblTaps_DS"
                                             text="Taps"
                                         />
                                     </Column>
 
-                                    <Column id="idKVA_DS">
+                                    <Column id="idKVA_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblKVA_DS"
                                             text="KVA"
                                         />
                                     </Column>
 
-                                    <Column id="idType5_DS">
+                                    <Column id="idType5_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblType5_DS"
                                             text="Type"
                                         />
                                     </Column>
 
-                                    <Column id="idSerial_DS">
+                                    <Column id="idSerial_DS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSerial_DS"
                                             text="Serial"

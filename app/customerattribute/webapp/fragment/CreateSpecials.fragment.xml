@@ -793,6 +793,7 @@
                                 id="idTFusesAtLb_CS"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                growing="true"
                                 items="{oSpecialsjmodel>/fuses}"
                             >
                                 <!-- <headerToolbar>
@@ -807,19 +808,19 @@
                                 </headerToolbar> -->
 
                                 <columns>
-                                    <Column id="idSequenceno_CO" width="5em">
+                                    <Column id="idSequenceno_CO" width="5em" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlSequenceno_CS_CO"
                                             text="Seq No"
                                         />
                                     </Column>
-                                    <Column id="idFusesSDate">
+                                    <Column id="idFusesSDate" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSDate_CS"
                                             text="{i18n>CS_SDate}"
                                         />
                                     </Column>
-                                    <Column id="idfusesEdate">
+                                    <Column id="idfusesEdate" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlEDate_CS"
                                             text="{i18n>CS_endDate}"
@@ -831,25 +832,25 @@
                                             text="Billing Entity"
                                         />
                                     </Column> -->
-                                    <Column id="id21CPSR">
+                                    <Column id="id21CPSR" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblsize_CS"
                                             text="{i18n>CS_Tsize}"
                                         />
                                     </Column>
-                                    <Column id="id31CPSR">
+                                    <Column id="id31CPSR" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlbltype3_CS"
                                             text="{i18n>CS_Ttype}"
                                         />
                                     </Column>
-                                    <Column id="id41CPSR">
+                                    <Column id="id41CPSR" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblcurve2_CS"
                                             text="{i18n>CS_Tcurve}"
                                         />
                                     </Column>
-                                    <Column id="id51CPSR">
+                                    <Column id="id51CPSR" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblvoltage2_CS"
                                             text="{i18n>CS_Tvoltage}"
@@ -990,6 +991,7 @@
                                 id="tablTrans"
                                 alternateRowColors="true"
                                 showNoData="true"
+                                growing="true"
                                 items="{oSpecialsjmodel>/transformers}"
                             >
                                 <!-- <headerToolbar>
@@ -1003,71 +1005,71 @@
                                     </Toolbar>
                                 </headerToolbar> -->
                                 <columns>
-                                <Column id="idSequencenoTrans_CO" width="5em">
+                                <Column id="idSequencenoTrans_CO" width="5em" minScreenWidth="1000px" demandPopin="true" >
                                         <Label
                                             id="idlSequencenoTrans_CS_CO"
                                             text="Seq No"
                                         />
                                     </Column>
-                                    <Column id="idTransSDate" width="9rem">
+                                    <Column id="idTransSDate" width="9rem" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblTransSDate_CS"
                                             text="{i18n>CS_SDate}"
                                         />
                                     </Column>
-                                    <Column id="idTransEdate" width="9rem">
+                                    <Column id="idTransEdate" width="9rem" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlTransEDate_CS"
                                             text="{i18n>CS_endDate}"
                                         />
                                     </Column>
-                                    <Column id="idColumnManufacturer_CS">
+                                    <Column id="idColumnManufacturer_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblManufacturer_CS"
                                             text="Manufacturer"
                                         />
                                     </Column>
-                                    <Column id="idImped_CS">
+                                    <Column id="idImped_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblImped_CS"
                                             text="% Imped"
                                         />
                                     </Column>
-                                    <Column id="idPriVolt1_CS">
+                                    <Column id="idPriVolt1_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblPriVolt_CS"
                                             text="Pri Volt"
                                         />
                                     </Column>
-                                    <Column id="idSecVolt1_CS">
+                                    <Column id="idSecVolt1_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSecVoltR_CS"
                                             text="Sec Volt"
                                         />
                                     </Column>
 
-                                    <Column id="idTaps1_CS">
+                                    <Column id="idTaps1_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblTaps_CS"
                                             text="Taps"
                                         />
                                     </Column>
 
-                                    <Column id="idKVA_CS">
+                                    <Column id="idKVA_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblKVA_CS"
                                             text="KVA"
                                         />
                                     </Column>
 
-                                    <Column id="idType5_CS">
+                                    <Column id="idType5_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblType5_CS"
                                             text="Type"
                                         />
                                     </Column>
 
-                                    <Column id="idSerial_CS">
+                                    <Column id="idSerial_CS" demandPopin="true" minScreenWidth="1000px">
                                         <Label
                                             id="idlblSerial_CS"
                                             text="Serial"

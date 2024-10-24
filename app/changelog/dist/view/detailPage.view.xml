@@ -108,9 +108,9 @@
                     <ObjectPageSubSection title="Load Break Disconnect" titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
                         <actions>
                             <m:RadioButtonGroup id="rbg3" columns="5" valueState="Information" editable="false">
-                                <m:RadioButton id="RB1" text="DTE" class="sapUiSmallMarginEnd"/>
-                                <m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" />
-                                <m:RadioButton id="RB3" text="None" />
+                                <m:RadioButton id="RB1" text="DTE Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByLBD' , targetType: 'any', formatter: '.LBDRBDO'}"/>
+                                <m:RadioButton id="RB2" text="Customer Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByLBD' , targetType: 'any', formatter: '.LBDRBCO'}"/>
+                                <m:RadioButton id="RB3" text="None" selected="{path : 'ownedByLBD' , targetType: 'any', formatter: '.LBDRBNONE'}"/>
                             </m:RadioButtonGroup>
                         </actions>
                         <blocks>
@@ -197,10 +197,10 @@
             <ObjectPageSection titleUppercase="false" title="Circuit Breaker">
                 <subSections>
                     <ObjectPageSubSection titleUppercase="false">
-                    <actions>
+                        <actions>
                             <m:RadioButtonGroup id="rbg7" columns="5" valueState="Information" editable="false">
-                                <m:RadioButton  text="DTE Owned" class="sapUiSmallMarginEnd" selected="true" />
-                                <m:RadioButton  text="Customer Owned" class="sapUiSmallMarginEnd" />
+                                <m:RadioButton id="RB9" text="DTE Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByCB' , targetType: 'any', formatter: '.CBRBDO'}"/>
+                                <m:RadioButton id="RB10" text="Customer Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByCB' , targetType: 'any', formatter: '.CBRBCO'}"/>
                             </m:RadioButtonGroup>
                         </actions>
                         <blocks>
@@ -431,23 +431,31 @@
                         <blocks>
                             <m:Table items="{localModel>/fuses}" growingScrollToLoad="true" growing="true" growingThreshold="5">
                                 <m:columns>
-                                    <m:Column>
-                                        <m:Label text="Sequence No">
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="Seq No">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="Start Date">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="End Date">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Size">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Type">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Curve">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Voltage">
                                         </m:Label>
                                     </m:Column>
@@ -456,6 +464,8 @@
                                     <m:ColumnListItem>
                                         <m:cells>
                                             <m:Text text="{localModel>fuseSeqNo}"/>
+                                            <m:Text text="{localModel>fusesStartDate}"/>
+                                            <m:Text text="{localModel>fusesEndDate}"/>
                                             <m:Text text="{localModel>fuseSize}"/>
                                             <m:Text text="{localModel>fuseType}"/>
                                             <m:Text text="{localModel>fuseCurve}"/>
@@ -474,46 +484,54 @@
                     <ObjectPageSubSection titleUppercase="false" class="sapUxAPObjectPageSubSectionHeader1">
                         <actions>
                             <m:RadioButtonGroup id="rbg2" columns="5" valueState="Information" editable="false">
-                                <m:RadioButton id="RB4" text="DTE Owned" class="sapUiSmallMarginEnd"/>
-                                <m:RadioButton id="RB5" text="Customer Owned" class="sapUiSmallMarginEnd" />
+                                <m:RadioButton id="RB4" text="DTE Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByTransformer' , targetType: 'any', formatter: '.transformerRBDO'}"/>
+                                <m:RadioButton id="RB5" text="Customer Owned" class="sapUiSmallMarginEnd" selected="{path : 'ownedByTransformer',targetType: 'any', formatter: '.transformerRBCO'}"/>
                             </m:RadioButtonGroup>
                         </actions>
                         <blocks>
                             <m:Table items="{localModel>/transformers}" growingScrollToLoad="true" growing="true" growingThreshold="5">
                                 <m:columns>
-                                    <m:Column>
-                                        <m:Label text="Sequence No">
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="Seq No">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="Start Date">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
+                                        <m:Label text="End Date">
+                                        </m:Label>
+                                    </m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Manufacturer">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="% Imped">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Pri Volt">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Sec Volt">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Taps">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="KVA">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Type">
                                         </m:Label>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column demandPopin="true" minScreenWidth="1000px">
                                         <m:Label text="Serial">
                                         </m:Label>
                                     </m:Column>
@@ -522,6 +540,8 @@
                                     <m:ColumnListItem>
                                         <m:cells>
                                             <m:Text text="{localModel>transSeqNo}"/>
+                                            <m:Text text="{localModel>transStartDate}"/>
+                                            <m:Text text="{localModel>transEndDate}"/>
                                             <m:Text text="{localModel>manufacturer}"/>
                                             <m:Text text="{localModel>imped}"/>
                                             <m:Text text="{localModel>primVolt}"/>

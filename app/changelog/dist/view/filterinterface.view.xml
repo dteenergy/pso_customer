@@ -62,34 +62,34 @@
                    </OverflowToolbar>
                 </headerToolbar>                
                     <columns>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Billing Entity"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Created By"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Created On"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Approved By"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Approved On"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Record Status"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Approver Comment"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Customer Name"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Street Number"></Label>
                         </Column>
-                        <Column>
+                        <Column demandPopin="true" minScreenWidth="1000px">
                             <Label text="Street Name"></Label>
                         </Column>
                     </columns>
